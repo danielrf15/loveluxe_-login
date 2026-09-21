@@ -2,110 +2,192 @@
 // LOVE LUXE LOGIN SYSTEM
 // ==========================================
 
-// Admin account
+
+// ==========================================
+// ADMIN ACCOUNT
+// ==========================================
+
 const adminAccount = {
+
     username: "admin",
+
     password: "Admin123",
+
     fullName: "Love Luxe Admin",
+
     role: "admin"
+
 };
 
-// Your existing Love Luxe dashboard
+
+// ==========================================
+// ADMIN DASHBOARD URL
+// ==========================================
+
 const dashboardURL =
-    "https://danielfl15.github.io/loveluxe_dashboard/";
+    "https://danielrf15.github.io/loveluxe_dashboard/";
+
 
 // ==========================================
 // SIGN IN
 // ==========================================
 
-const loginForm = document.getElementById("loginForm");
+const loginForm =
+    document.getElementById("loginForm");
+
 
 if (loginForm) {
 
-    loginForm.addEventListener("submit", function(event) {
+    loginForm.addEventListener(
+        "submit",
+        function(event) {
 
-        event.preventDefault();
-
-        const username =
-            document.getElementById("username").value.trim();
-
-        const password =
-            document.getElementById("password").value;
-
-        const message =
-            document.getElementById("loginMessage");
+            event.preventDefault();
 
 
-        // Check ADMIN account first
-        if (
-            username === adminAccount.username &&
-            password === adminAccount.password
-        ) {
-
-            // Save current logged-in user
-            localStorage.setItem(
-                "loveLuxeCurrentUser",
-                JSON.stringify(adminAccount)
-            );
-
-            message.style.color = "#4b7c59";
-            message.textContent = "Login successful. Redirecting...";
-
-            setTimeout(function() {
-                window.location.href = dashboardURL;
-            }, 700);
-
-            return;
-        }
+            const username =
+                document
+                .getElementById("username")
+                .value
+                .trim();
 
 
-        // Get customer accounts
-        const customers =
-            JSON.parse(
-                localStorage.getItem("loveLuxeCustomers")
-            ) || [];
+            const password =
+                document
+                .getElementById("password")
+                .value;
 
 
-        // Find customer
-        const customer = customers.find(function(account) {
-
-            return (
-                account.username === username &&
-                account.password === password
-            );
-
-        });
+            const message =
+                document
+                .getElementById("loginMessage");
 
 
-        if (customer) {
+            // ==================================
+            // CHECK ADMIN ACCOUNT
+            // ==================================
 
-            // Make sure the account is a customer
-            if (customer.role === "customer") {
+            if (
+                username === adminAccount.username &&
+                password === adminAccount.password
+            ) {
 
+                // Save logged-in admin
                 localStorage.setItem(
                     "loveLuxeCurrentUser",
-                    JSON.stringify(customer)
+                    JSON.stringify(adminAccount)
                 );
 
-                message.style.color = "#4b7c59";
+
+                message.style.color =
+                    "#4b7c59";
+
                 message.textContent =
                     "Login successful. Redirecting...";
 
-                setTimeout(function() {
-                    window.location.href = "customer.html";
-                }, 700);
+
+                // Redirect to your dashboard
+                setTimeout(
+                    function() {
+
+                        window.location.href =
+                            dashboardURL;
+
+                    },
+                    700
+                );
+
+
+                return;
+            }
+
+
+            // ==================================
+            // GET CUSTOMER ACCOUNTS
+            // ==================================
+
+            const customers =
+                JSON.parse(
+                    localStorage.getItem(
+                        "loveLuxeCustomers"
+                    )
+                ) || [];
+
+
+            // ==================================
+            // FIND CUSTOMER
+            // ==================================
+
+            const customer =
+                customers.find(
+                    function(account) {
+
+                        return (
+                            account.username ===
+                            username &&
+                            account.password ===
+                            password
+                        );
+
+                    }
+                );
+
+
+            // ==================================
+            // CUSTOMER LOGIN
+            // ==================================
+
+            if (customer) {
+
+                if (
+                    customer.role ===
+                    "customer"
+                ) {
+
+                    localStorage.setItem(
+                        "loveLuxeCurrentUser",
+                        JSON.stringify(customer)
+                    );
+
+
+                    message.style.color =
+                        "#4b7c59";
+
+                    message.textContent =
+                        "Login successful. Redirecting...";
+
+
+                    setTimeout(
+                        function() {
+
+                            window.location.href =
+                                "customer.html";
+
+                        },
+                        700
+                    );
+
+                }
 
             }
 
-        } else {
 
-            message.style.color = "#b94a48";
-            message.textContent =
-                "Incorrect username or password.";
+            // ==================================
+            // WRONG LOGIN
+            // ==================================
+
+            else {
+
+                message.style.color =
+                    "#b94a48";
+
+                message.textContent =
+                    "Incorrect username or password.";
+
+            }
 
         }
-
-    });
+    );
 
 }
 
@@ -117,136 +199,205 @@ if (loginForm) {
 const signupForm =
     document.getElementById("signupForm");
 
+
 if (signupForm) {
 
-    signupForm.addEventListener("submit", function(event) {
+    signupForm.addEventListener(
+        "submit",
+        function(event) {
 
-        event.preventDefault();
-
-        const fullName =
-            document.getElementById("fullName").value.trim();
-
-        const username =
-            document.getElementById("newUsername").value.trim();
-
-        const password =
-            document.getElementById("newPassword").value;
-
-        const confirmPassword =
-            document.getElementById("confirmPassword").value;
-
-        const message =
-            document.getElementById("signupMessage");
+            event.preventDefault();
 
 
-        // Check password confirmation
-        if (password !== confirmPassword) {
-
-            message.style.color = "#b94a48";
-            message.textContent =
-                "Passwords do not match.";
-
-            return;
-        }
+            const fullName =
+                document
+                .getElementById("fullName")
+                .value
+                .trim();
 
 
-        // Prevent empty information
-        if (
-            fullName === "" ||
-            username === "" ||
-            password === ""
-        ) {
-
-            message.style.color = "#b94a48";
-            message.textContent =
-                "Please complete all fields.";
-
-            return;
-        }
+            const username =
+                document
+                .getElementById("newUsername")
+                .value
+                .trim();
 
 
-        // Prevent using admin username
-        if (
-            username.toLowerCase() ===
-            adminAccount.username.toLowerCase()
-        ) {
-
-            message.style.color = "#b94a48";
-            message.textContent =
-                "This username is not available.";
-
-            return;
-        }
+            const password =
+                document
+                .getElementById("newPassword")
+                .value;
 
 
-        // Get existing customers
-        let customers =
-            JSON.parse(
-                localStorage.getItem("loveLuxeCustomers")
-            ) || [];
+            const confirmPassword =
+                document
+                .getElementById("confirmPassword")
+                .value;
 
 
-        // Check if username already exists
-        const existingCustomer =
-            customers.find(function(account) {
+            const message =
+                document
+                .getElementById("signupMessage");
 
-                return (
-                    account.username.toLowerCase() ===
-                    username.toLowerCase()
+
+            // ==================================
+            // CHECK ALL FIELDS
+            // ==================================
+
+            if (
+                fullName === "" ||
+                username === "" ||
+                password === "" ||
+                confirmPassword === ""
+            ) {
+
+                message.style.color =
+                    "#b94a48";
+
+                message.textContent =
+                    "Please complete all fields.";
+
+                return;
+            }
+
+
+            // ==================================
+            // CHECK PASSWORD
+            // ==================================
+
+            if (
+                password !==
+                confirmPassword
+            ) {
+
+                message.style.color =
+                    "#b94a48";
+
+                message.textContent =
+                    "Passwords do not match.";
+
+                return;
+            }
+
+
+            // ==================================
+            // PREVENT ADMIN USERNAME
+            // ==================================
+
+            if (
+                username.toLowerCase() ===
+                adminAccount.username.toLowerCase()
+            ) {
+
+                message.style.color =
+                    "#b94a48";
+
+                message.textContent =
+                    "This username is not available.";
+
+                return;
+            }
+
+
+            // ==================================
+            // GET EXISTING CUSTOMERS
+            // ==================================
+
+            let customers =
+                JSON.parse(
+                    localStorage.getItem(
+                        "loveLuxeCustomers"
+                    )
+                ) || [];
+
+
+            // ==================================
+            // CHECK EXISTING USERNAME
+            // ==================================
+
+            const existingCustomer =
+                customers.find(
+                    function(account) {
+
+                        return (
+                            account.username.toLowerCase() ===
+                            username.toLowerCase()
+                        );
+
+                    }
                 );
 
-            });
+
+            if (existingCustomer) {
+
+                message.style.color =
+                    "#b94a48";
+
+                message.textContent =
+                    "Username already exists.";
+
+                return;
+            }
 
 
-        if (existingCustomer) {
+            // ==================================
+            // CREATE CUSTOMER ACCOUNT
+            // ==================================
 
-            message.style.color = "#b94a48";
+            const newCustomer = {
+
+                fullName: fullName,
+
+                username: username,
+
+                password: password,
+
+                role: "customer"
+
+            };
+
+
+            // Add customer
+            customers.push(
+                newCustomer
+            );
+
+
+            // Save customers
+            localStorage.setItem(
+                "loveLuxeCustomers",
+                JSON.stringify(customers)
+            );
+
+
+            // ==================================
+            // SUCCESS MESSAGE
+            // ==================================
+
+            message.style.color =
+                "#4b7c59";
+
             message.textContent =
-                "Username already exists.";
+                "Account created successfully!";
 
-            return;
+
+            // Clear form
+            signupForm.reset();
+
+
+            // Go back to login
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "index.html";
+
+                },
+                1200
+            );
+
         }
-
-
-        // Create new CUSTOMER account
-        const newCustomer = {
-
-            fullName: fullName,
-            username: username,
-            password: password,
-            role: "customer"
-
-        };
-
-
-        // Add customer to array
-        customers.push(newCustomer);
-
-
-        // Save customers to browser
-        localStorage.setItem(
-            "loveLuxeCustomers",
-            JSON.stringify(customers)
-        );
-
-
-        message.style.color = "#4b7c59";
-        message.textContent =
-            "Account created successfully!";
-
-
-        // Clear form
-        signupForm.reset();
-
-
-        // Send user back to login
-        setTimeout(function() {
-
-            window.location.href = "index.html";
-
-        }, 1200);
-
-    });
+    );
 
 }
 
@@ -256,34 +407,58 @@ if (signupForm) {
 // ==========================================
 
 const welcomeCustomer =
-    document.getElementById("welcomeCustomer");
+    document.getElementById(
+        "welcomeCustomer"
+    );
+
 
 if (welcomeCustomer) {
 
     const currentUser =
         JSON.parse(
-            localStorage.getItem("loveLuxeCurrentUser")
+            localStorage.getItem(
+                "loveLuxeCurrentUser"
+            )
         );
 
 
-    // No logged-in account
+    // ==================================
+    // NO USER LOGGED IN
+    // ==================================
+
     if (!currentUser) {
 
-        window.location.href = "index.html";
+        window.location.href =
+            "index.html";
 
     }
 
-    // Prevent admin from opening customer page
-    else if (currentUser.role !== "customer") {
 
-        window.location.href = dashboardURL;
+    // ==================================
+    // ADMIN TRYING CUSTOMER PAGE
+    // ==================================
+
+    else if (
+        currentUser.role !==
+        "customer"
+    ) {
+
+        window.location.href =
+            dashboardURL;
 
     }
+
+
+    // ==================================
+    // CUSTOMER
+    // ==================================
 
     else {
 
         welcomeCustomer.textContent =
-            "Welcome, " + currentUser.fullName + "!";
+            "Welcome, " +
+            currentUser.fullName +
+            "!";
 
     }
 
@@ -300,5 +475,7 @@ function logout() {
         "loveLuxeCurrentUser"
     );
 
-    window.location.href = "index.html";
+
+    window.location.href =
+        "index.html";
 }
