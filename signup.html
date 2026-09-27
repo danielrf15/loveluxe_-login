@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Love Luxe - Sign Up</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,19 +14,30 @@
 
     <div class="login-container">
 
-        <div class="brand">
-            <h1>LOVE LUXE</h1>
-            <p>BY EA • EST. 2024</p>
-        </div>
-
         <div class="login-card">
 
+            <div class="brand">
+
+                <h1>LOVE LUXE</h1>
+
+                <p>BY EA • EST. 2024</p>
+
+            </div>
+
+
             <h2>Create Account</h2>
-            <p class="subtitle">Create your Love Luxe customer account</p>
 
-            <form id="signupForm">
+            <p class="subtitle">
+                Create your Love Luxe customer account
+            </p>
 
-                <label for="fullName">Full Name</label>
+
+            <form onsubmit="signup(); return false;">
+
+                <label>
+                    Full Name
+                </label>
+
                 <input
                     type="text"
                     id="fullName"
@@ -31,23 +45,35 @@
                     required
                 >
 
-                <label for="newUsername">Username</label>
+
+                <label>
+                    Username
+                </label>
+
                 <input
                     type="text"
-                    id="newUsername"
+                    id="signupUsername"
                     placeholder="Create a username"
                     required
                 >
 
-                <label for="newPassword">Password</label>
+
+                <label>
+                    Password
+                </label>
+
                 <input
                     type="password"
-                    id="newPassword"
+                    id="signupPassword"
                     placeholder="Create a password"
                     required
                 >
 
-                <label for="confirmPassword">Confirm Password</label>
+
+                <label>
+                    Confirm Password
+                </label>
+
                 <input
                     type="password"
                     id="confirmPassword"
@@ -55,24 +81,41 @@
                     required
                 >
 
-                <button type="submit">CREATE ACCOUNT</button>
+
+                <p
+                    id="signupMessage"
+                    class="message">
+                </p>
+
+
+                <button
+                    type="submit"
+                    class="main-button">
+
+                    Create Account
+
+                </button>
 
             </form>
 
-            <p id="signupMessage"></p>
 
-            <div class="signup-text">
+            <p class="signup-text">
+
                 Already have an account?
-                <a href="index.html">Sign In</a>
-            </div>
+
+                <a href="index.html">
+                    Sign In
+                </a>
+
+            </p>
 
         </div>
 
-        <p class="footer">Love Luxe by EA</p>
-
     </div>
+
 
     <script src="script.js"></script>
 
 </body>
+
 </html>
