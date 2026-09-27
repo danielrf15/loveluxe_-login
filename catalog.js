@@ -1,146 +1,237 @@
 // ==========================================
-// LOVE LUXE SHOPPER CATALOG
+// CUSTOMER ACCESS CHECK
 // ==========================================
 
+const currentUser =
+    localStorage.getItem(
+        "loveLuxeCurrentUser"
+    );
+
+
+if (!currentUser) {
+
+    // Not logged in
+    window.location.href =
+        "index.html";
+
+}
+
+
+else {
+
+    try {
+
+        const user =
+            JSON.parse(currentUser);
+
+
+        // ==========================================
+        // ONLY CUSTOMERS CAN ENTER CATALOG
+        // ==========================================
+
+        if (user.role !== "customer") {
+
+            window.location.href =
+                "https://danielrf15.github.io/loveluxe_dashboard/";
+
+        }
+
+    }
+
+    catch (error) {
+
+        localStorage.removeItem(
+            "loveLuxeCurrentUser"
+        );
+
+
+        window.location.href =
+            "index.html";
+
+    }
+
+}
+
+
+// ==========================================
+// LOVE LUXE PRODUCTS
+// ==========================================
 
 const products = [
 
+
+    // ==========================================
     // CLOTHING
+    // ==========================================
 
     {
         name: "Classic Ribbed Top",
         category: "Clothing",
         price: 499,
-        description: "Simple and versatile everyday top.",
+        description:
+            "Simple and versatile everyday top.",
         image: ""
     },
+
 
     {
         name: "Elegant Casual Dress",
         category: "Clothing",
         price: 899,
-        description: "A clean and elegant dress for any occasion.",
+        description:
+            "A clean and elegant dress for any occasion.",
         image: ""
     },
+
 
     {
         name: "Luxe Long Sleeve Blouse",
         category: "Clothing",
         price: 749,
-        description: "Comfortable blouse with a simple elegant style.",
+        description:
+            "Comfortable blouse with a simple elegant style.",
         image: ""
     },
+
 
     {
         name: "Everyday Wide Pants",
         category: "Clothing",
         price: 799,
-        description: "Comfortable pants designed for everyday wear.",
+        description:
+            "Comfortable pants designed for everyday wear.",
         image: ""
     },
 
 
+    // ==========================================
     // BODY CARE
+    // ==========================================
 
     {
         name: "Luxe Body Lotion",
         category: "Body Care",
         price: 399,
-        description: "Moisturizing body lotion for everyday care.",
+        description:
+            "Moisturizing body lotion for everyday care.",
         image: ""
     },
+
 
     {
         name: "Gentle Body Wash",
         category: "Body Care",
         price: 349,
-        description: "A refreshing body wash for daily use.",
+        description:
+            "A refreshing body wash for daily use.",
         image: ""
     },
+
 
     {
         name: "Body Scrub",
         category: "Body Care",
         price: 429,
-        description: "Gentle body scrub for a refreshing routine.",
+        description:
+            "Gentle body scrub for a refreshing routine.",
         image: ""
     },
+
 
     {
         name: "Hand & Body Cream",
         category: "Body Care",
         price: 299,
-        description: "Lightweight cream for everyday moisturizing.",
+        description:
+            "Lightweight cream for everyday moisturizing.",
         image: ""
     },
 
 
+    // ==========================================
     // BAGS
+    // ==========================================
 
     {
         name: "Classic Luxe Handbag",
         category: "Bags",
         price: 1299,
-        description: "Elegant handbag suitable for everyday use.",
+        description:
+            "Elegant handbag suitable for everyday use.",
         image: ""
     },
+
 
     {
         name: "Mini Shoulder Bag",
         category: "Bags",
         price: 999,
-        description: "Compact shoulder bag for your daily essentials.",
+        description:
+            "Compact shoulder bag for your daily essentials.",
         image: ""
     },
+
 
     {
         name: "Everyday Tote Bag",
         category: "Bags",
         price: 899,
-        description: "Spacious tote bag with a clean design.",
+        description:
+            "Spacious tote bag with a clean design.",
         image: ""
     },
+
 
     {
         name: "Elegant Crossbody Bag",
         category: "Bags",
         price: 1099,
-        description: "Stylish crossbody bag for casual occasions.",
+        description:
+            "Stylish crossbody bag for casual occasions.",
         image: ""
     },
 
 
+    // ==========================================
     // PERFUME
+    // ==========================================
 
     {
         name: "Luxe Bloom",
         category: "Perfume",
         price: 799,
-        description: "A soft and elegant fragrance for everyday wear.",
+        description:
+            "A soft and elegant fragrance for everyday wear.",
         image: ""
     },
+
 
     {
         name: "Golden Rose",
         category: "Perfume",
         price: 899,
-        description: "A warm fragrance with a graceful character.",
+        description:
+            "A warm fragrance with a graceful character.",
         image: ""
     },
+
 
     {
         name: "Midnight Luxe",
         category: "Perfume",
         price: 999,
-        description: "A deeper fragrance for evening occasions.",
+        description:
+            "A deeper fragrance for evening occasions.",
         image: ""
     },
+
 
     {
         name: "Fresh Aura",
         category: "Perfume",
         price: 699,
-        description: "A light and refreshing fragrance.",
+        description:
+            "A light and refreshing fragrance.",
         image: ""
     }
 
@@ -157,19 +248,33 @@ let searchText = "";
 
 
 const productGrid =
-    document.getElementById("productGrid");
+    document.getElementById(
+        "productGrid"
+    );
+
 
 const productCount =
-    document.getElementById("productCount");
+    document.getElementById(
+        "productCount"
+    );
+
 
 const searchInput =
-    document.getElementById("searchInput");
+    document.getElementById(
+        "searchInput"
+    );
+
 
 const noProducts =
-    document.getElementById("noProducts");
+    document.getElementById(
+        "noProducts"
+    );
+
 
 const filterButtons =
-    document.querySelectorAll(".filter-button");
+    document.querySelectorAll(
+        ".filter-button"
+    );
 
 
 // ==========================================
@@ -182,64 +287,93 @@ function displayProducts() {
 
 
     const filteredProducts =
-        products.filter(function(product) {
 
-            const categoryMatch =
-                selectedCategory === "All" ||
-                product.category === selectedCategory;
+        products.filter(
 
-
-            const searchMatch =
-                product.name
-                    .toLowerCase()
-                    .includes(
-                        searchText.toLowerCase()
-                    )
-
-                ||
-
-                product.category
-                    .toLowerCase()
-                    .includes(
-                        searchText.toLowerCase()
-                    );
+            function(product) {
 
 
-            return categoryMatch && searchMatch;
+                const categoryMatch =
 
-        });
+                    selectedCategory === "All" ||
+
+                    product.category ===
+                    selectedCategory;
 
 
+                const searchMatch =
+
+                    product.name
+                        .toLowerCase()
+                        .includes(
+                            searchText.toLowerCase()
+                        )
+
+                    ||
+
+                    product.category
+                        .toLowerCase()
+                        .includes(
+                            searchText.toLowerCase()
+                        );
+
+
+                return (
+                    categoryMatch &&
+                    searchMatch
+                );
+
+            }
+
+        );
+
+
+    // ==========================================
     // NO PRODUCTS
+    // ==========================================
 
-    if (filteredProducts.length === 0) {
+    if (
+        filteredProducts.length === 0
+    ) {
 
-        noProducts.style.display = "block";
+        noProducts.style.display =
+            "block";
+
 
         productCount.textContent =
             "No products found";
+
 
         return;
 
     }
 
 
-    noProducts.style.display = "none";
+    noProducts.style.display =
+        "none";
 
 
     productCount.textContent =
+
         "Showing " +
         filteredProducts.length +
         " product(s)";
 
 
-    // CREATE PRODUCT CARDS
+    // ==========================================
+    // CREATE CARDS
+    // ==========================================
 
     filteredProducts.forEach(
+
         function(product) {
 
+
             const card =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             card.className =
                 "product-card";
@@ -248,7 +382,9 @@ function displayProducts() {
             let imageHTML = "";
 
 
-            if (product.image !== "") {
+            if (
+                product.image !== ""
+            ) {
 
                 imageHTML =
 
@@ -331,9 +467,12 @@ function displayProducts() {
             `;
 
 
-            productGrid.appendChild(card);
+            productGrid.appendChild(
+                card
+            );
 
         }
+
     );
 
 }
@@ -400,6 +539,7 @@ searchInput.addEventListener(
         searchText =
             searchInput.value.trim();
 
+
         displayProducts();
 
     }
@@ -429,31 +569,56 @@ function viewProduct(productName) {
 // ==========================================
 
 const shopSidebar =
-    document.getElementById("shopSidebar");
+    document.getElementById(
+        "shopSidebar"
+    );
+
 
 const sidebarOverlay =
-    document.getElementById("sidebarOverlay");
+    document.getElementById(
+        "sidebarOverlay"
+    );
 
+
+// ==========================================
+// OPEN SIDEBAR
+// ==========================================
 
 function openSidebar() {
 
-    shopSidebar.classList.add("open");
+    shopSidebar.classList.add(
+        "open"
+    );
 
-    sidebarOverlay.classList.add("active");
+
+    sidebarOverlay.classList.add(
+        "active"
+    );
 
 }
 
+
+// ==========================================
+// CLOSE SIDEBAR
+// ==========================================
 
 function closeSidebar() {
 
-    shopSidebar.classList.remove("open");
+    shopSidebar.classList.remove(
+        "open"
+    );
 
-    sidebarOverlay.classList.remove("active");
+
+    sidebarOverlay.classList.remove(
+        "active"
+    );
 
 }
 
 
-// CLICK OVERLAY TO CLOSE
+// ==========================================
+// CLICK OVERLAY
+// ==========================================
 
 sidebarOverlay.addEventListener(
 
@@ -476,9 +641,12 @@ function showMessage(section) {
 
     closeSidebar();
 
+
     alert(
+
         section +
         " page will be added next."
+
     );
 
 }
@@ -491,7 +659,9 @@ function showMessage(section) {
 function displayCustomerName() {
 
     const customerName =
-        document.getElementById("customerName");
+        document.getElementById(
+            "customerName"
+        );
 
 
     const currentUser =
@@ -513,7 +683,9 @@ function displayCustomerName() {
     try {
 
         const user =
-            JSON.parse(currentUser);
+            JSON.parse(
+                currentUser
+            );
 
 
         if (user.fullName) {
