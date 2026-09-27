@@ -2,89 +2,164 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>Love Luxe - Shop</title>
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="catalog.css">
+    <link
+        rel="stylesheet"
+        href="style.css">
+
+    <link
+        rel="stylesheet"
+        href="catalog.css">
+
 </head>
+
 
 <body>
 
+
     <!-- MOBILE OVERLAY -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay">
+    </div>
+
 
     <!-- SIDEBAR -->
-    <aside class="shop-sidebar" id="shopSidebar">
+
+    <aside
+        class="shop-sidebar"
+        id="shopSidebar">
+
+
+        <!-- SIDEBAR BRAND -->
 
         <div class="sidebar-brand">
 
             <div>
-                <h1>LOVE LUXE</h1>
-                <p>BY EA • EST. 2024</p>
+
+                <h1>
+                    LOVE LUXE
+                </h1>
+
+                <p>
+                    BY EA • EST. 2024
+                </p>
+
             </div>
+
 
             <button
                 class="close-sidebar"
                 onclick="closeSidebar()">
+
                 ×
+
             </button>
 
         </div>
 
+
+        <!-- SIDEBAR MENU -->
+
         <div class="sidebar-content">
+
 
             <div class="sidebar-section-title">
                 SHOPPER
             </div>
 
+
+            <!-- SHOP -->
+
             <a
                 href="catalog.html"
                 class="sidebar-link active">
 
-                <span class="sidebar-icon">🛍</span>
-                <span>Shop</span>
+                <span class="sidebar-icon">
+                    🛍
+                </span>
+
+                <span>
+                    Shop
+                </span>
 
             </a>
+
+
+            <!-- MY ORDERS -->
 
             <a
                 href="#"
                 class="sidebar-link"
-                onclick="showMessage('My Orders')">
+                onclick="showMessage('My Orders'); return false;">
 
-                <span class="sidebar-icon">📦</span>
-                <span>My Orders</span>
+                <span class="sidebar-icon">
+                    📦
+                </span>
+
+                <span>
+                    My Orders
+                </span>
 
             </a>
+
+
+            <!-- ACCOUNT -->
 
             <a
                 href="customer.html"
                 class="sidebar-link">
 
-                <span class="sidebar-icon">👤</span>
-                <span>My Account</span>
+                <span class="sidebar-icon">
+                    👤
+                </span>
+
+                <span>
+                    My Account
+                </span>
 
             </a>
 
 
-            <div class="sidebar-section-title account-title">
+            <div
+                class="sidebar-section-title account-title">
+
                 ACCOUNT
+
             </div>
+
+
+            <!-- SETTINGS -->
 
             <a
                 href="#"
                 class="sidebar-link"
-                onclick="showMessage('Settings')">
+                onclick="showMessage('Settings'); return false;">
 
-                <span class="sidebar-icon">⚙</span>
-                <span>Settings</span>
+                <span class="sidebar-icon">
+                    ⚙
+                </span>
+
+                <span>
+                    Settings
+                </span>
 
             </a>
 
+
         </div>
 
+
+        <!-- LOGOUT -->
 
         <div class="sidebar-bottom">
 
@@ -92,42 +167,61 @@
                 class="logout-button"
                 onclick="logout()">
 
-                <span class="sidebar-icon">↪</span>
-                <span>Log Out</span>
+                <span class="sidebar-icon">
+                    ↪
+                </span>
+
+                <span>
+                    Log Out
+                </span>
 
             </button>
 
         </div>
 
+
     </aside>
 
 
     <!-- MAIN CONTENT -->
-    <main class="shop-main" id="shopMain">
+
+    <main
+        class="shop-main"
+        id="shopMain">
+
 
         <!-- TOP BAR -->
+
         <header class="shop-topbar">
+
 
             <button
                 class="open-sidebar"
-                id="openSidebarButton"
                 onclick="openSidebar()">
 
                 ☰
 
             </button>
 
+
             <div class="topbar-title">
 
-                <span>SHOP</span>
+                <span>
+                    SHOP
+                </span>
 
-                <h2>Love Luxe Collection</h2>
+                <h2>
+                    Love Luxe Collection
+                </h2>
 
             </div>
 
+
             <div class="topbar-user">
 
-                <span class="user-icon">👤</span>
+                <span class="user-icon">
+                    👤
+                </span>
 
                 <span id="customerName">
                     Customer
@@ -135,32 +229,41 @@
 
             </div>
 
+
         </header>
 
 
         <!-- HERO -->
+
         <section class="catalog-hero">
+
 
             <p class="hero-label">
                 LOVE LUXE COLLECTION
             </p>
 
+
             <h1>
                 Find Something You Love
             </h1>
 
+
             <p>
-                Explore our collection of clothing, bags,
-                perfume and body care products.
+                Explore our collection of clothing,
+                bags, perfume and body care products.
             </p>
+
 
         </section>
 
 
-        <!-- CATALOG -->
+        <!-- PRODUCT SECTION -->
+
         <section class="catalog-container">
 
+
             <div class="catalog-top">
+
 
                 <div>
 
@@ -175,6 +278,8 @@
                 </div>
 
 
+                <!-- SEARCH -->
+
                 <div class="search-box">
 
                     <input
@@ -184,11 +289,14 @@
 
                 </div>
 
+
             </div>
 
 
-            <!-- FILTERS -->
+            <!-- FILTER BUTTONS -->
+
             <div class="filter-section">
+
 
                 <button
                     class="filter-button active"
@@ -198,6 +306,7 @@
 
                 </button>
 
+
                 <button
                     class="filter-button"
                     data-category="Clothing">
@@ -205,6 +314,7 @@
                     Clothing
 
                 </button>
+
 
                 <button
                     class="filter-button"
@@ -214,6 +324,7 @@
 
                 </button>
 
+
                 <button
                     class="filter-button"
                     data-category="Bags">
@@ -221,6 +332,7 @@
                     Bags
 
                 </button>
+
 
                 <button
                     class="filter-button"
@@ -230,42 +342,50 @@
 
                 </button>
 
+
             </div>
 
 
-            <!-- PRODUCTS -->
+            <!-- PRODUCT GRID -->
+
             <div
                 class="product-grid"
                 id="productGrid">
-
             </div>
 
 
             <!-- NO PRODUCTS -->
+
             <div
                 class="no-products"
                 id="noProducts">
+
 
                 <h3>
                     No products found
                 </h3>
 
+
                 <p>
                     Try another search or category.
                 </p>
 
+
             </div>
 
+
         </section>
+
 
     </main>
 
 
-    <!-- EXISTING SCRIPT -->
+    <!-- SCRIPTS -->
+
     <script src="script.js"></script>
 
-    <!-- CATALOG SCRIPT -->
     <script src="catalog.js"></script>
+
 
 </body>
 
