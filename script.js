@@ -61,9 +61,7 @@ function login() {
         passwordElement.value.trim();
 
 
-    // ==========================================
     // ADMIN LOGIN
-    // ==========================================
 
     if (
         username === adminAccount.username &&
@@ -88,9 +86,7 @@ function login() {
     }
 
 
-    // ==========================================
     // CUSTOMER LOGIN
-    // ==========================================
 
     const customers =
 
@@ -133,8 +129,6 @@ function login() {
         );
 
 
-        // CUSTOMER GOES TO SHOPPER CATALOG
-
         window.location.href =
             "catalog.html";
 
@@ -143,10 +137,6 @@ function login() {
 
     }
 
-
-    // ==========================================
-    // WRONG LOGIN
-    // ==========================================
 
     if (errorElement) {
 
@@ -168,24 +158,16 @@ function signup() {
         document.getElementById("fullName");
 
     const usernameElement =
-        document.getElementById(
-            "signupUsername"
-        );
+        document.getElementById("signupUsername");
 
     const passwordElement =
-        document.getElementById(
-            "signupPassword"
-        );
+        document.getElementById("signupPassword");
 
     const confirmElement =
-        document.getElementById(
-            "confirmPassword"
-        );
+        document.getElementById("confirmPassword");
 
     const messageElement =
-        document.getElementById(
-            "signupMessage"
-        );
+        document.getElementById("signupMessage");
 
 
     if (
@@ -213,10 +195,6 @@ function signup() {
         confirmElement.value;
 
 
-    // ==========================================
-    // PASSWORD MATCH
-    // ==========================================
-
     if (
         password !== confirmPassword
     ) {
@@ -231,10 +209,6 @@ function signup() {
 
     }
 
-
-    // ==========================================
-    // ADMIN USERNAME CHECK
-    // ==========================================
 
     if (
         username.toLowerCase() ===
@@ -252,10 +226,6 @@ function signup() {
     }
 
 
-    // ==========================================
-    // GET CUSTOMERS
-    // ==========================================
-
     const customers =
 
         JSON.parse(
@@ -266,10 +236,6 @@ function signup() {
 
         ) || [];
 
-
-    // ==========================================
-    // DUPLICATE USERNAME
-    // ==========================================
 
     const existingUser =
 
@@ -301,10 +267,6 @@ function signup() {
 
     }
 
-
-    // ==========================================
-    // CREATE CUSTOMER
-    // ==========================================
 
     const newCustomer = {
 
@@ -349,10 +311,6 @@ function signup() {
     );
 
 
-    // ==========================================
-    // SUCCESS
-    // ==========================================
-
     messageElement.textContent =
         "Account created successfully!";
 
@@ -394,7 +352,7 @@ function logout() {
 
 
 // ==========================================
-// CUSTOMER PAGE ACCESS CHECK
+// CUSTOMER ACCESS CHECK
 // ==========================================
 
 function checkCustomerAccess() {
@@ -420,9 +378,6 @@ function checkCustomerAccess() {
         const user =
             JSON.parse(currentUser);
 
-
-        // Only customers can access
-        // the My Account page
 
         if (
             user.role !== "customer"
@@ -469,9 +424,6 @@ function loadCustomerAccount() {
         );
 
 
-    // If this isn't customer.html,
-    // stop here.
-
     if (!fullNameInput) {
 
         return;
@@ -489,10 +441,6 @@ function loadCustomerAccount() {
 
     }
 
-
-    // ==========================================
-    // MAKE SURE DATA EXISTS
-    // ==========================================
 
     if (!user.shippingAddress) {
 
@@ -522,10 +470,6 @@ function loadCustomerAccount() {
     }
 
 
-    // ==========================================
-    // PERSONAL INFORMATION
-    // ==========================================
-
     document.getElementById(
         "accountFullName"
     ).value =
@@ -543,10 +487,6 @@ function loadCustomerAccount() {
     ).value =
         user.phone || "";
 
-
-    // ==========================================
-    // SHIPPING ADDRESS
-    // ==========================================
 
     document.getElementById(
         "houseNumber"
@@ -584,16 +524,8 @@ function loadCustomerAccount() {
         user.shippingAddress.postalCode || "";
 
 
-    // ==========================================
-    // SUMMARY
-    // ==========================================
-
     updateAccountSummary(user);
 
-
-    // ==========================================
-    // TOP BAR NAME
-    // ==========================================
 
     const topName =
         document.getElementById(
@@ -628,9 +560,13 @@ function saveAccountChanges() {
     }
 
 
-    // ==========================================
-    // GET NEW INFORMATION
-    // ==========================================
+    // Remember the old username
+
+    const originalUsername =
+        user.username;
+
+
+    // PERSONAL INFORMATION
 
     const newFullName =
         document.getElementById(
@@ -650,10 +586,6 @@ function saveAccountChanges() {
         ).value.trim();
 
 
-    // ==========================================
-    // CHECK REQUIRED FIELDS
-    // ==========================================
-
     if (
         newFullName === "" ||
         newUsername === ""
@@ -669,9 +601,7 @@ function saveAccountChanges() {
     }
 
 
-    // ==========================================
-    // GET CUSTOMERS
-    // ==========================================
+    // CUSTOMER LIST
 
     const customers =
 
@@ -684,12 +614,9 @@ function saveAccountChanges() {
         ) || [];
 
 
-    // ==========================================
-    // CHECK USERNAME
-    // ==========================================
+    // CHECK DUPLICATE USERNAME
 
     const duplicateUser =
-
         customers.find(
 
             function(customer) {
@@ -700,7 +627,7 @@ function saveAccountChanges() {
                     newUsername.toLowerCase() &&
 
                     customer.username.toLowerCase() !==
-                    user.username.toLowerCase()
+                    originalUsername.toLowerCase()
 
                 );
 
@@ -721,9 +648,7 @@ function saveAccountChanges() {
     }
 
 
-    // ==========================================
-    // GET SHIPPING ADDRESS
-    // ==========================================
+    // SHIPPING ADDRESS
 
     const newAddress = {
 
@@ -760,118 +685,7 @@ function saveAccountChanges() {
     };
 
 
-    // ==========================================
-    // UPDATE USER
-    // ==========================================
-
-    user.fullName =
-        newFullName;
-
-    user.username =
-        newUsername;
-
-    user.phone =
-        newPhone;
-
-    user.shippingAddress =
-        newAddress;
-
-
-    // ==========================================
-    // UPDATE CUSTOMER LIST
-    // ==========================================
-
-    const userIndex =
-
-        customers.findIndex(
-
-            function(customer) {
-
-                return (
-
-                    customer.username ===
-                    user.username
-
-                );
-
-            }
-
-        );
-
-
-    /*
-       Because the username may have changed,
-       find the old account using the original
-       account information.
-    */
-
-    let originalIndex = userIndex;
-
-
-    if (originalIndex === -1) {
-
-        originalIndex =
-
-            customers.findIndex(
-
-                function(customer) {
-
-                    return (
-
-                        customer.fullName ===
-                        user.fullName
-
-                    );
-
-                }
-
-            );
-
-    }
-
-
-    /*
-       If the account is still found,
-       update it.
-    */
-
-    if (originalIndex !== -1) {
-
-        customers[originalIndex] =
-            user;
-
-    }
-
-
-    // ==========================================
-    // SAVE CUSTOMER LIST
-    // ==========================================
-
-    localStorage.setItem(
-
-        "loveLuxeCustomers",
-
-        JSON.stringify(customers)
-
-    );
-
-
-    // ==========================================
-    // UPDATE CURRENT USER
-    // ==========================================
-
-    localStorage.setItem(
-
-        "loveLuxeCurrentUser",
-
-        JSON.stringify(user)
-
-    );
-
-
-    // ==========================================
-    // CHANGE PASSWORD
-    // ==========================================
+    // PASSWORD
 
     const currentPassword =
         document.getElementById(
@@ -891,7 +705,8 @@ function saveAccountChanges() {
         ).value;
 
 
-    // If user wants to change password
+    // CHECK PASSWORD ONLY
+    // IF SOMETHING WAS ENTERED
 
     if (
         currentPassword !== "" ||
@@ -899,8 +714,6 @@ function saveAccountChanges() {
         confirmNewPassword !== ""
     ) {
 
-
-        // Check current password
 
         if (
             currentPassword !==
@@ -917,8 +730,6 @@ function saveAccountChanges() {
         }
 
 
-        // Check new password
-
         if (
             newPassword === ""
         ) {
@@ -932,8 +743,6 @@ function saveAccountChanges() {
 
         }
 
-
-        // Confirm new password
 
         if (
             newPassword !==
@@ -950,102 +759,109 @@ function saveAccountChanges() {
         }
 
 
-        // Update password
-
         user.password =
             newPassword;
-
-
-        // Save updated user
-
-        localStorage.setItem(
-
-            "loveLuxeCurrentUser",
-
-            JSON.stringify(user)
-
-        );
-
-
-        // Find and update customer
-
-        const updatedCustomers =
-
-            JSON.parse(
-
-                localStorage.getItem(
-                    "loveLuxeCustomers"
-                )
-
-            ) || [];
-
-
-        const passwordIndex =
-
-            updatedCustomers.findIndex(
-
-                function(customer) {
-
-                    return (
-                        customer.username ===
-                        user.username
-                    );
-
-                }
-
-            );
-
-
-        if (passwordIndex !== -1) {
-
-            updatedCustomers[
-                passwordIndex
-            ] = user;
-
-
-            localStorage.setItem(
-
-                "loveLuxeCustomers",
-
-                JSON.stringify(
-                    updatedCustomers
-                )
-
-            );
-
-        }
-
-
-        // Clear password fields
-
-        document.getElementById(
-            "currentPassword"
-        ).value = "";
-
-
-        document.getElementById(
-            "newPassword"
-        ).value = "";
-
-
-        document.getElementById(
-            "confirmNewPassword"
-        ).value = "";
 
     }
 
 
-    // ==========================================
-    // UPDATE SCREEN
-    // ==========================================
+    // UPDATE USER
 
-    updateAccountSummary(user);
+    user.fullName =
+        newFullName;
 
+
+    user.username =
+        newUsername;
+
+
+    user.phone =
+        newPhone;
+
+
+    user.shippingAddress =
+        newAddress;
+
+
+    // FIND ORIGINAL ACCOUNT
+
+    const originalIndex =
+        customers.findIndex(
+
+            function(customer) {
+
+                return (
+                    customer.username ===
+                    originalUsername
+                );
+
+            }
+
+        );
+
+
+    // UPDATE ACCOUNT
+
+    if (originalIndex !== -1) {
+
+        customers[originalIndex] =
+            user;
+
+    }
+
+
+    // SAVE CUSTOMER ACCOUNTS
+
+    localStorage.setItem(
+
+        "loveLuxeCustomers",
+
+        JSON.stringify(
+            customers
+        )
+
+    );
+
+
+    // SAVE CURRENT USER
+
+    localStorage.setItem(
+
+        "loveLuxeCurrentUser",
+
+        JSON.stringify(
+            user
+        )
+
+    );
+
+
+    // CLEAR PASSWORD INPUTS
+
+    document.getElementById(
+        "currentPassword"
+    ).value = "";
+
+
+    document.getElementById(
+        "newPassword"
+    ).value = "";
+
+
+    document.getElementById(
+        "confirmNewPassword"
+    ).value = "";
+
+
+    // UPDATE PAGE
 
     document.getElementById(
         "topCustomerName"
     ).textContent =
         user.fullName;
+
+
+    updateAccountSummary(user);
 
 
     showAccountMessage(
@@ -1057,7 +873,7 @@ function saveAccountChanges() {
 
 
 // ==========================================
-// UPDATE ACCOUNT SUMMARY
+// UPDATE SUMMARY
 // ==========================================
 
 function updateAccountSummary(user) {
@@ -1098,7 +914,6 @@ function updateAccountSummary(user) {
 
     if (address) {
 
-
         const shipping =
             user.shippingAddress;
 
@@ -1114,7 +929,6 @@ function updateAccountSummary(user) {
                 shipping.postalCode
             )
         ) {
-
 
             const parts = [
 
@@ -1196,7 +1010,23 @@ function showAccountMessage(
 
 
 // ==========================================
-// ACCOUNT SIDEBAR
+// SIDEBAR MESSAGE
+// ==========================================
+
+function showAccountMessageBox(section) {
+
+    closeAccountSidebar();
+
+    alert(
+        section +
+        " will be added next."
+    );
+
+}
+
+
+// ==========================================
+// OPEN SIDEBAR
 // ==========================================
 
 function openAccountSidebar() {
@@ -1213,17 +1043,29 @@ function openAccountSidebar() {
         );
 
 
-    sidebar.classList.add(
-        "open"
-    );
+    if (sidebar) {
+
+        sidebar.classList.add(
+            "open"
+        );
+
+    }
 
 
-    overlay.classList.add(
-        "active"
-    );
+    if (overlay) {
+
+        overlay.classList.add(
+            "active"
+        );
+
+    }
 
 }
 
+
+// ==========================================
+// CLOSE SIDEBAR
+// ==========================================
 
 function closeAccountSidebar() {
 
@@ -1239,14 +1081,22 @@ function closeAccountSidebar() {
         );
 
 
-    sidebar.classList.remove(
-        "open"
-    );
+    if (sidebar) {
+
+        sidebar.classList.remove(
+            "open"
+        );
+
+    }
 
 
-    overlay.classList.remove(
-        "active"
-    );
+    if (overlay) {
+
+        overlay.classList.remove(
+            "active"
+        );
+
+    }
 
 }
 
@@ -1273,40 +1123,6 @@ if (accountOverlay) {
 
         }
 
-    );
-
-}
-
-
-// ==========================================
-// SIDEBAR MESSAGE
-// ==========================================
-
-function showAccountMessageBox(
-    section
-) {
-
-    closeAccountSidebar();
-
-
-    alert(
-        section +
-        " will be added next."
-    );
-
-}
-
-
-function showAccountMessage(
-    section
-) {
-
-    closeAccountSidebar();
-
-
-    alert(
-        section +
-        " will be added next."
     );
 
 }
