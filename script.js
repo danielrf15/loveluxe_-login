@@ -18,7 +18,210 @@ const adminAccount = {
     role: "admin"
 
 };
+// ==========================================
+// RESET PASSWORD
+// ==========================================
 
+function resetPassword() {
+
+    const usernameElement =
+        document.getElementById(
+            "forgotUsername"
+        );
+
+    const newPasswordElement =
+        document.getElementById(
+            "forgotNewPassword"
+        );
+
+    const confirmPasswordElement =
+        document.getElementById(
+            "forgotConfirmPassword"
+        );
+
+    const messageElement =
+        document.getElementById(
+            "forgotMessage"
+        );
+
+
+    if (
+        !usernameElement ||
+        !newPasswordElement ||
+        !confirmPasswordElement
+    ) {
+
+        return;
+
+    }
+
+
+    const username =
+        usernameElement.value.trim();
+
+    const newPassword =
+        newPasswordElement.value;
+
+    const confirmPassword =
+        confirmPasswordElement.value;
+
+
+    // CHECK EMPTY FIELDS
+
+    if (
+        username === "" ||
+        newPassword === "" ||
+        confirmPassword === ""
+    ) {
+
+        messageElement.textContent =
+            "Please complete all fields.";
+
+        messageElement.style.color =
+            "#c0392b";
+
+        return;
+
+    }
+
+
+    // ADMIN ACCOUNT CANNOT BE RESET
+
+    if (
+        username.toLowerCase() === "admin"
+    ) {
+
+        messageElement.textContent =
+            "The admin password cannot be reset here.";
+
+        messageElement.style.color =
+            "#c0392b";
+
+        return;
+
+    }
+
+
+    // CHECK PASSWORD MATCH
+
+    if (
+        newPassword !== confirmPassword
+    ) {
+
+        messageElement.textContent =
+            "Passwords do not match.";
+
+        messageElement.style.color =
+            "#c0392b";
+
+        return;
+
+    }
+
+
+    // GET CUSTOMER ACCOUNTS
+
+    const customers =
+
+        JSON.parse(
+
+            localStorage.getItem(
+                "loveLuxeCustomers"
+            )
+
+        ) || [];
+
+
+    // FIND CUSTOMER
+
+    const customerIndex =
+
+        customers.findIndex(
+
+            function(customer) {
+
+                return (
+
+                    customer.username.toLowerCase() ===
+                    username.toLowerCase()
+
+                );
+
+            }
+
+        );
+
+
+    // USERNAME NOT FOUND
+
+    if (
+        customerIndex === -1
+    ) {
+
+        messageElement.textContent =
+            "Username not found.";
+
+        messageElement.style.color =
+            "#c0392b";
+
+        return;
+
+    }
+
+
+    // UPDATE PASSWORD
+
+    customers[
+        customerIndex
+    ].password =
+        newPassword;
+
+
+    // SAVE UPDATED CUSTOMERS
+
+    localStorage.setItem(
+
+        "loveLuxeCustomers",
+
+        JSON.stringify(customers)
+
+    );
+
+
+    // SUCCESS MESSAGE
+
+    messageElement.textContent =
+        "Password reset successfully!";
+
+    messageElement.style.color =
+        "#4a8c5c";
+
+
+    // CLEAR FIELDS
+
+    usernameElement.value = "";
+
+    newPasswordElement.value = "";
+
+    confirmPasswordElement.value = "";
+
+
+    // RETURN TO LOGIN
+
+    setTimeout(
+
+        function() {
+
+            window.location.href =
+                "index.html";
+
+        },
+
+        1200
+
+    );
+
+}
 
 // ==========================================
 // ADMIN DASHBOARD
