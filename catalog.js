@@ -1,66 +1,64 @@
-// ==========================================
-// CUSTOMER ACCESS CHECK
-// ==========================================
+/* ==========================================
+   LOVE LUXE CUSTOMER CATALOG
+========================================== */
 
-const currentUser =
+
+/* ==========================================
+   CUSTOMER ACCESS CHECK
+========================================== */
+
+const currentUserData =
     localStorage.getItem(
         "loveLuxeCurrentUser"
     );
 
 
-if (!currentUser) {
+if (!currentUserData) {
 
-    // Not logged in
     window.location.href =
         "index.html";
 
 }
 
-else {
 
-    try {
-
-        const user =
-            JSON.parse(currentUser);
+let catalogUser = null;
 
 
-        // ==========================================
-        // ONLY CUSTOMERS CAN ENTER CATALOG
-        // ==========================================
+try {
 
-        if (user.role !== "customer") {
+    catalogUser =
+        JSON.parse(currentUserData);
 
-            window.location.href =
-                "https://danielrf15.github.io/loveluxe_dashboard/";
+}
 
-        }
+catch (error) {
 
-    }
+    localStorage.removeItem(
+        "loveLuxeCurrentUser"
+    );
 
-    catch (error) {
-
-        localStorage.removeItem(
-            "loveLuxeCurrentUser"
-        );
-
-
-        window.location.href =
-            "index.html";
-
-    }
+    window.location.href =
+        "index.html";
 
 }
 
 
-// ==========================================
-// LOVE LUXE PRODUCTS
-// ==========================================
+if (
+    catalogUser &&
+    catalogUser.role !== "customer"
+) {
+
+    window.location.href =
+        "admin.html";
+
+}
+
+
+/* ==========================================
+   LOVE LUXE PRODUCTS
+========================================== */
 
 const products = [
-
-    // ==========================================
-    // CLOTHING
-    // ==========================================
 
     {
         name: "Sophia Skirt",
@@ -70,7 +68,6 @@ const products = [
         image: "images/sophia-skirt.jpg"
     },
 
-
     {
         name: "Nov-Mardi T-Shirt",
         category: "Clothing",
@@ -78,7 +75,6 @@ const products = [
         description: "Casual Nov-Mardi T-Shirt.",
         image: "images/nov-mardi-tshirt.jpg"
     },
-
 
     {
         name: "Basic Chic01 Terno",
@@ -88,7 +84,6 @@ const products = [
         image: "images/basic-chic01-terno.jpg"
     },
 
-
     {
         name: "Sami T-Shirt",
         category: "Clothing",
@@ -96,11 +91,6 @@ const products = [
         description: "Casual Sami T-Shirt.",
         image: "images/sami-tshirt.jpg"
     },
-
-
-    // ==========================================
-    // BODY CARE
-    // ==========================================
 
     {
         name: "Alada Soap",
@@ -110,7 +100,6 @@ const products = [
         image: "images/alada-soap.jpg"
     },
 
-
     {
         name: "Dewy Gluta Soap",
         category: "Body Care",
@@ -118,7 +107,6 @@ const products = [
         description: "Dewy Gluta Soap.",
         image: "images/dewy-gluta-soap.jpg"
     },
-
 
     {
         name: "Serene Skin Soap",
@@ -128,7 +116,6 @@ const products = [
         image: "images/serene-skin-soap.jpg"
     },
 
-
     {
         name: "Vitamin E Whitening Cream",
         category: "Body Care",
@@ -136,11 +123,6 @@ const products = [
         description: "Vitamin E Whitening Cream.",
         image: "images/vitamin-e-whitening-cream.jpg"
     },
-
-
-    // ==========================================
-    // BAGS
-    // ==========================================
 
     {
         name: "Mini Enzo",
@@ -150,7 +132,6 @@ const products = [
         image: "images/mini-enzo.jpg"
     },
 
-
     {
         name: "Mini Bucket Bag",
         category: "Bags",
@@ -158,7 +139,6 @@ const products = [
         description: "Mini Bucket Bag.",
         image: "images/mini-bucket-bag.jpg"
     },
-
 
     {
         name: "Anytime Medium",
@@ -168,7 +148,6 @@ const products = [
         image: "images/anytime-medium.jpg"
     },
 
-
     {
         name: "Emilio Barrel",
         category: "Bags",
@@ -176,11 +155,6 @@ const products = [
         description: "Emilio Barrel bag.",
         image: "images/emilio-barrel.jpg"
     },
-
-
-    // ==========================================
-    // PERFUME
-    // ==========================================
 
     {
         name: "Victoria's Secret Perfume",
@@ -190,7 +164,6 @@ const products = [
         image: "images/victorias-secret-perfume.jpg"
     },
 
-
     {
         name: "Bath & Body Works Perfume",
         category: "Perfume",
@@ -199,7 +172,6 @@ const products = [
         image: "images/bath-body-works-perfume.jpg"
     },
 
-
     {
         name: "Smart Collection Perfume",
         category: "Perfume",
@@ -207,7 +179,6 @@ const products = [
         description: "Smart Collection perfume.",
         image: "images/smart-collection-perfume.jpg"
     },
-
 
     {
         name: "Lattafa YARA",
@@ -220,13 +191,17 @@ const products = [
 ];
 
 
-// ==========================================
-// VARIABLES
-// ==========================================
+/* ==========================================
+   VARIABLES
+========================================== */
 
 let selectedCategory = "All";
 
 let searchText = "";
+
+let selectedProduct = null;
+
+let selectedQuantity = 1;
 
 
 const productGrid =
@@ -259,40 +234,36 @@ const filterButtons =
     );
 
 
-// ==========================================
-// DISPLAY PRODUCTS
-// ==========================================
+/* ==========================================
+   DISPLAY PRODUCTS
+========================================== */
 
 function displayProducts() {
+
+    if (!productGrid) {
+        return;
+    }
+
 
     productGrid.innerHTML = "";
 
 
     const filteredProducts =
-
         products.filter(
-
             function(product) {
 
-
                 const categoryMatch =
-
                     selectedCategory === "All" ||
-
-                    product.category ===
-                    selectedCategory;
+                    product.category === selectedCategory;
 
 
                 const searchMatch =
-
                     product.name
                         .toLowerCase()
                         .includes(
                             searchText.toLowerCase()
                         )
-
                     ||
-
                     product.category
                         .toLowerCase()
                         .includes(
@@ -306,50 +277,45 @@ function displayProducts() {
                 );
 
             }
-
         );
 
-
-    // ==========================================
-    // NO PRODUCTS
-    // ==========================================
 
     if (
         filteredProducts.length === 0
     ) {
 
-        noProducts.style.display =
-            "block";
+        if (noProducts) {
+            noProducts.style.display =
+                "block";
+        }
 
 
-        productCount.textContent =
-            "No products found";
+        if (productCount) {
+            productCount.textContent =
+                "No products found";
+        }
 
 
         return;
-
     }
 
 
-    noProducts.style.display =
-        "none";
+    if (noProducts) {
+        noProducts.style.display =
+            "none";
+    }
 
 
-    productCount.textContent =
+    if (productCount) {
+        productCount.textContent =
+            "Showing " +
+            filteredProducts.length +
+            " product(s)";
+    }
 
-        "Showing " +
-        filteredProducts.length +
-        " product(s)";
-
-
-    // ==========================================
-    // CREATE CARDS
-    // ==========================================
 
     filteredProducts.forEach(
-
         function(product) {
-
 
             const card =
                 document.createElement(
@@ -364,91 +330,90 @@ function displayProducts() {
             let imageHTML = "";
 
 
-            if (
-                product.image !== ""
-            ) {
+            if (product.image) {
 
                 imageHTML =
-
-                    `<img
+                    `
+                    <img
                         src="${product.image}"
                         alt="${product.name}"
-                    >`;
+                    >
+                    `;
 
             }
-
 
             else {
 
                 imageHTML =
-
-                    `<div class="image-placeholder">
+                    `
+                    <div class="image-placeholder">
                         LOVE LUXE
-                    </div>`;
+                    </div>
+                    `;
 
             }
 
 
-            card.innerHTML = `
-
+            card.innerHTML =
+                `
                 <div class="product-image">
-
                     ${imageHTML}
-
                 </div>
-
 
                 <div class="product-info">
 
                     <div class="product-category">
-
                         ${product.category}
-
                     </div>
 
-
                     <h3 class="product-name">
-
                         ${product.name}
-
                     </h3>
 
-
                     <p class="product-description">
-
                         ${product.description}
-
                     </p>
-
 
                     <div class="product-bottom">
 
                         <span class="product-price">
-
                             ₱${product.price.toLocaleString(
                                 "en-PH",
                                 {
                                     minimumFractionDigits: 2
                                 }
                             )}
-
                         </span>
-
 
                         <button
                             class="view-button"
-                            onclick="viewProduct('${product.name}')"
+                            type="button"
                         >
-
                             VIEW
-
                         </button>
 
                     </div>
 
                 </div>
+                `;
 
-            `;
+
+            const viewButton =
+                card.querySelector(
+                    ".view-button"
+                );
+
+
+            viewButton.addEventListener(
+                "click",
+                function() {
+
+                    viewProduct(
+                        product.name
+                    );
+
+                }
+            );
 
 
             productGrid.appendChild(
@@ -456,29 +421,23 @@ function displayProducts() {
             );
 
         }
-
     );
 
 }
 
 
-// ==========================================
-// CATEGORY FILTER
-// ==========================================
+/* ==========================================
+   CATEGORY FILTER
+========================================== */
 
 filterButtons.forEach(
-
     function(button) {
 
         button.addEventListener(
-
             "click",
-
             function() {
 
-
                 filterButtons.forEach(
-
                     function(btn) {
 
                         btn.classList.remove(
@@ -486,7 +445,6 @@ filterButtons.forEach(
                         );
 
                     }
-
                 );
 
 
@@ -502,55 +460,828 @@ filterButtons.forEach(
                 displayProducts();
 
             }
-
         );
 
     }
-
 );
 
 
-// ==========================================
-// SEARCH
-// ==========================================
+/* ==========================================
+   SEARCH
+========================================== */
 
-searchInput.addEventListener(
+if (searchInput) {
 
-    "input",
+    searchInput.addEventListener(
+        "input",
+        function() {
 
-    function() {
-
-        searchText =
-            searchInput.value.trim();
-
-
-        displayProducts();
-
-    }
-
-);
+            searchText =
+                searchInput.value.trim();
 
 
-// ==========================================
-// VIEW PRODUCT
-// ==========================================
+            displayProducts();
 
-function viewProduct(productName) {
-
-    alert(
-
-        "You selected: " +
-        productName +
-        "\n\nProduct details and ordering can be added here."
-
+        }
     );
 
 }
 
 
-// ==========================================
-// SIDEBAR
-// ==========================================
+/* ==========================================
+   CREATE CHECKOUT MODAL
+========================================== */
+
+function createCheckoutModal() {
+
+    if (
+        document.getElementById(
+            "loveLuxeCheckoutModal"
+        )
+    ) {
+        return;
+    }
+
+
+    const modal =
+        document.createElement(
+            "div"
+        );
+
+
+    modal.id =
+        "loveLuxeCheckoutModal";
+
+
+    modal.innerHTML =
+        `
+        <div
+            id="checkoutOverlay"
+            style="
+                position:fixed;
+                inset:0;
+                background:rgba(0,0,0,0.55);
+                z-index:9998;
+            "
+        ></div>
+
+        <div
+            style="
+                position:fixed;
+                left:50%;
+                top:50%;
+                transform:translate(-50%,-50%);
+                width:min(500px,92%);
+                max-height:90vh;
+                overflow-y:auto;
+                background:white;
+                border-radius:16px;
+                padding:25px;
+                z-index:9999;
+                box-shadow:0 20px 60px rgba(0,0,0,0.25);
+                font-family:Arial,sans-serif;
+            "
+        >
+
+            <button
+                id="checkoutClose"
+                type="button"
+                style="
+                    float:right;
+                    border:0;
+                    background:none;
+                    font-size:25px;
+                    cursor:pointer;
+                "
+            >
+                ×
+            </button>
+
+            <h2
+                style="
+                    margin-top:0;
+                    margin-bottom:20px;
+                "
+            >
+                Love Luxe Checkout
+            </h2>
+
+            <div
+                id="checkoutProduct"
+                style="
+                    margin-bottom:20px;
+                "
+            ></div>
+
+            <label
+                style="
+                    display:block;
+                    margin-bottom:7px;
+                    font-weight:bold;
+                "
+            >
+                Quantity
+            </label>
+
+            <div
+                style="
+                    display:flex;
+                    align-items:center;
+                    gap:10px;
+                    margin-bottom:18px;
+                "
+            >
+
+                <button
+                    id="quantityMinus"
+                    type="button"
+                    style="
+                        width:35px;
+                        height:35px;
+                        cursor:pointer;
+                    "
+                >
+                    -
+                </button>
+
+                <span
+                    id="checkoutQuantity"
+                    style="
+                        min-width:30px;
+                        text-align:center;
+                        font-weight:bold;
+                    "
+                >
+                    1
+                </span>
+
+                <button
+                    id="quantityPlus"
+                    type="button"
+                    style="
+                        width:35px;
+                        height:35px;
+                        cursor:pointer;
+                    "
+                >
+                    +
+                </button>
+
+            </div>
+
+            <div
+                style="
+                    margin-bottom:18px;
+                    padding:15px;
+                    background:#f5f5f5;
+                    border-radius:10px;
+                "
+            >
+                <strong>
+                    Total:
+                </strong>
+
+                <span
+                    id="checkoutTotal"
+                    style="
+                        float:right;
+                        font-weight:bold;
+                    "
+                >
+                    ₱0.00
+                </span>
+            </div>
+
+            <h3>
+                Shipping Address
+            </h3>
+
+            <p
+                id="checkoutAddress"
+                style="
+                    background:#f8f8f8;
+                    padding:12px;
+                    border-radius:8px;
+                    line-height:1.5;
+                "
+            >
+                No shipping address saved.
+            </p>
+
+            <p
+                style="
+                    font-size:13px;
+                    color:#777;
+                "
+            >
+                You can update your shipping address in
+                My Account → Settings.
+            </p>
+
+            <label
+                for="checkoutPayment"
+                style="
+                    display:block;
+                    margin-bottom:7px;
+                    font-weight:bold;
+                "
+            >
+                Payment Method
+            </label>
+
+            <select
+                id="checkoutPayment"
+                style="
+                    width:100%;
+                    padding:12px;
+                    margin-bottom:20px;
+                    border:1px solid #ddd;
+                    border-radius:8px;
+                "
+            >
+                <option value="Cash on Delivery">
+                    Cash on Delivery
+                </option>
+
+                <option value="GCash">
+                    GCash
+                </option>
+
+                <option value="Bank Transfer">
+                    Bank Transfer
+                </option>
+
+                <option value="Card">
+                    Card
+                </option>
+            </select>
+
+            <button
+                id="placeOrderButton"
+                type="button"
+                style="
+                    width:100%;
+                    padding:14px;
+                    border:0;
+                    border-radius:8px;
+                    background:#111;
+                    color:white;
+                    font-weight:bold;
+                    cursor:pointer;
+                "
+            >
+                PLACE ORDER
+            </button>
+
+            <p
+                id="checkoutMessage"
+                style="
+                    text-align:center;
+                    margin-top:15px;
+                "
+            ></p>
+
+        </div>
+        `;
+
+
+    document.body.appendChild(
+        modal
+    );
+
+
+    document
+        .getElementById("checkoutClose")
+        .addEventListener(
+            "click",
+            closeCheckout
+        );
+
+
+    document
+        .getElementById("checkoutOverlay")
+        .addEventListener(
+            "click",
+            closeCheckout
+        );
+
+
+    document
+        .getElementById("quantityMinus")
+        .addEventListener(
+            "click",
+            function() {
+
+                if (selectedQuantity > 1) {
+
+                    selectedQuantity--;
+
+                    updateCheckout();
+
+                }
+
+            }
+        );
+
+
+    document
+        .getElementById("quantityPlus")
+        .addEventListener(
+            "click",
+            function() {
+
+                selectedQuantity++;
+
+                updateCheckout();
+
+            }
+        );
+
+
+    document
+        .getElementById("placeOrderButton")
+        .addEventListener(
+            "click",
+            placeOrder
+        );
+
+}
+
+
+/* ==========================================
+   VIEW PRODUCT
+========================================== */
+
+function viewProduct(productName) {
+
+    selectedProduct =
+        products.find(
+            function(product) {
+
+                return product.name === productName;
+
+            }
+        );
+
+
+    if (!selectedProduct) {
+        return;
+    }
+
+
+    selectedQuantity = 1;
+
+
+    createCheckoutModal();
+
+
+    const modal =
+        document.getElementById(
+            "loveLuxeCheckoutModal"
+        );
+
+
+    modal.style.display =
+        "block";
+
+
+    updateCheckout();
+
+}
+
+
+/* ==========================================
+   UPDATE CHECKOUT
+========================================== */
+
+function updateCheckout() {
+
+    if (!selectedProduct) {
+        return;
+    }
+
+
+    const productElement =
+        document.getElementById(
+            "checkoutProduct"
+        );
+
+
+    const quantityElement =
+        document.getElementById(
+            "checkoutQuantity"
+        );
+
+
+    const totalElement =
+        document.getElementById(
+            "checkoutTotal"
+        );
+
+
+    const addressElement =
+        document.getElementById(
+            "checkoutAddress"
+        );
+
+
+    if (!productElement) {
+        return;
+    }
+
+
+    productElement.innerHTML =
+        `
+        <div
+            style="
+                display:flex;
+                gap:15px;
+                align-items:center;
+            "
+        >
+
+            <img
+                src="${selectedProduct.image}"
+                alt="${selectedProduct.name}"
+                style="
+                    width:90px;
+                    height:90px;
+                    object-fit:cover;
+                    border-radius:10px;
+                "
+            >
+
+            <div>
+
+                <div
+                    style="
+                        font-size:13px;
+                        color:#777;
+                    "
+                >
+                    ${selectedProduct.category}
+                </div>
+
+                <h3
+                    style="
+                        margin:5px 0;
+                    "
+                >
+                    ${selectedProduct.name}
+                </h3>
+
+                <div>
+                    ₱${selectedProduct.price.toLocaleString(
+                        "en-PH",
+                        {
+                            minimumFractionDigits:2
+                        }
+                    )}
+                </div>
+
+            </div>
+
+        </div>
+        `;
+
+
+    quantityElement.textContent =
+        selectedQuantity;
+
+
+    const total =
+        selectedProduct.price *
+        selectedQuantity;
+
+
+    totalElement.textContent =
+        "₱" +
+        total.toLocaleString(
+            "en-PH",
+            {
+                minimumFractionDigits:2
+            }
+        );
+
+
+    const user =
+        getCatalogCurrentUser();
+
+
+    const address =
+        user?.shippingAddress;
+
+
+    if (
+        address &&
+        (
+            address.houseNumber ||
+            address.street ||
+            address.barangay ||
+            address.city ||
+            address.province ||
+            address.postalCode
+        )
+    ) {
+
+        addressElement.textContent =
+            formatShippingAddress(
+                address
+            );
+
+    }
+
+    else {
+
+        addressElement.textContent =
+            "No shipping address saved. Please update your address in My Account → Settings.";
+
+    }
+
+}
+
+
+/* ==========================================
+   GET CURRENT CUSTOMER
+========================================== */
+
+function getCatalogCurrentUser() {
+
+    const savedUser =
+        localStorage.getItem(
+            "loveLuxeCurrentUser"
+        );
+
+
+    if (!savedUser) {
+        return null;
+    }
+
+
+    try {
+
+        return JSON.parse(
+            savedUser
+        );
+
+    }
+
+    catch (error) {
+
+        return null;
+
+    }
+
+}
+
+
+/* ==========================================
+   FORMAT SHIPPING ADDRESS
+========================================== */
+
+function formatShippingAddress(address) {
+
+    const parts = [
+
+        address.houseNumber,
+
+        address.street,
+
+        address.barangay,
+
+        address.city,
+
+        address.province,
+
+        address.postalCode
+
+    ];
+
+
+    return parts
+        .filter(
+            function(part) {
+                return part && part.trim() !== "";
+            }
+        )
+        .join(", ");
+
+}
+
+
+/* ==========================================
+   PLACE ORDER
+========================================== */
+
+function placeOrder() {
+
+    if (!selectedProduct) {
+        return;
+    }
+
+
+    const user =
+        getCatalogCurrentUser();
+
+
+    if (
+        !user ||
+        user.role !== "customer"
+    ) {
+
+        alert(
+            "Please log in as a customer first."
+        );
+
+        window.location.href =
+            "index.html";
+
+        return;
+    }
+
+
+    const address =
+        user.shippingAddress;
+
+
+    if (
+        !address ||
+        !(
+            address.houseNumber ||
+            address.street ||
+            address.barangay ||
+            address.city ||
+            address.province ||
+            address.postalCode
+        )
+    ) {
+
+        alert(
+            "Please save your shipping address in My Account → Settings before checking out."
+        );
+
+        window.location.href =
+            "customer.html#shipping";
+
+        return;
+    }
+
+
+    const paymentElement =
+        document.getElementById(
+            "checkoutPayment"
+        );
+
+
+    const paymentMethod =
+        paymentElement
+            ? paymentElement.value
+            : "Cash on Delivery";
+
+
+    const total =
+        selectedProduct.price *
+        selectedQuantity;
+
+
+    const orders =
+        JSON.parse(
+            localStorage.getItem(
+                "loveLuxeOrders"
+            )
+        ) || [];
+
+
+    const orderNumber =
+        "LL-" +
+        Date.now();
+
+
+    const newOrder = {
+
+        orderNumber:
+            orderNumber,
+
+        customerUsername:
+            user.username,
+
+        customerName:
+            user.fullName,
+
+        customerPhone:
+            user.phone || "",
+
+        productName:
+            selectedProduct.name,
+
+        category:
+            selectedProduct.category,
+
+        quantity:
+            selectedQuantity,
+
+        unitPrice:
+            selectedProduct.price,
+
+        total:
+            total,
+
+        shippingAddress:
+            formatShippingAddress(
+                address
+            ),
+
+        paymentMethod:
+            paymentMethod,
+
+        date:
+            new Date().toLocaleString(
+                "en-PH"
+            ),
+
+        status:
+            "Pending"
+
+    };
+
+
+    orders.push(
+        newOrder
+    );
+
+
+    localStorage.setItem(
+        "loveLuxeOrders",
+        JSON.stringify(orders)
+    );
+
+
+    const message =
+        document.getElementById(
+            "checkoutMessage"
+        );
+
+
+    if (message) {
+
+        message.style.color =
+            "green";
+
+        message.textContent =
+            "Order placed successfully! Order #" +
+            orderNumber;
+
+    }
+
+
+    setTimeout(
+        function() {
+
+            closeCheckout();
+
+            alert(
+                "Order placed successfully!\n\nOrder Number: " +
+                orderNumber
+            );
+
+        },
+        700
+    );
+
+}
+
+
+/* ==========================================
+   CLOSE CHECKOUT
+========================================== */
+
+function closeCheckout() {
+
+    const modal =
+        document.getElementById(
+            "loveLuxeCheckoutModal"
+        );
+
+
+    if (modal) {
+
+        modal.remove();
+
+    }
+
+
+    selectedProduct =
+        null;
+
+    selectedQuantity =
+        1;
+
+}
+
+
+/* ==========================================
+   SIDEBAR
+========================================== */
 
 const shopSidebar =
     document.getElementById(
@@ -564,62 +1295,67 @@ const sidebarOverlay =
     );
 
 
-// ==========================================
-// OPEN SIDEBAR
-// ==========================================
-
 function openSidebar() {
 
-    shopSidebar.classList.add(
-        "open"
-    );
+    if (shopSidebar) {
 
-
-    sidebarOverlay.classList.add(
-        "active"
-    );
-
-}
-
-
-// ==========================================
-// CLOSE SIDEBAR
-// ==========================================
-
-function closeSidebar() {
-
-    shopSidebar.classList.remove(
-        "open"
-    );
-
-
-    sidebarOverlay.classList.remove(
-        "active"
-    );
-
-}
-
-
-// ==========================================
-// CLICK OVERLAY
-// ==========================================
-
-sidebarOverlay.addEventListener(
-
-    "click",
-
-    function() {
-
-        closeSidebar();
+        shopSidebar.classList.add(
+            "open"
+        );
 
     }
 
-);
+
+    if (sidebarOverlay) {
+
+        sidebarOverlay.classList.add(
+            "active"
+        );
+
+    }
+
+}
 
 
-// ==========================================
-// SIDEBAR MESSAGE
-// ==========================================
+function closeSidebar() {
+
+    if (shopSidebar) {
+
+        shopSidebar.classList.remove(
+            "open"
+        );
+
+    }
+
+
+    if (sidebarOverlay) {
+
+        sidebarOverlay.classList.remove(
+            "active"
+        );
+
+    }
+
+}
+
+
+if (sidebarOverlay) {
+
+    sidebarOverlay.addEventListener(
+        "click",
+        function() {
+
+            closeSidebar();
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   SIDEBAR MESSAGE
+========================================== */
 
 function showMessage(section) {
 
@@ -627,18 +1363,16 @@ function showMessage(section) {
 
 
     alert(
-
         section +
         " page will be added next."
-
     );
 
 }
 
 
-// ==========================================
-// CUSTOMER NAME
-// ==========================================
+/* ==========================================
+   CUSTOMER NAME
+========================================== */
 
 function displayCustomerName() {
 
@@ -648,52 +1382,25 @@ function displayCustomerName() {
         );
 
 
-    const currentUser =
-        localStorage.getItem(
-            "loveLuxeCurrentUser"
-        );
-
-
-    if (!currentUser) {
-
-        customerName.textContent =
-            "Customer";
-
+    if (!customerName) {
         return;
-
     }
 
 
-    try {
-
-        const user =
-            JSON.parse(
-                currentUser
-            );
+    const user =
+        getCatalogCurrentUser();
 
 
-        if (user.fullName) {
-
-            customerName.textContent =
-                user.fullName;
-
-        }
-
-    }
-
-    catch (error) {
-
-        customerName.textContent =
-            "Customer";
-
-    }
+    customerName.textContent =
+        user?.fullName ||
+        "Customer";
 
 }
 
 
-// ==========================================
-// START
-// ==========================================
+/* ==========================================
+   START
+========================================== */
 
 displayCustomerName();
 
