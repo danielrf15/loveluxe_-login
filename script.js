@@ -8,15 +8,10 @@
 ========================================== */
 
 const adminAccount = {
-
     username: "admin",
-
     password: "Admin123",
-
     fullName: "Love Luxe Admin",
-
     role: "admin"
-
 };
 
 
@@ -45,9 +40,20 @@ function saveCustomers(customers) {
 
 function getCurrentUser() {
 
-    return JSON.parse(
-        localStorage.getItem("loveLuxeCurrentUser")
-    );
+    const savedUser =
+        localStorage.getItem("loveLuxeCurrentUser");
+
+    if (!savedUser) {
+        return null;
+    }
+
+    try {
+        return JSON.parse(savedUser);
+    }
+
+    catch (error) {
+        return null;
+    }
 
 }
 
@@ -79,28 +85,62 @@ if (loginForm) {
             event.preventDefault();
 
 
-            const username =
-                document
-                    .getElementById("username")
-                    .value
-                    .trim();
+            /* ----------------------------------
+               GET LOGIN INPUTS
+            ---------------------------------- */
 
+            const usernameInput =
+                document.getElementById("loginUsername") ||
+                document.getElementById("username");
 
-            const password =
-                document
-                    .getElementById("password")
-                    .value;
-
+            const passwordInput =
+                document.getElementById("loginPassword") ||
+                document.getElementById("password");
 
             const message =
-                document.getElementById(
-                    "loginMessage"
-                );
+                document.getElementById("loginMessage");
 
 
-            /* ------------------------------
+            if (!usernameInput || !passwordInput) {
+
+                if (message) {
+                    message.textContent =
+                        "Login fields could not be found.";
+                    message.className =
+                        "auth-message error";
+                }
+
+                return;
+            }
+
+
+            const username =
+                usernameInput.value.trim();
+
+            const password =
+                passwordInput.value;
+
+
+            /* ----------------------------------
+               CHECK EMPTY FIELDS
+            ---------------------------------- */
+
+            if (!username || !password) {
+
+                if (message) {
+                    message.textContent =
+                        "Please enter your username and password.";
+                    message.className =
+                        "auth-message error";
+                }
+
+                return;
+            }
+
+
+            /* ==================================
                ADMIN LOGIN
-            ------------------------------ */
+            ================================== */
 
             if (
                 username === adminAccount.username &&
@@ -124,13 +164,12 @@ if (loginForm) {
 
 
                 return;
-
             }
 
 
-            /* ------------------------------
+            /* ==================================
                CUSTOMER LOGIN
-            ------------------------------ */
+            ================================== */
 
             const customers =
                 getCustomers();
@@ -165,13 +204,12 @@ if (loginForm) {
 
 
                 return;
-
             }
 
 
-            /* ------------------------------
+            /* ==================================
                INVALID LOGIN
-            ------------------------------ */
+            ================================== */
 
             if (message) {
 
@@ -180,7 +218,6 @@ if (loginForm) {
 
                 message.className =
                     "auth-message error";
-
             }
 
         }
@@ -209,27 +246,25 @@ if (signupForm) {
             const fullName =
                 document
                     .getElementById("fullName")
-                    .value
-                    .trim();
+                    ?.value.trim();
 
 
             const username =
                 document
                     .getElementById("signupUsername")
-                    .value
-                    .trim();
+                    ?.value.trim();
 
 
             const password =
                 document
                     .getElementById("signupPassword")
-                    .value;
+                    ?.value;
 
 
             const confirmPassword =
                 document
                     .getElementById("confirmPassword")
-                    .value;
+                    ?.value;
 
 
             const message =
@@ -251,7 +286,6 @@ if (signupForm) {
                 );
 
                 return;
-
             }
 
 
@@ -266,11 +300,12 @@ if (signupForm) {
                 );
 
                 return;
-
             }
 
 
-            if (password !== confirmPassword) {
+            if (
+                password !== confirmPassword
+            ) {
 
                 showMessage(
                     message,
@@ -279,7 +314,6 @@ if (signupForm) {
                 );
 
                 return;
-
             }
 
 
@@ -309,46 +343,34 @@ if (signupForm) {
                 );
 
                 return;
-
             }
 
 
             const newCustomer = {
 
-                fullName:
-                    fullName,
+                fullName: fullName,
 
-                username:
-                    username,
+                username: username,
 
-                password:
-                    password,
+                password: password,
 
-                role:
-                    "customer",
+                role: "customer",
 
-                phone:
-                    "",
+                phone: "",
 
                 shippingAddress: {
 
-                    houseNumber:
-                        "",
+                    houseNumber: "",
 
-                    street:
-                        "",
+                    street: "",
 
-                    barangay:
-                        "",
+                    barangay: "",
 
-                    city:
-                        "",
+                    city: "",
 
-                    province:
-                        "",
+                    province: "",
 
-                    postalCode:
-                        ""
+                    postalCode: ""
 
                 }
 
@@ -423,9 +445,8 @@ function showMessage(
 ========================================== */
 
 const forgotPasswordForm =
-    document.getElementById(
-        "forgotPasswordForm"
-    );
+    document.getElementById("forgotPasswordForm") ||
+    document.getElementById("resetForm");
 
 
 if (forgotPasswordForm) {
@@ -440,30 +461,28 @@ if (forgotPasswordForm) {
             const username =
                 document
                     .getElementById("resetUsername")
-                    .value
-                    .trim();
+                    ?.value.trim();
 
 
             const newPassword =
                 document
                     .getElementById("newPassword")
-                    .value;
+                    ?.value;
 
 
             const confirmPassword =
                 document
                     .getElementById("confirmNewPassword")
-                    .value;
+                    ?.value;
 
 
             const message =
-                document.getElementById(
-                    "forgotMessage"
-                );
+                document.getElementById("forgotMessage") ||
+                document.getElementById("resetMessage");
 
 
             if (
-                username.toLowerCase() ===
+                username?.toLowerCase() ===
                 "admin"
             ) {
 
@@ -474,7 +493,6 @@ if (forgotPasswordForm) {
                 );
 
                 return;
-
             }
 
 
@@ -489,7 +507,18 @@ if (forgotPasswordForm) {
                 );
 
                 return;
+            }
 
+
+            if (!newPassword) {
+
+                showMessage(
+                    message,
+                    "Please enter a new password.",
+                    true
+                );
+
+                return;
             }
 
 
@@ -519,13 +548,10 @@ if (forgotPasswordForm) {
                 );
 
                 return;
-
             }
 
 
-            customers[
-                customerIndex
-            ].password =
+            customers[customerIndex].password =
                 newPassword;
 
 
@@ -565,9 +591,7 @@ if (forgotPasswordForm) {
 ========================================== */
 
 const customerPage =
-    document.getElementById(
-        "customerPage"
-    );
+    document.getElementById("customerPage");
 
 
 if (customerPage) {
@@ -713,9 +737,7 @@ function saveAccountChanges() {
 
 
     if (customerIndex === -1) {
-
         return;
-
     }
 
 
@@ -741,31 +763,22 @@ function saveAccountChanges() {
         );
 
         return;
-
     }
 
 
-    customers[
-        customerIndex
-    ].fullName =
+    customers[customerIndex].fullName =
         fullName;
 
 
-    customers[
-        customerIndex
-    ].username =
+    customers[customerIndex].username =
         username;
 
 
-    customers[
-        customerIndex
-    ].phone =
+    customers[customerIndex].phone =
         phone;
 
 
-    customers[
-        customerIndex
-    ].shippingAddress = {
+    customers[customerIndex].shippingAddress = {
 
         houseNumber:
             houseNumber,
@@ -857,7 +870,6 @@ function changeCustomerPassword() {
     ) {
 
         return;
-
     }
 
 
@@ -890,7 +902,6 @@ function changeCustomerPassword() {
         );
 
         return;
-
     }
 
 
@@ -905,7 +916,6 @@ function changeCustomerPassword() {
         );
 
         return;
-
     }
 
 
@@ -917,7 +927,6 @@ function changeCustomerPassword() {
         );
 
         return;
-
     }
 
 
@@ -939,15 +948,11 @@ function changeCustomerPassword() {
 
 
     if (customerIndex === -1) {
-
         return;
-
     }
 
 
-    customers[
-        customerIndex
-    ].password =
+    customers[customerIndex].password =
         newPassword;
 
 
