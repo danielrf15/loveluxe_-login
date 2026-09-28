@@ -1,5 +1,6 @@
 /* ==========================================
-   LOVE LUXE AUTHENTICATION
+   LOVE LUXE BY EA
+   LOGIN + SIGNUP + CUSTOMER ACCOUNT
 ========================================== */
 
 
@@ -15,332 +16,319 @@ const adminAccount = {
 };
 
 
-/* ==========================================
-   HELPER FUNCTIONS
-========================================== */
-
-function getCustomers() {
-
-    return JSON.parse(
-        localStorage.getItem("loveLuxeCustomers")
-    ) || [];
-
-}
-
-
-function saveCustomers(customers) {
-
-    localStorage.setItem(
-        "loveLuxeCustomers",
-        JSON.stringify(customers)
-    );
-
-}
-
-
-function getCurrentUser() {
-
-    const savedUser =
-        localStorage.getItem("loveLuxeCurrentUser");
-
-    if (!savedUser) {
-        return null;
-    }
-
-    try {
-        return JSON.parse(savedUser);
-    }
-
-    catch (error) {
-        return null;
-    }
-
-}
-
-
-function saveCurrentUser(user) {
-
-    localStorage.setItem(
-        "loveLuxeCurrentUser",
-        JSON.stringify(user)
-    );
-
-}
-
 
 /* ==========================================
    LOGIN
 ========================================== */
 
-const loginForm =
-    document.getElementById("loginForm");
+document.addEventListener("DOMContentLoaded", function () {
+
+    const loginForm = document.getElementById("loginForm");
+
+    if (!loginForm) {
+        return;
+    }
 
 
-if (loginForm) {
+    loginForm.addEventListener("submit", function (event) {
 
-    loginForm.addEventListener(
-        "submit",
-        function(event) {
-
-            event.preventDefault();
+        event.preventDefault();
 
 
-            /* ----------------------------------
-               GET LOGIN INPUTS
-            ---------------------------------- */
+        const usernameInput =
+            document.getElementById("username");
 
-            const usernameInput =
-                document.getElementById("loginUsername") ||
-                document.getElementById("username");
+        const passwordInput =
+            document.getElementById("password");
 
-            const passwordInput =
-                document.getElementById("loginPassword") ||
-                document.getElementById("password");
-
-            const message =
-                document.getElementById("loginMessage");
+        const loginMessage =
+            document.getElementById("loginMessage");
 
 
-            if (!usernameInput || !passwordInput) {
+        if (!usernameInput || !passwordInput) {
+            return;
+        }
 
-                if (message) {
-                    message.textContent =
-                        "Login fields could not be found.";
-                    message.className =
-                        "auth-message error";
-                }
 
-                return;
+        const username =
+            usernameInput.value.trim();
+
+        const password =
+            passwordInput.value.trim();
+
+
+        /* Clear old message */
+
+        if (loginMessage) {
+            loginMessage.textContent = "";
+        }
+
+
+        /* ======================================
+           ADMIN LOGIN
+        ====================================== */
+
+        if (
+            username === adminAccount.username &&
+            password === adminAccount.password
+        ) {
+
+            localStorage.setItem(
+                "loveLuxeAdminLoggedIn",
+                "true"
+            );
+
+
+            localStorage.setItem(
+                "loveLuxeCurrentUser",
+                JSON.stringify(adminAccount)
+            );
+
+
+            if (loginMessage) {
+
+                loginMessage.textContent =
+                    "Login successful. Opening admin dashboard...";
+
+                loginMessage.style.color = "green";
+
             }
 
 
-            const username =
-                usernameInput.value.trim();
+            /* Go to admin dashboard */
 
-            const password =
-                passwordInput.value;
-
-
-            /* ----------------------------------
-               CHECK EMPTY FIELDS
-            ---------------------------------- */
-
-            if (!username || !password) {
-
-                if (message) {
-                    message.textContent =
-                        "Please enter your username and password.";
-                    message.className =
-                        "auth-message error";
-                }
-
-                return;
-            }
-
-
-            /* ==================================
-               ADMIN LOGIN
-            ================================== */
-
-            if (
-                username === adminAccount.username &&
-                password === adminAccount.password
-            ) {
-
-                localStorage.setItem(
-                    "loveLuxeAdminLoggedIn",
-                    "true"
-                );
-
-
-                localStorage.setItem(
-                    "loveLuxeCurrentUser",
-                    JSON.stringify(adminAccount)
-                );
-
+            setTimeout(function () {
 
                 window.location.href =
                     "admin.html";
 
+            }, 300);
 
-                return;
+
+            return;
+        }
+
+
+
+        /* ======================================
+           CUSTOMER LOGIN
+        ====================================== */
+
+        let customers = [];
+
+
+        try {
+
+            customers =
+                JSON.parse(
+                    localStorage.getItem(
+                        "loveLuxeCustomers"
+                    )
+                ) || [];
+
+        } catch (error) {
+
+            customers = [];
+
+        }
+
+
+        const customer =
+            customers.find(function (user) {
+
+                return (
+                    user.username === username &&
+                    user.password === password
+                );
+
+            });
+
+
+        if (customer) {
+
+            localStorage.setItem(
+                "loveLuxeAdminLoggedIn",
+                "false"
+            );
+
+
+            localStorage.setItem(
+                "loveLuxeCurrentUser",
+                JSON.stringify(customer)
+            );
+
+
+            if (loginMessage) {
+
+                loginMessage.textContent =
+                    "Login successful. Opening shop...";
+
+                loginMessage.style.color = "green";
+
             }
 
 
-            /* ==================================
-               CUSTOMER LOGIN
-            ================================== */
-
-            const customers =
-                getCustomers();
-
-
-            const customer =
-                customers.find(
-                    function(account) {
-
-                        return (
-                            account.username === username &&
-                            account.password === password
-                        );
-
-                    }
-                );
-
-
-            if (customer) {
-
-                localStorage.setItem(
-                    "loveLuxeAdminLoggedIn",
-                    "false"
-                );
-
-
-                saveCurrentUser(customer);
-
+            setTimeout(function () {
 
                 window.location.href =
                     "catalog.html";
 
-
-                return;
-            }
+            }, 300);
 
 
-            /* ==================================
-               INVALID LOGIN
-            ================================== */
+            return;
+        }
 
-            if (message) {
 
-                message.textContent =
-                    "Invalid username or password.";
 
-                message.className =
-                    "auth-message error";
-            }
+        /* ======================================
+           INVALID LOGIN
+        ====================================== */
+
+        if (loginMessage) {
+
+            loginMessage.textContent =
+                "Invalid username or password.";
+
+            loginMessage.style.color = "red";
 
         }
-    );
 
-}
+    });
+
+});
+
 
 
 /* ==========================================
    SIGN UP
 ========================================== */
 
-const signupForm =
-    document.getElementById("signupForm");
+document.addEventListener("DOMContentLoaded", function () {
+
+    const signupForm =
+        document.getElementById("signupForm");
 
 
-if (signupForm) {
+    if (!signupForm) {
+        return;
+    }
+
 
     signupForm.addEventListener(
         "submit",
-        function(event) {
+        function (event) {
 
             event.preventDefault();
 
 
             const fullName =
-                document
-                    .getElementById("fullName")
-                    ?.value.trim();
-
+                document.getElementById("fullName")?.value.trim();
 
             const username =
-                document
-                    .getElementById("signupUsername")
-                    ?.value.trim();
-
+                document.getElementById("signupUsername")?.value.trim();
 
             const password =
-                document
-                    .getElementById("signupPassword")
-                    ?.value;
-
+                document.getElementById("signupPassword")?.value.trim();
 
             const confirmPassword =
-                document
-                    .getElementById("confirmPassword")
-                    ?.value;
+                document.getElementById("confirmPassword")?.value.trim();
 
 
-            const message =
-                document.getElementById(
-                    "signupMessage"
-                );
+            const signupMessage =
+                document.getElementById("signupMessage");
 
 
             if (
                 !fullName ||
                 !username ||
-                !password
+                !password ||
+                !confirmPassword
             ) {
 
-                showMessage(
-                    message,
-                    "Please complete all fields.",
-                    true
-                );
+                if (signupMessage) {
+
+                    signupMessage.textContent =
+                        "Please complete all fields.";
+
+                    signupMessage.style.color = "red";
+
+                }
 
                 return;
             }
 
 
-            if (
-                username.toLowerCase() === "admin"
-            ) {
+            if (username.toLowerCase() === "admin") {
 
-                showMessage(
-                    message,
-                    "This username is not available.",
-                    true
-                );
+                if (signupMessage) {
 
-                return;
-            }
+                    signupMessage.textContent =
+                        "This username is not available.";
 
+                    signupMessage.style.color = "red";
 
-            if (
-                password !== confirmPassword
-            ) {
-
-                showMessage(
-                    message,
-                    "Passwords do not match.",
-                    true
-                );
+                }
 
                 return;
             }
 
 
-            const customers =
-                getCustomers();
+            if (password !== confirmPassword) {
+
+                if (signupMessage) {
+
+                    signupMessage.textContent =
+                        "Passwords do not match.";
+
+                    signupMessage.style.color = "red";
+
+                }
+
+                return;
+            }
+
+
+            let customers = [];
+
+
+            try {
+
+                customers =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "loveLuxeCustomers"
+                        )
+                    ) || [];
+
+            } catch (error) {
+
+                customers = [];
+
+            }
 
 
             const existingCustomer =
-                customers.find(
-                    function(customer) {
+                customers.find(function (user) {
 
-                        return (
-                            customer.username.toLowerCase() ===
-                            username.toLowerCase()
-                        );
+                    return (
+                        user.username.toLowerCase() ===
+                        username.toLowerCase()
+                    );
 
-                    }
-                );
+                });
 
 
             if (existingCustomer) {
 
-                showMessage(
-                    message,
-                    "Username already exists.",
-                    true
-                );
+                if (signupMessage) {
+
+                    signupMessage.textContent =
+                        "Username already exists.";
+
+                    signupMessage.style.color = "red";
+
+                }
 
                 return;
             }
@@ -354,126 +342,78 @@ if (signupForm) {
 
                 password: password,
 
-                role: "customer",
-
                 phone: "",
 
-                shippingAddress: {
+                shippingAddress: "",
 
-                    houseNumber: "",
-
-                    street: "",
-
-                    barangay: "",
-
-                    city: "",
-
-                    province: "",
-
-                    postalCode: ""
-
-                }
+                role: "customer"
 
             };
 
 
-            customers.push(
-                newCustomer
+            customers.push(newCustomer);
+
+
+            localStorage.setItem(
+                "loveLuxeCustomers",
+                JSON.stringify(customers)
             );
 
 
-            saveCustomers(
-                customers
-            );
+            if (signupMessage) {
+
+                signupMessage.textContent =
+                    "Account created successfully!";
+
+                signupMessage.style.color = "green";
+
+            }
 
 
-            showMessage(
-                message,
-                "Account created successfully!",
-                false
-            );
+            setTimeout(function () {
 
+                window.location.href =
+                    "index.html";
 
-            signupForm.reset();
-
-
-            setTimeout(
-                function() {
-
-                    window.location.href =
-                        "index.html";
-
-                },
-                1200
-            );
+            }, 700);
 
         }
     );
 
-}
+});
 
-
-/* ==========================================
-   MESSAGE HELPER
-========================================== */
-
-function showMessage(
-    element,
-    message,
-    isError
-) {
-
-    if (!element) {
-        return;
-    }
-
-
-    element.textContent =
-        message;
-
-
-    element.className =
-        isError
-            ? "auth-message error"
-            : "auth-message success";
-
-}
 
 
 /* ==========================================
    FORGOT PASSWORD
 ========================================== */
 
-const forgotPasswordForm =
-    document.getElementById("forgotPasswordForm") ||
-    document.getElementById("resetForm");
+document.addEventListener("DOMContentLoaded", function () {
+
+    const forgotForm =
+        document.getElementById("forgotPasswordForm") ||
+        document.getElementById("resetForm");
 
 
-if (forgotPasswordForm) {
+    if (!forgotForm) {
+        return;
+    }
 
-    forgotPasswordForm.addEventListener(
+
+    forgotForm.addEventListener(
         "submit",
-        function(event) {
+        function (event) {
 
             event.preventDefault();
 
 
             const username =
-                document
-                    .getElementById("resetUsername")
-                    ?.value.trim();
+                document.getElementById("forgotUsername")?.value.trim() ||
+                document.getElementById("resetUsername")?.value.trim();
 
 
             const newPassword =
-                document
-                    .getElementById("newPassword")
-                    ?.value;
-
-
-            const confirmPassword =
-                document
-                    .getElementById("confirmNewPassword")
-                    ?.value;
+                document.getElementById("newPassword")?.value.trim();
 
 
             const message =
@@ -481,71 +421,79 @@ if (forgotPasswordForm) {
                 document.getElementById("resetMessage");
 
 
+            if (!username || !newPassword) {
+
+                if (message) {
+
+                    message.textContent =
+                        "Please complete all fields.";
+
+                    message.style.color = "red";
+
+                }
+
+                return;
+            }
+
+
             if (
-                username?.toLowerCase() ===
-                "admin"
+                username.toLowerCase() ===
+                adminAccount.username.toLowerCase()
             ) {
 
-                showMessage(
-                    message,
-                    "The admin password cannot be reset here.",
-                    true
-                );
+                if (message) {
+
+                    message.textContent =
+                        "Admin password cannot be reset here.";
+
+                    message.style.color = "red";
+
+                }
 
                 return;
             }
 
 
-            if (
-                newPassword !== confirmPassword
-            ) {
+            let customers = [];
 
-                showMessage(
-                    message,
-                    "Passwords do not match.",
-                    true
-                );
 
-                return;
+            try {
+
+                customers =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "loveLuxeCustomers"
+                        )
+                    ) || [];
+
+            } catch (error) {
+
+                customers = [];
+
             }
-
-
-            if (!newPassword) {
-
-                showMessage(
-                    message,
-                    "Please enter a new password.",
-                    true
-                );
-
-                return;
-            }
-
-
-            const customers =
-                getCustomers();
 
 
             const customerIndex =
-                customers.findIndex(
-                    function(customer) {
+                customers.findIndex(function (user) {
 
-                        return (
-                            customer.username.toLowerCase() ===
-                            username.toLowerCase()
-                        );
+                    return (
+                        user.username.toLowerCase() ===
+                        username.toLowerCase()
+                    );
 
-                    }
-                );
+                });
 
 
             if (customerIndex === -1) {
 
-                showMessage(
-                    message,
-                    "Username not found.",
-                    true
-                );
+                if (message) {
+
+                    message.textContent =
+                        "Username not found.";
+
+                    message.style.color = "red";
+
+                }
 
                 return;
             }
@@ -555,49 +503,85 @@ if (forgotPasswordForm) {
                 newPassword;
 
 
-            saveCustomers(
-                customers
+            localStorage.setItem(
+                "loveLuxeCustomers",
+                JSON.stringify(customers)
             );
 
 
-            showMessage(
-                message,
-                "Password changed successfully!",
-                false
-            );
+            if (message) {
+
+                message.textContent =
+                    "Password changed successfully.";
+
+                message.style.color = "green";
+
+            }
 
 
-            forgotPasswordForm.reset();
+            setTimeout(function () {
 
+                window.location.href =
+                    "index.html";
 
-            setTimeout(
-                function() {
-
-                    window.location.href =
-                        "index.html";
-
-                },
-                1200
-            );
+            }, 800);
 
         }
     );
 
-}
+});
+
 
 
 /* ==========================================
    CUSTOMER ACCOUNT PAGE
 ========================================== */
 
-const customerPage =
-    document.getElementById("customerPage");
+document.addEventListener("DOMContentLoaded", function () {
+
+    const accountFullName =
+        document.getElementById("accountFullName");
 
 
-if (customerPage) {
+    if (!accountFullName) {
+        return;
+    }
 
-    const currentUser =
-        getCurrentUser();
+
+    const currentUserData =
+        localStorage.getItem(
+            "loveLuxeCurrentUser"
+        );
+
+
+    if (!currentUserData) {
+
+        window.location.href =
+            "index.html";
+
+        return;
+    }
+
+
+    let currentUser;
+
+
+    try {
+
+        currentUser =
+            JSON.parse(currentUserData);
+
+    } catch (error) {
+
+        localStorage.removeItem(
+            "loveLuxeCurrentUser"
+        );
+
+        window.location.href =
+            "index.html";
+
+        return;
+    }
 
 
     if (
@@ -606,220 +590,396 @@ if (customerPage) {
     ) {
 
         window.location.href =
-            "index.html";
+            "catalog.html";
+
+        return;
+    }
+
+
+    /* ======================================
+       DISPLAY ACCOUNT INFORMATION
+    ====================================== */
+
+    accountFullName.value =
+        currentUser.fullName || "";
+
+
+    const accountUsername =
+        document.getElementById("accountUsername");
+
+
+    if (accountUsername) {
+
+        accountUsername.value =
+            currentUser.username || "";
 
     }
 
-}
+
+    const accountPhone =
+        document.getElementById("accountPhone");
 
 
-/* ==========================================
-   DISPLAY CUSTOMER NAME
-========================================== */
+    if (accountPhone) {
 
-function displayCustomerName() {
+        accountPhone.value =
+            currentUser.phone || "";
 
-    const currentUser =
-        getCurrentUser();
+    }
 
 
-    const elements =
-        document.querySelectorAll(
-            "[data-customer-name]"
+
+    /* ======================================
+       DISPLAY SHIPPING ADDRESS
+    ====================================== */
+
+    const address =
+        currentUser.shippingAddress || {};
+
+
+    if (typeof address === "object") {
+
+        const houseNumber =
+            document.getElementById("houseNumber");
+
+        const street =
+            document.getElementById("street");
+
+        const barangay =
+            document.getElementById("barangay");
+
+        const city =
+            document.getElementById("city");
+
+        const province =
+            document.getElementById("province");
+
+        const postalCode =
+            document.getElementById("postalCode");
+
+
+        if (houseNumber)
+            houseNumber.value =
+                address.houseNumber || "";
+
+
+        if (street)
+            street.value =
+                address.street || "";
+
+
+        if (barangay)
+            barangay.value =
+                address.barangay || "";
+
+
+        if (city)
+            city.value =
+                address.city || "";
+
+
+        if (province)
+            province.value =
+                address.province || "";
+
+
+        if (postalCode)
+            postalCode.value =
+                address.postalCode || "";
+
+    }
+
+
+    /* ======================================
+       SAVE ACCOUNT
+    ====================================== */
+
+    const saveAccountButton =
+        document.getElementById(
+            "saveAccountButton"
         );
 
 
-    elements.forEach(
-        function(element) {
+    if (saveAccountButton) {
 
-            element.textContent =
-                currentUser?.fullName ||
-                "Customer";
+        saveAccountButton.addEventListener(
+            "click",
+            function () {
 
-        }
-    );
-
-}
+                currentUser.fullName =
+                    accountFullName.value.trim();
 
 
-displayCustomerName();
+                currentUser.phone =
+                    document.getElementById(
+                        "accountPhone"
+                    )?.value.trim() || "";
 
 
-/* ==========================================
-   SAVE CUSTOMER ACCOUNT
-========================================== */
-
-function saveAccountChanges() {
-
-    const currentUser =
-        getCurrentUser();
+                updateCustomerStorage(
+                    currentUser
+                );
 
 
-    if (
-        !currentUser ||
-        currentUser.role !== "customer"
-    ) {
-
-        return;
-
-    }
+                localStorage.setItem(
+                    "loveLuxeCurrentUser",
+                    JSON.stringify(currentUser)
+                );
 
 
-    const fullName =
-        document.getElementById(
-            "accountFullName"
-        )?.value.trim();
-
-
-    const username =
-        document.getElementById(
-            "accountUsername"
-        )?.value.trim();
-
-
-    const phone =
-        document.getElementById(
-            "accountPhone"
-        )?.value.trim();
-
-
-    const houseNumber =
-        document.getElementById(
-            "houseNumber"
-        )?.value.trim();
-
-
-    const street =
-        document.getElementById(
-            "street"
-        )?.value.trim();
-
-
-    const barangay =
-        document.getElementById(
-            "barangay"
-        )?.value.trim();
-
-
-    const city =
-        document.getElementById(
-            "city"
-        )?.value.trim();
-
-
-    const province =
-        document.getElementById(
-            "province"
-        )?.value.trim();
-
-
-    const postalCode =
-        document.getElementById(
-            "postalCode"
-        )?.value.trim();
-
-
-    const customers =
-        getCustomers();
-
-
-    const customerIndex =
-        customers.findIndex(
-            function(customer) {
-
-                return (
-                    customer.username ===
-                    currentUser.username
+                showAccountMessage(
+                    "Account information saved successfully.",
+                    "green"
                 );
 
             }
         );
 
-
-    if (customerIndex === -1) {
-        return;
     }
 
 
-    const usernameTaken =
-        customers.some(
-            function(customer, index) {
 
-                return (
-                    index !== customerIndex &&
-                    customer.username.toLowerCase() ===
-                    username.toLowerCase()
+    /* ======================================
+       SAVE SHIPPING ADDRESS
+    ====================================== */
+
+    const saveShippingButton =
+        document.getElementById(
+            "saveShippingButton"
+        );
+
+
+    if (saveShippingButton) {
+
+        saveShippingButton.addEventListener(
+            "click",
+            function () {
+
+
+                currentUser.shippingAddress = {
+
+                    houseNumber:
+                        document.getElementById(
+                            "houseNumber"
+                        )?.value.trim() || "",
+
+                    street:
+                        document.getElementById(
+                            "street"
+                        )?.value.trim() || "",
+
+                    barangay:
+                        document.getElementById(
+                            "barangay"
+                        )?.value.trim() || "",
+
+                    city:
+                        document.getElementById(
+                            "city"
+                        )?.value.trim() || "",
+
+                    province:
+                        document.getElementById(
+                            "province"
+                        )?.value.trim() || "",
+
+                    postalCode:
+                        document.getElementById(
+                            "postalCode"
+                        )?.value.trim() || ""
+
+                };
+
+
+                updateCustomerStorage(
+                    currentUser
+                );
+
+
+                localStorage.setItem(
+                    "loveLuxeCurrentUser",
+                    JSON.stringify(currentUser)
+                );
+
+
+                showAccountMessage(
+                    "Shipping address saved successfully.",
+                    "green"
                 );
 
             }
         );
 
-
-    if (usernameTaken) {
-
-        showAccountMessage(
-            "Username already exists.",
-            true
-        );
-
-        return;
     }
 
 
-    customers[customerIndex].fullName =
-        fullName;
+
+    /* ======================================
+       CHANGE PASSWORD
+    ====================================== */
+
+    const changePasswordButton =
+        document.getElementById(
+            "changePasswordButton"
+        );
 
 
-    customers[customerIndex].username =
-        username;
+    if (changePasswordButton) {
+
+        changePasswordButton.addEventListener(
+            "click",
+            function () {
+
+                const currentPassword =
+                    document.getElementById(
+                        "currentPassword"
+                    )?.value.trim();
 
 
-    customers[customerIndex].phone =
-        phone;
+                const newPassword =
+                    document.getElementById(
+                        "accountNewPassword"
+                    )?.value.trim();
 
 
-    customers[customerIndex].shippingAddress = {
-
-        houseNumber:
-            houseNumber,
-
-        street:
-            street,
-
-        barangay:
-            barangay,
-
-        city:
-            city,
-
-        province:
-            province,
-
-        postalCode:
-            postalCode
-
-    };
+                const confirmPassword =
+                    document.getElementById(
+                        "accountConfirmPassword"
+                    )?.value.trim();
 
 
-    saveCustomers(
-        customers
+                if (
+                    currentPassword !==
+                    currentUser.password
+                ) {
+
+                    showAccountMessage(
+                        "Current password is incorrect.",
+                        "red"
+                    );
+
+                    return;
+                }
+
+
+                if (!newPassword) {
+
+                    showAccountMessage(
+                        "Please enter a new password.",
+                        "red"
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    newPassword !==
+                    confirmPassword
+                ) {
+
+                    showAccountMessage(
+                        "New passwords do not match.",
+                        "red"
+                    );
+
+                    return;
+                }
+
+
+                currentUser.password =
+                    newPassword;
+
+
+                updateCustomerStorage(
+                    currentUser
+                );
+
+
+                localStorage.setItem(
+                    "loveLuxeCurrentUser",
+                    JSON.stringify(currentUser)
+                );
+
+
+                showAccountMessage(
+                    "Password changed successfully.",
+                    "green"
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* ======================================
+       ORDERS
+    ====================================== */
+
+    loadCustomerOrders(
+        currentUser.username
     );
 
+});
 
-    saveCurrentUser(
-        customers[customerIndex]
+
+
+/* ==========================================
+   UPDATE CUSTOMER IN LOCAL STORAGE
+========================================== */
+
+function updateCustomerStorage(user) {
+
+    let customers = [];
+
+
+    try {
+
+        customers =
+            JSON.parse(
+                localStorage.getItem(
+                    "loveLuxeCustomers"
+                )
+            ) || [];
+
+    } catch (error) {
+
+        customers = [];
+
+    }
+
+
+    const index =
+        customers.findIndex(function (customer) {
+
+            return (
+                customer.username ===
+                user.username
+            );
+
+        });
+
+
+    if (index !== -1) {
+
+        customers[index] = user;
+
+    } else {
+
+        customers.push(user);
+
+    }
+
+
+    localStorage.setItem(
+        "loveLuxeCustomers",
+        JSON.stringify(customers)
     );
-
-
-    showAccountMessage(
-        "Account information saved successfully.",
-        false
-    );
-
-
-    displayCustomerName();
 
 }
+
 
 
 /* ==========================================
@@ -828,169 +988,146 @@ function saveAccountChanges() {
 
 function showAccountMessage(
     message,
-    isError
+    color
 ) {
 
-    const element =
+    const accountMessage =
         document.getElementById(
             "accountMessage"
         );
 
 
-    if (!element) {
-        return;
+    if (accountMessage) {
+
+        accountMessage.textContent =
+            message;
+
+        accountMessage.style.color =
+            color;
+
     }
-
-
-    element.textContent =
-        message;
-
-
-    element.className =
-        isError
-            ? "account-message error"
-            : "account-message success";
 
 }
 
 
+
 /* ==========================================
-   CHANGE PASSWORD
+   LOAD CUSTOMER ORDERS
 ========================================== */
 
-function changeCustomerPassword() {
+function loadCustomerOrders(username) {
 
-    const currentUser =
-        getCurrentUser();
-
-
-    if (
-        !currentUser ||
-        currentUser.role !== "customer"
-    ) {
-
-        return;
-    }
-
-
-    const currentPassword =
+    const ordersList =
         document.getElementById(
-            "currentPassword"
-        )?.value;
-
-
-    const newPassword =
-        document.getElementById(
-            "accountNewPassword"
-        )?.value;
-
-
-    const confirmPassword =
-        document.getElementById(
-            "accountConfirmPassword"
-        )?.value;
-
-
-    if (
-        currentPassword !==
-        currentUser.password
-    ) {
-
-        showAccountMessage(
-            "Current password is incorrect.",
-            true
+            "ordersList"
         );
 
+
+    if (!ordersList) {
         return;
     }
 
 
-    if (
-        newPassword !==
-        confirmPassword
-    ) {
+    let orders = [];
 
-        showAccountMessage(
-            "New passwords do not match.",
-            true
-        );
+
+    try {
+
+        orders =
+            JSON.parse(
+                localStorage.getItem(
+                    "loveLuxeOrders"
+                )
+            ) || [];
+
+    } catch (error) {
+
+        orders = [];
+
+    }
+
+
+    const customerOrders =
+        orders.filter(function (order) {
+
+            return (
+                order.customerUsername ===
+                username
+            );
+
+        });
+
+
+    if (customerOrders.length === 0) {
+
+        ordersList.innerHTML = `
+            <div class="empty-orders">
+                <h3>No orders yet</h3>
+                <p>Your orders will appear here.</p>
+            </div>
+        `;
 
         return;
     }
 
 
-    if (!newPassword) {
+    ordersList.innerHTML =
+        customerOrders.map(
+            function (order) {
 
-        showAccountMessage(
-            "Please enter a new password.",
-            true
-        );
+                return `
+                    <div class="order-card">
 
-        return;
-    }
+                        <div>
+                            <strong>
+                                ${order.productName}
+                            </strong>
+
+                            <p>
+                                Order #${order.orderNumber}
+                            </p>
+
+                            <p>
+                                Quantity:
+                                ${order.quantity}
+                            </p>
+
+                            <p>
+                                Payment:
+                                ${order.paymentMethod}
+                            </p>
+                        </div>
 
 
-    const customers =
-        getCustomers();
+                        <div>
+                            <strong>
+                                ₱${Number(
+                                    order.total
+                                ).toLocaleString(
+                                    "en-PH",
+                                    {
+                                        minimumFractionDigits: 2
+                                    }
+                                )}
+                            </strong>
 
+                            <p>
+                                ${order.status}
+                            </p>
+                        </div>
 
-    const customerIndex =
-        customers.findIndex(
-            function(customer) {
-
-                return (
-                    customer.username ===
-                    currentUser.username
-                );
+                    </div>
+                `;
 
             }
-        );
-
-
-    if (customerIndex === -1) {
-        return;
-    }
-
-
-    customers[customerIndex].password =
-        newPassword;
-
-
-    saveCustomers(
-        customers
-    );
-
-
-    saveCurrentUser(
-        customers[customerIndex]
-    );
-
-
-    document.getElementById(
-        "currentPassword"
-    ).value = "";
-
-
-    document.getElementById(
-        "accountNewPassword"
-    ).value = "";
-
-
-    document.getElementById(
-        "accountConfirmPassword"
-    ).value = "";
-
-
-    showAccountMessage(
-        "Password changed successfully.",
-        false
-    );
+        ).join("");
 
 }
 
 
+
 /* ==========================================
-   LOGOUT
+   CUSTOMER LOGOUT
 ========================================== */
 
 function logoutCustomer() {
@@ -1011,17 +1148,65 @@ function logoutCustomer() {
 }
 
 
+
 /* ==========================================
-   CUSTOMER SIDEBAR MESSAGE
+   MOBILE CUSTOMER SIDEBAR
 ========================================== */
 
-function showAccountMessageBox(
-    section
-) {
+function openCustomerSidebar() {
 
-    alert(
-        section +
-        " is currently available in the account section."
-    );
+    const sidebar =
+        document.getElementById(
+            "customerSidebar"
+        );
+
+    const overlay =
+        document.getElementById(
+            "customerSidebarOverlay"
+        );
+
+
+    if (sidebar) {
+
+        sidebar.classList.add("open");
+
+    }
+
+
+    if (overlay) {
+
+        overlay.classList.add("show");
+
+    }
+
+}
+
+
+
+function closeCustomerSidebar() {
+
+    const sidebar =
+        document.getElementById(
+            "customerSidebar"
+        );
+
+    const overlay =
+        document.getElementById(
+            "customerSidebarOverlay"
+        );
+
+
+    if (sidebar) {
+
+        sidebar.classList.remove("open");
+
+    }
+
+
+    if (overlay) {
+
+        overlay.classList.remove("show");
+
+    }
 
 }
