@@ -1,716 +1,267 @@
-// ==========================================
-// CUSTOMER ACCESS CHECK
-// ==========================================
-
-const currentUser =
-    localStorage.getItem(
-        "loveLuxeCurrentUser"
-    );
-
-
-if (!currentUser) {
-
-    // Not logged in
-    window.location.href =
-        "index.html";
-
-}
-
-
-else {
-
-    try {
-
-        const user =
-            JSON.parse(currentUser);
-
-
-        // ==========================================
-        // ONLY CUSTOMERS CAN ENTER CATALOG
-        // ==========================================
-
-        if (user.role !== "customer") {
-
-            window.location.href =
-                "https://danielrf15.github.io/loveluxe_dashboard/";
-
-        }
-
-    }
-
-    catch (error) {
-
-        localStorage.removeItem(
-            "loveLuxeCurrentUser"
-        );
-
-
-        window.location.href =
-            "index.html";
-
-    }
-
-}
-
-
-// ==========================================
-// LOVE LUXE PRODUCTS
-// ==========================================
-
 const products = [
-
-
-    // ==========================================
-    // CLOTHING
-    // ==========================================
-
-    {
-        name: "Classic Ribbed Top",
-        category: "Clothing",
-        price: 499,
-        description:
-            "Simple and versatile everyday top.",
-        image: ""
-    },
-
-
-    {
-        name: "Elegant Casual Dress",
-        category: "Clothing",
-        price: 899,
-        description:
-            "A clean and elegant dress for any occasion.",
-        image: ""
-    },
-
-
-    {
-        name: "Luxe Long Sleeve Blouse",
-        category: "Clothing",
-        price: 749,
-        description:
-            "Comfortable blouse with a simple elegant style.",
-        image: ""
-    },
-
-
-    {
-        name: "Everyday Wide Pants",
-        category: "Clothing",
-        price: 799,
-        description:
-            "Comfortable pants designed for everyday wear.",
-        image: ""
-    },
-
-
-    // ==========================================
     // BODY CARE
-    // ==========================================
-
     {
-        name: "Luxe Body Lotion",
+        id: 1,
+        name: "Alada Soap",
         category: "Body Care",
-        price: 399,
-        description:
-            "Moisturizing body lotion for everyday care.",
-        image: ""
+        price: 350,
+        image: "images/alada-soap.jpg"
     },
-
-
     {
-        name: "Gentle Body Wash",
+        id: 2,
+        name: "Dewy Gluta Soap",
         category: "Body Care",
-        price: 349,
-        description:
-            "A refreshing body wash for daily use.",
-        image: ""
+        price: 199,
+        image: "images/dewy-gluta-soap.jpg"
     },
-
-
     {
-        name: "Body Scrub",
-        category: "Body Care",
-        price: 429,
-        description:
-            "Gentle body scrub for a refreshing routine.",
-        image: ""
-    },
-
-
-    {
-        name: "Hand & Body Cream",
+        id: 3,
+        name: "Serene Skin Soap",
         category: "Body Care",
         price: 299,
-        description:
-            "Lightweight cream for everyday moisturizing.",
-        image: ""
+        image: "images/serene-skin-soap.jpg"
     },
-
-
-    // ==========================================
-    // BAGS
-    // ==========================================
-
     {
-        name: "Classic Luxe Handbag",
-        category: "Bags",
-        price: 1299,
-        description:
-            "Elegant handbag suitable for everyday use.",
-        image: ""
+        id: 4,
+        name: "Vitamin E Whitening Cream",
+        category: "Body Care",
+        price: 180,
+        image: "images/vitamin-e-whitening-cream.jpg"
     },
 
-
-    {
-        name: "Mini Shoulder Bag",
-        category: "Bags",
-        price: 999,
-        description:
-            "Compact shoulder bag for your daily essentials.",
-        image: ""
-    },
-
-
-    {
-        name: "Everyday Tote Bag",
-        category: "Bags",
-        price: 899,
-        description:
-            "Spacious tote bag with a clean design.",
-        image: ""
-    },
-
-
-    {
-        name: "Elegant Crossbody Bag",
-        category: "Bags",
-        price: 1099,
-        description:
-            "Stylish crossbody bag for casual occasions.",
-        image: ""
-    },
-
-
-    // ==========================================
     // PERFUME
-    // ==========================================
-
     {
-        name: "Luxe Bloom",
+        id: 5,
+        name: "Victoria's Secret Perfume",
         category: "Perfume",
-        price: 799,
-        description:
-            "A soft and elegant fragrance for everyday wear.",
-        image: ""
+        price: 700,
+        image: "images/victorias-secret-perfume.jpg"
+    },
+    {
+        id: 6,
+        name: "Bath & Body Works Perfume",
+        category: "Perfume",
+        price: 600,
+        image: "images/bath-body-works-perfume.jpg"
+    },
+    {
+        id: 7,
+        name: "Smart Collection Perfume",
+        category: "Perfume",
+        price: 350,
+        image: "images/smart-collection-perfume.jpg"
+    },
+    {
+        id: 8,
+        name: "Lattafa YARA",
+        category: "Perfume",
+        price: 390,
+        image: "images/lattafa-yara.jpg"
     },
 
-
+    // BAGS
     {
-        name: "Golden Rose",
-        category: "Perfume",
-        price: 899,
-        description:
-            "A warm fragrance with a graceful character.",
-        image: ""
+        id: 9,
+        name: "Mini Enzo",
+        category: "Bags",
+        price: 3590,
+        image: "images/mini-enzo.jpg"
+    },
+    {
+        id: 10,
+        name: "Mini Bucket Bag",
+        category: "Bags",
+        price: 2090,
+        image: "images/mini-bucket-bag.jpg"
+    },
+    {
+        id: 11,
+        name: "Anytime Medium",
+        category: "Bags",
+        price: 2890,
+        image: "images/anytime-medium.jpg"
+    },
+    {
+        id: 12,
+        name: "Emilio Barrel",
+        category: "Bags",
+        price: 3590,
+        image: "images/emilio-barrel.jpg"
     },
 
-
+    // CLOTHING
     {
-        name: "Midnight Luxe",
-        category: "Perfume",
-        price: 999,
-        description:
-            "A deeper fragrance for evening occasions.",
-        image: ""
+        id: 13,
+        name: "Sophia Skirt",
+        category: "Clothing",
+        price: 790,
+        image: "images/sophia-skirt.jpg"
     },
-
-
     {
-        name: "Fresh Aura",
-        category: "Perfume",
-        price: 699,
-        description:
-            "A light and refreshing fragrance.",
-        image: ""
+        id: 14,
+        name: "Nov-Mardi T-Shirt",
+        category: "Clothing",
+        price: 450,
+        image: "images/nov-mardi-tshirt.jpg"
+    },
+    {
+        id: 15,
+        name: "Basic Chic01 Terno",
+        category: "Clothing",
+        price: 950,
+        image: "images/basic-chic01-terno.jpg"
+    },
+    {
+        id: 16,
+        name: "Sami T-Shirt",
+        category: "Clothing",
+        price: 790,
+        image: "images/sami-tshirt.jpg"
     }
-
 ];
 
+const productGrid = document.getElementById("productGrid");
+const searchInput = document.getElementById("searchInput");
+const categoryButtons = document.querySelectorAll(".category-btn");
 
-// ==========================================
-// VARIABLES
-// ==========================================
+let currentCategory = "All";
+let searchTerm = "";
 
-let selectedCategory = "All";
-
-let searchText = "";
-
-
-const productGrid =
-    document.getElementById(
-        "productGrid"
-    );
-
-
-const productCount =
-    document.getElementById(
-        "productCount"
-    );
-
-
-const searchInput =
-    document.getElementById(
-        "searchInput"
-    );
-
-
-const noProducts =
-    document.getElementById(
-        "noProducts"
-    );
-
-
-const filterButtons =
-    document.querySelectorAll(
-        ".filter-button"
-    );
-
-
-// ==========================================
 // DISPLAY PRODUCTS
-// ==========================================
-
 function displayProducts() {
-
     productGrid.innerHTML = "";
 
+    const filteredProducts = products.filter(product => {
+        const matchesCategory =
+            currentCategory === "All" ||
+            product.category === currentCategory;
 
-    const filteredProducts =
+        const matchesSearch =
+            product.name.toLowerCase().includes(searchTerm.toLowerCase());
 
-        products.filter(
+        return matchesCategory && matchesSearch;
+    });
 
-            function(product) {
-
-
-                const categoryMatch =
-
-                    selectedCategory === "All" ||
-
-                    product.category ===
-                    selectedCategory;
-
-
-                const searchMatch =
-
-                    product.name
-                        .toLowerCase()
-                        .includes(
-                            searchText.toLowerCase()
-                        )
-
-                    ||
-
-                    product.category
-                        .toLowerCase()
-                        .includes(
-                            searchText.toLowerCase()
-                        );
-
-
-                return (
-                    categoryMatch &&
-                    searchMatch
-                );
-
-            }
-
-        );
-
-
-    // ==========================================
-    // NO PRODUCTS
-    // ==========================================
-
-    if (
-        filteredProducts.length === 0
-    ) {
-
-        noProducts.style.display =
-            "block";
-
-
-        productCount.textContent =
-            "No products found";
-
-
+    if (filteredProducts.length === 0) {
+        productGrid.innerHTML = `
+            <div class="no-products">
+                <p>No products found.</p>
+            </div>
+        `;
         return;
-
     }
 
+    filteredProducts.forEach(product => {
+        const productCard = document.createElement("div");
+        productCard.className = "product-card";
 
-    noProducts.style.display =
-        "none";
+        productCard.innerHTML = `
+            <div class="product-image">
+                <img 
+                    src="${product.image}" 
+                    alt="${product.name}"
+                    onerror="this.style.display='none';"
+                >
+            </div>
 
+            <div class="product-info">
+                <span class="product-category">
+                    ${product.category}
+                </span>
 
-    productCount.textContent =
+                <h3>${product.name}</h3>
 
-        "Showing " +
-        filteredProducts.length +
-        " product(s)";
+                <p class="product-price">
+                    ₱${product.price.toLocaleString("en-PH", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    })}
+                </p>
 
+                <button 
+                    class="view-product-btn"
+                    onclick="viewProduct(${product.id})"
+                >
+                    VIEW PRODUCT
+                </button>
+            </div>
+        `;
 
-    // ==========================================
-    // CREATE CARDS
-    // ==========================================
-
-    filteredProducts.forEach(
-
-        function(product) {
-
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className =
-                "product-card";
-
-
-            let imageHTML = "";
-
-
-            if (
-                product.image !== ""
-            ) {
-
-                imageHTML =
-
-                    `<img
-                        src="${product.image}"
-                        alt="${product.name}"
-                    >`;
-
-            }
-
-            else {
-
-                imageHTML =
-
-                    `<div class="image-placeholder">
-                        LOVE LUXE
-                    </div>`;
-
-            }
-
-
-            card.innerHTML = `
-
-                <div class="product-image">
-
-                    ${imageHTML}
-
-                </div>
-
-
-                <div class="product-info">
-
-                    <div class="product-category">
-
-                        ${product.category}
-
-                    </div>
-
-
-                    <h3 class="product-name">
-
-                        ${product.name}
-
-                    </h3>
-
-
-                    <p class="product-description">
-
-                        ${product.description}
-
-                    </p>
-
-
-                    <div class="product-bottom">
-
-                        <span class="product-price">
-
-                            ₱${product.price.toLocaleString(
-                                "en-PH",
-                                {
-                                    minimumFractionDigits: 2
-                                }
-                            )}
-
-                        </span>
-
-
-                        <button
-                            class="view-button"
-                            onclick="viewProduct('${product.name}')">
-
-                            VIEW
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            productGrid.appendChild(
-                card
-            );
-
-        }
-
-    );
-
+        productGrid.appendChild(productCard);
+    });
 }
 
-
-// ==========================================
 // CATEGORY FILTER
-// ==========================================
+categoryButtons.forEach(button => {
+    button.addEventListener("click", () => {
 
-filterButtons.forEach(
+        categoryButtons.forEach(btn => {
+            btn.classList.remove("active");
+        });
 
-    function(button) {
+        button.classList.add("active");
 
-        button.addEventListener(
-
-            "click",
-
-            function() {
-
-
-                filterButtons.forEach(
-
-                    function(btn) {
-
-                        btn.classList.remove(
-                            "active"
-                        );
-
-                    }
-
-                );
-
-
-                button.classList.add(
-                    "active"
-                );
-
-
-                selectedCategory =
-                    button.dataset.category;
-
-
-                displayProducts();
-
-            }
-
-        );
-
-    }
-
-);
-
-
-// ==========================================
-// SEARCH
-// ==========================================
-
-searchInput.addEventListener(
-
-    "input",
-
-    function() {
-
-        searchText =
-            searchInput.value.trim();
-
+        currentCategory = button.dataset.category;
 
         displayProducts();
+    });
+});
 
-    }
+// SEARCH
+if (searchInput) {
+    searchInput.addEventListener("input", () => {
+        searchTerm = searchInput.value;
+        displayProducts();
+    });
+}
 
-);
-
-
-// ==========================================
 // VIEW PRODUCT
-// ==========================================
+function viewProduct(productId) {
+    const product = products.find(item => item.id === productId);
 
-function viewProduct(productName) {
+    if (!product) return;
 
     alert(
-
-        "You selected: " +
-        productName +
-        "\n\nProduct details and ordering can be added here."
-
+        `${product.name}\n\n` +
+        `Category: ${product.category}\n` +
+        `Price: ₱${product.price.toLocaleString("en-PH", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        })}`
     );
-
 }
 
-
-// ==========================================
 // SIDEBAR
-// ==========================================
+const menuButton = document.getElementById("menuButton");
+const sidebar = document.getElementById("sidebar");
+const sidebarOverlay = document.getElementById("sidebarOverlay");
+const closeSidebar = document.getElementById("closeSidebar");
 
-const shopSidebar =
-    document.getElementById(
-        "shopSidebar"
-    );
-
-
-const sidebarOverlay =
-    document.getElementById(
-        "sidebarOverlay"
-    );
-
-
-// ==========================================
-// OPEN SIDEBAR
-// ==========================================
-
-function openSidebar() {
-
-    shopSidebar.classList.add(
-        "open"
-    );
-
-
-    sidebarOverlay.classList.add(
-        "active"
-    );
-
+if (menuButton) {
+    menuButton.addEventListener("click", () => {
+        sidebar.classList.add("open");
+        sidebarOverlay.classList.add("show");
+    });
 }
 
-
-// ==========================================
-// CLOSE SIDEBAR
-// ==========================================
-
-function closeSidebar() {
-
-    shopSidebar.classList.remove(
-        "open"
-    );
-
-
-    sidebarOverlay.classList.remove(
-        "active"
-    );
-
+if (closeSidebar) {
+    closeSidebar.addEventListener("click", () => {
+        sidebar.classList.remove("open");
+        sidebarOverlay.classList.remove("show");
+    });
 }
 
+if (sidebarOverlay) {
+    sidebarOverlay.addEventListener("click", () => {
+        sidebar.classList.remove("open");
+        sidebarOverlay.classList.remove("show");
+    });
+}
 
-// ==========================================
-// CLICK OVERLAY
-// ==========================================
-
-sidebarOverlay.addEventListener(
-
-    "click",
-
-    function() {
-
-        closeSidebar();
-
-    }
-
-);
-
-
-// ==========================================
-// SIDEBAR MESSAGE
-// ==========================================
-
+// MY ORDERS / SETTINGS
 function showMessage(section) {
-
-    closeSidebar();
-
-
-    alert(
-
-        section +
-        " page will be added next."
-
-    );
-
+    alert(`${section} is currently being prepared.`);
 }
 
-
-// ==========================================
-// CUSTOMER NAME
-// ==========================================
-
-function displayCustomerName() {
-
-    const customerName =
-        document.getElementById(
-            "customerName"
-        );
-
-
-    const currentUser =
-        localStorage.getItem(
-            "loveLuxeCurrentUser"
-        );
-
-
-    if (!currentUser) {
-
-        customerName.textContent =
-            "Customer";
-
-        return;
-
-    }
-
-
-    try {
-
-        const user =
-            JSON.parse(
-                currentUser
-            );
-
-
-        if (user.fullName) {
-
-            customerName.textContent =
-                user.fullName;
-
-        }
-
-    }
-
-    catch (error) {
-
-        customerName.textContent =
-            "Customer";
-
-    }
-
-}
-
-
-// ==========================================
-// START
-// ==========================================
-
-displayCustomerName();
-
+// INITIAL DISPLAY
 displayProducts();
