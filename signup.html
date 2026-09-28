@@ -2,39 +2,59 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>Love Luxe - Sign Up</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css">
+
 </head>
+
 
 <body>
 
+
     <div class="login-container">
+
 
         <div class="login-card">
 
+
             <div class="brand">
 
-                <h1>LOVE LUXE</h1>
+                <h1>
+                    LOVE LUXE
+                </h1>
 
-                <p>BY EA • EST. 2024</p>
+                <p>
+                    BY EA • EST. 2024
+                </p>
 
             </div>
 
 
-            <h2>Create Account</h2>
+            <h2>
+                Create Account
+            </h2>
+
 
             <p class="subtitle">
                 Create your Love Luxe customer account
             </p>
 
 
-            <form onsubmit="signup(); return false;">
+            <form
+                onsubmit="signup(); return false;">
 
-                <label>
+
+                <label for="fullName">
                     Full Name
                 </label>
 
@@ -42,11 +62,10 @@
                     type="text"
                     id="fullName"
                     placeholder="Enter your full name"
-                    required
-                >
+                    required>
 
 
-                <label>
+                <label for="signupUsername">
                     Username
                 </label>
 
@@ -54,11 +73,10 @@
                     type="text"
                     id="signupUsername"
                     placeholder="Create a username"
-                    required
-                >
+                    required>
 
 
-                <label>
+                <label for="signupPassword">
                     Password
                 </label>
 
@@ -66,11 +84,10 @@
                     type="password"
                     id="signupPassword"
                     placeholder="Create a password"
-                    required
-                >
+                    required>
 
 
-                <label>
+                <label for="confirmPassword">
                     Confirm Password
                 </label>
 
@@ -78,8 +95,7 @@
                     type="password"
                     id="confirmPassword"
                     placeholder="Confirm your password"
-                    required
-                >
+                    required>
 
 
                 <p
@@ -92,24 +108,25 @@
                     type="submit"
                     class="main-button">
 
-                    Create Account
+                    CREATE ACCOUNT
 
                 </button>
+
 
             </form>
 
 
-            <p class="signup-text">
+            <button
+                class="secondary-button"
+                onclick="window.location.href='index.html'">
 
-                Already have an account?
+                BACK TO LOGIN
 
-                <a href="index.html">
-                    Sign In
-                </a>
+            </button>
 
-            </p>
 
         </div>
+
 
     </div>
 
