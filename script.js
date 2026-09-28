@@ -1,11 +1,11 @@
-// ==========================================
-// LOVE LUXE LOGIN AND ACCOUNT SYSTEM
-// ==========================================
+/* ==========================================
+   LOVE LUXE AUTHENTICATION
+========================================== */
 
 
-// ==========================================
-// ADMIN ACCOUNT
-// ==========================================
+/* ==========================================
+   ADMIN ACCOUNT
+========================================== */
 
 const adminAccount = {
 
@@ -20,388 +20,711 @@ const adminAccount = {
 };
 
 
-// ==========================================
-// ADMIN DASHBOARD
-// ==========================================
+/* ==========================================
+   HELPER FUNCTIONS
+========================================== */
 
-const dashboardURL =
-    "https://danielrf15.github.io/loveluxe_dashboard/";
+function getCustomers() {
 
-
-// ==========================================
-// LOGIN
-// ==========================================
-
-function login() {
-
-    const usernameElement =
-        document.getElementById("username");
-
-    const passwordElement =
-        document.getElementById("password");
-
-    const errorElement =
-        document.getElementById("loginError");
-
-
-    if (
-        !usernameElement ||
-        !passwordElement
-    ) {
-        return;
-    }
-
-
-    const username =
-        usernameElement.value.trim();
-
-    const password =
-        passwordElement.value;
-
-
-    // ADMIN LOGIN
-
-    if (
-        username === adminAccount.username &&
-        password === adminAccount.password
-    ) {
-
-        localStorage.setItem(
-            "loveLuxeCurrentUser",
-            JSON.stringify(adminAccount)
-        );
-
-
-        window.location.href =
-            dashboardURL;
-
-
-        return;
-    }
-
-
-    // CUSTOMER LOGIN
-
-    const customers =
-        JSON.parse(
-            localStorage.getItem(
-                "loveLuxeCustomers"
-            )
-        ) || [];
-
-
-    const customer =
-        customers.find(
-            function(user) {
-
-                return (
-                    user.username === username &&
-                    user.password === password
-                );
-
-            }
-        );
-
-
-    if (customer) {
-
-        localStorage.setItem(
-            "loveLuxeCurrentUser",
-            JSON.stringify(customer)
-        );
-
-
-        window.location.href =
-            "catalog.html";
-
-
-        return;
-    }
-
-
-    // INVALID LOGIN
-
-    if (errorElement) {
-
-        errorElement.textContent =
-            "Invalid username or password.";
-
-    }
+    return JSON.parse(
+        localStorage.getItem("loveLuxeCustomers")
+    ) || [];
 
 }
 
 
-// ==========================================
-// SIGN UP
-// ==========================================
-
-function signup() {
-
-    const fullNameElement =
-        document.getElementById("fullName");
-
-    const usernameElement =
-        document.getElementById("signupUsername");
-
-    const passwordElement =
-        document.getElementById("signupPassword");
-
-    const confirmElement =
-        document.getElementById("confirmPassword");
-
-    const messageElement =
-        document.getElementById("signupMessage");
-
-
-    const fullName =
-        fullNameElement.value.trim();
-
-    const username =
-        usernameElement.value.trim();
-
-    const password =
-        passwordElement.value;
-
-    const confirmPassword =
-        confirmElement.value;
-
-
-    if (
-        password !== confirmPassword
-    ) {
-
-        messageElement.textContent =
-            "Passwords do not match.";
-
-        messageElement.style.color =
-            "#c0392b";
-
-        return;
-    }
-
-
-    if (
-        username.toLowerCase() === "admin"
-    ) {
-
-        messageElement.textContent =
-            "This username is not available.";
-
-        messageElement.style.color =
-            "#c0392b";
-
-        return;
-    }
-
-
-    const customers =
-        JSON.parse(
-            localStorage.getItem(
-                "loveLuxeCustomers"
-            )
-        ) || [];
-
-
-    const existingUser =
-        customers.find(
-            function(user) {
-
-                return (
-                    user.username.toLowerCase() ===
-                    username.toLowerCase()
-                );
-
-            }
-        );
-
-
-    if (existingUser) {
-
-        messageElement.textContent =
-            "Username already exists.";
-
-        messageElement.style.color =
-            "#c0392b";
-
-        return;
-    }
-
-
-    const newCustomer = {
-
-        fullName: fullName,
-
-        username: username,
-
-        password: password,
-
-        role: "customer",
-
-        phone: "",
-
-        shippingAddress: {
-
-            houseNumber: "",
-
-            street: "",
-
-            barangay: "",
-
-            city: "",
-
-            province: "",
-
-            postalCode: ""
-
-        }
-
-    };
-
-
-    customers.push(newCustomer);
-
+function saveCustomers(customers) {
 
     localStorage.setItem(
         "loveLuxeCustomers",
         JSON.stringify(customers)
     );
 
-
-    messageElement.textContent =
-        "Account created successfully!";
-
-    messageElement.style.color =
-        "#4a8c5c";
+}
 
 
-    setTimeout(
-        function() {
+function getCurrentUser() {
 
-            window.location.href =
-                "index.html";
-
-        },
-        1000
+    return JSON.parse(
+        localStorage.getItem("loveLuxeCurrentUser")
     );
 
 }
 
 
-// ==========================================
-// FORGOT PASSWORD
-// ==========================================
+function saveCurrentUser(user) {
 
-function resetPassword() {
+    localStorage.setItem(
+        "loveLuxeCurrentUser",
+        JSON.stringify(user)
+    );
 
-    const usernameElement =
-        document.getElementById(
-            "forgotUsername"
-        );
+}
 
-    const newPasswordElement =
-        document.getElementById(
-            "forgotNewPassword"
-        );
 
-    const confirmPasswordElement =
-        document.getElementById(
-            "forgotConfirmPassword"
-        );
+/* ==========================================
+   LOGIN
+========================================== */
 
-    const messageElement =
-        document.getElementById(
-            "forgotMessage"
-        );
+const loginForm =
+    document.getElementById("loginForm");
+
+
+if (loginForm) {
+
+    loginForm.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const username =
+                document
+                    .getElementById("username")
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
+
+
+            const message =
+                document.getElementById(
+                    "loginMessage"
+                );
+
+
+            /* ------------------------------
+               ADMIN LOGIN
+            ------------------------------ */
+
+            if (
+                username === adminAccount.username &&
+                password === adminAccount.password
+            ) {
+
+                localStorage.setItem(
+                    "loveLuxeAdminLoggedIn",
+                    "true"
+                );
+
+
+                localStorage.setItem(
+                    "loveLuxeCurrentUser",
+                    JSON.stringify(adminAccount)
+                );
+
+
+                window.location.href =
+                    "admin.html";
+
+
+                return;
+
+            }
+
+
+            /* ------------------------------
+               CUSTOMER LOGIN
+            ------------------------------ */
+
+            const customers =
+                getCustomers();
+
+
+            const customer =
+                customers.find(
+                    function(account) {
+
+                        return (
+                            account.username === username &&
+                            account.password === password
+                        );
+
+                    }
+                );
+
+
+            if (customer) {
+
+                localStorage.setItem(
+                    "loveLuxeAdminLoggedIn",
+                    "false"
+                );
+
+
+                saveCurrentUser(customer);
+
+
+                window.location.href =
+                    "catalog.html";
+
+
+                return;
+
+            }
+
+
+            /* ------------------------------
+               INVALID LOGIN
+            ------------------------------ */
+
+            if (message) {
+
+                message.textContent =
+                    "Invalid username or password.";
+
+                message.className =
+                    "auth-message error";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   SIGN UP
+========================================== */
+
+const signupForm =
+    document.getElementById("signupForm");
+
+
+if (signupForm) {
+
+    signupForm.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const fullName =
+                document
+                    .getElementById("fullName")
+                    .value
+                    .trim();
+
+
+            const username =
+                document
+                    .getElementById("signupUsername")
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById("signupPassword")
+                    .value;
+
+
+            const confirmPassword =
+                document
+                    .getElementById("confirmPassword")
+                    .value;
+
+
+            const message =
+                document.getElementById(
+                    "signupMessage"
+                );
+
+
+            if (
+                !fullName ||
+                !username ||
+                !password
+            ) {
+
+                showMessage(
+                    message,
+                    "Please complete all fields.",
+                    true
+                );
+
+                return;
+
+            }
+
+
+            if (
+                username.toLowerCase() === "admin"
+            ) {
+
+                showMessage(
+                    message,
+                    "This username is not available.",
+                    true
+                );
+
+                return;
+
+            }
+
+
+            if (password !== confirmPassword) {
+
+                showMessage(
+                    message,
+                    "Passwords do not match.",
+                    true
+                );
+
+                return;
+
+            }
+
+
+            const customers =
+                getCustomers();
+
+
+            const existingCustomer =
+                customers.find(
+                    function(customer) {
+
+                        return (
+                            customer.username.toLowerCase() ===
+                            username.toLowerCase()
+                        );
+
+                    }
+                );
+
+
+            if (existingCustomer) {
+
+                showMessage(
+                    message,
+                    "Username already exists.",
+                    true
+                );
+
+                return;
+
+            }
+
+
+            const newCustomer = {
+
+                fullName:
+                    fullName,
+
+                username:
+                    username,
+
+                password:
+                    password,
+
+                role:
+                    "customer",
+
+                phone:
+                    "",
+
+                shippingAddress: {
+
+                    houseNumber:
+                        "",
+
+                    street:
+                        "",
+
+                    barangay:
+                        "",
+
+                    city:
+                        "",
+
+                    province:
+                        "",
+
+                    postalCode:
+                        ""
+
+                }
+
+            };
+
+
+            customers.push(
+                newCustomer
+            );
+
+
+            saveCustomers(
+                customers
+            );
+
+
+            showMessage(
+                message,
+                "Account created successfully!",
+                false
+            );
+
+
+            signupForm.reset();
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "index.html";
+
+                },
+                1200
+            );
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   MESSAGE HELPER
+========================================== */
+
+function showMessage(
+    element,
+    message,
+    isError
+) {
+
+    if (!element) {
+        return;
+    }
+
+
+    element.textContent =
+        message;
+
+
+    element.className =
+        isError
+            ? "auth-message error"
+            : "auth-message success";
+
+}
+
+
+/* ==========================================
+   FORGOT PASSWORD
+========================================== */
+
+const forgotPasswordForm =
+    document.getElementById(
+        "forgotPasswordForm"
+    );
+
+
+if (forgotPasswordForm) {
+
+    forgotPasswordForm.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const username =
+                document
+                    .getElementById("resetUsername")
+                    .value
+                    .trim();
+
+
+            const newPassword =
+                document
+                    .getElementById("newPassword")
+                    .value;
+
+
+            const confirmPassword =
+                document
+                    .getElementById("confirmNewPassword")
+                    .value;
+
+
+            const message =
+                document.getElementById(
+                    "forgotMessage"
+                );
+
+
+            if (
+                username.toLowerCase() ===
+                "admin"
+            ) {
+
+                showMessage(
+                    message,
+                    "The admin password cannot be reset here.",
+                    true
+                );
+
+                return;
+
+            }
+
+
+            if (
+                newPassword !== confirmPassword
+            ) {
+
+                showMessage(
+                    message,
+                    "Passwords do not match.",
+                    true
+                );
+
+                return;
+
+            }
+
+
+            const customers =
+                getCustomers();
+
+
+            const customerIndex =
+                customers.findIndex(
+                    function(customer) {
+
+                        return (
+                            customer.username.toLowerCase() ===
+                            username.toLowerCase()
+                        );
+
+                    }
+                );
+
+
+            if (customerIndex === -1) {
+
+                showMessage(
+                    message,
+                    "Username not found.",
+                    true
+                );
+
+                return;
+
+            }
+
+
+            customers[
+                customerIndex
+            ].password =
+                newPassword;
+
+
+            saveCustomers(
+                customers
+            );
+
+
+            showMessage(
+                message,
+                "Password changed successfully!",
+                false
+            );
+
+
+            forgotPasswordForm.reset();
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "index.html";
+
+                },
+                1200
+            );
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   CUSTOMER ACCOUNT PAGE
+========================================== */
+
+const customerPage =
+    document.getElementById(
+        "customerPage"
+    );
+
+
+if (customerPage) {
+
+    const currentUser =
+        getCurrentUser();
 
 
     if (
-        !usernameElement ||
-        !newPasswordElement ||
-        !confirmPasswordElement ||
-        !messageElement
+        !currentUser ||
+        currentUser.role !== "customer"
+    ) {
+
+        window.location.href =
+            "index.html";
+
+    }
+
+}
+
+
+/* ==========================================
+   DISPLAY CUSTOMER NAME
+========================================== */
+
+function displayCustomerName() {
+
+    const currentUser =
+        getCurrentUser();
+
+
+    const elements =
+        document.querySelectorAll(
+            "[data-customer-name]"
+        );
+
+
+    elements.forEach(
+        function(element) {
+
+            element.textContent =
+                currentUser?.fullName ||
+                "Customer";
+
+        }
+    );
+
+}
+
+
+displayCustomerName();
+
+
+/* ==========================================
+   SAVE CUSTOMER ACCOUNT
+========================================== */
+
+function saveAccountChanges() {
+
+    const currentUser =
+        getCurrentUser();
+
+
+    if (
+        !currentUser ||
+        currentUser.role !== "customer"
     ) {
 
         return;
+
     }
+
+
+    const fullName =
+        document.getElementById(
+            "accountFullName"
+        )?.value.trim();
 
 
     const username =
-        usernameElement.value.trim();
-
-    const newPassword =
-        newPasswordElement.value;
-
-    const confirmPassword =
-        confirmPasswordElement.value;
+        document.getElementById(
+            "accountUsername"
+        )?.value.trim();
 
 
-    // CHECK EMPTY FIELDS
-
-    if (
-        username === "" ||
-        newPassword === "" ||
-        confirmPassword === ""
-    ) {
-
-        messageElement.textContent =
-            "Please complete all fields.";
-
-        messageElement.style.color =
-            "#c0392b";
-
-        return;
-    }
+    const phone =
+        document.getElementById(
+            "accountPhone"
+        )?.value.trim();
 
 
-    // ADMIN CANNOT USE THIS PAGE
-
-    if (
-        username.toLowerCase() === "admin"
-    ) {
-
-        messageElement.textContent =
-            "The admin password cannot be reset here.";
-
-        messageElement.style.color =
-            "#c0392b";
-
-        return;
-    }
+    const houseNumber =
+        document.getElementById(
+            "houseNumber"
+        )?.value.trim();
 
 
-    // PASSWORD MATCH
-
-    if (
-        newPassword !== confirmPassword
-    ) {
-
-        messageElement.textContent =
-            "Passwords do not match.";
-
-        messageElement.style.color =
-            "#c0392b";
-
-        return;
-    }
+    const street =
+        document.getElementById(
+            "street"
+        )?.value.trim();
 
 
-    // GET CUSTOMERS
+    const barangay =
+        document.getElementById(
+            "barangay"
+        )?.value.trim();
+
+
+    const city =
+        document.getElementById(
+            "city"
+        )?.value.trim();
+
+
+    const province =
+        document.getElementById(
+            "province"
+        )?.value.trim();
+
+
+    const postalCode =
+        document.getElementById(
+            "postalCode"
+        )?.value.trim();
+
 
     const customers =
-        JSON.parse(
-            localStorage.getItem(
-                "loveLuxeCustomers"
-            )
-        ) || [];
+        getCustomers();
 
-
-    // FIND CUSTOMER
 
     const customerIndex =
         customers.findIndex(
             function(customer) {
 
                 return (
+                    customer.username ===
+                    currentUser.username
+                );
+
+            }
+        );
+
+
+    if (customerIndex === -1) {
+
+        return;
+
+    }
+
+
+    const usernameTaken =
+        customers.some(
+            function(customer, index) {
+
+                return (
+                    index !== customerIndex &&
                     customer.username.toLowerCase() ===
                     username.toLowerCase()
                 );
@@ -410,23 +733,217 @@ function resetPassword() {
         );
 
 
-    // USER NOT FOUND
+    if (usernameTaken) {
 
-    if (
-        customerIndex === -1
-    ) {
+        showAccountMessage(
+            "Username already exists.",
+            true
+        );
 
-        messageElement.textContent =
-            "Username not found.";
+        return;
 
-        messageElement.style.color =
-            "#c0392b";
+    }
 
+
+    customers[
+        customerIndex
+    ].fullName =
+        fullName;
+
+
+    customers[
+        customerIndex
+    ].username =
+        username;
+
+
+    customers[
+        customerIndex
+    ].phone =
+        phone;
+
+
+    customers[
+        customerIndex
+    ].shippingAddress = {
+
+        houseNumber:
+            houseNumber,
+
+        street:
+            street,
+
+        barangay:
+            barangay,
+
+        city:
+            city,
+
+        province:
+            province,
+
+        postalCode:
+            postalCode
+
+    };
+
+
+    saveCustomers(
+        customers
+    );
+
+
+    saveCurrentUser(
+        customers[customerIndex]
+    );
+
+
+    showAccountMessage(
+        "Account information saved successfully.",
+        false
+    );
+
+
+    displayCustomerName();
+
+}
+
+
+/* ==========================================
+   ACCOUNT MESSAGE
+========================================== */
+
+function showAccountMessage(
+    message,
+    isError
+) {
+
+    const element =
+        document.getElementById(
+            "accountMessage"
+        );
+
+
+    if (!element) {
         return;
     }
 
 
-    // UPDATE PASSWORD
+    element.textContent =
+        message;
+
+
+    element.className =
+        isError
+            ? "account-message error"
+            : "account-message success";
+
+}
+
+
+/* ==========================================
+   CHANGE PASSWORD
+========================================== */
+
+function changeCustomerPassword() {
+
+    const currentUser =
+        getCurrentUser();
+
+
+    if (
+        !currentUser ||
+        currentUser.role !== "customer"
+    ) {
+
+        return;
+
+    }
+
+
+    const currentPassword =
+        document.getElementById(
+            "currentPassword"
+        )?.value;
+
+
+    const newPassword =
+        document.getElementById(
+            "accountNewPassword"
+        )?.value;
+
+
+    const confirmPassword =
+        document.getElementById(
+            "accountConfirmPassword"
+        )?.value;
+
+
+    if (
+        currentPassword !==
+        currentUser.password
+    ) {
+
+        showAccountMessage(
+            "Current password is incorrect.",
+            true
+        );
+
+        return;
+
+    }
+
+
+    if (
+        newPassword !==
+        confirmPassword
+    ) {
+
+        showAccountMessage(
+            "New passwords do not match.",
+            true
+        );
+
+        return;
+
+    }
+
+
+    if (!newPassword) {
+
+        showAccountMessage(
+            "Please enter a new password.",
+            true
+        );
+
+        return;
+
+    }
+
+
+    const customers =
+        getCustomers();
+
+
+    const customerIndex =
+        customers.findIndex(
+            function(customer) {
+
+                return (
+                    customer.username ===
+                    currentUser.username
+                );
+
+            }
+        );
+
+
+    if (customerIndex === -1) {
+
+        return;
+
+    }
+
 
     customers[
         customerIndex
@@ -434,49 +951,52 @@ function resetPassword() {
         newPassword;
 
 
-    // SAVE
-
-    localStorage.setItem(
-        "loveLuxeCustomers",
-        JSON.stringify(customers)
+    saveCustomers(
+        customers
     );
 
 
-    messageElement.textContent =
-        "Password reset successfully!";
-
-    messageElement.style.color =
-        "#4a8c5c";
+    saveCurrentUser(
+        customers[customerIndex]
+    );
 
 
-    usernameElement.value = "";
-
-    newPasswordElement.value = "";
-
-    confirmPasswordElement.value = "";
+    document.getElementById(
+        "currentPassword"
+    ).value = "";
 
 
-    setTimeout(
-        function() {
+    document.getElementById(
+        "accountNewPassword"
+    ).value = "";
 
-            window.location.href =
-                "index.html";
 
-        },
-        1200
+    document.getElementById(
+        "accountConfirmPassword"
+    ).value = "";
+
+
+    showAccountMessage(
+        "Password changed successfully.",
+        false
     );
 
 }
 
 
-// ==========================================
-// LOGOUT
-// ==========================================
+/* ==========================================
+   LOGOUT
+========================================== */
 
-function logout() {
+function logoutCustomer() {
 
     localStorage.removeItem(
         "loveLuxeCurrentUser"
+    );
+
+
+    localStorage.removeItem(
+        "loveLuxeAdminLoggedIn"
     );
 
 
@@ -486,719 +1006,17 @@ function logout() {
 }
 
 
-// ==========================================
-// CUSTOMER ACCESS
-// ==========================================
-
-function checkCustomerAccess() {
-
-    const currentUser =
-        localStorage.getItem(
-            "loveLuxeCurrentUser"
-        );
-
-
-    if (!currentUser) {
-
-        window.location.href =
-            "index.html";
-
-        return null;
-    }
-
-
-    try {
-
-        const user =
-            JSON.parse(currentUser);
-
-
-        if (
-            user.role !== "customer"
-        ) {
-
-            window.location.href =
-                dashboardURL;
-
-            return null;
-        }
-
-
-        return user;
-
-    }
-
-    catch (error) {
-
-        localStorage.removeItem(
-            "loveLuxeCurrentUser"
-        );
-
-
-        window.location.href =
-            "index.html";
-
-        return null;
-
-    }
-
-}
-
-
-// ==========================================
-// LOAD CUSTOMER ACCOUNT
-// ==========================================
-
-function loadCustomerAccount() {
-
-    const fullNameInput =
-        document.getElementById(
-            "accountFullName"
-        );
-
-
-    if (!fullNameInput) {
-        return;
-    }
-
-
-    const user =
-        checkCustomerAccess();
-
-
-    if (!user) {
-        return;
-    }
-
-
-    if (!user.shippingAddress) {
-
-        user.shippingAddress = {
-
-            houseNumber: "",
-
-            street: "",
-
-            barangay: "",
-
-            city: "",
-
-            province: "",
-
-            postalCode: ""
-
-        };
-
-    }
-
-
-    if (!user.phone) {
-        user.phone = "";
-    }
-
-
-    document.getElementById(
-        "accountFullName"
-    ).value =
-        user.fullName || "";
-
-
-    document.getElementById(
-        "accountUsername"
-    ).value =
-        user.username || "";
-
-
-    document.getElementById(
-        "accountPhone"
-    ).value =
-        user.phone || "";
-
-
-    document.getElementById(
-        "houseNumber"
-    ).value =
-        user.shippingAddress.houseNumber || "";
-
-
-    document.getElementById(
-        "street"
-    ).value =
-        user.shippingAddress.street || "";
-
-
-    document.getElementById(
-        "barangay"
-    ).value =
-        user.shippingAddress.barangay || "";
-
-
-    document.getElementById(
-        "city"
-    ).value =
-        user.shippingAddress.city || "";
-
-
-    document.getElementById(
-        "province"
-    ).value =
-        user.shippingAddress.province || "";
-
-
-    document.getElementById(
-        "postalCode"
-    ).value =
-        user.shippingAddress.postalCode || "";
-
-
-    updateAccountSummary(user);
-
-
-    const topName =
-        document.getElementById(
-            "topCustomerName"
-        );
-
-
-    if (topName) {
-
-        topName.textContent =
-            user.fullName;
-
-    }
-
-}
-
-
-// ==========================================
-// SAVE ACCOUNT CHANGES
-// ==========================================
-
-function saveAccountChanges() {
-
-    const user =
-        checkCustomerAccess();
-
-
-    if (!user) {
-        return;
-    }
-
-
-    const originalUsername =
-        user.username;
-
-
-    const newFullName =
-        document.getElementById(
-            "accountFullName"
-        ).value.trim();
-
-
-    const newUsername =
-        document.getElementById(
-            "accountUsername"
-        ).value.trim();
-
-
-    const newPhone =
-        document.getElementById(
-            "accountPhone"
-        ).value.trim();
-
-
-    if (
-        newFullName === "" ||
-        newUsername === ""
-    ) {
-
-        showAccountMessage(
-            "Full name and username are required.",
-            true
-        );
-
-        return;
-    }
-
-
-    if (
-        newUsername.toLowerCase() === "admin"
-    ) {
-
-        showAccountMessage(
-            "This username is not available.",
-            true
-        );
-
-        return;
-    }
-
-
-    const customers =
-        JSON.parse(
-            localStorage.getItem(
-                "loveLuxeCustomers"
-            )
-        ) || [];
-
-
-    const duplicateUser =
-        customers.find(
-            function(customer) {
-
-                return (
-                    customer.username.toLowerCase() ===
-                    newUsername.toLowerCase() &&
-                    customer.username.toLowerCase() !==
-                    originalUsername.toLowerCase()
-                );
-
-            }
-        );
-
-
-    if (duplicateUser) {
-
-        showAccountMessage(
-            "That username is already being used.",
-            true
-        );
-
-        return;
-    }
-
-
-    const newAddress = {
-
-        houseNumber:
-            document.getElementById(
-                "houseNumber"
-            ).value.trim(),
-
-        street:
-            document.getElementById(
-                "street"
-            ).value.trim(),
-
-        barangay:
-            document.getElementById(
-                "barangay"
-            ).value.trim(),
-
-        city:
-            document.getElementById(
-                "city"
-            ).value.trim(),
-
-        province:
-            document.getElementById(
-                "province"
-            ).value.trim(),
-
-        postalCode:
-            document.getElementById(
-                "postalCode"
-            ).value.trim()
-
-    };
-
-
-    user.fullName =
-        newFullName;
-
-    user.username =
-        newUsername;
-
-    user.phone =
-        newPhone;
-
-    user.shippingAddress =
-        newAddress;
-
-
-    const userIndex =
-        customers.findIndex(
-            function(customer) {
-
-                return (
-                    customer.username ===
-                    originalUsername
-                );
-
-            }
-        );
-
-
-    if (userIndex !== -1) {
-
-        customers[userIndex] =
-            user;
-
-    }
-
-
-    // PASSWORD CHANGE
-
-    const currentPassword =
-        document.getElementById(
-            "currentPassword"
-        ).value;
-
-    const newPassword =
-        document.getElementById(
-            "newPassword"
-        ).value;
-
-    const confirmNewPassword =
-        document.getElementById(
-            "confirmNewPassword"
-        ).value;
-
-
-    if (
-        currentPassword !== "" ||
-        newPassword !== "" ||
-        confirmNewPassword !== ""
-    ) {
-
-
-        if (
-            currentPassword !==
-            user.password
-        ) {
-
-            showAccountMessage(
-                "Current password is incorrect.",
-                true
-            );
-
-            return;
-        }
-
-
-        if (
-            newPassword === ""
-        ) {
-
-            showAccountMessage(
-                "Enter a new password.",
-                true
-            );
-
-            return;
-        }
-
-
-        if (
-            newPassword !==
-            confirmNewPassword
-        ) {
-
-            showAccountMessage(
-                "New passwords do not match.",
-                true
-            );
-
-            return;
-        }
-
-
-        user.password =
-            newPassword;
-
-
-        document.getElementById(
-            "currentPassword"
-        ).value = "";
-
-        document.getElementById(
-            "newPassword"
-        ).value = "";
-
-        document.getElementById(
-            "confirmNewPassword"
-        ).value = "";
-
-    }
-
-
-    localStorage.setItem(
-        "loveLuxeCustomers",
-        JSON.stringify(customers)
-    );
-
-
-    localStorage.setItem(
-        "loveLuxeCurrentUser",
-        JSON.stringify(user)
-    );
-
-
-    updateAccountSummary(user);
-
-
-    document.getElementById(
-        "topCustomerName"
-    ).textContent =
-        user.fullName;
-
-
-    showAccountMessage(
-        "Your account information has been saved.",
-        false
-    );
-
-}
-
-
-// ==========================================
-// ACCOUNT SUMMARY
-// ==========================================
-
-function updateAccountSummary(user) {
-
-    const username =
-        document.getElementById(
-            "summaryUsername"
-        );
-
-    const phone =
-        document.getElementById(
-            "summaryPhone"
-        );
-
-    const address =
-        document.getElementById(
-            "summaryAddress"
-        );
-
-
-    if (username) {
-
-        username.textContent =
-            user.username || "-";
-
-    }
-
-
-    if (phone) {
-
-        phone.textContent =
-            user.phone || "Not set";
-
-    }
-
-
-    if (address) {
-
-        const shipping =
-            user.shippingAddress;
-
-
-        if (
-            shipping &&
-            (
-                shipping.houseNumber ||
-                shipping.street ||
-                shipping.barangay ||
-                shipping.city ||
-                shipping.province ||
-                shipping.postalCode
-            )
-        ) {
-
-            const parts = [
-
-                shipping.houseNumber,
-
-                shipping.street,
-
-                shipping.barangay,
-
-                shipping.city,
-
-                shipping.province,
-
-                shipping.postalCode
-
-            ];
-
-
-            address.textContent =
-                parts
-                    .filter(Boolean)
-                    .join(", ");
-
-        }
-
-        else {
-
-            address.textContent =
-                "Not set";
-
-        }
-
-    }
-
-}
-
-
-// ==========================================
-// ACCOUNT MESSAGE
-// ==========================================
-
-function showAccountMessage(
-    message,
-    isError
-) {
-
-    const messageElement =
-        document.getElementById(
-            "accountMessage"
-        );
-
-
-    if (!messageElement) {
-        return;
-    }
-
-
-    messageElement.textContent =
-        message;
-
-
-    if (isError) {
-
-        messageElement.style.color =
-            "#c0392b";
-
-    }
-
-    else {
-
-        messageElement.style.color =
-            "#4a8c5c";
-
-    }
-
-}
-
-
-// ==========================================
-// ACCOUNT SIDEBAR
-// ==========================================
-
-function openAccountSidebar() {
-
-    const sidebar =
-        document.getElementById(
-            "accountSidebar"
-        );
-
-    const overlay =
-        document.getElementById(
-            "accountOverlay"
-        );
-
-
-    if (sidebar) {
-
-        sidebar.classList.add(
-            "open"
-        );
-
-    }
-
-
-    if (overlay) {
-
-        overlay.classList.add(
-            "active"
-        );
-
-    }
-
-}
-
-
-function closeAccountSidebar() {
-
-    const sidebar =
-        document.getElementById(
-            "accountSidebar"
-        );
-
-    const overlay =
-        document.getElementById(
-            "accountOverlay"
-        );
-
-
-    if (sidebar) {
-
-        sidebar.classList.remove(
-            "open"
-        );
-
-    }
-
-
-    if (overlay) {
-
-        overlay.classList.remove(
-            "active"
-        );
-
-    }
-
-}
-
-
-// ==========================================
-// ACCOUNT SIDEBAR MESSAGE
-// ==========================================
+/* ==========================================
+   CUSTOMER SIDEBAR MESSAGE
+========================================== */
 
 function showAccountMessageBox(
     section
 ) {
 
-    closeAccountSidebar();
-
-
     alert(
         section +
-        " will be added next."
+        " is currently available in the account section."
     );
 
 }
-
-
-// ==========================================
-// OVERLAY
-// ==========================================
-
-const accountOverlay =
-    document.getElementById(
-        "accountOverlay"
-    );
-
-
-if (accountOverlay) {
-
-    accountOverlay.addEventListener(
-        "click",
-        function() {
-
-            closeAccountSidebar();
-
-        }
-    );
-
-}
-
-
-// ==========================================
-// LOAD ACCOUNT PAGE
-// ==========================================
-
-loadCustomerAccount();
