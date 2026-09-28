@@ -2,59 +2,670 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Love Luxe - Customer</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+    <title>Love Luxe - My Account</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
 </head>
+
 
 <body>
 
-    <div class="customer-page">
 
-        <div class="customer-card">
+    <!-- MOBILE OVERLAY -->
 
-            <div class="brand">
+    <div
+        class="account-overlay"
+        id="accountOverlay">
+    </div>
 
-                <h1>LOVE LUXE</h1>
 
-                <p>BY EA • EST. 2024</p>
+    <!-- SIDEBAR -->
+
+    <aside
+        class="account-sidebar"
+        id="accountSidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="account-sidebar-brand">
+
+            <div>
+
+                <h1>
+                    LOVE LUXE
+                </h1>
+
+                <p>
+                    BY EA • EST. 2024
+                </p>
 
             </div>
 
 
-            <h2 id="customerWelcome">
-                Welcome!
-            </h2>
-
-
-            <p>
-                Welcome to Love Luxe.
-            </p>
-
-
             <button
-                class="main-button"
-                onclick="window.location.href='catalog.html'">
+                class="account-close-button"
+                onclick="closeAccountSidebar()">
 
-                SHOP PRODUCTS
-
-            </button>
-
-
-            <button
-                class="secondary-button"
-                onclick="logout()">
-
-                LOG OUT
+                ×
 
             </button>
 
         </div>
 
-    </div>
+
+        <!-- MENU -->
+
+        <div class="account-sidebar-content">
+
+
+            <div class="account-section-title">
+                SHOPPER
+            </div>
+
+
+            <!-- SHOP -->
+
+            <a
+                href="catalog.html"
+                class="account-sidebar-link">
+
+                <span class="account-sidebar-icon">
+                    🛍
+                </span>
+
+                <span>
+                    Shop
+                </span>
+
+            </a>
+
+
+            <!-- MY ORDERS -->
+
+            <a
+                href="#"
+                class="account-sidebar-link"
+                onclick="showAccountMessage('My Orders'); return false;">
+
+                <span class="account-sidebar-icon">
+                    📦
+                </span>
+
+                <span>
+                    My Orders
+                </span>
+
+            </a>
+
+
+            <!-- MY ACCOUNT -->
+
+            <a
+                href="customer.html"
+                class="account-sidebar-link active">
+
+                <span class="account-sidebar-icon">
+                    👤
+                </span>
+
+                <span>
+                    My Account
+                </span>
+
+            </a>
+
+
+            <div class="account-section-title account-menu-title">
+                ACCOUNT
+            </div>
+
+
+            <!-- SETTINGS -->
+
+            <a
+                href="#accountSettings"
+                class="account-sidebar-link">
+
+                <span class="account-sidebar-icon">
+                    ⚙
+                </span>
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+
+        </div>
+
+
+        <!-- LOGOUT -->
+
+        <div class="account-sidebar-bottom">
+
+            <button
+                class="account-logout-button"
+                onclick="logout()">
+
+                <span class="account-sidebar-icon">
+                    ↪
+                </span>
+
+                <span>
+                    Log Out
+                </span>
+
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="account-main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="account-topbar">
+
+
+            <button
+                class="account-open-button"
+                onclick="openAccountSidebar()">
+
+                ☰
+
+            </button>
+
+
+            <div class="account-topbar-title">
+
+                <span>
+                    ACCOUNT
+                </span>
+
+                <h2>
+                    My Account
+                </h2>
+
+            </div>
+
+
+            <div class="account-user">
+
+                <span>
+                    👤
+                </span>
+
+                <span id="topCustomerName">
+                    Customer
+                </span>
+
+            </div>
+
+
+        </header>
+
+
+        <!-- PAGE CONTENT -->
+
+        <section class="account-container">
+
+
+            <!-- PAGE INTRO -->
+
+            <div class="account-intro">
+
+                <p class="account-label">
+                    CUSTOMER PROFILE
+                </p>
+
+                <h1>
+                    My Account
+                </h1>
+
+                <p>
+                    Manage your personal information,
+                    password and shipping details.
+                </p>
+
+            </div>
+
+
+            <!-- ACCOUNT CONTENT -->
+
+            <div class="account-grid">
+
+
+                <!-- PERSONAL INFORMATION -->
+
+                <div class="account-card">
+
+
+                    <div class="account-card-header">
+
+                        <div>
+
+                            <p class="card-label">
+                                PROFILE
+                            </p>
+
+                            <h2>
+                                Personal Information
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="account-form">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="accountFullName"
+                                placeholder="Enter your full name">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Username
+                            </label>
+
+                            <input
+                                type="text"
+                                id="accountUsername"
+                                placeholder="Enter your username">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="accountPhone"
+                                placeholder="09XXXXXXXXX">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Account Type
+                            </label>
+
+                            <input
+                                type="text"
+                                value="Customer"
+                                readonly>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- SHIPPING ADDRESS -->
+
+                <div class="account-card">
+
+
+                    <div class="account-card-header">
+
+                        <div>
+
+                            <p class="card-label">
+                                DELIVERY
+                            </p>
+
+                            <h2>
+                                Shipping Address
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="account-form">
+
+
+                        <div class="form-row">
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    House / Unit No.
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="houseNumber"
+                                    placeholder="House or unit number">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Street
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="street"
+                                    placeholder="Street name">
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Barangay
+                            </label>
+
+                            <input
+                                type="text"
+                                id="barangay"
+                                placeholder="Barangay">
+
+                        </div>
+
+
+                        <div class="form-row">
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    City / Municipality
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="city"
+                                    placeholder="City or municipality">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Province
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="province"
+                                    placeholder="Province">
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Postal Code
+                            </label>
+
+                            <input
+                                type="text"
+                                id="postalCode"
+                                placeholder="Postal code">
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div
+                    class="account-card"
+                    id="accountSettings">
+
+
+                    <div class="account-card-header">
+
+                        <div>
+
+                            <p class="card-label">
+                                SECURITY
+                            </p>
+
+                            <h2>
+                                Change Password
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="account-form">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Current Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="currentPassword"
+                                placeholder="Enter current password">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                New Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="newPassword"
+                                placeholder="Enter new password">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Confirm New Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="confirmNewPassword"
+                                placeholder="Confirm new password">
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ACCOUNT SUMMARY -->
+
+                <div class="account-card account-summary-card">
+
+
+                    <div class="account-card-header">
+
+                        <div>
+
+                            <p class="card-label">
+                                ACCOUNT
+                            </p>
+
+                            <h2>
+                                Account Summary
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-list">
+
+
+                        <div class="summary-item">
+
+                            <span>
+                                Account Type
+                            </span>
+
+                            <strong>
+                                Customer
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-item">
+
+                            <span>
+                                Username
+                            </span>
+
+                            <strong id="summaryUsername">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-item">
+
+                            <span>
+                                Phone
+                            </span>
+
+                            <strong id="summaryPhone">
+                                Not set
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-item">
+
+                            <span>
+                                Shipping Address
+                            </span>
+
+                            <strong id="summaryAddress">
+                                Not set
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <p
+                id="accountMessage"
+                class="account-message">
+            </p>
+
+
+            <!-- ACTIONS -->
+
+            <div class="account-actions">
+
+
+                <button
+                    class="save-account-button"
+                    onclick="saveAccountChanges()">
+
+                    SAVE CHANGES
+
+                </button>
+
+
+                <button
+                    class="back-shop-button"
+                    onclick="window.location.href='catalog.html'">
+
+                    BACK TO SHOP
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
 
 
     <script src="script.js"></script>
