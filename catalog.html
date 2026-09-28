@@ -25,79 +25,66 @@
 <body>
 
 
-    <!-- MOBILE HEADER -->
+    <!-- ==========================================
+         MOBILE HEADER
+    =========================================== -->
 
     <header class="mobile-header">
 
         <button
-            id="menuButton"
             class="menu-button"
+            onclick="openSidebar()"
+            type="button"
         >
             ☰
         </button>
 
-
         <div class="mobile-brand">
-
             LOVE LUXE
-
-            <span>
-                BY EA • EST. 2024
-            </span>
-
+            <span>by EA</span>
         </div>
 
     </header>
 
 
 
-    <!-- SIDEBAR -->
+    <!-- ==========================================
+         SIDEBAR
+    =========================================== -->
 
     <aside
-        class="catalog-sidebar"
-        id="catalogSidebar"
+        class="shop-sidebar"
+        id="shopSidebar"
     >
 
+        <div class="sidebar-brand">
 
-        <div class="catalog-brand">
-
-            <div class="catalog-brand-title">
-                LOVE LUXE
+            <div class="brand-title">
+                Love Luxe
             </div>
 
-
-            <div class="catalog-brand-subtitle">
-                BY EA • EST. 2024
+            <div class="brand-subtitle">
+                by EA • Est. 2024
             </div>
 
         </div>
 
 
+        <div class="sidebar-section">
 
-        <div class="customer-welcome">
-
-            <span>
-                Welcome
-            </span>
-
-
-            <strong
-                id="customerName"
-            >
-                Customer
-            </strong>
-
-        </div>
-
-
-
-        <nav class="catalog-nav">
+            <div class="sidebar-label">
+                SHOP
+            </div>
 
 
             <a
                 href="catalog.html"
-                class="catalog-nav-link active"
+                class="sidebar-link active"
             >
+
+                <span>
+                    🛍️
+                </span>
 
                 <span>
                     Products
@@ -108,8 +95,12 @@
 
             <a
                 href="customer.html"
-                class="catalog-nav-link"
+                class="sidebar-link"
             >
+
+                <span>
+                    👤
+                </span>
 
                 <span>
                     My Account
@@ -117,177 +108,302 @@
 
             </a>
 
+        </div>
+
+
+        <div class="sidebar-section">
+
+            <div class="sidebar-label">
+                CATEGORIES
+            </div>
+
 
             <button
                 type="button"
-                id="logoutButton"
-                class="catalog-nav-link logout-link"
+                class="sidebar-link category-sidebar-link"
+                onclick="filterCategoryFromSidebar('Bags')"
             >
 
                 <span>
-                    Logout
+                    👜
+                </span>
+
+                <span>
+                    Bags
                 </span>
 
             </button>
 
 
-        </nav>
+            <button
+                type="button"
+                class="sidebar-link category-sidebar-link"
+                onclick="filterCategoryFromSidebar('Clothing')"
+            >
 
+                <span>
+                    👗
+                </span>
+
+                <span>
+                    Clothing
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="sidebar-link category-sidebar-link"
+                onclick="filterCategoryFromSidebar('Perfume')"
+            >
+
+                <span>
+                    🌸
+                </span>
+
+                <span>
+                    Perfume
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="sidebar-link category-sidebar-link"
+                onclick="filterCategoryFromSidebar('Body Care')"
+            >
+
+                <span>
+                    🧴
+                </span>
+
+                <span>
+                    Body Care
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <!--
+            LOGOUT REMOVED
+            Logout is available in My Account.
+        -->
 
     </aside>
 
 
 
-    <!-- OVERLAY -->
+    <!-- ==========================================
+         SIDEBAR OVERLAY
+    =========================================== -->
 
     <div
-        id="sidebarOverlay"
         class="sidebar-overlay"
+        id="sidebarOverlay"
     ></div>
 
 
 
-    <!-- MAIN -->
+    <!-- ==========================================
+         MAIN CONTENT
+    =========================================== -->
 
-    <main class="catalog-main">
+    <main class="shop-main">
 
 
-        <!-- TOP BAR -->
+        <!-- ======================================
+             TOP BAR
+        ======================================= -->
 
-        <header class="catalog-topbar">
-
+        <div class="shop-topbar">
 
             <div>
 
-                <div class="topbar-label">
-                    LOVE LUXE BY EA
+                <div class="page-small-title">
+                    CUSTOMER SHOP
                 </div>
 
-
                 <h1>
-                    Product Catalog
+                    Product Management
                 </h1>
 
             </div>
 
 
-            <a
-                href="customer.html"
-                class="account-button"
-            >
-                My Account
-            </a>
+            <div class="customer-profile">
 
+                <div class="customer-avatar">
+                    C
+                </div>
 
-        </header>
+                <div>
 
+                    <div class="customer-label">
+                        Welcome Customer
+                    </div>
 
+                    <div
+                        class="customer-name"
+                        id="customerName"
+                    >
+                        Customer
+                    </div>
 
-        <!-- CATALOG CONTROLS -->
-
-        <section class="catalog-controls">
-
-
-            <div class="category-buttons">
-
-
-                <button
-                    type="button"
-                    class="filter-button active"
-                    data-category="All"
-                >
-                    All
-                </button>
-
-
-                <button
-                    type="button"
-                    class="filter-button"
-                    data-category="Bags"
-                >
-                    Bags
-                </button>
-
-
-                <button
-                    type="button"
-                    class="filter-button"
-                    data-category="Clothing"
-                >
-                    Clothing
-                </button>
-
-
-                <button
-                    type="button"
-                    class="filter-button"
-                    data-category="Perfume"
-                >
-                    Perfume
-                </button>
-
-
-                <button
-                    type="button"
-                    class="filter-button"
-                    data-category="Body Care"
-                >
-                    Body Care
-                </button>
-
+                </div>
 
             </div>
-
-
-
-            <div class="search-area">
-
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search products..."
-                >
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- PRODUCT COUNT -->
-
-        <div class="catalog-info">
-
-            <span id="productCount">
-                16 products
-            </span>
 
         </div>
 
 
 
-        <!-- PRODUCTS -->
+        <!-- ======================================
+             SHOP HEADER
+        ======================================= -->
+
+        <section class="catalog-header">
+
+            <div>
+
+                <div class="catalog-eyebrow">
+                    LOVE LUXE COLLECTION
+                </div>
+
+                <h2>
+                    Our Products
+                </h2>
+
+                <p>
+                    Browse our available products and
+                    choose what you would like to order.
+                </p>
+
+            </div>
+
+
+            <div
+                class="product-count"
+                id="productCount"
+            >
+                Showing 16 product(s)
+            </div>
+
+        </section>
+
+
+
+        <!-- ======================================
+             SEARCH
+        ======================================= -->
+
+        <section class="catalog-tools">
+
+            <div class="search-box">
+
+                <span>
+                    🔍
+                </span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search products..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ======================================
+             CATEGORY FILTERS
+        ======================================= -->
+
+        <div class="filter-buttons">
+
+            <button
+                type="button"
+                class="filter-button active"
+                data-category="All"
+            >
+                All
+            </button>
+
+
+            <button
+                type="button"
+                class="filter-button"
+                data-category="Bags"
+            >
+                Bags
+            </button>
+
+
+            <button
+                type="button"
+                class="filter-button"
+                data-category="Clothing"
+            >
+                Clothing
+            </button>
+
+
+            <button
+                type="button"
+                class="filter-button"
+                data-category="Perfume"
+            >
+                Perfume
+            </button>
+
+
+            <button
+                type="button"
+                class="filter-button"
+                data-category="Body Care"
+            >
+                Body Care
+            </button>
+
+        </div>
+
+
+
+        <!-- ======================================
+             PRODUCT GRID
+        ======================================= -->
 
         <section
-            id="productGrid"
             class="product-grid"
+            id="productGrid"
         >
         </section>
 
 
 
-        <!-- NO PRODUCTS -->
+        <!-- ======================================
+             NO PRODUCTS MESSAGE
+        ======================================= -->
 
         <div
-            id="noProducts"
             class="no-products"
+            id="noProducts"
             style="display: none;"
         >
 
-            <h2>
+            <div class="no-products-icon">
+                🔍
+            </div>
+
+            <h3>
                 No products found
-            </h2>
+            </h3>
 
             <p>
                 Try another search or category.
@@ -296,236 +412,115 @@
         </div>
 
 
+
+        <!-- ======================================
+             FOOTER
+        ======================================= -->
+
+        <footer class="shop-footer">
+
+            <div>
+                Love Luxe by EA
+            </div>
+
+            <div>
+                Products • Bags • Clothing • Perfume • Body Care
+            </div>
+
+        </footer>
+
+
     </main>
 
 
 
-    <!-- CHECKOUT MODAL -->
-
-    <div
-        id="checkoutModal"
-        class="modal-overlay"
-    >
-
-
-        <div class="checkout-modal">
-
-
-            <button
-                type="button"
-                id="closeCheckout"
-                class="close-modal"
-            >
-                ×
-            </button>
-
-
-
-            <div class="checkout-header">
-
-                <span>
-                    LOVE LUXE BY EA
-                </span>
-
-                <h2>
-                    Product Details
-                </h2>
-
-            </div>
-
-
-
-            <!-- PRODUCT DETAILS -->
-
-            <div class="checkout-product">
-
-
-                <div class="checkout-image-wrapper">
-
-                    <img
-                        id="checkoutImage"
-                        src=""
-                        alt="Product"
-                    >
-
-                </div>
-
-
-
-                <div class="checkout-product-info">
-
-
-                    <div
-                        id="checkoutCategory"
-                        class="checkout-category"
-                    >
-                    </div>
-
-
-                    <h3 id="checkoutName">
-                    </h3>
-
-
-                    <p
-                        id="checkoutDescription"
-                        class="checkout-description"
-                    >
-                    </p>
-
-
-                    <div
-                        id="checkoutPrice"
-                        class="checkout-price"
-                    >
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-
-
-            <!-- QUANTITY -->
-
-            <div class="checkout-field">
-
-                <label>
-                    Quantity
-                </label>
-
-
-                <div class="quantity-control">
-
-                    <button
-                        type="button"
-                        id="decreaseQuantity"
-                    >
-                        −
-                    </button>
-
-
-                    <span id="checkoutQuantity">
-                        1
-                    </span>
-
-
-                    <button
-                        type="button"
-                        id="increaseQuantity"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- SHIPPING ADDRESS -->
-
-            <div class="checkout-section">
-
-
-                <div class="checkout-section-title">
-                    Shipping Address
-                </div>
-
-
-                <div
-                    id="checkoutAddress"
-                    class="checkout-address"
-                >
-                    No shipping address saved.
-                </div>
-
-
-                <a
-                    href="customer.html#shipping"
-                    class="edit-address-link"
-                >
-                    Manage Shipping Address
-                </a>
-
-
-            </div>
-
-
-
-            <!-- PAYMENT -->
-
-            <div class="checkout-field">
-
-                <label for="paymentMethod">
-                    Payment Method
-                </label>
-
-
-                <select
-                    id="paymentMethod"
-                >
-
-                    <option value="Cash on Delivery">
-                        Cash on Delivery
-                    </option>
-
-                    <option value="GCash">
-                        GCash
-                    </option>
-
-                </select>
-
-            </div>
-
-
-
-            <!-- TOTAL -->
-
-            <div class="checkout-total-row">
-
-                <span>
-                    Total
-                </span>
-
-
-                <strong
-                    id="checkoutTotal"
-                >
-                    ₱0.00
-                </strong>
-
-            </div>
-
-
-
-            <!-- CHECKOUT BUTTON -->
-
-            <button
-                type="button"
-                id="placeOrderButton"
-                class="place-order-button"
-            >
-                PLACE ORDER
-            </button>
-
-
-            <p
-                id="checkoutMessage"
-                class="checkout-message"
-            >
-            </p>
-
-
-        </div>
-
-
-    </div>
-
-
+    <!-- ==========================================
+         SCRIPT
+    =========================================== -->
 
     <script src="catalog.js"></script>
+
+
+    <!-- ==========================================
+         SIDEBAR CATEGORY HELPER
+    =========================================== -->
+
+    <script>
+
+        function filterCategoryFromSidebar(category) {
+
+            const buttons =
+                document.querySelectorAll(
+                    ".filter-button"
+                );
+
+
+            buttons.forEach(
+                function(button) {
+
+                    button.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+
+            buttons.forEach(
+                function(button) {
+
+                    if (
+                        button.dataset.category ===
+                        category
+                    ) {
+
+                        button.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            /*
+                The catalog.js file uses
+                the selected category internally.
+                We trigger the matching filter
+                button so both sidebar and
+                category buttons work together.
+            */
+
+            buttons.forEach(
+                function(button) {
+
+                    if (
+                        button.dataset.category ===
+                        category
+                    ) {
+
+                        button.click();
+
+                    }
+
+                }
+            );
+
+
+            if (
+                typeof closeSidebar ===
+                "function"
+            ) {
+
+                closeSidebar();
+
+            }
+
+        }
+
+    </script>
+
 
 </body>
 
