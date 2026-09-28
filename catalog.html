@@ -10,9 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Love Luxe by EA - Products
-    </title>
+    <title>Love Luxe by EA - Products</title>
 
     <link
         rel="stylesheet"
@@ -25,14 +23,13 @@
 <body>
 
 
-    <!-- ==========================================
-         MOBILE HEADER
-    =========================================== -->
+    <!-- MOBILE HEADER -->
 
     <header class="mobile-header">
 
         <button
             class="menu-button"
+            id="customerMenuButton"
             onclick="openSidebar()"
             type="button"
         >
@@ -48,38 +45,47 @@
 
 
 
-    <!-- ==========================================
-         SIDEBAR
-    =========================================== -->
+    <!-- SIDEBAR -->
 
     <aside
-        class="shop-sidebar"
+        class="catalog-sidebar"
         id="shopSidebar"
     >
 
-        <div class="sidebar-brand">
+        <div class="catalog-brand">
 
-            <div class="brand-title">
+            <div class="catalog-brand-title">
                 Love Luxe
             </div>
 
-            <div class="brand-subtitle">
+            <div class="catalog-brand-subtitle">
                 by EA • Est. 2024
             </div>
 
         </div>
 
 
-        <div class="sidebar-section">
+        <div class="customer-welcome">
 
-            <div class="sidebar-label">
-                SHOP
-            </div>
+            <span>
+                Welcome Customer
+            </span>
 
+            <strong id="customerName">
+                Customer
+            </strong>
+
+        </div>
+
+
+        <nav class="catalog-nav">
+
+
+            <!-- PRODUCTS -->
 
             <a
                 href="catalog.html"
-                class="sidebar-link active"
+                class="catalog-nav-link active"
             >
 
                 <span>
@@ -93,9 +99,11 @@
             </a>
 
 
+            <!-- MY ACCOUNT -->
+
             <a
                 href="customer.html"
-                class="sidebar-link"
+                class="catalog-nav-link"
             >
 
                 <span>
@@ -108,19 +116,12 @@
 
             </a>
 
-        </div>
 
-
-        <div class="sidebar-section">
-
-            <div class="sidebar-label">
-                CATEGORIES
-            </div>
-
+            <!-- CATEGORIES -->
 
             <button
                 type="button"
-                class="sidebar-link category-sidebar-link"
+                class="catalog-nav-link"
                 onclick="filterCategoryFromSidebar('Bags')"
             >
 
@@ -137,7 +138,7 @@
 
             <button
                 type="button"
-                class="sidebar-link category-sidebar-link"
+                class="catalog-nav-link"
                 onclick="filterCategoryFromSidebar('Clothing')"
             >
 
@@ -154,7 +155,7 @@
 
             <button
                 type="button"
-                class="sidebar-link category-sidebar-link"
+                class="catalog-nav-link"
                 onclick="filterCategoryFromSidebar('Perfume')"
             >
 
@@ -171,7 +172,7 @@
 
             <button
                 type="button"
-                class="sidebar-link category-sidebar-link"
+                class="catalog-nav-link"
                 onclick="filterCategoryFromSidebar('Body Care')"
             >
 
@@ -185,21 +186,18 @@
 
             </button>
 
-        </div>
+
+        </nav>
 
 
-        <!--
-            LOGOUT REMOVED
-            Logout is available in My Account.
-        -->
+        <!-- NO LOGOUT HERE -->
+
 
     </aside>
 
 
 
-    <!-- ==========================================
-         SIDEBAR OVERLAY
-    =========================================== -->
+    <!-- SIDEBAR OVERLAY -->
 
     <div
         class="sidebar-overlay"
@@ -208,22 +206,18 @@
 
 
 
-    <!-- ==========================================
-         MAIN CONTENT
-    =========================================== -->
+    <!-- MAIN -->
 
-    <main class="shop-main">
+    <main class="catalog-main">
 
 
-        <!-- ======================================
-             TOP BAR
-        ======================================= -->
+        <!-- TOPBAR -->
 
-        <div class="shop-topbar">
+        <div class="catalog-topbar">
 
             <div>
 
-                <div class="page-small-title">
+                <div class="topbar-label">
                     CUSTOMER SHOP
                 </div>
 
@@ -234,79 +228,77 @@
             </div>
 
 
-            <div class="customer-profile">
-
-                <div class="customer-avatar">
-                    C
-                </div>
-
-                <div>
-
-                    <div class="customer-label">
-                        Welcome Customer
-                    </div>
-
-                    <div
-                        class="customer-name"
-                        id="customerName"
-                    >
-                        Customer
-                    </div>
-
-                </div>
-
-            </div>
+            <a
+                href="customer.html"
+                class="account-button"
+            >
+                My Account
+            </a>
 
         </div>
 
 
 
-        <!-- ======================================
-             SHOP HEADER
-        ======================================= -->
+        <!-- CONTROLS -->
 
-        <section class="catalog-header">
+        <div class="catalog-controls">
 
-            <div>
 
-                <div class="catalog-eyebrow">
-                    LOVE LUXE COLLECTION
-                </div>
+            <!-- CATEGORY BUTTONS -->
 
-                <h2>
-                    Our Products
-                </h2>
+            <div class="category-buttons">
 
-                <p>
-                    Browse our available products and
-                    choose what you would like to order.
-                </p>
+                <button
+                    type="button"
+                    class="filter-button active"
+                    data-category="All"
+                >
+                    All
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter-button"
+                    data-category="Bags"
+                >
+                    Bags
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter-button"
+                    data-category="Clothing"
+                >
+                    Clothing
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter-button"
+                    data-category="Perfume"
+                >
+                    Perfume
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter-button"
+                    data-category="Body Care"
+                >
+                    Body Care
+                </button>
 
             </div>
 
 
-            <div
-                class="product-count"
-                id="productCount"
-            >
-                Showing 16 product(s)
-            </div>
 
-        </section>
+            <!-- SEARCH -->
 
-
-
-        <!-- ======================================
-             SEARCH
-        ======================================= -->
-
-        <section class="catalog-tools">
-
-            <div class="search-box">
-
-                <span>
-                    🔍
-                </span>
+            <div class="search-area">
 
                 <input
                     type="text"
@@ -317,67 +309,23 @@
 
             </div>
 
-        </section>
-
-
-
-        <!-- ======================================
-             CATEGORY FILTERS
-        ======================================= -->
-
-        <div class="filter-buttons">
-
-            <button
-                type="button"
-                class="filter-button active"
-                data-category="All"
-            >
-                All
-            </button>
-
-
-            <button
-                type="button"
-                class="filter-button"
-                data-category="Bags"
-            >
-                Bags
-            </button>
-
-
-            <button
-                type="button"
-                class="filter-button"
-                data-category="Clothing"
-            >
-                Clothing
-            </button>
-
-
-            <button
-                type="button"
-                class="filter-button"
-                data-category="Perfume"
-            >
-                Perfume
-            </button>
-
-
-            <button
-                type="button"
-                class="filter-button"
-                data-category="Body Care"
-            >
-                Body Care
-            </button>
 
         </div>
 
 
 
-        <!-- ======================================
-             PRODUCT GRID
-        ======================================= -->
+        <!-- PRODUCT COUNT -->
+
+        <div
+            class="catalog-info"
+            id="productCount"
+        >
+            Showing 16 product(s)
+        </div>
+
+
+
+        <!-- PRODUCT GRID -->
 
         <section
             class="product-grid"
@@ -387,9 +335,7 @@
 
 
 
-        <!-- ======================================
-             NO PRODUCTS MESSAGE
-        ======================================= -->
+        <!-- NO PRODUCTS -->
 
         <div
             class="no-products"
@@ -397,13 +343,9 @@
             style="display: none;"
         >
 
-            <div class="no-products-icon">
-                🔍
-            </div>
-
-            <h3>
+            <h2>
                 No products found
-            </h3>
+            </h2>
 
             <p>
                 Try another search or category.
@@ -413,11 +355,21 @@
 
 
 
-        <!-- ======================================
-             FOOTER
-        ======================================= -->
+        <!-- FOOTER -->
 
-        <footer class="shop-footer">
+        <footer
+            style="
+                margin-top: 50px;
+                padding: 25px 0;
+                border-top: 1px solid #e0e2e6;
+                color: #777777;
+                font-size: 13px;
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                flex-wrap: wrap;
+            "
+        >
 
             <div>
                 Love Luxe by EA
@@ -434,16 +386,13 @@
 
 
 
-    <!-- ==========================================
-         SCRIPT
-    =========================================== -->
+    <!-- CATALOG JAVASCRIPT -->
 
     <script src="catalog.js"></script>
 
 
-    <!-- ==========================================
-         SIDEBAR CATEGORY HELPER
-    =========================================== -->
+
+    <!-- SIDEBAR CATEGORY FUNCTION -->
 
     <script>
 
@@ -455,69 +404,121 @@
                 );
 
 
-            buttons.forEach(
-                function(button) {
+            buttons.forEach(function(button) {
 
-                    button.classList.remove(
-                        "active"
-                    );
+                button.classList.remove("active");
 
-                }
-            );
+            });
 
 
-            buttons.forEach(
-                function(button) {
-
-                    if (
-                        button.dataset.category ===
-                        category
-                    ) {
-
-                        button.classList.add(
-                            "active"
-                        );
-
-                    }
-
-                }
-            );
+            const selectedButton =
+                document.querySelector(
+                    '.filter-button[data-category="' +
+                    category +
+                    '"]'
+                );
 
 
-            /*
-                The catalog.js file uses
-                the selected category internally.
-                We trigger the matching filter
-                button so both sidebar and
-                category buttons work together.
-            */
+            if (selectedButton) {
 
-            buttons.forEach(
-                function(button) {
+                selectedButton.click();
 
-                    if (
-                        button.dataset.category ===
-                        category
-                    ) {
-
-                        button.click();
-
-                    }
-
-                }
-            );
+            }
 
 
-            if (
-                typeof closeSidebar ===
-                "function"
-            ) {
+            closeSidebar();
 
-                closeSidebar();
+        }
+
+
+
+        /* ======================================
+           SIDEBAR
+        ====================================== */
+
+        function openSidebar() {
+
+            const sidebar =
+                document.getElementById(
+                    "shopSidebar"
+                );
+
+            const overlay =
+                document.getElementById(
+                    "sidebarOverlay"
+                );
+
+
+            if (sidebar) {
+
+                sidebar.classList.add("open");
+
+            }
+
+
+            if (overlay) {
+
+                overlay.classList.add("active");
 
             }
 
         }
+
+
+
+        function closeSidebar() {
+
+            const sidebar =
+                document.getElementById(
+                    "shopSidebar"
+                );
+
+            const overlay =
+                document.getElementById(
+                    "sidebarOverlay"
+                );
+
+
+            if (sidebar) {
+
+                sidebar.classList.remove("open");
+
+            }
+
+
+            if (overlay) {
+
+                overlay.classList.remove("active");
+
+            }
+
+        }
+
+
+
+        /* CLOSE SIDEBAR WHEN OVERLAY IS CLICKED */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                const overlay =
+                    document.getElementById(
+                        "sidebarOverlay"
+                    );
+
+
+                if (overlay) {
+
+                    overlay.addEventListener(
+                        "click",
+                        closeSidebar
+                    );
+
+                }
+
+            }
+        );
 
     </script>
 
