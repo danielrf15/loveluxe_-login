@@ -67,7 +67,7 @@ const products = [
         category: "Clothing",
         price: 790,
         description: "Stylish Sophia skirt.",
-        image: ""
+        image: "images/sophia-skirt.jpg"
     },
 
 
@@ -76,7 +76,7 @@ const products = [
         category: "Clothing",
         price: 450,
         description: "Casual Nov-Mardi T-Shirt.",
-        image: ""
+        image: "images/nov-mardi-tshirt.jpg"
     },
 
 
@@ -85,7 +85,7 @@ const products = [
         category: "Clothing",
         price: 950,
         description: "Simple and stylish Basic Chic01 Terno.",
-        image: ""
+        image: "images/basic-chic01-terno.jpg"
     },
 
 
@@ -94,7 +94,7 @@ const products = [
         category: "Clothing",
         price: 790,
         description: "Casual Sami T-Shirt.",
-        image: ""
+        image: "images/sami-tshirt.jpg"
     },
 
 
@@ -107,7 +107,7 @@ const products = [
         category: "Body Care",
         price: 350,
         description: "Alada Soap.",
-        image: ""
+        image: "images/alada-soap.jpg"
     },
 
 
@@ -116,7 +116,7 @@ const products = [
         category: "Body Care",
         price: 199,
         description: "Dewy Gluta Soap.",
-        image: ""
+        image: "images/dewy-gluta-soap.jpg"
     },
 
 
@@ -125,7 +125,7 @@ const products = [
         category: "Body Care",
         price: 299,
         description: "Serene Skin Soap.",
-        image: ""
+        image: "images/serene-skin-soap.jpg"
     },
 
 
@@ -134,7 +134,7 @@ const products = [
         category: "Body Care",
         price: 180,
         description: "Vitamin E Whitening Cream.",
-        image: ""
+        image: "images/vitamin-e-whitening-cream.jpg"
     },
 
 
@@ -147,7 +147,7 @@ const products = [
         category: "Bags",
         price: 3590,
         description: "Mini Enzo bag.",
-        image: ""
+        image: "images/mini-enzo.jpg"
     },
 
 
@@ -156,7 +156,7 @@ const products = [
         category: "Bags",
         price: 2090,
         description: "Mini Bucket Bag.",
-        image: ""
+        image: "images/mini-bucket-bag.jpg"
     },
 
 
@@ -165,7 +165,7 @@ const products = [
         category: "Bags",
         price: 2890,
         description: "Anytime Medium bag.",
-        image: ""
+        image: "images/anytime-medium.jpg"
     },
 
 
@@ -174,7 +174,7 @@ const products = [
         category: "Bags",
         price: 3590,
         description: "Emilio Barrel bag.",
-        image: ""
+        image: "images/emilio-barrel.jpg"
     },
 
 
@@ -187,7 +187,7 @@ const products = [
         category: "Perfume",
         price: 700,
         description: "Victoria's Secret perfume.",
-        image: ""
+        image: "images/victorias-secret-perfume.jpg"
     },
 
 
@@ -196,7 +196,7 @@ const products = [
         category: "Perfume",
         price: 600,
         description: "Bath & Body Works perfume.",
-        image: ""
+        image: "images/bath-body-works-perfume.jpg"
     },
 
 
@@ -205,7 +205,7 @@ const products = [
         category: "Perfume",
         price: 350,
         description: "Smart Collection perfume.",
-        image: ""
+        image: "images/smart-collection-perfume.jpg"
     },
 
 
@@ -214,7 +214,7 @@ const products = [
         category: "Perfume",
         price: 390,
         description: "Lattafa YARA perfume.",
-        image: ""
+        image: "images/lattafa-yara.jpg"
     }
 
 ];
