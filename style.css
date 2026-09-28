@@ -1140,3 +1140,31 @@ form input:focus {
     }
 
 }
+/* ==========================================
+   FORGOT PASSWORD
+   ========================================== */
+
+.forgot-password {
+
+    display: block;
+
+    text-align: right;
+
+    color: #b18a3e;
+
+    font-size: 11px;
+
+    text-decoration: none;
+
+    margin-top: -8px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.forgot-password:hover {
+
+    text-decoration: underline;
+
+}
