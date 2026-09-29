@@ -16,7 +16,7 @@ body {
    SIDEBAR
 ========================================== */
 
-.catalog-sidebar {
+.shop-sidebar {
 
     position: fixed;
 
@@ -39,7 +39,7 @@ body {
 }
 
 
-.catalog-brand {
+.sidebar-brand {
 
     height: 125px;
 
@@ -56,7 +56,7 @@ body {
 }
 
 
-.catalog-brand-title {
+.brand-title {
 
     font-family: Georgia, serif;
 
@@ -69,7 +69,7 @@ body {
 }
 
 
-.catalog-brand-subtitle {
+.brand-subtitle {
 
     margin-top: 6px;
 
@@ -82,57 +82,29 @@ body {
 }
 
 
-/* ==========================================
-   WELCOME
-========================================== */
-
-.customer-welcome {
-
-    padding: 25px 22px;
-
-    border-bottom: 1px solid #292929;
-
-}
-
-
-.customer-welcome span {
-
-    display: block;
-
-    color: #858585;
-
-    font-size: 13px;
-
-    margin-bottom: 5px;
-
-}
-
-
-.customer-welcome strong {
-
-    display: block;
-
-    color: white;
-
-    font-size: 18px;
-
-    font-weight: 500;
-
-}
-
-
-/* ==========================================
-   NAVIGATION
-========================================== */
-
-.catalog-nav {
+.sidebar-section {
 
     padding: 25px 15px;
 
 }
 
 
-.catalog-nav-link {
+.sidebar-label {
+
+    color: #777777;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    font-weight: bold;
+
+    padding: 0 17px 12px;
+
+}
+
+
+.sidebar-link {
 
     width: 100%;
 
@@ -143,6 +115,8 @@ body {
     display: flex;
 
     align-items: center;
+
+    gap: 12px;
 
     text-decoration: none;
 
@@ -165,7 +139,7 @@ body {
 }
 
 
-.catalog-nav-link:hover {
+.sidebar-link:hover {
 
     color: white;
 
@@ -174,7 +148,7 @@ body {
 }
 
 
-.catalog-nav-link.active {
+.sidebar-link.active {
 
     color: white;
 
@@ -193,8 +167,6 @@ body {
 
     justify-content: flex-start;
 
-    gap: 12px;
-
 }
 
 
@@ -211,14 +183,12 @@ body {
 
     font-size: 14px;
 
-    transition:
-        transform 0.2s ease;
+    transition: transform 0.2s ease;
 
 }
 
 
-.account-dropdown-button.open
-.account-arrow {
+.account-dropdown-button.open .account-arrow {
 
     transform: rotate(180deg);
 
@@ -255,8 +225,7 @@ body {
 
     border-radius: 6px;
 
-    transition:
-        0.2s ease;
+    transition: 0.2s ease;
 
 }
 
@@ -274,7 +243,7 @@ body {
    MAIN
 ========================================== */
 
-.catalog-main {
+.shop-main {
 
     margin-left: 260px;
 
@@ -286,10 +255,10 @@ body {
 
 
 /* ==========================================
-   TOPBAR
+   TOP BAR
 ========================================== */
 
-.catalog-topbar {
+.shop-topbar {
 
     display: flex;
 
@@ -304,7 +273,7 @@ body {
 }
 
 
-.topbar-label {
+.page-small-title {
 
     color: #c5a059;
 
@@ -319,7 +288,7 @@ body {
 }
 
 
-.catalog-topbar h1 {
+.shop-topbar h1 {
 
     font-family: Georgia, serif;
 
@@ -330,56 +299,203 @@ body {
 }
 
 
-.account-button {
+.customer-profile {
 
-    padding: 12px 20px;
+    display: flex;
 
-    border: 1px solid #c5a059;
+    align-items: center;
 
-    border-radius: 7px;
+    gap: 12px;
 
     text-decoration: none;
 
-    color: #111111;
-
-    background: white;
-
-    font-size: 14px;
-
-    cursor: pointer;
+    color: inherit;
 
 }
 
 
-.account-button:hover {
+.customer-avatar {
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 50%;
 
     background: #c5a059;
 
     color: white;
 
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: bold;
+
+}
+
+
+.customer-label {
+
+    color: #888888;
+
+    font-size: 11px;
+
+}
+
+
+.customer-name {
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    margin-top: 3px;
+
 }
 
 
 /* ==========================================
-   CONTROLS
+   CATALOG HEADER
 ========================================== */
 
-.catalog-controls {
+.catalog-header {
 
-    margin-top: 30px;
+    margin-top: 35px;
 
     display: flex;
 
     justify-content: space-between;
 
-    align-items: center;
+    align-items: flex-end;
 
     gap: 20px;
 
 }
 
 
-.category-buttons {
+.catalog-eyebrow {
+
+    color: #c5a059;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+}
+
+
+.catalog-header h2 {
+
+    font-family: Georgia, serif;
+
+    font-size: 32px;
+
+    font-weight: normal;
+
+}
+
+
+.catalog-header p {
+
+    color: #777777;
+
+    font-size: 14px;
+
+    margin-top: 8px;
+
+}
+
+
+.product-count {
+
+    color: #777777;
+
+    font-size: 13px;
+
+    white-space: nowrap;
+
+}
+
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+.catalog-tools {
+
+    margin-top: 28px;
+
+}
+
+
+.search-box {
+
+    width: 100%;
+
+    height: 45px;
+
+    background: white;
+
+    border: 1px solid #d9dce1;
+
+    border-radius: 7px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 14px;
+
+    gap: 10px;
+
+}
+
+
+.search-box span {
+
+    font-size: 15px;
+
+}
+
+
+.search-box input {
+
+    width: 100%;
+
+    height: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-size: 14px;
+
+}
+
+
+.search-box:focus-within {
+
+    border-color: #c5a059;
+
+}
+
+
+/* ==========================================
+   FILTER BUTTONS
+========================================== */
+
+.filter-buttons {
+
+    margin-top: 18px;
 
     display: flex;
 
@@ -427,54 +543,13 @@ body {
 }
 
 
-.search-area input {
-
-    width: 250px;
-
-    height: 43px;
-
-    border: 1px solid #d9dce1;
-
-    border-radius: 7px;
-
-    padding: 0 15px;
-
-    outline: none;
-
-    font-size: 14px;
-
-}
-
-
-.search-area input:focus {
-
-    border-color: #c5a059;
-
-}
-
-
-/* ==========================================
-   PRODUCT COUNT
-========================================== */
-
-.catalog-info {
-
-    margin-top: 28px;
-
-    margin-bottom: 15px;
-
-    color: #777777;
-
-    font-size: 14px;
-
-}
-
-
 /* ==========================================
    PRODUCT GRID
 ========================================== */
 
 .product-grid {
+
+    margin-top: 25px;
 
     display: grid;
 
@@ -656,9 +731,20 @@ body {
 }
 
 
-.no-products h2 {
+.no-products-icon {
+
+    font-size: 35px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.no-products h3 {
 
     font-family: Georgia, serif;
+
+    font-size: 24px;
 
     font-weight: normal;
 
@@ -670,6 +756,29 @@ body {
 .no-products p {
 
     color: #777777;
+
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.shop-footer {
+
+    margin-top: 60px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #e0e2e6;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #888888;
+
+    font-size: 12px;
 
 }
 
@@ -882,6 +991,58 @@ body {
     font-size: 18px;
 
     font-weight: bold;
+
+}
+
+
+/* ==========================================
+   PRODUCT OPTIONS
+========================================== */
+
+.option-group {
+
+    margin-top: 18px;
+
+}
+
+
+.option-group label {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+}
+
+
+.option-group select {
+
+    width: 100%;
+
+    height: 45px;
+
+    border: 1px solid #d8d8d8;
+
+    border-radius: 7px;
+
+    padding: 0 12px;
+
+    background: white;
+
+    font-size: 14px;
+
+}
+
+
+.option-group select:focus {
+
+    outline: none;
+
+    border-color: #c5a059;
 
 }
 
@@ -1144,7 +1305,7 @@ body {
 
 
 /* ==========================================
-   OVERLAY
+   SIDEBAR OVERLAY
 ========================================== */
 
 .sidebar-overlay {
@@ -1172,7 +1333,7 @@ body {
 
 @media (max-width: 900px) {
 
-    .catalog-sidebar {
+    .shop-sidebar {
 
         width: 260px;
 
@@ -1183,7 +1344,7 @@ body {
     }
 
 
-    .catalog-sidebar.open {
+    .shop-sidebar.open {
 
         transform: translateX(0);
 
@@ -1272,7 +1433,7 @@ body {
     }
 
 
-    .catalog-main {
+    .shop-main {
 
         margin-left: 0;
 
@@ -1293,7 +1454,7 @@ body {
 
 @media (max-width: 600px) {
 
-    .catalog-main {
+    .shop-main {
 
         padding-left: 15px;
 
@@ -1302,7 +1463,7 @@ body {
     }
 
 
-    .catalog-topbar {
+    .shop-topbar {
 
         align-items: flex-start;
 
@@ -1311,30 +1472,30 @@ body {
     }
 
 
-    .catalog-topbar h1 {
+    .shop-topbar h1 {
 
         font-size: 28px;
 
     }
 
 
-    .account-button {
+    .customer-profile {
 
         display: none;
 
     }
 
 
-    .catalog-controls {
+    .catalog-header {
 
         flex-direction: column;
 
-        align-items: stretch;
+        align-items: flex-start;
 
     }
 
 
-    .category-buttons {
+    .filter-buttons {
 
         overflow-x: auto;
 
@@ -1352,13 +1513,6 @@ body {
     }
 
 
-    .search-area input {
-
-        width: 100%;
-
-    }
-
-
     .product-grid {
 
         grid-template-columns: 1fr;
@@ -1369,6 +1523,15 @@ body {
     .product-image {
 
         height: 280px;
+
+    }
+
+
+    .shop-footer {
+
+        flex-direction: column;
+
+        gap: 8px;
 
     }
 
