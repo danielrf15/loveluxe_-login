@@ -7,9 +7,7 @@
 
 body {
     font-family: "Plus Jakarta Sans", Arial, sans-serif;
-
     background: #f5f6fa;
-
     color: #111111;
 }
 
@@ -185,9 +183,89 @@ body {
 }
 
 
-.logout-link {
+/* ==========================================
+   MY ACCOUNT DROPDOWN
+========================================== */
+
+.account-dropdown-button {
 
     font-family: inherit;
+
+    justify-content: flex-start;
+
+    gap: 12px;
+
+}
+
+
+.account-dropdown-button span:nth-child(2) {
+
+    flex: 1;
+
+}
+
+
+.account-arrow {
+
+    margin-left: auto;
+
+    font-size: 14px;
+
+    transition:
+        transform 0.2s ease;
+
+}
+
+
+.account-dropdown-button.open
+.account-arrow {
+
+    transform: rotate(180deg);
+
+}
+
+
+.account-dropdown-menu {
+
+    display: none;
+
+    padding: 0 0 8px 42px;
+
+}
+
+
+.account-dropdown-menu.show {
+
+    display: block;
+
+}
+
+
+.account-dropdown-link {
+
+    display: block;
+
+    padding: 10px 12px;
+
+    color: #bdbdbd;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    border-radius: 6px;
+
+    transition:
+        0.2s ease;
+
+}
+
+
+.account-dropdown-link:hover {
+
+    color: white;
+
+    background: #1d1d1d;
 
 }
 
@@ -267,6 +345,8 @@ body {
     background: white;
 
     font-size: 14px;
+
+    cursor: pointer;
 
 }
 
@@ -1207,7 +1287,6 @@ body {
             repeat(2, minmax(0, 1fr));
 
     }
-
 
 }
 
