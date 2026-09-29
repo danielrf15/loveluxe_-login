@@ -418,41 +418,15 @@ if (
 
     accountDropdownButton.addEventListener(
         "click",
-        function() {
+        function () {
 
             accountDropdownMenu.classList.toggle(
                 "show"
             );
 
-
             accountDropdownButton.classList.toggle(
                 "open"
             );
-
-        }
-    );
-
-}
-
-
-/* ==========================================
-   TOP MY ACCOUNT BUTTON
-========================================== */
-
-const topAccountButton =
-    document.getElementById(
-        "topAccountButton"
-    );
-
-
-if (topAccountButton) {
-
-    topAccountButton.addEventListener(
-        "click",
-        function() {
-
-            window.location.href =
-                "customer.html#personal";
 
         }
     );
@@ -494,7 +468,7 @@ function displayProducts() {
 
     const filteredProducts =
         products.filter(
-            function(product) {
+            function (product) {
 
                 const categoryMatch =
                     selectedCategory === "All" ||
@@ -563,7 +537,7 @@ function displayProducts() {
 
     productGrid.innerHTML =
         filteredProducts.map(
-            function(product) {
+            function (product) {
 
                 return `
 
@@ -647,11 +621,11 @@ function displayProducts() {
 
 
     viewButtons.forEach(
-        function(button) {
+        function (button) {
 
             button.addEventListener(
                 "click",
-                function() {
+                function () {
 
                     const productId =
                         Number(
@@ -676,14 +650,14 @@ function displayProducts() {
 ========================================== */
 
 filterButtons.forEach(
-    function(button) {
+    function (button) {
 
         button.addEventListener(
             "click",
-            function() {
+            function () {
 
                 filterButtons.forEach(
-                    function(item) {
+                    function (item) {
 
                         item.classList.remove(
                             "active"
@@ -740,48 +714,6 @@ function createCheckoutModal() {
         return;
 
     }
-
-
-    const style =
-        document.createElement(
-            "style"
-        );
-
-
-    style.textContent = `
-
-        .option-group {
-            margin-top: 18px;
-        }
-
-        .option-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .option-group select {
-            width: 100%;
-            height: 45px;
-            border: 1px solid #d8d8d8;
-            border-radius: 7px;
-            padding: 0 12px;
-            background: white;
-            font-size: 14px;
-        }
-
-        .option-group select:focus {
-            outline: none;
-            border-color: #c5a059;
-        }
-
-    `;
-
-
-    document.head.appendChild(
-        style
-    );
 
 
     const modal =
@@ -941,7 +873,7 @@ function createCheckoutModal() {
 
 
                 <a
-                    href="customer.html#settings"
+                    href="settings.html"
                     class="edit-address-link"
                 >
                     Manage shipping address
@@ -1038,7 +970,7 @@ function createCheckoutModal() {
 
     modal.addEventListener(
         "click",
-        function(event) {
+        function (event) {
 
             if (
                 event.target === modal
@@ -1056,7 +988,7 @@ function createCheckoutModal() {
         "decreaseQuantity"
     ).addEventListener(
         "click",
-        function() {
+        function () {
 
             if (
                 selectedQuantity > 1
@@ -1076,7 +1008,7 @@ function createCheckoutModal() {
         "increaseQuantity"
     ).addEventListener(
         "click",
-        function() {
+        function () {
 
             if (
                 selectedQuantity < 99
@@ -1106,9 +1038,7 @@ function createCheckoutModal() {
    PRODUCT OPTIONS
 ========================================== */
 
-function createProductOptions(
-    product
-) {
+function createProductOptions(product) {
 
     const container =
         document.getElementById(
@@ -1125,10 +1055,6 @@ function createProductOptions(
 
     container.innerHTML = "";
 
-
-    /* ======================================
-       COLOR
-    ====================================== */
 
     if (
         product.colors &&
@@ -1151,16 +1077,14 @@ function createProductOptions(
                 Color
             </label>
 
-            <select
-                id="productColor"
-            >
+            <select id="productColor">
 
                 <option value="">
                     Select color
                 </option>
 
                 ${product.colors.map(
-                    function(color) {
+                    function (color) {
 
                         return `
                             <option value="${color}">
@@ -1183,10 +1107,6 @@ function createProductOptions(
     }
 
 
-    /* ======================================
-       SIZE
-    ====================================== */
-
     if (
         product.sizes &&
         product.sizes.length > 0
@@ -1208,16 +1128,14 @@ function createProductOptions(
                 Size
             </label>
 
-            <select
-                id="productSize"
-            >
+            <select id="productSize">
 
                 <option value="">
                     Select size
                 </option>
 
                 ${product.sizes.map(
-                    function(size) {
+                    function (size) {
 
                         return `
                             <option value="${size}">
@@ -1240,10 +1158,6 @@ function createProductOptions(
     }
 
 
-    /* ======================================
-       SCENT
-    ====================================== */
-
     if (
         product.scents &&
         product.scents.length > 0
@@ -1265,16 +1179,14 @@ function createProductOptions(
                 Scent
             </label>
 
-            <select
-                id="productScent"
-            >
+            <select id="productScent">
 
                 <option value="">
                     Select scent
                 </option>
 
                 ${product.scents.map(
-                    function(scent) {
+                    function (scent) {
 
                         return `
                             <option value="${scent}">
@@ -1303,13 +1215,11 @@ function createProductOptions(
    VIEW PRODUCT
 ========================================== */
 
-function viewProduct(
-    productId
-) {
+function viewProduct(productId) {
 
     selectedProduct =
         products.find(
-            function(product) {
+            function (product) {
 
                 return product.id ===
                     productId;
@@ -1337,63 +1247,39 @@ function viewProduct(
     selectedScent = "";
 
 
-    const checkoutImage =
-        document.getElementById(
-            "checkoutImage"
-        );
-
-
-    const checkoutName =
-        document.getElementById(
-            "checkoutName"
-        );
-
-
-    const checkoutCategory =
-        document.getElementById(
-            "checkoutCategory"
-        );
-
-
-    const checkoutDescription =
-        document.getElementById(
-            "checkoutDescription"
-        );
-
-
-    const checkoutPrice =
-        document.getElementById(
-            "checkoutPrice"
-        );
-
-
-    const checkoutMessage =
-        document.getElementById(
-            "checkoutMessage"
-        );
-
-
-    checkoutImage.src =
+    document.getElementById(
+        "checkoutImage"
+    ).src =
         selectedProduct.image;
 
 
-    checkoutImage.alt =
+    document.getElementById(
+        "checkoutImage"
+    ).alt =
         selectedProduct.name;
 
 
-    checkoutName.textContent =
+    document.getElementById(
+        "checkoutName"
+    ).textContent =
         selectedProduct.name;
 
 
-    checkoutCategory.textContent =
+    document.getElementById(
+        "checkoutCategory"
+    ).textContent =
         selectedProduct.category;
 
 
-    checkoutDescription.textContent =
+    document.getElementById(
+        "checkoutDescription"
+    ).textContent =
         selectedProduct.description;
 
 
-    checkoutPrice.textContent =
+    document.getElementById(
+        "checkoutPrice"
+    ).textContent =
         formatPrice(
             selectedProduct.price
         );
@@ -1410,8 +1296,9 @@ function viewProduct(
     displayShippingAddress();
 
 
-    checkoutMessage.textContent =
-        "";
+    document.getElementById(
+        "checkoutMessage"
+    ).textContent = "";
 
 
     document.getElementById(
@@ -1523,7 +1410,7 @@ function displayShippingAddress() {
         address.postalCode
 
     ].filter(
-        function(part) {
+        function (part) {
 
             return part &&
                 part.trim() !== "";
@@ -1614,10 +1501,6 @@ function placeOrder() {
     }
 
 
-    /* ======================================
-       GET OPTIONS
-    ====================================== */
-
     const colorSelect =
         document.getElementById(
             "productColor"
@@ -1653,10 +1536,6 @@ function placeOrder() {
             ? scentSelect.value
             : "";
 
-
-    /* ======================================
-       REQUIRE OPTIONS
-    ====================================== */
 
     if (
         selectedProduct.colors &&
@@ -1703,10 +1582,6 @@ function placeOrder() {
     }
 
 
-    /* ======================================
-       SHIPPING ADDRESS
-    ====================================== */
-
     const address =
         user.shippingAddress;
 
@@ -1721,7 +1596,7 @@ function placeOrder() {
         address?.postalCode
 
     ].filter(
-        function(part) {
+        function (part) {
 
             return part &&
                 part.trim() !== "";
@@ -1744,10 +1619,6 @@ function placeOrder() {
     }
 
 
-    /* ======================================
-       PAYMENT
-    ====================================== */
-
     const paymentMethod =
         document.getElementById(
             "paymentMethod"
@@ -1755,18 +1626,10 @@ function placeOrder() {
         "Cash on Delivery";
 
 
-    /* ======================================
-       TOTAL
-    ====================================== */
-
     const total =
         selectedProduct.price *
         selectedQuantity;
 
-
-    /* ======================================
-       ORDER NUMBER
-    ====================================== */
 
     const orderNumber =
         "LL-" +
@@ -1774,10 +1637,6 @@ function placeOrder() {
             .toString()
             .slice(-8);
 
-
-    /* ======================================
-       ORDER DATA
-    ====================================== */
 
     const order = {
 
@@ -1832,10 +1691,6 @@ function placeOrder() {
     };
 
 
-    /* ======================================
-       SAVE ORDER
-    ====================================== */
-
     const orders =
         JSON.parse(
             localStorage.getItem(
@@ -1865,7 +1720,7 @@ function placeOrder() {
 
 
     setTimeout(
-        function() {
+        function () {
 
             closeCheckout();
 
@@ -2025,7 +1880,7 @@ if (sidebarOverlay) {
 
 
 /* ==========================================
-   CLOSE MOBILE SIDEBAR AFTER ACCOUNT LINK
+   ACCOUNT LINKS
 ========================================== */
 
 const accountLinks =
@@ -2035,11 +1890,11 @@ const accountLinks =
 
 
 accountLinks.forEach(
-    function(link) {
+    function (link) {
 
         link.addEventListener(
             "click",
-            function() {
+            function () {
 
                 closeSidebar();
 
