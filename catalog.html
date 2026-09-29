@@ -19,68 +19,6 @@
         href="catalog.css"
     >
 
-    <style>
-
-        /* ==========================================
-           MY ACCOUNT DROPDOWN
-        ========================================== */
-
-        .account-dropdown-button {
-            width: 100%;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            text-align: left;
-            font: inherit;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-
-        .account-dropdown-button .account-arrow {
-            margin-left: auto;
-            transition: transform 0.2s ease;
-        }
-
-
-        .account-dropdown-button.open .account-arrow {
-            transform: rotate(180deg);
-        }
-
-
-        .account-dropdown-menu {
-            display: none;
-            margin-top: 4px;
-            margin-left: 34px;
-            padding-left: 10px;
-            border-left: 2px solid #e5e5e5;
-        }
-
-
-        .account-dropdown-menu.show {
-            display: block;
-        }
-
-
-        .account-dropdown-link {
-            display: block;
-            padding: 9px 10px;
-            color: #555;
-            text-decoration: none;
-            font-size: 13px;
-            border-radius: 6px;
-            transition: 0.2s ease;
-        }
-
-
-        .account-dropdown-link:hover {
-            background: #f5f1e8;
-            color: #111;
-        }
-
-    </style>
-
 </head>
 
 
@@ -178,7 +116,6 @@
 
                 <span
                     class="account-arrow"
-                    id="accountArrow"
                 >
                     ▾
                 </span>
@@ -217,12 +154,6 @@
             </div>
 
         </div>
-
-
-        <!--
-            LOGOUT IS AVAILABLE
-            INSIDE MY ACCOUNT PAGES
-        -->
 
     </aside>
 
@@ -268,7 +199,6 @@
             <a
                 href="personal.html"
                 class="customer-profile"
-                style="text-decoration: none; color: inherit;"
             >
 
                 <div class="customer-avatar">
@@ -324,7 +254,7 @@
                 class="product-count"
                 id="productCount"
             >
-                Showing 16 product(s)
+                Showing 16 products
             </div>
 
         </section>
@@ -469,236 +399,7 @@
 
 
 
-    <!-- ==========================================
-         EXISTING CATALOG JAVASCRIPT
-    =========================================== -->
-
     <script src="catalog.js"></script>
-
-
-
-    <!-- ==========================================
-         MY ACCOUNT + SIDEBAR
-    =========================================== -->
-
-    <script>
-
-        /* ==========================================
-           MY ACCOUNT DROPDOWN
-        ========================================== */
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            function () {
-
-                const accountButton =
-                    document.getElementById(
-                        "accountDropdownButton"
-                    );
-
-
-                const accountMenu =
-                    document.getElementById(
-                        "accountDropdownMenu"
-                    );
-
-
-                if (
-                    accountButton &&
-                    accountMenu
-                ) {
-
-                    accountButton.addEventListener(
-                        "click",
-                        function () {
-
-                            accountMenu.classList.toggle(
-                                "show"
-                            );
-
-
-                            accountButton.classList.toggle(
-                                "open"
-                            );
-
-                        }
-                    );
-
-                }
-
-
-                /* ==================================
-                   LOAD CUSTOMER NAME
-                ================================== */
-
-                const currentUser =
-                    JSON.parse(
-                        localStorage.getItem(
-                            "loveLuxeCurrentUser"
-                        )
-                    );
-
-
-                if (
-                    currentUser &&
-                    currentUser.role === "customer"
-                ) {
-
-                    const customerName =
-                        document.getElementById(
-                            "customerName"
-                        );
-
-
-                    if (customerName) {
-
-                        customerName.textContent =
-                            currentUser.fullName ||
-                            "Customer";
-
-                    }
-
-                }
-
-
-                /* ==================================
-                   MOBILE SIDEBAR
-                ================================== */
-
-                const overlay =
-                    document.getElementById(
-                        "sidebarOverlay"
-                    );
-
-
-                if (overlay) {
-
-                    overlay.addEventListener(
-                        "click",
-                        function () {
-
-                            closeSidebar();
-
-                        }
-                    );
-
-                }
-
-            }
-        );
-
-
-        /* ==========================================
-           SIDEBAR CATEGORY HELPER
-        ========================================== */
-
-        function filterCategoryFromSidebar(
-            category
-        ) {
-
-            const buttons =
-                document.querySelectorAll(
-                    ".filter-button"
-                );
-
-
-            buttons.forEach(
-                function (button) {
-
-                    if (
-                        button.dataset.category ===
-                        category
-                    ) {
-
-                        button.click();
-
-                    }
-
-                }
-            );
-
-
-            closeSidebar();
-
-        }
-
-
-        /* ==========================================
-           OPEN SIDEBAR
-        ========================================== */
-
-        function openSidebar() {
-
-            const sidebar =
-                document.getElementById(
-                    "shopSidebar"
-                );
-
-
-            const overlay =
-                document.getElementById(
-                    "sidebarOverlay"
-                );
-
-
-            if (sidebar) {
-
-                sidebar.classList.add(
-                    "open"
-                );
-
-            }
-
-
-            if (overlay) {
-
-                overlay.classList.add(
-                    "active"
-                );
-
-            }
-
-        }
-
-
-        /* ==========================================
-           CLOSE SIDEBAR
-        ========================================== */
-
-        function closeSidebar() {
-
-            const sidebar =
-                document.getElementById(
-                    "shopSidebar"
-                );
-
-
-            const overlay =
-                document.getElementById(
-                    "sidebarOverlay"
-                );
-
-
-            if (sidebar) {
-
-                sidebar.classList.remove(
-                    "open"
-                );
-
-            }
-
-
-            if (overlay) {
-
-                overlay.classList.remove(
-                    "active"
-                );
-
-            }
-
-        }
-
-    </script>
 
 
 </body>
