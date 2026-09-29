@@ -99,11 +99,13 @@
             </a>
 
 
-            <!-- MY ACCOUNT -->
 
-            <a
-                href="customer.html"
-                class="catalog-nav-link"
+            <!-- MY ACCOUNT DROPDOWN -->
+
+            <button
+                type="button"
+                class="catalog-nav-link account-dropdown-button"
+                id="accountDropdownButton"
             >
 
                 <span>
@@ -114,10 +116,48 @@
                     My Account
                 </span>
 
-            </a>
+                <span
+                    class="account-arrow"
+                    id="accountArrow"
+                >
+                    ▾
+                </span>
 
-        <!-- NO LOGOUT HERE -->
+            </button>
 
+
+            <div
+                class="account-dropdown-menu"
+                id="accountDropdownMenu"
+            >
+
+                <a
+                    href="customer.html#personal"
+                    class="account-dropdown-link"
+                >
+                    Personal Information
+                </a>
+
+
+                <a
+                    href="customer.html#orders"
+                    class="account-dropdown-link"
+                >
+                    My Orders
+                </a>
+
+
+                <a
+                    href="customer.html#settings"
+                    class="account-dropdown-link"
+                >
+                    Settings
+                </a>
+
+            </div>
+
+
+        </nav>
 
     </aside>
 
@@ -154,12 +194,13 @@
             </div>
 
 
-            <a
-                href="customer.html"
+            <button
+                type="button"
                 class="account-button"
+                id="topAccountButton"
             >
                 My Account
-            </a>
+            </button>
 
         </div>
 
@@ -315,138 +356,6 @@
     <!-- CATALOG JAVASCRIPT -->
 
     <script src="catalog.js"></script>
-
-
-
-    <!-- SIDEBAR CATEGORY FUNCTION -->
-
-    <script>
-
-        function filterCategoryFromSidebar(category) {
-
-            const buttons =
-                document.querySelectorAll(
-                    ".filter-button"
-                );
-
-
-            buttons.forEach(function(button) {
-
-                button.classList.remove("active");
-
-            });
-
-
-            const selectedButton =
-                document.querySelector(
-                    '.filter-button[data-category="' +
-                    category +
-                    '"]'
-                );
-
-
-            if (selectedButton) {
-
-                selectedButton.click();
-
-            }
-
-
-            closeSidebar();
-
-        }
-
-
-
-        /* ======================================
-           SIDEBAR
-        ====================================== */
-
-        function openSidebar() {
-
-            const sidebar =
-                document.getElementById(
-                    "shopSidebar"
-                );
-
-            const overlay =
-                document.getElementById(
-                    "sidebarOverlay"
-                );
-
-
-            if (sidebar) {
-
-                sidebar.classList.add("open");
-
-            }
-
-
-            if (overlay) {
-
-                overlay.classList.add("active");
-
-            }
-
-        }
-
-
-
-        function closeSidebar() {
-
-            const sidebar =
-                document.getElementById(
-                    "shopSidebar"
-                );
-
-            const overlay =
-                document.getElementById(
-                    "sidebarOverlay"
-                );
-
-
-            if (sidebar) {
-
-                sidebar.classList.remove("open");
-
-            }
-
-
-            if (overlay) {
-
-                overlay.classList.remove("active");
-
-            }
-
-        }
-
-
-
-        /* CLOSE SIDEBAR WHEN OVERLAY IS CLICKED */
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            function() {
-
-                const overlay =
-                    document.getElementById(
-                        "sidebarOverlay"
-                    );
-
-
-                if (overlay) {
-
-                    overlay.addEventListener(
-                        "click",
-                        closeSidebar
-                    );
-
-                }
-
-            }
-        );
-
-    </script>
 
 
 </body>
