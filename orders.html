@@ -68,19 +68,17 @@
         </div>
 
 
-
         <div class="customer-sidebar-welcome">
 
             <span>
                 Welcome
             </span>
 
-            <strong id="customerName">
+            <strong id="sidebarCustomerName">
                 Customer
             </strong>
 
         </div>
-
 
 
         <nav class="customer-nav">
@@ -132,12 +130,11 @@
         </nav>
 
 
-
         <div class="customer-sidebar-bottom">
 
             <button
                 type="button"
-                id="customerLogoutButton"
+                id="logoutButton"
                 class="customer-logout-button"
             >
                 ↪ &nbsp; Logout
@@ -209,12 +206,113 @@
 
 
 
-            <div class="account-card">
+            <div
+                class="account-card"
+                id="ordersList"
+            >
 
-                <div
-                    id="ordersList"
-                    class="orders-list"
-                >
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const user =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "loveLuxeCurrentUser"
+                        )
+                    );
+
+
+                if (
+                    !user ||
+                    user.role !== "customer"
+                ) {
+
+                    window.location.href =
+                        "index.html";
+
+                    return;
+
+                }
+
+
+                document.getElementById(
+                    "sidebarCustomerName"
+                ).textContent =
+                    user.fullName ||
+                    "Customer";
+
+
+                loadOrders();
+
+
+                document.getElementById(
+                    "logoutButton"
+                ).addEventListener(
+                    "click",
+                    logout
+                );
+
+
+                setupMobileMenu();
+
+            }
+        );
+
+
+        function loadOrders() {
+
+            const user =
+                JSON.parse(
+                    localStorage.getItem(
+                        "loveLuxeCurrentUser"
+                    )
+                );
+
+
+            const allOrders =
+                JSON.parse(
+                    localStorage.getItem(
+                        "loveLuxeOrders"
+                    )
+                ) || [];
+
+
+            const orders =
+                allOrders.filter(
+                    function (order) {
+
+                        return order.customerUsername ===
+                            user.username;
+
+                    }
+                ).reverse();
+
+
+            const ordersList =
+                document.getElementById(
+                    "ordersList"
+                );
+
+
+            if (!ordersList) {
+                return;
+            }
+
+
+            if (orders.length === 0) {
+
+                ordersList.innerHTML = `
 
                     <div class="empty-orders">
 
@@ -239,111 +337,7 @@
 
                     </div>
 
-                </div>
-
-            </div>
-
-        </section>
-
-
-    </main>
-
-
-
-    <script>
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            function () {
-
-                let currentUser = null;
-
-
-                try {
-
-                    currentUser =
-                        JSON.parse(
-                            localStorage.getItem(
-                                "loveLuxeCurrentUser"
-                            )
-                        );
-
-                } catch (error) {
-
-                    currentUser = null;
-
-                }
-
-
-                if (
-                    !currentUser ||
-                    currentUser.role !== "customer"
-                ) {
-
-                    window.location.href =
-                        "index.html";
-
-                    return;
-
-                }
-
-
-                document.getElementById(
-                    "customerName"
-                ).textContent =
-                    currentUser.fullName ||
-                    "Customer";
-
-
-                loadOrders();
-
-
-                setupSidebar();
-
-            }
-        );
-
-
-        function loadOrders() {
-
-            const currentUser =
-                JSON.parse(
-                    localStorage.getItem(
-                        "loveLuxeCurrentUser"
-                    )
-                );
-
-
-            const orders =
-                JSON.parse(
-                    localStorage.getItem(
-                        "loveLuxeOrders"
-                    )
-                ) || [];
-
-
-            const customerOrders =
-                orders.filter(
-                    function (order) {
-
-                        return (
-                            order.customerUsername ===
-                            currentUser.username
-                        );
-
-                    }
-                ).reverse();
-
-
-            const ordersList =
-                document.getElementById(
-                    "ordersList"
-                );
-
-
-            if (
-                customerOrders.length === 0
-            ) {
+                `;
 
                 return;
 
@@ -351,78 +345,185 @@
 
 
             ordersList.innerHTML =
-                customerOrders.map(
+                orders.map(
                     function (order) {
+
+                        const date =
+                            new Date(
+                                order.date
+                            );
+
+
+                        const formattedDate =
+                            date.toLocaleDateString(
+                                "en-PH",
+                                {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric"
+                                }
+                            );
+
 
                         return `
 
-                            <div class="order-item">
+                            <div
+                                class="order-card"
+                                style="
+                                    border: 1px solid #e5e5e5;
+                                    border-radius: 10px;
+                                    padding: 20px;
+                                    margin-bottom: 15px;
+                                "
+                            >
 
-                                <div class="order-item-top">
+                                <div
+                                    style="
+                                        display:flex;
+                                        justify-content:space-between;
+                                        gap:15px;
+                                        flex-wrap:wrap;
+                                    "
+                                >
 
                                     <div>
 
-                                        <span class="order-number">
-                                            ${order.orderNumber || "Order"}
-                                        </span>
+                                        <div
+                                            style="
+                                                color:#c5a059;
+                                                font-size:11px;
+                                                letter-spacing:1px;
+                                                font-weight:bold;
+                                            "
+                                        >
+                                            ORDER
+                                        </div>
 
-                                        <span class="order-date">
-                                            ${formatOrderDate(order.date)}
-                                        </span>
+                                        <h3
+                                            style="
+                                                margin-top:5px;
+                                            "
+                                        >
+                                            ${order.orderNumber}
+                                        </h3>
 
                                     </div>
 
 
-                                    <span class="order-status">
-                                        ${order.status || "Pending"}
-                                    </span>
-
-                                </div>
-
-
-                                <div class="order-item-content">
-
-                                    <div>
-
-                                        <strong>
-                                            ${order.productName || "Product"}
-                                        </strong>
-
-                                        <span>
-                                            ${order.category || ""}
-                                            •
-                                            Quantity:
-                                            ${order.quantity || 1}
-                                        </span>
-
-                                    </div>
-
-
-                                    <strong class="order-total">
-
-                                        ₱${Number(
-                                            order.total || 0
-                                        ).toLocaleString(
-                                            "en-PH",
-                                            {
-                                                minimumFractionDigits: 2
-                                            }
-                                        )}
-
+                                    <strong>
+                                        ${order.status}
                                     </strong>
 
                                 </div>
 
 
-                                <div class="order-item-footer">
+                                <div
+                                    style="
+                                        margin-top:15px;
+                                        line-height:1.8;
+                                        color:#555;
+                                        font-size:14px;
+                                    "
+                                >
+
+                                    <div>
+                                        <strong>Product:</strong>
+                                        ${order.productName}
+                                    </div>
+
+
+                                    <div>
+                                        <strong>Category:</strong>
+                                        ${order.category}
+                                    </div>
+
+
+                                    <div>
+                                        <strong>Quantity:</strong>
+                                        ${order.quantity}
+                                    </div>
+
+
+                                    ${
+                                        order.color
+                                            ? `
+                                                <div>
+                                                    <strong>Color:</strong>
+                                                    ${order.color}
+                                                </div>
+                                            `
+                                            : ""
+                                    }
+
+
+                                    ${
+                                        order.size
+                                            ? `
+                                                <div>
+                                                    <strong>Size:</strong>
+                                                    ${order.size}
+                                                </div>
+                                            `
+                                            : ""
+                                    }
+
+
+                                    ${
+                                        order.scent
+                                            ? `
+                                                <div>
+                                                    <strong>Scent:</strong>
+                                                    ${order.scent}
+                                                </div>
+                                            `
+                                            : ""
+                                    }
+
+
+                                    <div>
+                                        <strong>Payment:</strong>
+                                        ${order.paymentMethod}
+                                    </div>
+
+
+                                    <div>
+                                        <strong>Date:</strong>
+                                        ${formattedDate}
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    style="
+                                        border-top:1px solid #eeeeee;
+                                        margin-top:15px;
+                                        padding-top:15px;
+                                        display:flex;
+                                        justify-content:space-between;
+                                        align-items:center;
+                                    "
+                                >
 
                                     <span>
-                                        ${order.paymentMethod || "—"}
+                                        Total
                                     </span>
 
-                                    <span>
-                                        ${order.shippingAddress || "—"}
-                                    </span>
+                                    <strong
+                                        style="
+                                            font-size:18px;
+                                        "
+                                    >
+                                        ₱${Number(
+                                            order.total
+                                        ).toLocaleString(
+                                            "en-PH",
+                                            {
+                                                minimumFractionDigits: 2,
+                                                maximumFractionDigits: 2
+                                            }
+                                        )}
+                                    </strong>
 
                                 </div>
 
@@ -436,32 +537,7 @@
         }
 
 
-        function formatOrderDate(
-            date
-        ) {
-
-            if (!date) {
-                return "No date";
-            }
-
-
-            const orderDate =
-                new Date(date);
-
-
-            return orderDate.toLocaleDateString(
-                "en-PH",
-                {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric"
-                }
-            );
-
-        }
-
-
-        function setupSidebar() {
+        function setupMobileMenu() {
 
             const menuButton =
                 document.getElementById(
@@ -481,66 +557,58 @@
                 );
 
 
-            menuButton.addEventListener(
-                "click",
-                function () {
+            if (menuButton) {
 
-                    sidebar.classList.add(
-                        "open"
-                    );
+                menuButton.addEventListener(
+                    "click",
+                    function () {
 
-                    overlay.classList.add(
-                        "active"
-                    );
+                        sidebar.classList.toggle(
+                            "open"
+                        );
 
-                }
-            );
+                        overlay.classList.toggle(
+                            "active"
+                        );
 
+                    }
+                );
 
-            overlay.addEventListener(
-                "click",
-                closeSidebar
-            );
+            }
 
 
-            document.getElementById(
-                "customerLogoutButton"
-            ).addEventListener(
-                "click",
-                logout
-            );
+            if (overlay) {
 
-        }
+                overlay.addEventListener(
+                    "click",
+                    function () {
 
+                        sidebar.classList.remove(
+                            "open"
+                        );
 
-        function closeSidebar() {
+                        overlay.classList.remove(
+                            "active"
+                        );
 
-            document.getElementById(
-                "customerSidebar"
-            ).classList.remove(
-                "open"
-            );
+                    }
+                );
 
-
-            document.getElementById(
-                "customerSidebarOverlay"
-            ).classList.remove(
-                "active"
-            );
+            }
 
         }
 
 
         function logout() {
 
-            if (
-                !confirm(
+            const confirmLogout =
+                confirm(
                     "Are you sure you want to logout?"
-                )
-            ) {
+                );
 
+
+            if (!confirmLogout) {
                 return;
-
             }
 
 
@@ -560,7 +628,6 @@
         }
 
     </script>
-
 
 </body>
 
