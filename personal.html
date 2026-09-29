@@ -65,13 +65,11 @@
                 LOVE LUXE
             </div>
 
-
             <div class="customer-brand-subtitle">
                 BY EA • EST. 2024
             </div>
 
         </div>
-
 
 
         <div class="customer-sidebar-welcome">
@@ -80,12 +78,11 @@
                 Welcome
             </span>
 
-            <strong id="customerName">
+            <strong id="sidebarCustomerName">
                 Customer
             </strong>
 
         </div>
-
 
 
         <nav class="customer-nav">
@@ -137,12 +134,11 @@
         </nav>
 
 
-
         <div class="customer-sidebar-bottom">
 
             <button
                 type="button"
-                id="customerLogoutButton"
+                id="logoutButton"
                 class="customer-logout-button"
             >
                 ↪ &nbsp; Logout
@@ -198,8 +194,6 @@
         ></div>
 
 
-
-        <!-- PERSONAL INFORMATION -->
 
         <section class="account-section">
 
@@ -315,8 +309,6 @@
 
 
 
-        <!-- ACCOUNT SUMMARY -->
-
         <section class="account-summary-section">
 
             <div class="summary-card">
@@ -372,7 +364,6 @@
 
         </section>
 
-
     </main>
 
 
@@ -383,28 +374,17 @@
             "DOMContentLoaded",
             function () {
 
-                let currentUser = null;
-
-
-                try {
-
-                    currentUser =
-                        JSON.parse(
-                            localStorage.getItem(
-                                "loveLuxeCurrentUser"
-                            )
-                        );
-
-                } catch (error) {
-
-                    currentUser = null;
-
-                }
+                const user =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "loveLuxeCurrentUser"
+                        )
+                    );
 
 
                 if (
-                    !currentUser ||
-                    currentUser.role !== "customer"
+                    !user ||
+                    user.role !== "customer"
                 ) {
 
                     window.location.href =
@@ -415,35 +395,64 @@
                 }
 
 
-                document.getElementById(
-                    "customerName"
-                ).textContent =
-                    currentUser.fullName ||
-                    "Customer";
+                const fullName =
+                    document.getElementById(
+                        "accountFullName"
+                    );
 
 
-                document.getElementById(
-                    "accountFullName"
-                ).value =
-                    currentUser.fullName || "";
+                const username =
+                    document.getElementById(
+                        "accountUsername"
+                    );
 
 
-                document.getElementById(
-                    "accountUsername"
-                ).value =
-                    currentUser.username || "";
+                const phone =
+                    document.getElementById(
+                        "accountPhone"
+                    );
 
 
-                document.getElementById(
-                    "accountPhone"
-                ).value =
-                    currentUser.phone || "";
+                const sidebarName =
+                    document.getElementById(
+                        "sidebarCustomerName"
+                    );
 
 
-                document.getElementById(
-                    "summaryUsername"
-                ).textContent =
-                    currentUser.username || "—";
+                const summaryUsername =
+                    document.getElementById(
+                        "summaryUsername"
+                    );
+
+
+                if (fullName) {
+                    fullName.value =
+                        user.fullName || "";
+                }
+
+
+                if (username) {
+                    username.value =
+                        user.username || "";
+                }
+
+
+                if (phone) {
+                    phone.value =
+                        user.phone || "";
+                }
+
+
+                if (sidebarName) {
+                    sidebarName.textContent =
+                        user.fullName || "Customer";
+                }
+
+
+                if (summaryUsername) {
+                    summaryUsername.textContent =
+                        user.username || "—";
+                }
 
 
                 loadOrderCount();
@@ -453,19 +462,82 @@
                     "saveAccountButton"
                 ).addEventListener(
                     "click",
-                    savePersonalInformation
+                    saveAccount
                 );
 
 
-                setupSidebar();
+                document.getElementById(
+                    "logoutButton"
+                ).addEventListener(
+                    "click",
+                    logout
+                );
+
+
+                const menuButton =
+                    document.getElementById(
+                        "customerMenuButton"
+                    );
+
+
+                const sidebar =
+                    document.getElementById(
+                        "customerSidebar"
+                    );
+
+
+                const overlay =
+                    document.getElementById(
+                        "customerSidebarOverlay"
+                    );
+
+
+                if (menuButton) {
+
+                    menuButton.addEventListener(
+                        "click",
+                        function () {
+
+                            sidebar.classList.toggle(
+                                "open"
+                            );
+
+                            overlay.classList.toggle(
+                                "active"
+                            );
+
+                        }
+                    );
+
+                }
+
+
+                if (overlay) {
+
+                    overlay.addEventListener(
+                        "click",
+                        function () {
+
+                            sidebar.classList.remove(
+                                "open"
+                            );
+
+                            overlay.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+                }
 
             }
         );
 
 
-        function savePersonalInformation() {
+        function saveAccount() {
 
-            const currentUser =
+            const user =
                 JSON.parse(
                     localStorage.getItem(
                         "loveLuxeCurrentUser"
@@ -473,42 +545,7 @@
                 );
 
 
-            if (!currentUser) {
-                return;
-            }
-
-
-            const fullName =
-                document.getElementById(
-                    "accountFullName"
-                ).value.trim();
-
-
-            const username =
-                document.getElementById(
-                    "accountUsername"
-                ).value.trim();
-
-
-            const phone =
-                document.getElementById(
-                    "accountPhone"
-                ).value.trim();
-
-
-            if (!fullName || !username) {
-
-                showMessage(
-                    "Please complete your name and username.",
-                    true
-                );
-
-                return;
-
-            }
-
-
-            const customers =
+            let customers =
                 JSON.parse(
                     localStorage.getItem(
                         "loveLuxeCustomers"
@@ -516,98 +553,100 @@
                 ) || [];
 
 
+            const newFullName =
+                document.getElementById(
+                    "accountFullName"
+                ).value.trim();
+
+
+            const newUsername =
+                document.getElementById(
+                    "accountUsername"
+                ).value.trim();
+
+
+            const newPhone =
+                document.getElementById(
+                    "accountPhone"
+                ).value.trim();
+
+
+            if (!newFullName || !newUsername) {
+
+                showMessage(
+                    "Please enter your name and username.",
+                    "red"
+                );
+
+                return;
+
+            }
+
+
+            const oldUsername =
+                user.username;
+
+
+            user.fullName =
+                newFullName;
+
+            user.username =
+                newUsername;
+
+            user.phone =
+                newPhone;
+
+
             const customerIndex =
                 customers.findIndex(
                     function (customer) {
 
-                        return (
-                            customer.username ===
-                            currentUser.username
-                        );
+                        return customer.username ===
+                            oldUsername;
 
                     }
                 );
 
 
-            if (customerIndex === -1) {
+            if (customerIndex !== -1) {
 
-                showMessage(
-                    "Customer account could not be found.",
-                    true
-                );
-
-                return;
+                customers[customerIndex] =
+                    user;
 
             }
-
-
-            const duplicate =
-                customers.some(
-                    function (customer, index) {
-
-                        return (
-                            index !== customerIndex &&
-                            customer.username.toLowerCase() ===
-                            username.toLowerCase()
-                        );
-
-                    }
-                );
-
-
-            if (duplicate) {
-
-                showMessage(
-                    "That username is already being used.",
-                    true
-                );
-
-                return;
-
-            }
-
-
-            customers[customerIndex].fullName =
-                fullName;
-
-
-            customers[customerIndex].username =
-                username;
-
-
-            customers[customerIndex].phone =
-                phone;
 
 
             localStorage.setItem(
                 "loveLuxeCustomers",
-                JSON.stringify(customers)
+                JSON.stringify(
+                    customers
+                )
             );
 
 
             localStorage.setItem(
                 "loveLuxeCurrentUser",
                 JSON.stringify(
-                    customers[customerIndex]
+                    user
                 )
             );
 
 
             document.getElementById(
-                "customerName"
+                "sidebarCustomerName"
             ).textContent =
-                fullName;
+                newFullName;
 
 
             document.getElementById(
                 "summaryUsername"
             ).textContent =
-                username;
+                newUsername;
 
 
             showMessage(
                 "Personal information saved successfully.",
-                false
+                "green"
             );
 
         }
@@ -615,7 +654,7 @@
 
         function loadOrderCount() {
 
-            const currentUser =
+            const user =
                 JSON.parse(
                     localStorage.getItem(
                         "loveLuxeCurrentUser"
@@ -631,130 +670,69 @@
                 ) || [];
 
 
-            const customerOrders =
+            const count =
                 orders.filter(
                     function (order) {
 
-                        return (
-                            order.customerUsername ===
-                            currentUser.username
-                        );
+                        return order.customerUsername ===
+                            user.username;
 
                     }
+                ).length;
+
+
+            const summary =
+                document.getElementById(
+                    "summaryOrders"
                 );
 
 
-            document.getElementById(
-                "summaryOrders"
-            ).textContent =
-                customerOrders.length;
+            if (summary) {
+
+                summary.textContent =
+                    count;
+
+            }
 
         }
 
 
         function showMessage(
             message,
-            isError
+            color
         ) {
 
-            const element =
+            const box =
                 document.getElementById(
                     "accountMessage"
                 );
 
 
-            element.textContent =
+            if (!box) return;
+
+
+            box.textContent =
                 message;
 
 
-            element.className =
-                isError
-                    ? "account-message error"
-                    : "account-message success";
-
-        }
-
-
-        function setupSidebar() {
-
-            const menuButton =
-                document.getElementById(
-                    "customerMenuButton"
-                );
-
-
-            const sidebar =
-                document.getElementById(
-                    "customerSidebar"
-                );
-
-
-            const overlay =
-                document.getElementById(
-                    "customerSidebarOverlay"
-                );
-
-
-            menuButton.addEventListener(
-                "click",
-                function () {
-
-                    sidebar.classList.add(
-                        "open"
-                    );
-
-                    overlay.classList.add(
-                        "active"
-                    );
-
-                }
-            );
-
-
-            overlay.addEventListener(
-                "click",
-                closeSidebar
-            );
-
-
-            document.getElementById(
-                "customerLogoutButton"
-            ).addEventListener(
-                "click",
-                logout
-            );
-
-        }
-
-
-        function closeSidebar() {
-
-            document.getElementById(
-                "customerSidebar"
-            ).classList.remove(
-                "open"
-            );
-
-
-            document.getElementById(
-                "customerSidebarOverlay"
-            ).classList.remove(
-                "active"
-            );
+            box.style.color =
+                color === "green"
+                    ? "#16834a"
+                    : "#c0392b";
 
         }
 
 
         function logout() {
 
-            if (
-                !confirm(
+            const confirmLogout =
+                confirm(
                     "Are you sure you want to logout?"
-                )
-            ) {
+                );
 
+
+            if (!confirmLogout) {
                 return;
-
             }
 
 
@@ -774,7 +752,6 @@
         }
 
     </script>
-
 
 </body>
 
