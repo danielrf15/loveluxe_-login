@@ -1,191 +1,331 @@
 /* ==========================================
-   LOVE LUXE CUSTOMER CATALOG
+   LOVE LUXE PRODUCT CATALOG
 ========================================== */
 
 
 /* ==========================================
-   CUSTOMER ACCESS CHECK
+   CUSTOMER ACCESS
 ========================================== */
 
-const currentUserData =
-    localStorage.getItem(
-        "loveLuxeCurrentUser"
+const currentUser =
+    JSON.parse(
+        localStorage.getItem(
+            "loveLuxeCurrentUser"
+        )
     );
-
-
-if (!currentUserData) {
-
-    window.location.href =
-        "index.html";
-
-}
-
-
-let catalogUser = null;
-
-
-try {
-
-    catalogUser =
-        JSON.parse(currentUserData);
-
-}
-
-catch (error) {
-
-    localStorage.removeItem(
-        "loveLuxeCurrentUser"
-    );
-
-    window.location.href =
-        "index.html";
-
-}
 
 
 if (
-    catalogUser &&
-    catalogUser.role !== "customer"
+    !currentUser ||
+    currentUser.role !== "customer"
 ) {
 
     window.location.href =
-        "admin.html";
+        "index.html";
 
 }
 
 
 /* ==========================================
-   LOVE LUXE PRODUCTS
+   PRODUCTS
 ========================================== */
 
 const products = [
 
+    /* ==========================================
+       CLOTHING
+    ========================================== */
+
     {
+        id: 1,
         name: "Sophia Skirt",
         category: "Clothing",
         price: 790,
-        description: "Stylish Sophia skirt.",
-        image: "images/sophia-skirt.jpg"
+        image: "images/sophia-skirt.jpg",
+        description:
+            "A simple and stylish skirt that is easy to pair with different outfits.",
+
+        colors: [
+            "Black and White Polka",
+            "Light Blue",
+            "Gray",
+            "Black"
+        ],
+
+        sizes: [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "2XL",
+            "3XL"
+        ]
     },
 
+
     {
+        id: 2,
         name: "Nov-Mardi T-Shirt",
         category: "Clothing",
         price: 450,
-        description: "Casual Nov-Mardi T-Shirt.",
-        image: "images/nov-mardi-tshirt.jpg"
+        image: "images/nov-mardi-tshirt.jpg",
+        description:
+            "A comfortable everyday t-shirt with a simple and casual style.",
+
+        colors: [
+            "White",
+            "Pink",
+            "Black"
+        ],
+
+        sizes: [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "2XL",
+            "3XL"
+        ]
     },
 
+
     {
+        id: 3,
         name: "Basic Chic01 Terno",
         category: "Clothing",
         price: 950,
-        description: "Simple and stylish Basic Chic01 Terno.",
-        image: "images/basic-chic01-terno.jpg"
+        image: "images/basic-chic01-terno.jpg",
+        description:
+            "A stylish terno set designed for a simple and comfortable look.",
+
+        sizes: [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "2XL",
+            "3XL"
+        ]
+
+        /* Fixed color, so no color option */
     },
 
+
     {
+        id: 4,
         name: "Sami T-Shirt",
         category: "Clothing",
         price: 790,
-        description: "Casual Sami T-Shirt.",
-        image: "images/sami-tshirt.jpg"
+        image: "images/sami-tshirt.jpg",
+        description:
+            "A casual t-shirt that can be worn for everyday activities.",
+
+        colors: [
+            "Brown",
+            "Tan",
+            "Pink",
+            "Black",
+            "Light Blue"
+        ]
+
+        /* No size */
     },
 
+
+    /* ==========================================
+       BODY CARE
+    ========================================== */
+
     {
+        id: 5,
         name: "Alada Soap",
         category: "Body Care",
         price: 350,
-        description: "Alada Soap.",
-        image: "images/alada-soap.jpg"
+        image: "images/alada-soap.jpg",
+        description:
+            "A body care soap for a simple everyday skincare routine."
     },
 
+
     {
+        id: 6,
         name: "Dewy Gluta Soap",
         category: "Body Care",
         price: 199,
-        description: "Dewy Gluta Soap.",
-        image: "images/dewy-gluta-soap.jpg"
+        image: "images/dewy-gluta-soap.jpg",
+        description:
+            "A cleansing soap made for everyday personal care."
     },
 
+
     {
+        id: 7,
         name: "Serene Skin Soap",
         category: "Body Care",
         price: 299,
-        description: "Serene Skin Soap.",
-        image: "images/serene-skin-soap.jpg"
+        image: "images/serene-skin-soap.jpg",
+        description:
+            "A gentle body care product for everyday use."
     },
 
+
     {
+        id: 8,
         name: "Vitamin E Whitening Cream",
         category: "Body Care",
         price: 180,
-        description: "Vitamin E Whitening Cream.",
-        image: "images/vitamine-e-whitening-cream.jpg"
+        image: "images/vitamin-e-whitening-cream.jpg",
+        description:
+            "A moisturizing cream for an everyday skincare routine."
     },
 
+
+    /* ==========================================
+       BAGS
+    ========================================== */
+
     {
+        id: 9,
         name: "Mini Enzo",
         category: "Bags",
         price: 3590,
-        description: "Mini Enzo bag.",
-        image: "images/mini-enzo.jpg"
+        image: "images/mini-enzo.jpg",
+        description:
+            "A compact and stylish bag that works well for everyday use.",
+
+        colors: [
+            "Black",
+            "Green",
+            "Red",
+            "Blue"
+        ]
     },
 
+
     {
+        id: 10,
         name: "Mini Bucket Bag",
         category: "Bags",
         price: 2090,
-        description: "Mini Bucket Bag.",
-        image: "images/mini-bucket-bag.jpg"
+        image: "images/mini-bucket-bag.jpg",
+        description:
+            "A small bucket-style bag with a simple and fashionable design.",
+
+        colors: [
+            "Dark Blue",
+            "Grayish Blue",
+            "Blue",
+            "Blue Stripes"
+        ]
     },
 
+
     {
+        id: 11,
         name: "Anytime Medium",
         category: "Bags",
         price: 2890,
-        description: "Anytime Medium bag.",
-        image: "images/anytime-medium.jpg"
+        image: "images/anytime-medium.jpg",
+        description:
+            "A medium-sized everyday bag with enough space for your essentials.",
+
+        colors: [
+            "Black",
+            "Tantaupe",
+            "Tantaupe Two",
+            "White",
+            "Clay Two"
+        ]
     },
 
+
     {
+        id: 12,
         name: "Emilio Barrel",
         category: "Bags",
         price: 3590,
-        description: "Emilio Barrel bag.",
-        image: "images/emilio-barrel.jpg"
+        image: "images/emilio-barrel.jpg",
+        description:
+            "A barrel-style bag with a clean and modern appearance.",
+
+        colors: [
+            "Dark Brown",
+            "Red",
+            "Green",
+            "Black"
+        ]
     },
 
+
+    /* ==========================================
+       PERFUME
+    ========================================== */
+
     {
+        id: 13,
         name: "Victoria's Secret Perfume",
         category: "Perfume",
         price: 700,
-        description: "Victoria's Secret perfume.",
-        image: "images/victorias-secret-perfume.jpg"
+        image: "images/victorias-secret-perfume.jpg",
+        description:
+            "A fragrance option for everyday wear.",
+
+        scents: [
+            "Bare Vanilla",
+            "Aqua Kiss",
+            "Vanilla Lace",
+            "Midnight Bloom",
+            "Love Spell",
+            "Pure Seduction",
+            "Velvet Petals"
+        ]
     },
 
+
     {
+        id: 14,
         name: "Bath & Body Works Perfume",
         category: "Perfume",
         price: 600,
-        description: "Bath & Body Works perfume.",
-        image: "images/bath-body-works-perfume.jpg"
+        image: "images/bath-body-works-perfume.jpg",
+        description:
+            "A fragrance designed for a fresh everyday scent.",
+
+        scents: [
+            "Pure Wonder",
+            "Hello Beautiful",
+            "A Thousand Wishes",
+            "You're the One",
+            "Vanilla Ease"
+        ]
     },
 
+
     {
+        id: 15,
         name: "Smart Collection Perfume",
         category: "Perfume",
         price: 350,
-        description: "Smart Collection perfume.",
-        image: "images/smart-collection-perfume.jpg"
+        image: "images/smart-collection-perfume.jpg",
+        description:
+            "An affordable fragrance option for everyday use.",
+
+        scents: [
+            "Chanel N'5"
+        ]
     },
 
+
     {
+        id: 16,
         name: "Lattafa YARA",
         category: "Perfume",
         price: 390,
-        description: "Lattafa YARA perfume.",
-        image: "images/lattafa-yara.jpg"
+        image: "images/lattafa-yara.jpg",
+        description:
+            "A popular fragrance choice with a soft and pleasant scent."
+
+        /* No other scent */
     }
 
 ];
@@ -197,12 +337,20 @@ const products = [
 
 let selectedCategory = "All";
 
-let searchText = "";
-
 let selectedProduct = null;
 
 let selectedQuantity = 1;
 
+let selectedColor = "";
+
+let selectedSize = "";
+
+let selectedScent = "";
+
+
+/* ==========================================
+   ELEMENTS
+========================================== */
 
 const productGrid =
     document.getElementById(
@@ -235,17 +383,54 @@ const filterButtons =
 
 
 /* ==========================================
+   CUSTOMER NAME
+========================================== */
+
+const customerName =
+    document.getElementById(
+        "customerName"
+    );
+
+
+if (customerName) {
+
+    customerName.textContent =
+        currentUser.fullName ||
+        "Customer";
+
+}
+
+
+/* ==========================================
+   FORMAT PRICE
+========================================== */
+
+function formatPrice(price) {
+
+    return "₱" +
+        price.toLocaleString(
+            "en-PH",
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+
+}
+
+
+/* ==========================================
    DISPLAY PRODUCTS
 ========================================== */
 
 function displayProducts() {
 
-    if (!productGrid) {
-        return;
-    }
-
-
-    productGrid.innerHTML = "";
+    const searchText =
+        searchInput
+            ? searchInput.value
+                .toLowerCase()
+                .trim()
+            : "";
 
 
     const filteredProducts =
@@ -254,21 +439,18 @@ function displayProducts() {
 
                 const categoryMatch =
                     selectedCategory === "All" ||
-                    product.category === selectedCategory;
+                    product.category ===
+                    selectedCategory;
 
 
                 const searchMatch =
                     product.name
                         .toLowerCase()
-                        .includes(
-                            searchText.toLowerCase()
-                        )
-                    ||
+                        .includes(searchText) ||
+
                     product.category
                         .toLowerCase()
-                        .includes(
-                            searchText.toLowerCase()
-                        );
+                        .includes(searchText);
 
 
                 return (
@@ -280,144 +462,147 @@ function displayProducts() {
         );
 
 
+    if (productCount) {
+
+        productCount.textContent =
+            filteredProducts.length +
+            (
+                filteredProducts.length === 1
+                    ? " product"
+                    : " products"
+            );
+
+    }
+
+
     if (
         filteredProducts.length === 0
     ) {
 
+        productGrid.innerHTML = "";
+
         if (noProducts) {
+
             noProducts.style.display =
                 "block";
+
         }
-
-
-        if (productCount) {
-            productCount.textContent =
-                "No products found";
-        }
-
 
         return;
+
     }
 
 
     if (noProducts) {
+
         noProducts.style.display =
             "none";
+
     }
 
 
-    if (productCount) {
-        productCount.textContent =
-            "Showing " +
-            filteredProducts.length +
-            " product(s)";
-    }
+    productGrid.innerHTML =
+        filteredProducts.map(
+            function(product) {
 
+                return `
 
-    filteredProducts.forEach(
-        function(product) {
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className =
-                "product-card";
-
-
-            let imageHTML = "";
-
-
-            if (product.image) {
-
-                imageHTML =
-                    `
-                    <img
-                        src="${product.image}"
-                        alt="${product.name}"
+                    <article
+                        class="product-card"
                     >
-                    `;
 
-            }
-
-            else {
-
-                imageHTML =
-                    `
-                    <div class="image-placeholder">
-                        LOVE LUXE
-                    </div>
-                    `;
-
-            }
-
-
-            card.innerHTML =
-                `
-                <div class="product-image">
-                    ${imageHTML}
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        ${product.category}
-                    </div>
-
-                    <h3 class="product-name">
-                        ${product.name}
-                    </h3>
-
-                    <p class="product-description">
-                        ${product.description}
-                    </p>
-
-                    <div class="product-bottom">
-
-                        <span class="product-price">
-                            ₱${product.price.toLocaleString(
-                                "en-PH",
-                                {
-                                    minimumFractionDigits: 2
-                                }
-                            )}
-                        </span>
-
-                        <button
-                            class="view-button"
-                            type="button"
+                        <div
+                            class="product-image"
                         >
-                            VIEW
-                        </button>
 
-                    </div>
+                            <img
+                                src="${product.image}"
+                                alt="${product.name}"
+                                onerror="this.src='https://via.placeholder.com/500x500?text=Love+Luxe'"
+                            >
 
-                </div>
+                        </div>
+
+
+                        <div
+                            class="product-info"
+                        >
+
+                            <div
+                                class="product-category"
+                            >
+                                ${product.category}
+                            </div>
+
+
+                            <div
+                                class="product-name"
+                            >
+                                ${product.name}
+                            </div>
+
+
+                            <div
+                                class="product-description"
+                            >
+                                ${product.description}
+                            </div>
+
+
+                            <div
+                                class="product-bottom"
+                            >
+
+                                <div
+                                    class="product-price"
+                                >
+                                    ${formatPrice(product.price)}
+                                </div>
+
+
+                                <button
+                                    type="button"
+                                    class="view-button"
+                                    data-product-id="${product.id}"
+                                >
+                                    VIEW
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
                 `;
 
-
-            const viewButton =
-                card.querySelector(
-                    ".view-button"
-                );
+            }
+        ).join("");
 
 
-            viewButton.addEventListener(
+    const viewButtons =
+        document.querySelectorAll(
+            ".view-button"
+        );
+
+
+    viewButtons.forEach(
+        function(button) {
+
+            button.addEventListener(
                 "click",
                 function() {
 
+                    const productId =
+                        Number(
+                            button.dataset.productId
+                        );
+
                     viewProduct(
-                        product.name
+                        productId
                     );
 
                 }
-            );
-
-
-            productGrid.appendChild(
-                card
             );
 
         }
@@ -438,9 +623,9 @@ filterButtons.forEach(
             function() {
 
                 filterButtons.forEach(
-                    function(btn) {
+                    function(item) {
 
-                        btn.classList.remove(
+                        item.classList.remove(
                             "active"
                         );
 
@@ -474,15 +659,7 @@ if (searchInput) {
 
     searchInput.addEventListener(
         "input",
-        function() {
-
-            searchText =
-                searchInput.value.trim();
-
-
-            displayProducts();
-
-        }
+        displayProducts
     );
 
 }
@@ -496,11 +673,61 @@ function createCheckoutModal() {
 
     if (
         document.getElementById(
-            "loveLuxeCheckoutModal"
+            "checkoutModal"
         )
     ) {
+
         return;
+
     }
+
+
+    const style =
+        document.createElement(
+            "style"
+        );
+
+
+    style.textContent = `
+
+        .option-group {
+            margin-top: 18px;
+        }
+
+        .option-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .option-group select {
+            width: 100%;
+            height: 45px;
+            border: 1px solid #d8d8d8;
+            border-radius: 7px;
+            padding: 0 12px;
+            background: white;
+            font-size: 14px;
+        }
+
+        .option-group select:focus {
+            outline: none;
+            border-color: #c5a059;
+        }
+
+        .selected-option-note {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #777777;
+        }
+
+    `;
+
+
+    document.head.appendChild(
+        style
+    );
 
 
     const modal =
@@ -510,239 +737,236 @@ function createCheckoutModal() {
 
 
     modal.id =
-        "loveLuxeCheckoutModal";
+        "checkoutModal";
 
 
-    modal.innerHTML =
-        `
-        <div
-            id="checkoutOverlay"
-            style="
-                position:fixed;
-                inset:0;
-                background:rgba(0,0,0,0.55);
-                z-index:9998;
-            "
-        ></div>
+    modal.className =
+        "modal-overlay";
+
+
+    modal.innerHTML = `
 
         <div
-            style="
-                position:fixed;
-                left:50%;
-                top:50%;
-                transform:translate(-50%,-50%);
-                width:min(500px,92%);
-                max-height:90vh;
-                overflow-y:auto;
-                background:white;
-                border-radius:16px;
-                padding:25px;
-                z-index:9999;
-                box-shadow:0 20px 60px rgba(0,0,0,0.25);
-                font-family:Arial,sans-serif;
-            "
+            class="checkout-modal"
         >
 
             <button
-                id="checkoutClose"
                 type="button"
-                style="
-                    float:right;
-                    border:0;
-                    background:none;
-                    font-size:25px;
-                    cursor:pointer;
-                "
+                class="close-modal"
+                id="closeCheckout"
             >
                 ×
             </button>
 
-            <h2
-                style="
-                    margin-top:0;
-                    margin-bottom:20px;
-                "
-            >
-                Love Luxe Checkout
-            </h2>
 
             <div
-                id="checkoutProduct"
-                style="
-                    margin-bottom:20px;
-                "
+                class="checkout-header"
+            >
+
+                <span>
+                    LOVE LUXE ORDER
+                </span>
+
+                <h2>
+                    Product Details
+                </h2>
+
+            </div>
+
+
+            <div
+                class="checkout-product"
+            >
+
+                <div
+                    class="checkout-image-wrapper"
+                >
+
+                    <img
+                        id="checkoutImage"
+                        src=""
+                        alt=""
+                    >
+
+                </div>
+
+
+                <div
+                    class="checkout-product-info"
+                >
+
+                    <div
+                        class="checkout-category"
+                        id="checkoutCategory"
+                    ></div>
+
+
+                    <h3
+                        id="checkoutName"
+                    ></h3>
+
+
+                    <p
+                        class="checkout-description"
+                        id="checkoutDescription"
+                    ></p>
+
+
+                    <div
+                        class="checkout-price"
+                        id="checkoutPrice"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="productOptions"
             ></div>
 
-            <label
-                style="
-                    display:block;
-                    margin-bottom:7px;
-                    font-weight:bold;
-                "
-            >
-                Quantity
-            </label>
 
             <div
-                style="
-                    display:flex;
-                    align-items:center;
-                    gap:10px;
-                    margin-bottom:18px;
-                "
+                class="checkout-field"
             >
 
-                <button
-                    id="quantityMinus"
-                    type="button"
-                    style="
-                        width:35px;
-                        height:35px;
-                        cursor:pointer;
-                    "
-                >
-                    -
-                </button>
+                <label>
+                    Quantity
+                </label>
 
-                <span
-                    id="checkoutQuantity"
-                    style="
-                        min-width:30px;
-                        text-align:center;
-                        font-weight:bold;
-                    "
-                >
-                    1
-                </span>
 
-                <button
-                    id="quantityPlus"
-                    type="button"
-                    style="
-                        width:35px;
-                        height:35px;
-                        cursor:pointer;
-                    "
+                <div
+                    class="quantity-control"
                 >
-                    +
-                </button>
+
+                    <button
+                        type="button"
+                        id="decreaseQuantity"
+                    >
+                        −
+                    </button>
+
+
+                    <span
+                        id="checkoutQuantity"
+                    >
+                        1
+                    </span>
+
+
+                    <button
+                        type="button"
+                        id="increaseQuantity"
+                    >
+                        +
+                    </button>
+
+                </div>
 
             </div>
 
-            <div
-                style="
-                    margin-bottom:18px;
-                    padding:15px;
-                    background:#f5f5f5;
-                    border-radius:10px;
-                "
-            >
-                <strong>
-                    Total:
-                </strong>
 
-                <span
+            <div
+                class="checkout-section"
+            >
+
+                <div
+                    class="checkout-section-title"
+                >
+                    Shipping Address
+                </div>
+
+
+                <div
+                    class="checkout-address"
+                    id="checkoutAddress"
+                >
+                    No shipping address saved.
+                </div>
+
+
+                <a
+                    href="customer.html#settings"
+                    class="edit-address-link"
+                >
+                    Manage shipping address
+                </a>
+
+            </div>
+
+
+            <div
+                class="checkout-field"
+            >
+
+                <label
+                    for="paymentMethod"
+                >
+                    Payment Method
+                </label>
+
+
+                <select
+                    id="paymentMethod"
+                >
+
+                    <option>
+                        Cash on Delivery
+                    </option>
+
+                    <option>
+                        GCash
+                    </option>
+
+                    <option>
+                        Bank Transfer
+                    </option>
+
+                    <option>
+                        Card
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                class="checkout-total-row"
+            >
+
+                <span>
+                    Total
+                </span>
+
+
+                <strong
                     id="checkoutTotal"
-                    style="
-                        float:right;
-                        font-weight:bold;
-                    "
                 >
                     ₱0.00
-                </span>
+                </strong>
+
             </div>
 
-            <h3>
-                Shipping Address
-            </h3>
-
-            <p
-                id="checkoutAddress"
-                style="
-                    background:#f8f8f8;
-                    padding:12px;
-                    border-radius:8px;
-                    line-height:1.5;
-                "
-            >
-                No shipping address saved.
-            </p>
-
-            <p
-                style="
-                    font-size:13px;
-                    color:#777;
-                "
-            >
-                You can update your shipping address in
-                My Account → Settings.
-            </p>
-
-            <label
-                for="checkoutPayment"
-                style="
-                    display:block;
-                    margin-bottom:7px;
-                    font-weight:bold;
-                "
-            >
-                Payment Method
-            </label>
-
-            <select
-                id="checkoutPayment"
-                style="
-                    width:100%;
-                    padding:12px;
-                    margin-bottom:20px;
-                    border:1px solid #ddd;
-                    border-radius:8px;
-                "
-            >
-                <option value="Cash on Delivery">
-                    Cash on Delivery
-                </option>
-
-                <option value="GCash">
-                    GCash
-                </option>
-
-                <option value="Bank Transfer">
-                    Bank Transfer
-                </option>
-
-                <option value="Card">
-                    Card
-                </option>
-            </select>
 
             <button
-                id="placeOrderButton"
                 type="button"
-                style="
-                    width:100%;
-                    padding:14px;
-                    border:0;
-                    border-radius:8px;
-                    background:#111;
-                    color:white;
-                    font-weight:bold;
-                    cursor:pointer;
-                "
+                class="place-order-button"
+                id="placeOrderButton"
             >
                 PLACE ORDER
             </button>
 
-            <p
+
+            <div
+                class="checkout-message"
                 id="checkoutMessage"
-                style="
-                    text-align:center;
-                    margin-top:15px;
-                "
-            ></p>
+            ></div>
 
         </div>
-        `;
+
+    `;
 
 
     document.body.appendChild(
@@ -750,60 +974,273 @@ function createCheckoutModal() {
     );
 
 
-    document
-        .getElementById("checkoutClose")
-        .addEventListener(
-            "click",
-            closeCheckout
-        );
+    document.getElementById(
+        "closeCheckout"
+    ).addEventListener(
+        "click",
+        closeCheckout
+    );
 
 
-    document
-        .getElementById("checkoutOverlay")
-        .addEventListener(
-            "click",
-            closeCheckout
-        );
+    modal.addEventListener(
+        "click",
+        function(event) {
 
+            if (
+                event.target === modal
+            ) {
 
-    document
-        .getElementById("quantityMinus")
-        .addEventListener(
-            "click",
-            function() {
-
-                if (selectedQuantity > 1) {
-
-                    selectedQuantity--;
-
-                    updateCheckout();
-
-                }
+                closeCheckout();
 
             }
-        );
+
+        }
+    );
 
 
-    document
-        .getElementById("quantityPlus")
-        .addEventListener(
-            "click",
-            function() {
+    document.getElementById(
+        "decreaseQuantity"
+    ).addEventListener(
+        "click",
+        function() {
+
+            if (
+                selectedQuantity > 1
+            ) {
+
+                selectedQuantity--;
+
+                updateCheckoutQuantity();
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "increaseQuantity"
+    ).addEventListener(
+        "click",
+        function() {
+
+            if (
+                selectedQuantity < 99
+            ) {
 
                 selectedQuantity++;
 
-                updateCheckout();
+                updateCheckoutQuantity();
 
             }
+
+        }
+    );
+
+
+    document.getElementById(
+        "placeOrderButton"
+    ).addEventListener(
+        "click",
+        placeOrder
+    );
+
+}
+
+
+/* ==========================================
+   PRODUCT OPTIONS
+========================================== */
+
+function createProductOptions(
+    product
+) {
+
+    const container =
+        document.getElementById(
+            "productOptions"
         );
 
 
-    document
-        .getElementById("placeOrderButton")
-        .addEventListener(
-            "click",
-            placeOrder
+    if (!container) {
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    /* ======================================
+       COLOR
+    ====================================== */
+
+    if (
+        product.colors &&
+        product.colors.length > 0
+    ) {
+
+        const group =
+            document.createElement(
+                "div"
+            );
+
+
+        group.className =
+            "option-group";
+
+
+        group.innerHTML = `
+
+            <label for="productColor">
+                Color
+            </label>
+
+            <select
+                id="productColor"
+            >
+
+                <option value="">
+                    Select color
+                </option>
+
+                ${product.colors.map(
+                    function(color) {
+
+                        return `
+                            <option value="${color}">
+                                ${color}
+                            </option>
+                        `;
+
+                    }
+                ).join("")}
+
+            </select>
+
+        `;
+
+
+        container.appendChild(
+            group
         );
+
+    }
+
+
+    /* ======================================
+       SIZE
+    ====================================== */
+
+    if (
+        product.sizes &&
+        product.sizes.length > 0
+    ) {
+
+        const group =
+            document.createElement(
+                "div"
+            );
+
+
+        group.className =
+            "option-group";
+
+
+        group.innerHTML = `
+
+            <label for="productSize">
+                Size
+            </label>
+
+            <select
+                id="productSize"
+            >
+
+                <option value="">
+                    Select size
+                </option>
+
+                ${product.sizes.map(
+                    function(size) {
+
+                        return `
+                            <option value="${size}">
+                                ${size}
+                            </option>
+                        `;
+
+                    }
+                ).join("")}
+
+            </select>
+
+        `;
+
+
+        container.appendChild(
+            group
+        );
+
+    }
+
+
+    /* ======================================
+       SCENT
+    ====================================== */
+
+    if (
+        product.scents &&
+        product.scents.length > 0
+    ) {
+
+        const group =
+            document.createElement(
+                "div"
+            );
+
+
+        group.className =
+            "option-group";
+
+
+        group.innerHTML = `
+
+            <label for="productScent">
+                Scent
+            </label>
+
+            <select
+                id="productScent"
+            >
+
+                <option value="">
+                    Select scent
+                </option>
+
+                ${product.scents.map(
+                    function(scent) {
+
+                        return `
+                            <option value="${scent}">
+                                ${scent}
+                            </option>
+                        `;
+
+                    }
+                ).join("")}
+
+            </select>
+
+        `;
+
+
+        container.appendChild(
+            group
+        );
+
+    }
 
 }
 
@@ -812,259 +1249,279 @@ function createCheckoutModal() {
    VIEW PRODUCT
 ========================================== */
 
-function viewProduct(productName) {
+function viewProduct(
+    productId
+) {
 
     selectedProduct =
         products.find(
             function(product) {
 
-                return product.name === productName;
+                return product.id ===
+                    productId;
 
             }
         );
 
 
     if (!selectedProduct) {
+
         return;
+
     }
-
-
-    selectedQuantity = 1;
 
 
     createCheckoutModal();
 
 
-    const modal =
+    selectedQuantity = 1;
+
+    selectedColor = "";
+
+    selectedSize = "";
+
+    selectedScent = "";
+
+
+    const checkoutImage =
         document.getElementById(
-            "loveLuxeCheckoutModal"
+            "checkoutImage"
         );
 
 
-    modal.style.display =
-        "block";
+    const checkoutName =
+        document.getElementById(
+            "checkoutName"
+        );
 
 
-    updateCheckout();
+    const checkoutCategory =
+        document.getElementById(
+            "checkoutCategory"
+        );
+
+
+    const checkoutDescription =
+        document.getElementById(
+            "checkoutDescription"
+        );
+
+
+    const checkoutPrice =
+        document.getElementById(
+            "checkoutPrice"
+        );
+
+
+    const checkoutMessage =
+        document.getElementById(
+            "checkoutMessage"
+        );
+
+
+    checkoutImage.src =
+        selectedProduct.image;
+
+
+    checkoutImage.alt =
+        selectedProduct.name;
+
+
+    checkoutName.textContent =
+        selectedProduct.name;
+
+
+    checkoutCategory.textContent =
+        selectedProduct.category;
+
+
+    checkoutDescription.textContent =
+        selectedProduct.description;
+
+
+    checkoutPrice.textContent =
+        formatPrice(
+            selectedProduct.price
+        );
+
+
+    createProductOptions(
+        selectedProduct
+    );
+
+
+    updateCheckoutQuantity();
+
+
+    displayShippingAddress();
+
+
+    checkoutMessage.textContent =
+        "";
+
+
+    document.getElementById(
+        "checkoutModal"
+    ).classList.add(
+        "show"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
 
 }
 
 
 /* ==========================================
-   UPDATE CHECKOUT
+   QUANTITY
 ========================================== */
 
-function updateCheckout() {
+function updateCheckoutQuantity() {
 
-    if (!selectedProduct) {
-        return;
-    }
-
-
-    const productElement =
-        document.getElementById(
-            "checkoutProduct"
-        );
-
-
-    const quantityElement =
+    const quantity =
         document.getElementById(
             "checkoutQuantity"
         );
 
 
-    const totalElement =
+    const total =
         document.getElementById(
             "checkoutTotal"
         );
 
 
-    const addressElement =
+    if (quantity) {
+
+        quantity.textContent =
+            selectedQuantity;
+
+    }
+
+
+    if (
+        total &&
+        selectedProduct
+    ) {
+
+        total.textContent =
+            formatPrice(
+                selectedProduct.price *
+                selectedQuantity
+            );
+
+    }
+
+}
+
+
+/* ==========================================
+   SHIPPING ADDRESS
+========================================== */
+
+function displayShippingAddress() {
+
+    const checkoutAddress =
         document.getElementById(
             "checkoutAddress"
         );
 
 
-    if (!productElement) {
+    if (!checkoutAddress) {
+
         return;
+
     }
-
-
-    productElement.innerHTML =
-        `
-        <div
-            style="
-                display:flex;
-                gap:15px;
-                align-items:center;
-            "
-        >
-
-            <img
-                src="${selectedProduct.image}"
-                alt="${selectedProduct.name}"
-                style="
-                    width:90px;
-                    height:90px;
-                    object-fit:cover;
-                    border-radius:10px;
-                "
-            >
-
-            <div>
-
-                <div
-                    style="
-                        font-size:13px;
-                        color:#777;
-                    "
-                >
-                    ${selectedProduct.category}
-                </div>
-
-                <h3
-                    style="
-                        margin:5px 0;
-                    "
-                >
-                    ${selectedProduct.name}
-                </h3>
-
-                <div>
-                    ₱${selectedProduct.price.toLocaleString(
-                        "en-PH",
-                        {
-                            minimumFractionDigits:2
-                        }
-                    )}
-                </div>
-
-            </div>
-
-        </div>
-        `;
-
-
-    quantityElement.textContent =
-        selectedQuantity;
-
-
-    const total =
-        selectedProduct.price *
-        selectedQuantity;
-
-
-    totalElement.textContent =
-        "₱" +
-        total.toLocaleString(
-            "en-PH",
-            {
-                minimumFractionDigits:2
-            }
-        );
 
 
     const user =
-        getCatalogCurrentUser();
-
-
-    const address =
-        user?.shippingAddress;
+        JSON.parse(
+            localStorage.getItem(
+                "loveLuxeCurrentUser"
+            )
+        );
 
 
     if (
-        address &&
-        (
-            address.houseNumber ||
-            address.street ||
-            address.barangay ||
-            address.city ||
-            address.province ||
-            address.postalCode
-        )
+        !user ||
+        !user.shippingAddress
     ) {
 
-        addressElement.textContent =
-            formatShippingAddress(
-                address
-            );
+        checkoutAddress.textContent =
+            "No shipping address saved.";
+
+        return;
 
     }
 
-    else {
 
-        addressElement.textContent =
-            "No shipping address saved. Please update your address in My Account → Settings.";
+    const address =
+        user.shippingAddress;
 
-    }
-
-}
-
-
-/* ==========================================
-   GET CURRENT CUSTOMER
-========================================== */
-
-function getCatalogCurrentUser() {
-
-    const savedUser =
-        localStorage.getItem(
-            "loveLuxeCurrentUser"
-        );
-
-
-    if (!savedUser) {
-        return null;
-    }
-
-
-    try {
-
-        return JSON.parse(
-            savedUser
-        );
-
-    }
-
-    catch (error) {
-
-        return null;
-
-    }
-
-}
-
-
-/* ==========================================
-   FORMAT SHIPPING ADDRESS
-========================================== */
-
-function formatShippingAddress(address) {
 
     const parts = [
 
         address.houseNumber,
-
         address.street,
-
         address.barangay,
-
         address.city,
-
         address.province,
-
         address.postalCode
 
-    ];
+    ].filter(
+        function(part) {
+
+            return part &&
+                part.trim() !== "";
+
+        }
+    );
 
 
-    return parts
-        .filter(
-            function(part) {
-                return part && part.trim() !== "";
-            }
-        )
-        .join(", ");
+    if (
+        parts.length === 0
+    ) {
+
+        checkoutAddress.textContent =
+            "No shipping address saved.";
+
+        return;
+
+    }
+
+
+    checkoutAddress.textContent =
+        parts.join(", ");
+
+}
+
+
+/* ==========================================
+   CLOSE CHECKOUT
+========================================== */
+
+function closeCheckout() {
+
+    const modal =
+        document.getElementById(
+            "checkoutModal"
+        );
+
+
+    if (!modal) {
+
+        return;
+
+    }
+
+
+    modal.classList.remove(
+        "show"
+    );
+
+
+    document.body.style.overflow =
+        "";
 
 }
 
@@ -1076,12 +1533,18 @@ function formatShippingAddress(address) {
 function placeOrder() {
 
     if (!selectedProduct) {
+
         return;
+
     }
 
 
     const user =
-        getCatalogCurrentUser();
+        JSON.parse(
+            localStorage.getItem(
+                "loveLuxeCurrentUser"
+            )
+        );
 
 
     if (
@@ -1089,75 +1552,180 @@ function placeOrder() {
         user.role !== "customer"
     ) {
 
-        alert(
-            "Please log in as a customer first."
-        );
-
         window.location.href =
             "index.html";
 
         return;
+
     }
 
+
+    /* ======================================
+       GET OPTIONS
+    ====================================== */
+
+    const colorSelect =
+        document.getElementById(
+            "productColor"
+        );
+
+
+    const sizeSelect =
+        document.getElementById(
+            "productSize"
+        );
+
+
+    const scentSelect =
+        document.getElementById(
+            "productScent"
+        );
+
+
+    selectedColor =
+        colorSelect
+            ? colorSelect.value
+            : "";
+
+
+    selectedSize =
+        sizeSelect
+            ? sizeSelect.value
+            : "";
+
+
+    selectedScent =
+        scentSelect
+            ? scentSelect.value
+            : "";
+
+
+    /* ======================================
+       REQUIRE OPTIONS
+    ====================================== */
+
+    if (
+        selectedProduct.colors &&
+        selectedProduct.colors.length > 0 &&
+        !selectedColor
+    ) {
+
+        showCheckoutMessage(
+            "Please select a color."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        selectedProduct.sizes &&
+        selectedProduct.sizes.length > 0 &&
+        !selectedSize
+    ) {
+
+        showCheckoutMessage(
+            "Please select a size."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        selectedProduct.scents &&
+        selectedProduct.scents.length > 0 &&
+        !selectedScent
+    ) {
+
+        showCheckoutMessage(
+            "Please select a scent."
+        );
+
+        return;
+
+    }
+
+
+    /* ======================================
+       SHIPPING ADDRESS
+    ====================================== */
 
     const address =
         user.shippingAddress;
 
 
+    const addressParts = [
+
+        address?.houseNumber,
+        address?.street,
+        address?.barangay,
+        address?.city,
+        address?.province,
+        address?.postalCode
+
+    ].filter(
+        function(part) {
+
+            return part &&
+                part.trim() !== "";
+
+        }
+    );
+
+
     if (
-        !address ||
-        !(
-            address.houseNumber ||
-            address.street ||
-            address.barangay ||
-            address.city ||
-            address.province ||
-            address.postalCode
-        )
+        addressParts.length === 0
     ) {
 
-        alert(
-            "Please save your shipping address in My Account → Settings before checking out."
+        showCheckoutMessage(
+            "Please add your shipping address first.",
+            "#c0392b"
         );
 
-        window.location.href =
-            "customer.html#shipping";
-
         return;
+
     }
 
 
-    const paymentElement =
-        document.getElementById(
-            "checkoutPayment"
-        );
-
+    /* ======================================
+       PAYMENT
+    ====================================== */
 
     const paymentMethod =
-        paymentElement
-            ? paymentElement.value
-            : "Cash on Delivery";
+        document.getElementById(
+            "paymentMethod"
+        )?.value ||
+        "Cash on Delivery";
 
+
+    /* ======================================
+       TOTAL
+    ====================================== */
 
     const total =
         selectedProduct.price *
         selectedQuantity;
 
 
-    const orders =
-        JSON.parse(
-            localStorage.getItem(
-                "loveLuxeOrders"
-            )
-        ) || [];
-
+    /* ======================================
+       ORDER NUMBER
+    ====================================== */
 
     const orderNumber =
         "LL-" +
-        Date.now();
+        Date.now()
+            .toString()
+            .slice(-8);
 
 
-    const newOrder = {
+    /* ======================================
+       ORDER DATA
+    ====================================== */
+
+    const order = {
 
         orderNumber:
             orderNumber,
@@ -1168,8 +1736,8 @@ function placeOrder() {
         customerName:
             user.fullName,
 
-        customerPhone:
-            user.phone || "",
+        productId:
+            selectedProduct.id,
 
         productName:
             selectedProduct.name,
@@ -1183,21 +1751,26 @@ function placeOrder() {
         unitPrice:
             selectedProduct.price,
 
+        color:
+            selectedColor,
+
+        size:
+            selectedSize,
+
+        scent:
+            selectedScent,
+
         total:
             total,
 
         shippingAddress:
-            formatShippingAddress(
-                address
-            ),
+            addressParts.join(", "),
 
         paymentMethod:
             paymentMethod,
 
         date:
-            new Date().toLocaleString(
-                "en-PH"
-            ),
+            new Date().toISOString(),
 
         status:
             "Pending"
@@ -1205,33 +1778,36 @@ function placeOrder() {
     };
 
 
+    /* ======================================
+       SAVE ORDER
+    ====================================== */
+
+    const orders =
+        JSON.parse(
+            localStorage.getItem(
+                "loveLuxeOrders"
+            )
+        ) || [];
+
+
     orders.push(
-        newOrder
+        order
     );
 
 
     localStorage.setItem(
         "loveLuxeOrders",
-        JSON.stringify(orders)
+        JSON.stringify(
+            orders
+        )
     );
 
 
-    const message =
-        document.getElementById(
-            "checkoutMessage"
-        );
-
-
-    if (message) {
-
-        message.style.color =
-            "green";
-
-        message.textContent =
-            "Order placed successfully! Order #" +
-            orderNumber;
-
-    }
+    showCheckoutMessage(
+        "Order placed successfully! Order #" +
+        orderNumber,
+        "#16834a"
+    );
 
 
     setTimeout(
@@ -1239,48 +1815,93 @@ function placeOrder() {
 
             closeCheckout();
 
+
             alert(
-                "Order placed successfully!\n\nOrder Number: " +
-                orderNumber
+
+                "Order placed successfully!\n\n" +
+
+                "Order #: " +
+                orderNumber +
+                "\n" +
+
+                "Product: " +
+                selectedProduct.name +
+                "\n" +
+
+                (
+                    selectedColor
+                        ? "Color: " +
+                          selectedColor +
+                          "\n"
+                        : ""
+                ) +
+
+                (
+                    selectedSize
+                        ? "Size: " +
+                          selectedSize +
+                          "\n"
+                        : ""
+                ) +
+
+                (
+                    selectedScent
+                        ? "Scent: " +
+                          selectedScent +
+                          "\n"
+                        : ""
+                ) +
+
+                "Quantity: " +
+                selectedQuantity +
+                "\n" +
+
+                "Total: " +
+                formatPrice(total)
+
             );
 
         },
-        700
+        600
     );
 
 }
 
 
 /* ==========================================
-   CLOSE CHECKOUT
+   CHECKOUT MESSAGE
 ========================================== */
 
-function closeCheckout() {
+function showCheckoutMessage(
+    message,
+    color = "#c0392b"
+) {
 
-    const modal =
+    const messageBox =
         document.getElementById(
-            "loveLuxeCheckoutModal"
+            "checkoutMessage"
         );
 
 
-    if (modal) {
+    if (!messageBox) {
 
-        modal.remove();
+        return;
 
     }
 
 
-    selectedProduct =
-        null;
+    messageBox.textContent =
+        message;
 
-    selectedQuantity =
-        1;
+
+    messageBox.style.color =
+        color;
 
 }
 
 
 /* ==========================================
-   SIDEBAR
+   MOBILE SIDEBAR
 ========================================== */
 
 const shopSidebar =
@@ -1339,69 +1960,54 @@ function closeSidebar() {
 }
 
 
-if (sidebarOverlay) {
+sidebarOverlay?.addEventListener(
+    "click",
+    closeSidebar
+);
 
-    sidebarOverlay.addEventListener(
-        "click",
-        function() {
 
-            closeSidebar();
+/* ==========================================
+   LOGOUT
+========================================== */
+
+document.getElementById(
+    "logoutButton"
+)?.addEventListener(
+    "click",
+    function() {
+
+        const confirmLogout =
+            confirm(
+                "Are you sure you want to logout?"
+            );
+
+
+        if (!confirmLogout) {
+
+            return;
 
         }
-    );
-
-}
 
 
-/* ==========================================
-   SIDEBAR MESSAGE
-========================================== */
-
-function showMessage(section) {
-
-    closeSidebar();
-
-
-    alert(
-        section +
-        " page will be added next."
-    );
-
-}
-
-
-/* ==========================================
-   CUSTOMER NAME
-========================================== */
-
-function displayCustomerName() {
-
-    const customerName =
-        document.getElementById(
-            "customerName"
+        localStorage.removeItem(
+            "loveLuxeCurrentUser"
         );
 
 
-    if (!customerName) {
-        return;
+        localStorage.removeItem(
+            "loveLuxeAdminLoggedIn"
+        );
+
+
+        window.location.href =
+            "index.html";
+
     }
-
-
-    const user =
-        getCatalogCurrentUser();
-
-
-    customerName.textContent =
-        user?.fullName ||
-        "Customer";
-
-}
+);
 
 
 /* ==========================================
-   START
+   INITIAL DISPLAY
 ========================================== */
-
-displayCustomerName();
 
 displayProducts();
