@@ -68,19 +68,17 @@
         </div>
 
 
-
         <div class="customer-sidebar-welcome">
 
             <span>
                 Welcome
             </span>
 
-            <strong id="customerName">
+            <strong id="sidebarCustomerName">
                 Customer
             </strong>
 
         </div>
-
 
 
         <nav class="customer-nav">
@@ -132,12 +130,11 @@
         </nav>
 
 
-
         <div class="customer-sidebar-bottom">
 
             <button
                 type="button"
-                id="customerLogoutButton"
+                id="logoutButton"
                 class="customer-logout-button"
             >
                 ↪ &nbsp; Logout
@@ -192,9 +189,7 @@
 
 
 
-        <!-- ==================================
-             SHIPPING ADDRESS
-        =================================== -->
+        <!-- SHIPPING ADDRESS -->
 
         <section class="account-section">
 
@@ -207,11 +202,11 @@
                     </div>
 
                     <h2>
-                        Settings
+                        Shipping Address
                     </h2>
 
                     <p>
-                        Manage your shipping address and password.
+                        This address will be used when you checkout.
                     </p>
 
                 </div>
@@ -219,31 +214,7 @@
             </div>
 
 
-
             <div class="account-card settings-card">
-
-                <div class="settings-card-heading">
-
-                    <div>
-
-                        <h3>
-                            Shipping Address
-                        </h3>
-
-                        <p>
-                            This address will be used when you checkout.
-                        </p>
-
-                    </div>
-
-
-                    <span class="settings-icon">
-                        📍
-                    </span>
-
-                </div>
-
-
 
                 <div class="account-form-grid">
 
@@ -345,7 +316,6 @@
                 </div>
 
 
-
                 <div class="settings-card-footer">
 
                     <button
@@ -360,36 +330,36 @@
 
             </div>
 
+        </section>
 
 
-            <!-- ==================================
-                 CHANGE PASSWORD
-            =================================== -->
 
-            <div class="account-card settings-card">
+        <!-- CHANGE PASSWORD -->
 
-                <div class="settings-card-heading">
+        <section class="account-section">
 
-                    <div>
+            <div class="section-heading">
 
-                        <h3>
-                            Change Password
-                        </h3>
+                <div>
 
-                        <p>
-                            Update your account password.
-                        </p>
-
+                    <div class="section-small-title">
+                        SECURITY
                     </div>
 
+                    <h2>
+                        Change Password
+                    </h2>
 
-                    <span class="settings-icon">
-                        🔒
-                    </span>
+                    <p>
+                        Update your account password.
+                    </p>
 
                 </div>
 
+            </div>
 
+
+            <div class="account-card settings-card">
 
                 <div class="password-form">
 
@@ -412,13 +382,13 @@
 
                     <div class="form-group">
 
-                        <label for="accountNewPassword">
+                        <label for="newPassword">
                             New Password
                         </label>
 
                         <input
                             type="password"
-                            id="accountNewPassword"
+                            id="newPassword"
                             placeholder="Enter new password"
                         >
 
@@ -428,20 +398,19 @@
 
                     <div class="form-group">
 
-                        <label for="accountConfirmPassword">
+                        <label for="confirmPassword">
                             Confirm New Password
                         </label>
 
                         <input
                             type="password"
-                            id="accountConfirmPassword"
+                            id="confirmPassword"
                             placeholder="Confirm new password"
                         >
 
                     </div>
 
                 </div>
-
 
 
                 <div class="settings-card-footer">
@@ -460,7 +429,6 @@
 
         </section>
 
-
     </main>
 
 
@@ -471,28 +439,17 @@
             "DOMContentLoaded",
             function () {
 
-                let currentUser = null;
-
-
-                try {
-
-                    currentUser =
-                        JSON.parse(
-                            localStorage.getItem(
-                                "loveLuxeCurrentUser"
-                            )
-                        );
-
-                } catch (error) {
-
-                    currentUser = null;
-
-                }
+                const user =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "loveLuxeCurrentUser"
+                        )
+                    );
 
 
                 if (
-                    !currentUser ||
-                    currentUser.role !== "customer"
+                    !user ||
+                    user.role !== "customer"
                 ) {
 
                     window.location.href =
@@ -504,50 +461,13 @@
 
 
                 document.getElementById(
-                    "customerName"
+                    "sidebarCustomerName"
                 ).textContent =
-                    currentUser.fullName ||
+                    user.fullName ||
                     "Customer";
 
 
-                const address =
-                    currentUser.shippingAddress || {};
-
-
-                document.getElementById(
-                    "houseNumber"
-                ).value =
-                    address.houseNumber || "";
-
-
-                document.getElementById(
-                    "street"
-                ).value =
-                    address.street || "";
-
-
-                document.getElementById(
-                    "barangay"
-                ).value =
-                    address.barangay || "";
-
-
-                document.getElementById(
-                    "city"
-                ).value =
-                    address.city || "";
-
-
-                document.getElementById(
-                    "province"
-                ).value =
-                    address.province || "";
-
-
-                document.getElementById(
-                    "postalCode"
-                ).value =
-                    address.postalCode || "";
+                loadShippingAddress();
 
 
                 document.getElementById(
@@ -566,19 +486,27 @@
                 );
 
 
-                setupSidebar();
+                document.getElementById(
+                    "logoutButton"
+                ).addEventListener(
+                    "click",
+                    logout
+                );
+
+
+                setupMobileMenu();
 
             }
         );
 
 
         /* ==========================================
-           SAVE SHIPPING ADDRESS
+           SHIPPING ADDRESS
         ========================================== */
 
-        function saveShippingAddress() {
+        function loadShippingAddress() {
 
-            const currentUser =
+            const user =
                 JSON.parse(
                     localStorage.getItem(
                         "loveLuxeCurrentUser"
@@ -586,12 +514,67 @@
                 );
 
 
-            if (!currentUser) {
-                return;
-            }
+            const address =
+                user.shippingAddress || {};
 
 
-            const shippingAddress = {
+            document.getElementById(
+                "houseNumber"
+            ).value =
+                address.houseNumber || "";
+
+
+            document.getElementById(
+                "street"
+            ).value =
+                address.street || "";
+
+
+            document.getElementById(
+                "barangay"
+            ).value =
+                address.barangay || "";
+
+
+            document.getElementById(
+                "city"
+            ).value =
+                address.city || "";
+
+
+            document.getElementById(
+                "province"
+            ).value =
+                address.province || "";
+
+
+            document.getElementById(
+                "postalCode"
+            ).value =
+                address.postalCode || "";
+
+        }
+
+
+        function saveShippingAddress() {
+
+            const user =
+                JSON.parse(
+                    localStorage.getItem(
+                        "loveLuxeCurrentUser"
+                    )
+                );
+
+
+            let customers =
+                JSON.parse(
+                    localStorage.getItem(
+                        "loveLuxeCustomers"
+                    )
+                ) || [];
+
+
+            const address = {
 
                 houseNumber:
                     document.getElementById(
@@ -626,60 +609,48 @@
             };
 
 
-            const customers =
-                JSON.parse(
-                    localStorage.getItem(
-                        "loveLuxeCustomers"
-                    )
-                ) || [];
+            user.shippingAddress =
+                address;
 
 
             const customerIndex =
                 customers.findIndex(
                     function (customer) {
 
-                        return (
-                            customer.username ===
-                            currentUser.username
-                        );
+                        return customer.username ===
+                            user.username;
 
                     }
                 );
 
 
-            if (customerIndex === -1) {
+            if (customerIndex !== -1) {
 
-                showMessage(
-                    "Customer account could not be found.",
-                    true
-                );
-
-                return;
+                customers[customerIndex] =
+                    user;
 
             }
 
 
-            customers[customerIndex].shippingAddress =
-                shippingAddress;
-
-
             localStorage.setItem(
                 "loveLuxeCustomers",
-                JSON.stringify(customers)
+                JSON.stringify(
+                    customers
+                )
             );
 
 
             localStorage.setItem(
                 "loveLuxeCurrentUser",
                 JSON.stringify(
-                    customers[customerIndex]
+                    user
                 )
             );
 
 
             showMessage(
                 "Shipping address saved successfully.",
-                false
+                "green"
             );
 
         }
@@ -691,7 +662,7 @@
 
         function changePassword() {
 
-            const currentUser =
+            const user =
                 JSON.parse(
                     localStorage.getItem(
                         "loveLuxeCurrentUser"
@@ -699,9 +670,12 @@
                 );
 
 
-            if (!currentUser) {
-                return;
-            }
+            let customers =
+                JSON.parse(
+                    localStorage.getItem(
+                        "loveLuxeCustomers"
+                    )
+                ) || [];
 
 
             const currentPassword =
@@ -712,24 +686,36 @@
 
             const newPassword =
                 document.getElementById(
-                    "accountNewPassword"
+                    "newPassword"
                 ).value;
 
 
             const confirmPassword =
                 document.getElementById(
-                    "accountConfirmPassword"
+                    "confirmPassword"
                 ).value;
+
+
+            if (!currentPassword) {
+
+                showMessage(
+                    "Please enter your current password.",
+                    "red"
+                );
+
+                return;
+
+            }
 
 
             if (
                 currentPassword !==
-                currentUser.password
+                user.password
             ) {
 
                 showMessage(
                     "Current password is incorrect.",
-                    true
+                    "red"
                 );
 
                 return;
@@ -741,7 +727,7 @@
 
                 showMessage(
                     "Please enter a new password.",
-                    true
+                    "red"
                 );
 
                 return;
@@ -755,8 +741,8 @@
             ) {
 
                 showMessage(
-                    "The new passwords do not match.",
-                    true
+                    "New passwords do not match.",
+                    "red"
                 );
 
                 return;
@@ -764,53 +750,41 @@
             }
 
 
-            const customers =
-                JSON.parse(
-                    localStorage.getItem(
-                        "loveLuxeCustomers"
-                    )
-                ) || [];
+            user.password =
+                newPassword;
 
 
             const customerIndex =
                 customers.findIndex(
                     function (customer) {
 
-                        return (
-                            customer.username ===
-                            currentUser.username
-                        );
+                        return customer.username ===
+                            user.username;
 
                     }
                 );
 
 
-            if (customerIndex === -1) {
+            if (customerIndex !== -1) {
 
-                showMessage(
-                    "Customer account could not be found.",
-                    true
-                );
-
-                return;
+                customers[customerIndex] =
+                    user;
 
             }
 
 
-            customers[customerIndex].password =
-                newPassword;
-
-
             localStorage.setItem(
                 "loveLuxeCustomers",
-                JSON.stringify(customers)
+                JSON.stringify(
+                    customers
+                )
             );
 
 
             localStorage.setItem(
                 "loveLuxeCurrentUser",
                 JSON.stringify(
-                    customers[customerIndex]
+                    user
                 )
             );
 
@@ -821,18 +795,18 @@
 
 
             document.getElementById(
-                "accountNewPassword"
+                "newPassword"
             ).value = "";
 
 
             document.getElementById(
-                "accountConfirmPassword"
+                "confirmPassword"
             ).value = "";
 
 
             showMessage(
                 "Password changed successfully.",
-                false
+                "green"
             );
 
         }
@@ -844,32 +818,35 @@
 
         function showMessage(
             message,
-            isError
+            color
         ) {
 
-            const element =
+            const box =
                 document.getElementById(
                     "accountMessage"
                 );
 
 
-            element.textContent =
+            if (!box) return;
+
+
+            box.textContent =
                 message;
 
 
-            element.className =
-                isError
-                    ? "account-message error"
-                    : "account-message success";
+            box.style.color =
+                color === "green"
+                    ? "#16834a"
+                    : "#c0392b";
 
         }
 
 
         /* ==========================================
-           SIDEBAR
+           MOBILE MENU
         ========================================== */
 
-        function setupSidebar() {
+        function setupMobileMenu() {
 
             const menuButton =
                 document.getElementById(
@@ -889,66 +866,62 @@
                 );
 
 
-            menuButton.addEventListener(
-                "click",
-                function () {
+            if (menuButton) {
 
-                    sidebar.classList.add(
-                        "open"
-                    );
+                menuButton.addEventListener(
+                    "click",
+                    function () {
 
-                    overlay.classList.add(
-                        "active"
-                    );
+                        sidebar.classList.toggle(
+                            "open"
+                        );
 
-                }
-            );
+                        overlay.classList.toggle(
+                            "active"
+                        );
 
+                    }
+                );
 
-            overlay.addEventListener(
-                "click",
-                closeSidebar
-            );
+            }
 
 
-            document.getElementById(
-                "customerLogoutButton"
-            ).addEventListener(
-                "click",
-                logout
-            );
+            if (overlay) {
 
-        }
+                overlay.addEventListener(
+                    "click",
+                    function () {
 
+                        sidebar.classList.remove(
+                            "open"
+                        );
 
-        function closeSidebar() {
+                        overlay.classList.remove(
+                            "active"
+                        );
 
-            document.getElementById(
-                "customerSidebar"
-            ).classList.remove(
-                "open"
-            );
+                    }
+                );
 
-
-            document.getElementById(
-                "customerSidebarOverlay"
-            ).classList.remove(
-                "active"
-            );
+            }
 
         }
 
+
+        /* ==========================================
+           LOGOUT
+        ========================================== */
 
         function logout() {
 
-            if (
-                !confirm(
+            const confirmLogout =
+                confirm(
                     "Are you sure you want to logout?"
-                )
-            ) {
+                );
 
+
+            if (!confirmLogout) {
                 return;
-
             }
 
 
@@ -968,7 +941,6 @@
         }
 
     </script>
-
 
 </body>
 
