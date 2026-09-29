@@ -106,8 +106,6 @@ const products = [
             "2XL",
             "3XL"
         ]
-
-        /* Fixed color, so no color option */
     },
 
 
@@ -127,8 +125,6 @@ const products = [
             "Black",
             "Light Blue"
         ]
-
-        /* No size */
     },
 
 
@@ -324,8 +320,6 @@ const products = [
         image: "images/lattafa-yara.jpg",
         description:
             "A popular fragrance choice with a soft and pleasant scent."
-
-        /* No other scent */
     }
 
 ];
@@ -402,6 +396,71 @@ if (customerName) {
 
 
 /* ==========================================
+   MY ACCOUNT DROPDOWN
+========================================== */
+
+const accountDropdownButton =
+    document.getElementById(
+        "accountDropdownButton"
+    );
+
+
+const accountDropdownMenu =
+    document.getElementById(
+        "accountDropdownMenu"
+    );
+
+
+if (
+    accountDropdownButton &&
+    accountDropdownMenu
+) {
+
+    accountDropdownButton.addEventListener(
+        "click",
+        function() {
+
+            accountDropdownMenu.classList.toggle(
+                "show"
+            );
+
+
+            accountDropdownButton.classList.toggle(
+                "open"
+            );
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   TOP MY ACCOUNT BUTTON
+========================================== */
+
+const topAccountButton =
+    document.getElementById(
+        "topAccountButton"
+    );
+
+
+if (topAccountButton) {
+
+    topAccountButton.addEventListener(
+        "click",
+        function() {
+
+            window.location.href =
+                "customer.html#personal";
+
+        }
+    );
+
+}
+
+
+/* ==========================================
    FORMAT PRICE
 ========================================== */
 
@@ -465,6 +524,7 @@ function displayProducts() {
     if (productCount) {
 
         productCount.textContent =
+            "Showing " +
             filteredProducts.length +
             (
                 filteredProducts.length === 1
@@ -714,12 +774,6 @@ function createCheckoutModal() {
         .option-group select:focus {
             outline: none;
             border-color: #c5a059;
-        }
-
-        .selected-option-note {
-            margin-top: 8px;
-            font-size: 12px;
-            color: #777777;
         }
 
     `;
@@ -1960,47 +2014,37 @@ function closeSidebar() {
 }
 
 
-sidebarOverlay?.addEventListener(
-    "click",
-    closeSidebar
-);
+if (sidebarOverlay) {
+
+    sidebarOverlay.addEventListener(
+        "click",
+        closeSidebar
+    );
+
+}
 
 
 /* ==========================================
-   LOGOUT
+   CLOSE MOBILE SIDEBAR AFTER ACCOUNT LINK
 ========================================== */
 
-document.getElementById(
-    "logoutButton"
-)?.addEventListener(
-    "click",
-    function() {
-
-        const confirmLogout =
-            confirm(
-                "Are you sure you want to logout?"
-            );
+const accountLinks =
+    document.querySelectorAll(
+        ".account-dropdown-link"
+    );
 
 
-        if (!confirmLogout) {
+accountLinks.forEach(
+    function(link) {
 
-            return;
+        link.addEventListener(
+            "click",
+            function() {
 
-        }
+                closeSidebar();
 
-
-        localStorage.removeItem(
-            "loveLuxeCurrentUser"
+            }
         );
-
-
-        localStorage.removeItem(
-            "loveLuxeAdminLoggedIn"
-        );
-
-
-        window.location.href =
-            "index.html";
 
     }
 );
