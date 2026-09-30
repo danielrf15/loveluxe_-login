@@ -25,15 +25,13 @@
 <body>
 
 
-    <!-- ==========================================
-         MOBILE HEADER
-    =========================================== -->
+    <!-- MOBILE HEADER -->
 
     <header class="mobile-header">
 
         <button
             class="menu-button"
-            id="menuButton"
+            onclick="openSidebar()"
             type="button"
         >
             ☰
@@ -48,9 +46,7 @@
 
 
 
-    <!-- ==========================================
-         SIDEBAR
-    =========================================== -->
+    <!-- SIDEBAR -->
 
     <aside
         class="shop-sidebar"
@@ -80,9 +76,12 @@
             <a
                 href="catalog.html"
                 class="sidebar-link active"
+                id="productsLink"
             >
 
-                <span>🛍️</span>
+                <span>
+                    🛍️
+                </span>
 
                 <span>
                     Products
@@ -93,58 +92,53 @@
 
             <!-- MY ACCOUNT -->
 
-            <div class="sidebar-account-wrapper">
+            <button
+                type="button"
+                class="sidebar-link account-toggle"
+                id="accountToggle"
+            >
 
-                <button
-                    type="button"
-                    class="sidebar-link account-toggle"
-                    id="accountToggle"
-                >
+                <span>
+                    👤
+                </span>
 
-                    <span>👤</span>
+                <span>
+                    My Account
+                </span>
 
-                    <span>
-                        My Account
-                    </span>
+                <span class="account-arrow">
+                    ▼
+                </span>
 
-                    <span class="account-arrow">
-                        ▼
-                    </span>
-
-                </button>
+            </button>
 
 
-                <div
-                    class="account-dropdown"
-                    id="accountDropdown"
-                >
+            <div
+                class="account-dropdown"
+                id="accountDropdown"
+            >
 
-                    <a href="personal.html">
-                        Personal Information
-                    </a>
+                <a href="personal.html">
+                    Personal Information
+                </a>
 
-                    <a href="orders.html">
-                        My Orders
-                    </a>
+                <a href="orders.html">
+                    My Orders
+                </a>
 
-                    <a href="settings.html">
-                        Settings
-                    </a>
-
-                </div>
+                <a href="settings.html">
+                    Settings
+                </a>
 
             </div>
 
         </div>
 
-
     </aside>
 
 
 
-    <!-- ==========================================
-         SIDEBAR OVERLAY
-    =========================================== -->
+    <!-- SIDEBAR OVERLAY -->
 
     <div
         class="sidebar-overlay"
@@ -153,16 +147,12 @@
 
 
 
-    <!-- ==========================================
-         MAIN CONTENT
-    =========================================== -->
+    <!-- MAIN -->
 
     <main class="shop-main">
 
 
-        <!-- ======================================
-             TOP BAR
-        ======================================= -->
+        <!-- TOP BAR -->
 
         <div class="shop-topbar">
 
@@ -206,9 +196,7 @@
 
 
 
-        <!-- ======================================
-             SHOP HEADER
-        ======================================= -->
+        <!-- SHOP HEADER -->
 
         <section class="catalog-header">
 
@@ -234,16 +222,14 @@
                 class="product-count"
                 id="productCount"
             >
-                16 products
+                Showing 16 product(s)
             </div>
 
         </section>
 
 
 
-        <!-- ======================================
-             SEARCH
-        ======================================= -->
+        <!-- SEARCH -->
 
         <section class="catalog-tools">
 
@@ -266,9 +252,7 @@
 
 
 
-        <!-- ======================================
-             CATEGORY FILTERS
-        ======================================= -->
+        <!-- CATEGORY FILTERS -->
 
         <div class="filter-buttons">
 
@@ -280,7 +264,6 @@
                 All
             </button>
 
-
             <button
                 type="button"
                 class="filter-button"
@@ -288,7 +271,6 @@
             >
                 Bags
             </button>
-
 
             <button
                 type="button"
@@ -298,7 +280,6 @@
                 Clothing
             </button>
 
-
             <button
                 type="button"
                 class="filter-button"
@@ -306,7 +287,6 @@
             >
                 Perfume
             </button>
-
 
             <button
                 type="button"
@@ -320,9 +300,7 @@
 
 
 
-        <!-- ======================================
-             PRODUCT GRID
-        ======================================= -->
+        <!-- PRODUCT GRID -->
 
         <section
             class="product-grid"
@@ -332,15 +310,17 @@
 
 
 
-        <!-- ======================================
-             NO PRODUCTS
-        ======================================= -->
+        <!-- NO PRODUCTS -->
 
         <div
             class="no-products"
             id="noProducts"
-            style="display:none;"
+            style="display: none;"
         >
+
+            <div class="no-products-icon">
+                🔍
+            </div>
 
             <h3>
                 No products found
@@ -354,9 +334,7 @@
 
 
 
-        <!-- ======================================
-             FOOTER
-        ======================================= -->
+        <!-- FOOTER -->
 
         <footer class="shop-footer">
 
@@ -375,7 +353,7 @@
 
 
     <!-- ==========================================
-         CHECKOUT / PRODUCT VIEW MODAL
+         CHECKOUT / PRODUCT MODAL
     =========================================== -->
 
     <div
@@ -384,7 +362,6 @@
     >
 
         <div class="checkout-box">
-
 
             <button
                 type="button"
@@ -398,7 +375,7 @@
             <div class="checkout-content">
 
 
-                <!-- PRODUCT IMAGE -->
+                <!-- IMAGE -->
 
                 <div class="checkout-image-area">
 
@@ -407,7 +384,6 @@
                         src=""
                         alt="Product"
                     >
-
 
                     <div
                         class="product-gallery"
@@ -419,7 +395,7 @@
 
 
 
-                <!-- PRODUCT DETAILS -->
+                <!-- DETAILS -->
 
                 <div class="checkout-details">
 
@@ -429,11 +405,8 @@
                     >
                     </div>
 
-
                     <h2 id="checkoutName">
-                        Product
                     </h2>
-
 
                     <p
                         class="checkout-description"
@@ -441,21 +414,18 @@
                     >
                     </p>
 
-
                     <div
                         class="checkout-price"
                         id="checkoutPrice"
                     >
-                        ₱0.00
                     </div>
-
 
 
                     <!-- OPTIONS -->
 
                     <div
-                        id="productOptions"
                         class="product-options"
+                        id="productOptions"
                     >
                     </div>
 
@@ -480,9 +450,13 @@
                             </button>
 
 
-                            <span id="checkoutQuantity">
-                                1
-                            </span>
+                            <input
+                                type="number"
+                                id="checkoutQuantity"
+                                min="1"
+                                max="99"
+                                value="1"
+                            >
 
 
                             <button
@@ -539,6 +513,10 @@
                                 Bank Transfer
                             </option>
 
+                            <option value="Card">
+                                Card
+                            </option>
+
                         </select>
 
                     </div>
@@ -561,7 +539,7 @@
 
 
 
-                    <!-- PLACE ORDER -->
+                    <!-- ORDER -->
 
                     <button
                         type="button"
