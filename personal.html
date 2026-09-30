@@ -19,10 +19,173 @@
         href="catalog.css"
     >
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <style>
+
+        /* ==========================================
+           ACCOUNT PAGE
+        ========================================== */
+
+        .account-page-content {
+            padding: 35px 40px 50px;
+        }
+
+
+        .account-page-header {
+            margin-bottom: 28px;
+        }
+
+
+        .account-page-eyebrow {
+            color: #c5a059;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+
+        .account-page-header h2 {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+
+        .account-page-header p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+
+        .account-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+        }
+
+
+        .account-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+
+        .form-group label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #333;
+        }
+
+
+        .form-group input {
+            width: 100%;
+            height: 45px;
+            border: 1px solid #d9dde5;
+            border-radius: 7px;
+            padding: 0 13px;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+        }
+
+
+        .form-group input:focus {
+            border-color: #c5a059;
+        }
+
+
+        .readonly-input {
+            background: #f5f6fa;
+            color: #777;
+        }
+
+
+        .account-card-footer {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eeeeee;
+        }
+
+
+        .primary-button {
+            border: none;
+            background: #111111;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 7px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            cursor: pointer;
+        }
+
+
+        .primary-button:hover {
+            background: #c5a059;
+        }
+
+
+        .account-message {
+            display: none;
+            padding: 13px 16px;
+            border-radius: 7px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+
+        .account-message.show {
+            display: block;
+        }
+
+
+        .account-message.success {
+            background: #edf8ef;
+            color: #27733b;
+        }
+
+
+        .account-message.error {
+            background: #fff0f0;
+            color: #a72e2e;
+        }
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 768px) {
+
+            .account-page-content {
+                padding: 25px 18px 40px;
+            }
+
+
+            .account-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .account-card {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -38,11 +201,12 @@
 
         <button
             class="menu-button"
-            type="button"
             onclick="openSidebar()"
+            type="button"
         >
             ☰
         </button>
+
 
         <div class="mobile-brand">
 
@@ -57,8 +221,9 @@
     </header>
 
 
+
     <!-- ==========================================
-         SIDEBAR
+         SAME SIDEBAR AS CATALOG
     =========================================== -->
 
     <aside
@@ -79,6 +244,7 @@
         </div>
 
 
+
         <div class="sidebar-section">
 
             <div class="sidebar-label">
@@ -86,9 +252,12 @@
             </div>
 
 
+            <!-- PRODUCTS -->
+
             <a
                 href="catalog.html"
                 class="sidebar-link"
+                id="productsLink"
             >
 
                 <span>
@@ -101,6 +270,9 @@
 
             </a>
 
+
+
+            <!-- MY ACCOUNT -->
 
             <button
                 type="button"
@@ -123,6 +295,9 @@
             </button>
 
 
+
+            <!-- ACCOUNT DROPDOWN -->
+
             <div
                 class="account-dropdown show"
                 id="accountDropdown"
@@ -135,15 +310,11 @@
                     Personal Information
                 </a>
 
-                <a
-                    href="orders.html"
-                >
+                <a href="orders.html">
                     My Orders
                 </a>
 
-                <a
-                    href="settings.html"
-                >
+                <a href="settings.html">
                     Settings
                 </a>
 
@@ -154,9 +325,8 @@
     </aside>
 
 
-    <!-- ==========================================
-         SIDEBAR OVERLAY
-    =========================================== -->
+
+    <!-- SIDEBAR OVERLAY -->
 
     <div
         class="sidebar-overlay"
@@ -164,20 +334,21 @@
     ></div>
 
 
+
     <!-- ==========================================
-         MAIN
+         MAIN CONTENT
     =========================================== -->
 
-    <main class="customer-main">
+    <main class="shop-main">
 
 
         <!-- TOP BAR -->
 
-        <header class="customer-topbar">
+        <div class="shop-topbar">
 
             <div>
 
-                <div class="customer-topbar-label">
+                <div class="page-small-title">
                     CUSTOMER ACCOUNT
                 </div>
 
@@ -187,46 +358,70 @@
 
             </div>
 
-        </header>
 
+            <div class="customer-profile">
 
-        <!-- MESSAGE -->
-
-        <div
-            id="accountMessage"
-            class="account-message"
-        ></div>
-
-
-        <!-- PERSONAL INFORMATION -->
-
-        <section class="account-section">
-
-            <div class="section-heading">
+                <div class="customer-avatar">
+                    C
+                </div>
 
                 <div>
 
-                    <div class="section-small-title">
-                        ACCOUNT
+                    <div class="customer-label">
+                        Welcome Customer
                     </div>
 
-                    <h2>
-                        Personal Information
-                    </h2>
-
-                    <p>
-                        Manage your basic account information.
-                    </p>
+                    <div
+                        class="customer-name"
+                        id="customerName"
+                    >
+                        Customer
+                    </div>
 
                 </div>
 
             </div>
+
+        </div>
+
+
+
+        <!-- ACCOUNT CONTENT -->
+
+        <section class="account-page-content">
+
+
+            <div class="account-page-header">
+
+                <div class="account-page-eyebrow">
+                    ACCOUNT
+                </div>
+
+                <h2>
+                    Personal Information
+                </h2>
+
+                <p>
+                    Manage your basic account information.
+                </p>
+
+            </div>
+
+
+
+            <div
+                id="accountMessage"
+                class="account-message"
+            ></div>
+
 
 
             <div class="account-card">
 
                 <div class="account-form-grid">
 
+
+                    <!-- FULL NAME -->
 
                     <div class="form-group">
 
@@ -235,13 +430,16 @@
                         </label>
 
                         <input
-                            id="accountFullName"
                             type="text"
+                            id="accountFullName"
                             placeholder="Enter your full name"
                         >
 
                     </div>
 
+
+
+                    <!-- USERNAME -->
 
                     <div class="form-group">
 
@@ -250,13 +448,16 @@
                         </label>
 
                         <input
-                            id="accountUsername"
                             type="text"
+                            id="accountUsername"
                             placeholder="Enter your username"
                         >
 
                     </div>
 
+
+
+                    <!-- PHONE -->
 
                     <div class="form-group">
 
@@ -265,13 +466,16 @@
                         </label>
 
                         <input
-                            id="accountPhone"
                             type="text"
+                            id="accountPhone"
                             placeholder="Enter your phone number"
                         >
 
                     </div>
 
+
+
+                    <!-- ACCOUNT TYPE -->
 
                     <div class="form-group">
 
@@ -291,6 +495,7 @@
                 </div>
 
 
+
                 <div class="account-card-footer">
 
                     <button
@@ -307,65 +512,8 @@
 
         </section>
 
-
-        <!-- ACCOUNT SUMMARY -->
-
-        <section class="account-summary-section">
-
-            <div class="summary-card">
-
-                <div class="summary-title">
-                    ACCOUNT SUMMARY
-                </div>
-
-                <div class="summary-grid">
-
-                    <div>
-
-                        <span>
-                            Account Type
-                        </span>
-
-                        <strong>
-                            Customer
-                        </strong>
-
-                    </div>
-
-
-                    <div>
-
-                        <span>
-                            Username
-                        </span>
-
-                        <strong id="summaryUsername">
-                            —
-                        </strong>
-
-                    </div>
-
-
-                    <div>
-
-                        <span>
-                            Orders
-                        </span>
-
-                        <strong id="summaryOrders">
-                            0
-                        </strong>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
     </main>
+
 
 
     <!-- ==========================================
@@ -377,185 +525,55 @@
 
     <script>
 
-        const data = window.LoveLuxeData;
-
-        const user = data.customers[0];
-
-
         /* ==========================================
-           PAGE LOAD
+           ACCOUNT DROPDOWN
         ========================================== */
 
-        document.addEventListener(
-            "DOMContentLoaded",
+        const accountToggle =
+            document.getElementById("accountToggle");
+
+        const accountDropdown =
+            document.getElementById("accountDropdown");
+
+
+        accountToggle.addEventListener(
+            "click",
             function () {
 
-                document.getElementById(
-                    "accountFullName"
-                ).value = user.fullName;
+                accountDropdown.classList.toggle("show");
 
+                accountToggle.classList.toggle("active");
 
-                document.getElementById(
-                    "accountUsername"
-                ).value = user.username;
+                if (
+                    accountDropdown.classList.contains("show")
+                ) {
 
+                    accountToggle.querySelector(
+                        ".account-arrow"
+                    ).textContent = "▲";
 
-                document.getElementById(
-                    "accountPhone"
-                ).value = user.phone || "";
+                } else {
 
+                    accountToggle.querySelector(
+                        ".account-arrow"
+                    ).textContent = "▼";
 
-                document.getElementById(
-                    "summaryUsername"
-                ).textContent = user.username;
-
-
-                document.getElementById(
-                    "summaryOrders"
-                ).textContent =
-                    data.orders.filter(
-                        function (order) {
-
-                            return (
-                                order.customerUsername ===
-                                user.username
-                            );
-
-                        }
-                    ).length;
-
-
-                document.getElementById(
-                    "saveAccountButton"
-                ).onclick = saveAccount;
-
-
-                setupSidebar();
+                }
 
             }
         );
 
 
-        /* ==========================================
-           SAVE ACCOUNT
-        ========================================== */
-
-        function saveAccount() {
-
-            const name =
-                document.getElementById(
-                    "accountFullName"
-                ).value.trim();
-
-
-            const username =
-                document.getElementById(
-                    "accountUsername"
-                ).value.trim();
-
-
-            const phone =
-                document.getElementById(
-                    "accountPhone"
-                ).value.trim();
-
-
-            if (!name || !username) {
-
-                showMessage(
-                    "Please enter your name and username.",
-                    true
-                );
-
-                return;
-
-            }
-
-
-            user.fullName = name;
-
-            user.username = username;
-
-            user.phone = phone;
-
-
-            document.getElementById(
-                "summaryUsername"
-            ).textContent = username;
-
-
-            showMessage(
-                "Personal information saved successfully for this session.",
-                false
-            );
-
-        }
-
 
         /* ==========================================
-           MESSAGE
+           MOBILE SIDEBAR
         ========================================== */
-
-        function showMessage(text, error) {
-
-            const box =
-                document.getElementById(
-                    "accountMessage"
-                );
-
-
-            box.textContent = text;
-
-
-            box.className =
-                error
-                    ? "account-message error"
-                    : "account-message success";
-
-        }
-
-
-        /* ==========================================
-           SIDEBAR
-        ========================================== */
-
-        function setupSidebar() {
-
-            const toggle =
-                document.getElementById(
-                    "accountToggle"
-                );
-
-
-            const dropdown =
-                document.getElementById(
-                    "accountDropdown"
-                );
-
-
-            toggle.onclick =
-                function () {
-
-                    dropdown.classList.toggle("show");
-
-                    toggle.classList.toggle("active");
-
-                };
-
-
-            document
-                .getElementById("sidebarOverlay")
-                .onclick = closeSidebar;
-
-        }
-
 
         function openSidebar() {
 
             document
                 .getElementById("shopSidebar")
                 .classList.add("open");
-
 
             document
                 .getElementById("sidebarOverlay")
@@ -570,12 +588,141 @@
                 .getElementById("shopSidebar")
                 .classList.remove("open");
 
-
             document
                 .getElementById("sidebarOverlay")
                 .classList.remove("active");
 
         }
+
+
+        document
+            .getElementById("sidebarOverlay")
+            .addEventListener(
+                "click",
+                closeSidebar
+            );
+
+
+
+        /* ==========================================
+           CUSTOMER DATA
+        ========================================== */
+
+        const customer =
+            customers.find(
+                function (user) {
+
+                    return user.role === "customer";
+
+                }
+            );
+
+
+        if (!customer) {
+
+            window.location.href = "index.html";
+
+        } else {
+
+            document.getElementById(
+                "customerName"
+            ).textContent =
+                customer.fullName || "Customer";
+
+
+            document.getElementById(
+                "accountFullName"
+            ).value =
+                customer.fullName || "";
+
+
+            document.getElementById(
+                "accountUsername"
+            ).value =
+                customer.username || "";
+
+
+            document.getElementById(
+                "accountPhone"
+            ).value =
+                customer.phone || "";
+
+        }
+
+
+
+        /* ==========================================
+           SAVE INFORMATION
+        ========================================== */
+
+        document
+            .getElementById("saveAccountButton")
+            .addEventListener(
+                "click",
+                function () {
+
+                    const fullName =
+                        document
+                            .getElementById("accountFullName")
+                            .value
+                            .trim();
+
+                    const username =
+                        document
+                            .getElementById("accountUsername")
+                            .value
+                            .trim();
+
+                    const phone =
+                        document
+                            .getElementById("accountPhone")
+                            .value
+                            .trim();
+
+
+                    const message =
+                        document.getElementById(
+                            "accountMessage"
+                        );
+
+
+                    if (!fullName || !username) {
+
+                        message.textContent =
+                            "Please complete your name and username.";
+
+                        message.className =
+                            "account-message error show";
+
+                        return;
+
+                    }
+
+
+                    customer.fullName =
+                        fullName;
+
+                    customer.username =
+                        username;
+
+                    customer.phone =
+                        phone;
+
+
+                    document.getElementById(
+                        "customerName"
+                    ).textContent =
+                        fullName;
+
+
+                    message.textContent =
+                        "Personal information updated.";
+
+                    message.className =
+                        "account-message success show";
+
+                }
+            );
 
     </script>
 
