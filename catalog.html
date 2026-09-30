@@ -33,7 +33,7 @@
 
         <button
             class="menu-button"
-            onclick="openSidebar()"
+            id="menuButton"
             type="button"
         >
             ☰
@@ -82,9 +82,7 @@
                 class="sidebar-link active"
             >
 
-                <span>
-                    🛍️
-                </span>
+                <span>🛍️</span>
 
                 <span>
                     Products
@@ -92,6 +90,8 @@
 
             </a>
 
+
+            <!-- MY ACCOUNT -->
 
             <div class="sidebar-account-wrapper">
 
@@ -101,16 +101,14 @@
                     id="accountToggle"
                 >
 
-                    <span>
-                        👤
-                    </span>
+                    <span>👤</span>
 
                     <span>
                         My Account
                     </span>
 
                     <span class="account-arrow">
-                        ▾
+                        ▼
                     </span>
 
                 </button>
@@ -139,8 +137,6 @@
 
         </div>
 
-
-        <!-- CATEGORY BUTTONS ARE KEPT ABOVE THE PRODUCTS -->
 
     </aside>
 
@@ -238,7 +234,7 @@
                 class="product-count"
                 id="productCount"
             >
-                Showing 16 product(s)
+                16 products
             </div>
 
         </section>
@@ -337,18 +333,14 @@
 
 
         <!-- ======================================
-             NO PRODUCTS MESSAGE
+             NO PRODUCTS
         ======================================= -->
 
         <div
             class="no-products"
             id="noProducts"
-            style="display: none;"
+            style="display:none;"
         >
-
-            <div class="no-products-icon">
-                🔍
-            </div>
 
             <h3>
                 No products found
@@ -378,13 +370,12 @@
 
         </footer>
 
-
     </main>
 
 
 
     <!-- ==========================================
-         CHECKOUT MODAL
+         CHECKOUT / PRODUCT VIEW MODAL
     =========================================== -->
 
     <div
@@ -393,6 +384,7 @@
     >
 
         <div class="checkout-box">
+
 
             <button
                 type="button"
@@ -416,9 +408,10 @@
                         alt="Product"
                     >
 
+
                     <div
-                        id="checkoutThumbnails"
                         class="product-gallery"
+                        id="checkoutThumbnails"
                     >
                     </div>
 
@@ -438,13 +431,13 @@
 
 
                     <h2 id="checkoutName">
-                        Product Name
+                        Product
                     </h2>
 
 
                     <p
-                        id="checkoutDescription"
                         class="checkout-description"
+                        id="checkoutDescription"
                     >
                     </p>
 
@@ -458,6 +451,16 @@
 
 
 
+                    <!-- OPTIONS -->
+
+                    <div
+                        id="productOptions"
+                        class="product-options"
+                    >
+                    </div>
+
+
+
                     <!-- QUANTITY -->
 
                     <div class="quantity-section">
@@ -465,6 +468,7 @@
                         <label>
                             Quantity
                         </label>
+
 
                         <div class="quantity-controls">
 
@@ -475,11 +479,11 @@
                                 −
                             </button>
 
-                            <span
-                                id="checkoutQuantity"
-                            >
+
+                            <span id="checkoutQuantity">
                                 1
                             </span>
+
 
                             <button
                                 type="button"
@@ -494,22 +498,6 @@
 
 
 
-                    <!-- TOTAL -->
-
-                    <div class="checkout-total-row">
-
-                        <span>
-                            Total
-                        </span>
-
-                        <strong id="checkoutTotal">
-                            ₱0.00
-                        </strong>
-
-                    </div>
-
-
-
                     <!-- SHIPPING ADDRESS -->
 
                     <div class="checkout-address-section">
@@ -519,8 +507,8 @@
                         </label>
 
                         <div
-                            id="checkoutAddress"
                             class="checkout-address"
+                            id="checkoutAddress"
                         >
                             No shipping address saved.
                         </div>
@@ -557,12 +545,18 @@
 
 
 
-                    <!-- MESSAGE -->
+                    <!-- TOTAL -->
 
-                    <div
-                        id="checkoutMessage"
-                        class="checkout-message"
-                    >
+                    <div class="checkout-total-row">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="checkoutTotal">
+                            ₱0.00
+                        </strong>
+
                     </div>
 
 
@@ -571,11 +565,18 @@
 
                     <button
                         type="button"
-                        id="placeOrderButton"
                         class="place-order-button"
+                        id="placeOrderButton"
                     >
                         PLACE ORDER
                     </button>
+
+
+                    <div
+                        class="checkout-message"
+                        id="checkoutMessage"
+                    >
+                    </div>
 
                 </div>
 
@@ -587,12 +588,7 @@
 
 
 
-    <!-- ==========================================
-         SCRIPT
-    =========================================== -->
-
     <script src="catalog.js"></script>
-
 
 </body>
 
