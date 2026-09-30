@@ -39,7 +39,6 @@
             ☰
         </button>
 
-
         <div class="mobile-brand">
             LOVE LUXE
             <span>by EA</span>
@@ -71,7 +70,6 @@
         </div>
 
 
-
         <div class="sidebar-section">
 
             <div class="sidebar-label">
@@ -95,65 +93,54 @@
             </a>
 
 
+            <div class="sidebar-account-wrapper">
 
-            <!-- ==================================
-                 MY ACCOUNT DROPDOWN
-            =================================== -->
-
-            <button
-                type="button"
-                class="sidebar-link account-dropdown-button"
-                id="accountDropdownButton"
-            >
-
-                <span>
-                    👤
-                </span>
-
-                <span>
-                    My Account
-                </span>
-
-                <span
-                    class="account-arrow"
+                <button
+                    type="button"
+                    class="sidebar-link account-toggle"
+                    id="accountToggle"
                 >
-                    ▾
-                </span>
 
-            </button>
+                    <span>
+                        👤
+                    </span>
+
+                    <span>
+                        My Account
+                    </span>
+
+                    <span class="account-arrow">
+                        ▾
+                    </span>
+
+                </button>
 
 
-            <div
-                class="account-dropdown-menu"
-                id="accountDropdownMenu"
-            >
-
-                <a
-                    href="personal.html"
-                    class="account-dropdown-link"
+                <div
+                    class="account-dropdown"
+                    id="accountDropdown"
                 >
-                    Personal Information
-                </a>
 
+                    <a href="personal.html">
+                        Personal Information
+                    </a>
 
-                <a
-                    href="orders.html"
-                    class="account-dropdown-link"
-                >
-                    My Orders
-                </a>
+                    <a href="orders.html">
+                        My Orders
+                    </a>
 
+                    <a href="settings.html">
+                        Settings
+                    </a>
 
-                <a
-                    href="settings.html"
-                    class="account-dropdown-link"
-                >
-                    Settings
-                </a>
+                </div>
 
             </div>
 
         </div>
+
+
+        <!-- CATEGORY BUTTONS ARE KEPT ABOVE THE PRODUCTS -->
 
     </aside>
 
@@ -196,10 +183,7 @@
             </div>
 
 
-            <a
-                href="personal.html"
-                class="customer-profile"
-            >
+            <div class="customer-profile">
 
                 <div class="customer-avatar">
                     C
@@ -220,7 +204,7 @@
 
                 </div>
 
-            </a>
+            </div>
 
         </div>
 
@@ -254,7 +238,7 @@
                 class="product-count"
                 id="productCount"
             >
-                Showing 16 products
+                Showing 16 product(s)
             </div>
 
         </section>
@@ -398,6 +382,214 @@
     </main>
 
 
+
+    <!-- ==========================================
+         CHECKOUT MODAL
+    =========================================== -->
+
+    <div
+        class="checkout-modal"
+        id="checkoutModal"
+    >
+
+        <div class="checkout-box">
+
+            <button
+                type="button"
+                class="close-checkout"
+                id="closeCheckout"
+            >
+                ×
+            </button>
+
+
+            <div class="checkout-content">
+
+
+                <!-- PRODUCT IMAGE -->
+
+                <div class="checkout-image-area">
+
+                    <img
+                        id="checkoutImage"
+                        src=""
+                        alt="Product"
+                    >
+
+                    <div
+                        id="checkoutThumbnails"
+                        class="product-gallery"
+                    >
+                    </div>
+
+                </div>
+
+
+
+                <!-- PRODUCT DETAILS -->
+
+                <div class="checkout-details">
+
+                    <div
+                        class="checkout-category"
+                        id="checkoutCategory"
+                    >
+                    </div>
+
+
+                    <h2 id="checkoutName">
+                        Product Name
+                    </h2>
+
+
+                    <p
+                        id="checkoutDescription"
+                        class="checkout-description"
+                    >
+                    </p>
+
+
+                    <div
+                        class="checkout-price"
+                        id="checkoutPrice"
+                    >
+                        ₱0.00
+                    </div>
+
+
+
+                    <!-- QUANTITY -->
+
+                    <div class="quantity-section">
+
+                        <label>
+                            Quantity
+                        </label>
+
+                        <div class="quantity-controls">
+
+                            <button
+                                type="button"
+                                id="decreaseQuantity"
+                            >
+                                −
+                            </button>
+
+                            <span
+                                id="checkoutQuantity"
+                            >
+                                1
+                            </span>
+
+                            <button
+                                type="button"
+                                id="increaseQuantity"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- TOTAL -->
+
+                    <div class="checkout-total-row">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="checkoutTotal">
+                            ₱0.00
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- SHIPPING ADDRESS -->
+
+                    <div class="checkout-address-section">
+
+                        <label>
+                            Shipping Address
+                        </label>
+
+                        <div
+                            id="checkoutAddress"
+                            class="checkout-address"
+                        >
+                            No shipping address saved.
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PAYMENT -->
+
+                    <div class="payment-section">
+
+                        <label for="paymentMethod">
+                            Payment Method
+                        </label>
+
+                        <select id="paymentMethod">
+
+                            <option value="Cash on Delivery">
+                                Cash on Delivery
+                            </option>
+
+                            <option value="GCash">
+                                GCash
+                            </option>
+
+                            <option value="Bank Transfer">
+                                Bank Transfer
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                        id="checkoutMessage"
+                        class="checkout-message"
+                    >
+                    </div>
+
+
+
+                    <!-- PLACE ORDER -->
+
+                    <button
+                        type="button"
+                        id="placeOrderButton"
+                        class="place-order-button"
+                    >
+                        PLACE ORDER
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         SCRIPT
+    =========================================== -->
 
     <script src="catalog.js"></script>
 
