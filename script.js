@@ -1,31 +1,8 @@
 /* ==========================================
    LOVE LUXE BY EA
-   ARRAY-ONLY LOGIN SYSTEM
+   LOGIN + SIGNUP
+   ARRAY ONLY
 ========================================== */
-
-
-/* ==========================================
-   ADMIN ACCOUNT
-========================================== */
-
-const adminAccount = {
-
-    username: "admin",
-
-    password: "Admin123",
-
-    fullName: "Love Luxe Admin",
-
-    role: "admin"
-
-};
-
-
-/* ==========================================
-   CURRENT USER
-========================================== */
-
-let currentUser = null;
 
 
 /* ==========================================
@@ -36,6 +13,7 @@ document.addEventListener(
     "DOMContentLoaded",
     function () {
 
+
         const loginForm =
             document.getElementById(
                 "loginForm"
@@ -43,21 +21,13 @@ document.addEventListener(
 
 
         if (!loginForm) {
-
             return;
-
         }
 
 
         loginForm.addEventListener(
             "submit",
             function (event) {
-
-                /*
-                   IMPORTANT:
-                   Prevent the normal HTML form
-                   submission.
-                */
 
                 event.preventDefault();
 
@@ -98,31 +68,53 @@ document.addEventListener(
                     passwordInput.value;
 
 
-                /*
-                   Clear previous message
-                */
+                /* =========================
+                   CLEAR MESSAGE
+                ========================= */
 
                 if (loginMessage) {
 
-                    loginMessage.textContent = "";
-
-                    loginMessage.className =
-                        "auth-message";
+                    loginMessage.textContent =
+                        "";
 
                 }
 
 
-                /* ==================================
+                /* =========================
+                   EMPTY FIELDS
+                ========================= */
+
+                if (
+                    username === "" ||
+                    password === ""
+                ) {
+
+                    if (loginMessage) {
+
+                        loginMessage.textContent =
+                            "Please enter your username and password.";
+
+                        loginMessage.style.color =
+                            "red";
+
+                    }
+
+                    return;
+
+                }
+
+
+                /* =========================
                    ADMIN LOGIN
-                ================================== */
+                ========================= */
 
                 if (
                     username ===
                         adminAccount.username &&
-
                     password ===
                         adminAccount.password
                 ) {
+
 
                     currentUser =
                         adminAccount;
@@ -133,15 +125,11 @@ document.addEventListener(
                         loginMessage.textContent =
                             "Login successful. Opening admin dashboard...";
 
-                        loginMessage.className =
-                            "auth-message success";
+                        loginMessage.style.color =
+                            "green";
 
                     }
 
-
-                    /*
-                       Go to admin page
-                    */
 
                     setTimeout(
                         function () {
@@ -159,47 +147,19 @@ document.addEventListener(
                 }
 
 
-                /* ==================================
+                /* =========================
                    CUSTOMER LOGIN
-                ================================== */
-
-                /*
-                   data.js contains the
-                   customers array.
-                */
-
-                if (
-                    typeof customers ===
-                    "undefined"
-                ) {
-
-                    if (loginMessage) {
-
-                        loginMessage.textContent =
-                            "Customer data could not be loaded.";
-
-                        loginMessage.className =
-                            "auth-message error";
-
-                    }
-
-                    return;
-
-                }
-
+                ========================= */
 
                 const customer =
                     customers.find(
-                        function (user) {
+                        function (account) {
 
                             return (
-
-                                user.username ===
+                                account.username ===
                                     username &&
-
-                                user.password ===
+                                account.password ===
                                     password
-
                             );
 
                         }
@@ -207,6 +167,7 @@ document.addEventListener(
 
 
                 if (customer) {
+
 
                     currentUser =
                         customer;
@@ -217,15 +178,11 @@ document.addEventListener(
                         loginMessage.textContent =
                             "Login successful. Opening shop...";
 
-                        loginMessage.className =
-                            "auth-message success";
+                        loginMessage.style.color =
+                            "green";
 
                     }
 
-
-                    /*
-                       Go to customer catalog
-                    */
 
                     setTimeout(
                         function () {
@@ -243,17 +200,17 @@ document.addEventListener(
                 }
 
 
-                /* ==================================
+                /* =========================
                    INVALID LOGIN
-                ================================== */
+                ========================= */
 
                 if (loginMessage) {
 
                     loginMessage.textContent =
                         "Invalid username or password.";
 
-                    loginMessage.className =
-                        "auth-message error";
+                    loginMessage.style.color =
+                        "red";
 
                 }
 
@@ -272,6 +229,7 @@ document.addEventListener(
     "DOMContentLoaded",
     function () {
 
+
         const signupForm =
             document.getElementById(
                 "signupForm"
@@ -279,9 +237,7 @@ document.addEventListener(
 
 
         if (!signupForm) {
-
             return;
-
         }
 
 
@@ -292,28 +248,28 @@ document.addEventListener(
                 event.preventDefault();
 
 
-                const fullName =
+                const fullNameInput =
                     document.getElementById(
                         "fullName"
-                    )?.value.trim();
+                    );
 
 
-                const username =
+                const usernameInput =
                     document.getElementById(
                         "signupUsername"
-                    )?.value.trim();
+                    );
 
 
-                const password =
+                const passwordInput =
                     document.getElementById(
                         "signupPassword"
-                    )?.value;
+                    );
 
 
-                const confirmPassword =
+                const confirmPasswordInput =
                     document.getElementById(
                         "confirmPassword"
-                    )?.value;
+                    );
 
 
                 const signupMessage =
@@ -322,18 +278,46 @@ document.addEventListener(
                     );
 
 
-                /* ==================================
-                   REQUIRED FIELDS
-                ================================== */
-
                 if (
-                    !fullName ||
-                    !username ||
-                    !password ||
-                    !confirmPassword
+                    !fullNameInput ||
+                    !usernameInput ||
+                    !passwordInput ||
+                    !confirmPasswordInput
                 ) {
 
-                    showMessage(
+                    return;
+
+                }
+
+
+                const fullName =
+                    fullNameInput.value.trim();
+
+
+                const username =
+                    usernameInput.value.trim();
+
+
+                const password =
+                    passwordInput.value;
+
+
+                const confirmPassword =
+                    confirmPasswordInput.value;
+
+
+                /* =========================
+                   EMPTY FIELDS
+                ========================= */
+
+                if (
+                    fullName === "" ||
+                    username === "" ||
+                    password === "" ||
+                    confirmPassword === ""
+                ) {
+
+                    showSignupMessage(
                         signupMessage,
                         "Please complete all fields.",
                         true
@@ -344,16 +328,16 @@ document.addEventListener(
                 }
 
 
-                /* ==================================
+                /* =========================
                    ADMIN USERNAME
-                ================================== */
+                ========================= */
 
                 if (
                     username.toLowerCase() ===
                     "admin"
                 ) {
 
-                    showMessage(
+                    showSignupMessage(
                         signupMessage,
                         "This username is not available.",
                         true
@@ -364,16 +348,16 @@ document.addEventListener(
                 }
 
 
-                /* ==================================
-                   PASSWORD MATCH
-                ================================== */
+                /* =========================
+                   PASSWORD CHECK
+                ========================= */
 
                 if (
                     password !==
                     confirmPassword
                 ) {
 
-                    showMessage(
+                    showSignupMessage(
                         signupMessage,
                         "Passwords do not match.",
                         true
@@ -384,51 +368,27 @@ document.addEventListener(
                 }
 
 
-                /*
-                   Make sure customers array
-                   exists.
-                */
+                /* =========================
+                   DUPLICATE USERNAME
+                ========================= */
 
-                if (
-                    typeof customers ===
-                    "undefined"
-                ) {
-
-                    showMessage(
-                        signupMessage,
-                        "Customer data could not be loaded.",
-                        true
-                    );
-
-                    return;
-
-                }
-
-
-                /* ==================================
-                   CHECK DUPLICATE USERNAME
-                ================================== */
-
-                const usernameExists =
-                    customers.some(
+                const existingCustomer =
+                    customers.find(
                         function (customer) {
 
                             return (
-
                                 customer.username
                                     .toLowerCase() ===
-
                                 username.toLowerCase()
-
                             );
 
                         }
                     );
 
 
-                if (usernameExists) {
+                if (existingCustomer) {
 
-                    showMessage(
+                    showSignupMessage(
                         signupMessage,
                         "Username already exists.",
                         true
@@ -439,9 +399,9 @@ document.addEventListener(
                 }
 
 
-                /* ==================================
+                /* =========================
                    CREATE CUSTOMER
-                ================================== */
+                ========================= */
 
                 const newCustomer = {
 
@@ -457,8 +417,27 @@ document.addEventListener(
                     phone:
                         "",
 
-                    shippingAddress:
-                        "",
+                    shippingAddress: {
+
+                        houseNumber:
+                            "",
+
+                        street:
+                            "",
+
+                        barangay:
+                            "",
+
+                        city:
+                            "",
+
+                        province:
+                            "",
+
+                        postalCode:
+                            ""
+
+                    },
 
                     role:
                         "customer"
@@ -466,34 +445,25 @@ document.addEventListener(
                 };
 
 
-                /*
-                   Add customer to array
-                */
-
                 customers.push(
                     newCustomer
                 );
 
 
-                /*
-                   Temporarily make this
-                   user the current user
-                */
-
-                currentUser =
-                    newCustomer;
-
-
-                showMessage(
+                showSignupMessage(
                     signupMessage,
                     "Account created successfully!",
                     false
                 );
 
 
-                /*
-                   Go back to login
-                */
+                signupForm.reset();
+
+
+                /* =========================
+                   IMPORTANT
+                   ARRAY-ONLY SYSTEM
+                ========================= */
 
                 setTimeout(
                     function () {
@@ -502,7 +472,7 @@ document.addEventListener(
                             "index.html";
 
                     },
-                    700
+                    1000
                 );
 
             }
@@ -513,19 +483,17 @@ document.addEventListener(
 
 
 /* ==========================================
-   MESSAGE HELPER
+   SIGNUP MESSAGE
 ========================================== */
 
-function showMessage(
+function showSignupMessage(
     element,
     message,
     isError
 ) {
 
     if (!element) {
-
         return;
-
     }
 
 
@@ -535,180 +503,14 @@ function showMessage(
 
     if (isError) {
 
-        element.className =
-            "auth-message error";
+        element.style.color =
+            "red";
+
+    } else {
+
+        element.style.color =
+            "green";
 
     }
-
-    else {
-
-        element.className =
-            "auth-message success";
-
-    }
-
-}
-
-
-/* ==========================================
-   FORGOT PASSWORD
-========================================== */
-
-function resetPassword() {
-
-    const username =
-        document.getElementById(
-            "forgotUsername"
-        )?.value.trim();
-
-
-    const newPassword =
-        document.getElementById(
-            "forgotNewPassword"
-        )?.value;
-
-
-    const confirmPassword =
-        document.getElementById(
-            "forgotConfirmPassword"
-        )?.value;
-
-
-    const message =
-        document.getElementById(
-            "forgotMessage"
-        );
-
-
-    if (
-        !username ||
-        !newPassword ||
-        !confirmPassword
-    ) {
-
-        showMessage(
-            message,
-            "Please complete all fields.",
-            true
-        );
-
-        return false;
-
-    }
-
-
-    if (
-        newPassword !==
-        confirmPassword
-    ) {
-
-        showMessage(
-            message,
-            "Passwords do not match.",
-            true
-        );
-
-        return false;
-
-    }
-
-
-    if (
-        typeof customers ===
-        "undefined"
-    ) {
-
-        showMessage(
-            message,
-            "Customer data could not be loaded.",
-            true
-        );
-
-        return false;
-
-    }
-
-
-    const customer =
-        customers.find(
-            function (user) {
-
-                return (
-                    user.username.toLowerCase() ===
-                    username.toLowerCase()
-                );
-
-            }
-        );
-
-
-    if (!customer) {
-
-        showMessage(
-            message,
-            "Username not found.",
-            true
-        );
-
-        return false;
-
-    }
-
-
-    customer.password =
-        newPassword;
-
-
-    showMessage(
-        message,
-        "Password changed successfully.",
-        false
-    );
-
-
-    return false;
-
-}
-
-
-/* ==========================================
-   GET CURRENT USER
-========================================== */
-
-function getCurrentUser() {
-
-    return currentUser;
-
-}
-
-
-/* ==========================================
-   LOGOUT
-========================================== */
-
-function logoutCustomer() {
-
-    currentUser =
-        null;
-
-
-    window.location.href =
-        "index.html";
-
-}
-
-
-/* ==========================================
-   ADMIN LOGOUT
-========================================== */
-
-function adminLogout() {
-
-    currentUser =
-        null;
-
-
-    window.location.href =
-        "index.html";
 
 }
