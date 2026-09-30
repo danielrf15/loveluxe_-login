@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Love Luxe by EA - Products
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="catalog.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- MOBILE HEADER -->
+
+    <header class="mobile-header">
+
+        <button
+            class="menu-button"
+            onclick="openSidebar()"
+            type="button"
+        >
+            ☰
+        </button>
+
+        <div class="mobile-brand">
+            LOVE LUXE
+            <span>by EA</span>
+        </div>
+
+    </header>
+
+
+
+    <!-- SIDEBAR -->
+
+    <aside
+        class="shop-sidebar"
+        id="shopSidebar"
+    >
+
+        <div class="sidebar-brand">
+
+            <div class="brand-title">
+                Love Luxe
+            </div>
+
+            <div class="brand-subtitle">
+                by EA • Est. 2024
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-section">
+
+            <div class="sidebar-label">
+                SHOP
+            </div>
+
+
+            <a
+                href="catalog.html"
+                class="sidebar-link active"
+                id="productsLink"
+            >
+
+                <span>
+                    🛍️
+                </span>
+
+                <span>
+                    Products
+                </span>
+
+            </a>
+
+
+            <!-- MY ACCOUNT -->
+
+            <button
+                type="button"
+                class="sidebar-link account-toggle"
+                id="accountToggle"
+            >
+
+                <span>
+                    👤
+                </span>
+
+                <span>
+                    My Account
+                </span>
+
+                <span class="account-arrow">
+                    ▼
+                </span>
+
+            </button>
+
+
+            <div
+                class="account-dropdown"
+                id="accountDropdown"
+            >
+
+                <a href="personal.html">
+                    Personal Information
+                </a>
+
+                <a href="orders.html">
+                    My Orders
+                </a>
+
+                <a href="settings.html">
+                    Settings
+                </a>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- SIDEBAR OVERLAY -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+
+    <!-- MAIN -->
+
+    <main class="shop-main">
+
+
+        <!-- TOP BAR -->
+
+        <div class="shop-topbar">
+
+            <div>
+
+                <div class="page-small-title">
+                    CUSTOMER SHOP
+                </div>
+
+                <h1>
+                    Product Management
+                </h1>
+
+            </div>
+
+
+            <div class="customer-profile">
+
+                <div class="customer-avatar">
+                    C
+                </div>
+
+                <div>
+
+                    <div class="customer-label">
+                        Welcome Customer
+                    </div>
+
+                    <div
+                        class="customer-name"
+                        id="customerName"
+                    >
+                        Customer
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SHOP HEADER -->
+
+        <section class="catalog-header">
+
+            <div>
+
+                <div class="catalog-eyebrow">
+                    LOVE LUXE COLLECTION
+                </div>
+
+                <h2>
+                    Our Products
+                </h2>
+
+                <p>
+                    Browse our available products and
+                    choose what you would like to order.
+                </p>
+
+            </div>
+
+
+            <div
+                class="product-count"
+                id="productCount"
+            >
+                Showing 16 product(s)
+            </div>
+
+        </section>
+
+
+
+        <!-- SEARCH -->
+
+        <section class="catalog-tools">
+
+            <div class="search-box">
+
+                <span>
+                    🔍
+                </span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search products..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+        </section>
+
+
+
+        <!-- CATEGORY FILTERS -->
+
+        <div class="filter-buttons">
+
+            <button
+                type="button"
+                class="filter-button active"
+                data-category="All"
+            >
+                All
+            </button>
+
+            <button
+                type="button"
+                class="filter-button"
+                data-category="Bags"
+            >
+                Bags
+            </button>
+
+            <button
+                type="button"
+                class="filter-button"
+                data-category="Clothing"
+            >
+                Clothing
+            </button>
+
+            <button
+                type="button"
+                class="filter-button"
+                data-category="Perfume"
+            >
+                Perfume
+            </button>
+
+            <button
+                type="button"
+                class="filter-button"
+                data-category="Body Care"
+            >
+                Body Care
+            </button>
+
+        </div>
+
+
+
+        <!-- PRODUCT GRID -->
+
+        <section
+            class="product-grid"
+            id="productGrid"
+        >
+        </section>
+
+
+
+        <!-- NO PRODUCTS -->
+
+        <div
+            class="no-products"
+            id="noProducts"
+            style="display: none;"
+        >
+
+            <div class="no-products-icon">
+                🔍
+            </div>
+
+            <h3>
+                No products found
+            </h3>
+
+            <p>
+                Try another search or category.
+            </p>
+
+        </div>
+
+
+
+        <!-- FOOTER -->
+
+        <footer class="shop-footer">
+
+            <div>
+                Love Luxe by EA
+            </div>
+
+            <div>
+                Products • Bags • Clothing • Perfume • Body Care
+            </div>
+
+        </footer>
+
+    </main>
+
+
+
+    <!-- ==========================================
+         CHECKOUT / PRODUCT MODAL
+    =========================================== -->
+
+    <div
+        class="checkout-modal"
+        id="checkoutModal"
+    >
+
+        <div class="checkout-box">
+
+            <button
+                type="button"
+                class="close-checkout"
+                id="closeCheckout"
+            >
+                ×
+            </button>
+
+
+            <div class="checkout-content">
+
+
+                <!-- IMAGE -->
+
+                <div class="checkout-image-area">
+
+                    <img
+                        id="checkoutImage"
+                        src=""
+                        alt="Product"
+                    >
+
+                    <div
+                        class="product-gallery"
+                        id="checkoutThumbnails"
+                    >
+                    </div>
+
+                </div>
+
+
+
+                <!-- DETAILS -->
+
+                <div class="checkout-details">
+
+                    <div
+                        class="checkout-category"
+                        id="checkoutCategory"
+                    >
+                    </div>
+
+                    <h2 id="checkoutName">
+                    </h2>
+
+                    <p
+                        class="checkout-description"
+                        id="checkoutDescription"
+                    >
+                    </p>
+
+                    <div
+                        class="checkout-price"
+                        id="checkoutPrice"
+                    >
+                    </div>
+
+
+                    <!-- OPTIONS -->
+
+                    <div
+                        class="product-options"
+                        id="productOptions"
+                    >
+                    </div>
+
+
+
+                    <!-- QUANTITY -->
+
+                    <div class="quantity-section">
+
+                        <label>
+                            Quantity
+                        </label>
+
+
+                        <div class="quantity-controls">
+
+                            <button
+                                type="button"
+                                id="decreaseQuantity"
+                            >
+                                −
+                            </button>
+
+
+                            <input
+                                type="number"
+                                id="checkoutQuantity"
+                                min="1"
+                                max="99"
+                                value="1"
+                            >
+
+
+                            <button
+                                type="button"
+                                id="increaseQuantity"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SHIPPING ADDRESS -->
+
+                    <div class="checkout-address-section">
+
+                        <label>
+                            Shipping Address
+                        </label>
+
+                        <div
+                            class="checkout-address"
+                            id="checkoutAddress"
+                        >
+                            No shipping address saved.
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PAYMENT -->
+
+                    <div class="payment-section">
+
+                        <label for="paymentMethod">
+                            Payment Method
+                        </label>
+
+                        <select id="paymentMethod">
+
+                            <option value="Cash on Delivery">
+                                Cash on Delivery
+                            </option>
+
+                            <option value="GCash">
+                                GCash
+                            </option>
+
+                            <option value="Bank Transfer">
+                                Bank Transfer
+                            </option>
+
+                            <option value="Card">
+                                Card
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- TOTAL -->
+
+                    <div class="checkout-total-row">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="checkoutTotal">
+                            ₱0.00
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- ORDER -->
+
+                    <button
+                        type="button"
+                        class="place-order-button"
+                        id="placeOrderButton"
+                    >
+                        PLACE ORDER
+                    </button>
+
+
+                    <div
+                        class="checkout-message"
+                        id="checkoutMessage"
+                    >
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="data.js"></script>
+    <script src="catalog.js"></script>
+
+</body>
+
+</html>

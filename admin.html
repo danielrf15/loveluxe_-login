@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Love Luxe by EA - Admin Portal
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+
+    <style>
+
+        /* ==========================================
+           PAGE VIEWS
+        ========================================== */
+
+        .admin-view {
+            display: none;
+        }
+
+        .admin-view.active-view {
+            display: block;
+        }
+
+
+        /* ==========================================
+           ACTIVE SIDEBAR ITEM
+        ========================================== */
+
+        .sidebar .nav-link.page-active {
+            background: #d3ad5c;
+            color: #ffffff;
+            border-radius: 8px;
+        }
+
+
+        .sidebar .nav-link.page-active span {
+            color: #ffffff;
+        }
+
+
+        /* ==========================================
+           PRODUCT ACTIVE ITEM
+        ========================================== */
+
+        .sidebar .sub-link.active-sub {
+            background: #d3ad5c;
+            color: #ffffff;
+            border-radius: 8px;
+        }
+
+
+        /* ==========================================
+           KEEP PRODUCT SUBMENU VISIBLE
+        ========================================== */
+
+        .product-menu {
+            display: block;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         MOBILE HEADER
+    =========================================== -->
+
+    <header class="mobile-header">
+
+        <button
+            class="menu-button"
+            onclick="toggleSidebar()"
+        >
+            ☰
+        </button>
+
+
+        <div class="mobile-brand">
+
+            LOVE LUXE
+
+            <span>
+                BY EA • EST. 2024
+            </span>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         SIDEBAR
+    =========================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+
+        <!-- BRAND -->
+
+        <div class="brand">
+
+            <div class="brand-title">
+                LOVE LUXE
+            </div>
+
+            <div class="brand-subtitle">
+                BY EA • EST. 2024
+            </div>
+
+        </div>
+
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <!-- GENERAL -->
+
+            <div class="nav-heading">
+                GENERAL
+            </div>
+
+
+            <!-- DASHBOARD -->
+
+            <a
+                href="#dashboard"
+                id="dashboardLink"
+                class="nav-link page-active"
+                data-page="dashboard"
+            >
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+
+            <!-- TEAM MODULES -->
+
+            <div class="nav-heading">
+                TEAM MODULES
+            </div>
+
+
+
+            <!-- NEW ORDER -->
+
+            <a
+                href="#"
+                class="nav-link inactive-link"
+            >
+
+                <span>
+                    New Order / POS
+                </span>
+
+                <span>
+                    −
+                </span>
+
+            </a>
+
+
+
+            <!-- APPOINTMENTS -->
+
+            <a
+                href="#"
+                class="nav-link inactive-link"
+            >
+
+                <span>
+                    Appointments
+                </span>
+
+                <span>
+                    −
+                </span>
+
+            </a>
+
+
+
+            <!-- ACTIVITY LOGS -->
+
+            <a
+                href="#"
+                class="nav-link inactive-link"
+            >
+
+                <span>
+                    Activity Logs
+                </span>
+
+                <span>
+                    −
+                </span>
+
+            </a>
+
+
+
+            <!-- ======================================
+                 PRODUCT MANAGEMENT
+            ======================================= -->
+
+            <div class="product-menu">
+
+
+                <!-- PRODUCT MANAGEMENT TITLE -->
+
+                <div class="nav-link product-title">
+
+                    <span>
+                        Product Management
+                    </span>
+
+                    <span>
+                        −
+                    </span>
+
+                </div>
+
+
+
+                <!-- ADD / CREATE PRODUCT -->
+
+                <a
+                    href="#product"
+                    id="productLink"
+                    class="sub-link"
+                    data-page="product"
+                >
+                    Add/Create Product
+                </a>
+
+
+
+                <!-- PRODUCT AUDIT -->
+
+                <a
+                    href="#"
+                    class="sub-link inactive-link"
+                >
+                    Product Audit Trail
+                </a>
+
+
+
+                <!-- PRODUCT ARCHIVE -->
+
+                <a
+                    href="#"
+                    class="sub-link inactive-link"
+                >
+                    Product Archive
+                </a>
+
+
+            </div>
+
+
+
+            <!-- INVENTORY -->
+
+            <a
+                href="#"
+                class="nav-link inactive-link"
+            >
+
+                <span>
+                    Inventory & Stock
+                </span>
+
+            </a>
+
+
+
+            <!-- SALES REPORTS -->
+
+            <a
+                href="#"
+                class="nav-link inactive-link"
+            >
+
+                <span>
+                    Sales Reports
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+
+        <!-- ==========================================
+             LOGOUT
+        =========================================== -->
+
+        <div class="sidebar-bottom">
+
+            <button
+                class="logout-button"
+                onclick="adminLogout()"
+            >
+                ↪ &nbsp; Logout
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- ==========================================
+         MOBILE OVERLAY
+    =========================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+        onclick="closeSidebar()"
+    ></div>
+
+
+
+    <!-- ==========================================
+         MAIN CONTENT
+    =========================================== -->
+
+    <main class="main-content">
+
+
+        <!-- ======================================
+             TOP BAR
+        ======================================= -->
+
+        <header class="topbar">
+
+
+            <div class="admin-label">
+                ADMIN PORTAL
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="admin-avatar">
+                    A
+                </div>
+
+                <span>
+                    Love Luxe Admin
+                </span>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- ==================================================
+             DASHBOARD VIEW
+        =================================================== -->
+
+        <section
+            id="dashboardView"
+            class="admin-view active-view"
+        >
+
+
+            <!-- PAGE HEADING -->
+
+            <section class="page-heading">
+
+                <div class="section-label">
+                    GENERAL
+                </div>
+
+                <h1>
+                    Dashboard Overview
+                </h1>
+
+                <p>
+                    Monitor the current sales, transactions, stock, and alerts of Love Luxe By EA.
+                </p>
+
+            </section>
+
+
+
+            <!-- DASHBOARD -->
+
+            <section class="dashboard-section">
+
+
+                <div class="dashboard-label">
+                    DASHBOARD OVERVIEW
+                </div>
+
+
+
+                <!-- STAT CARDS -->
+
+                <div class="stats-grid">
+
+
+                    <!-- SALES -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-title">
+                            TODAY'S TOTAL SALES
+                        </div>
+
+                        <div class="stat-value">
+                            ₱18,450.00
+                        </div>
+
+                        <div class="stat-positive">
+                            +12.5% from yesterday
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- TRANSACTIONS -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-title">
+                            TRANSACTIONS TODAY
+                        </div>
+
+                        <div class="stat-value">
+                            14
+                        </div>
+
+                        <div class="stat-description">
+                            Completed orders
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- STOCK -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-title">
+                            AVAILABLE STOCK
+                        </div>
+
+                        <div class="stat-value">
+                            128
+                        </div>
+
+                        <div class="stat-description">
+                            Items in catalog
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- LOW STOCK -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-title">
+                            LOW STOCK ALERTS
+                        </div>
+
+                        <div class="stat-value red">
+                            2
+                        </div>
+
+                        <div class="stat-danger">
+                            Needs restocking!
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- DASHBOARD TABLES -->
+
+                <div class="dashboard-tables">
+
+
+                    <!-- RECENT TRANSACTIONS -->
+
+                    <div class="table-card">
+
+                        <h2>
+                            Recent Transactions
+                        </h2>
+
+
+                        <div class="table-wrapper">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            RECEIPT #
+                                        </th>
+
+                                        <th>
+                                            CUSTOMER
+                                        </th>
+
+                                        <th>
+                                            AMOUNT
+                                        </th>
+
+                                        <th>
+                                            STATUS
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody>
+
+
+                                    <tr>
+
+                                        <td>
+                                            LL-0014
+                                        </td>
+
+                                        <td>
+                                            Customer
+                                        </td>
+
+                                        <td>
+                                            ₱3,590.00
+                                        </td>
+
+                                        <td>
+
+                                            <span class="completed">
+                                                Completed
+                                            </span>
+
+                                        </td>
+
+                                    </tr>
+
+
+
+                                    <tr>
+
+                                        <td>
+                                            LL-0013
+                                        </td>
+
+                                        <td>
+                                            Customer
+                                        </td>
+
+                                        <td>
+                                            ₱1,490.00
+                                        </td>
+
+                                        <td>
+
+                                            <span class="completed">
+                                                Completed
+                                            </span>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- STOCK STATUS -->
+
+                    <div class="table-card">
+
+                        <h2>
+                            Stock Status
+                        </h2>
+
+
+                        <div class="table-wrapper">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            ITEM
+                                        </th>
+
+                                        <th>
+                                            QTY
+                                        </th>
+
+                                        <th>
+                                            STATUS
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody>
+
+
+                                    <tr>
+
+                                        <td>
+                                            Luxe Handbag
+                                        </td>
+
+                                        <td>
+                                            18
+                                        </td>
+
+                                        <td>
+
+                                            <span class="available">
+                                                Available
+                                            </span>
+
+                                        </td>
+
+                                    </tr>
+
+
+
+                                    <tr>
+
+                                        <td>
+                                            Victoria's Secret Perfume
+                                        </td>
+
+                                        <td>
+                                            5
+                                        </td>
+
+                                        <td>
+
+                                            <span class="low-stock">
+                                                Low Stock
+                                            </span>
+
+                                        </td>
+
+                                    </tr>
+
+
+
+                                    <tr>
+
+                                        <td>
+                                            Alada Soap
+                                        </td>
+
+                                        <td>
+                                            3
+                                        </td>
+
+                                        <td>
+
+                                            <span class="low-stock">
+                                                Low Stock
+                                            </span>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </section>
+
+
+
+        <!-- ==================================================
+             PRODUCT MANAGEMENT VIEW
+        =================================================== -->
+
+        <section
+            id="productView"
+            class="admin-view"
+        >
+
+
+            <!-- PAGE HEADING -->
+
+            <section class="page-heading">
+
+
+                <div class="section-label">
+                    PRODUCT MANAGEMENT
+                </div>
+
+
+                <h1>
+                    Add / Create Product
+                </h1>
+
+
+                <p>
+                    Add and manage the product information of Love Luxe By EA.
+                </p>
+
+
+            </section>
+
+
+
+            <!-- PRODUCT MANAGEMENT -->
+
+            <section class="product-layout">
+
+
+                <!-- PRODUCT FORM -->
+
+                <div class="product-card">
+
+
+                    <h2>
+                        Product Information
+                    </h2>
+
+
+                    <p class="card-description">
+                        Enter the details of the product.
+                    </p>
+
+
+
+                    <label>
+                        Product Code
+                    </label>
+
+
+                    <input
+                        type="text"
+                        placeholder="e.g. LL-001"
+                    >
+
+
+
+                    <label>
+                        Product Name
+                    </label>
+
+
+                    <input
+                        type="text"
+                        placeholder="Enter product name"
+                    >
+
+
+
+                    <label>
+                        Category
+                    </label>
+
+
+                    <select>
+
+                        <option>
+                            Select category
+                        </option>
+
+                        <option>
+                            Bags
+                        </option>
+
+                        <option>
+                            Clothing
+                        </option>
+
+                        <option>
+                            Perfume
+                        </option>
+
+                        <option>
+                            Body Care
+                        </option>
+
+                    </select>
+
+
+
+                    <div class="two-inputs">
+
+
+                        <div>
+
+                            <label>
+                                Price
+                            </label>
+
+                            <input
+                                type="text"
+                                placeholder="₱0.00"
+                            >
+
+                        </div>
+
+
+
+                        <div>
+
+                            <label>
+                                Size
+                            </label>
+
+                            <input
+                                type="text"
+                                placeholder="e.g. Small / 100ml"
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <label>
+                        Color
+                    </label>
+
+
+                    <input
+                        type="text"
+                        placeholder="e.g. Black"
+                    >
+
+
+
+                    <label>
+                        Product Image
+                    </label>
+
+
+                    <div class="image-upload">
+
+                        <span>
+                            +
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- PRODUCT LIST -->
+
+                <div class="product-card product-list-card">
+
+
+                    <div class="product-list-header">
+
+
+                        <div>
+
+                            <h2>
+                                Product List
+                            </h2>
+
+                            <p class="card-description">
+                                Manage your current product records.
+                            </p>
+
+                        </div>
+
+
+
+                        <div class="product-filters">
+
+
+                            <input
+                                type="text"
+                                placeholder="Search products or product code..."
+                            >
+
+
+                            <select>
+
+                                <option>
+                                    All Categories
+                                </option>
+
+                                <option>
+                                    Bags
+                                </option>
+
+                                <option>
+                                    Clothing
+                                </option>
+
+                                <option>
+                                    Perfume
+                                </option>
+
+                                <option>
+                                    Body Care
+                                </option>
+
+                            </select>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="no-products">
+
+                        No products found.
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ==========================================
+         ADMIN JAVASCRIPT
+    =========================================== -->
+
+    <script src="data.js"></script>
+    <script src="admin.js"></script>
+
+
+</body>
+
+</html>

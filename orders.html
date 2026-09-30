@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Luxe by EA - My Orders</title><link rel="stylesheet" href="style.css">
+</head>
+<body id="customerPage">
+<header class="customer-mobile-header"><button type="button" id="customerMenuButton" class="customer-menu-button">☰</button><div class="customer-mobile-brand">LOVE LUXE<span>BY EA • EST. 2024</span></div></header>
+<aside id="customerSidebar" class="customer-sidebar"><div class="customer-brand"><div class="customer-brand-title">LOVE LUXE</div><div class="customer-brand-subtitle">BY EA • EST. 2024</div></div><div class="customer-sidebar-welcome"><span>Welcome</span><strong id="sidebarCustomerName">Customer</strong></div><nav class="customer-nav"><div class="customer-nav-heading">ACCOUNT</div><a href="personal.html" class="customer-nav-link">Personal Information</a><a href="orders.html" class="customer-nav-link active">My Orders</a><a href="settings.html" class="customer-nav-link">Settings</a><a href="catalog.html" class="customer-nav-link">Back to Shop</a></nav><div class="customer-sidebar-bottom"><button type="button" id="logoutButton" class="customer-logout-button">↪ &nbsp; Logout</button></div></aside>
+<div id="customerSidebarOverlay" class="customer-sidebar-overlay"></div>
+<main class="customer-main"><header class="customer-topbar"><div><div class="customer-topbar-label">CUSTOMER ACCOUNT</div><h1>My Orders</h1></div></header>
+<section class="account-section"><div class="section-heading"><div><div class="section-small-title">ORDERS</div><h2>My Orders</h2><p>View your recent Love Luxe orders.</p></div></div><div class="account-card" id="ordersList"></div></section></main>
+<script src="data.js"></script>
+<script>
+const data=window.LoveLuxeData,user=data.customers[0];
+document.addEventListener("DOMContentLoaded",function(){document.getElementById("sidebarCustomerName").textContent=user.fullName;loadOrders();document.getElementById("logoutButton").onclick=logout;setupMobile();});
+function loadOrders(){const list=document.getElementById("ordersList"),orders=data.orders.filter(o=>o.customerUsername===user.username).slice().reverse();if(!orders.length){list.innerHTML='<div class="empty-orders"><div class="empty-orders-icon">🛍</div><h3>No Orders Yet</h3><p>Your orders will appear here after you make a purchase.</p><a href="catalog.html" class="primary-button-link">SHOP NOW</a></div>';return;}list.innerHTML=orders.map(o=>`<div class="order-item"><div class="order-item-top"><div><span class="order-number">${o.orderNumber}</span><span class="order-date">${new Date(o.date).toLocaleDateString("en-PH")}</span></div><span class="order-status">${o.status}</span></div><div class="order-item-content"><div><strong>${o.productName}</strong><span>Category: ${o.category}</span><span>Quantity: ${o.quantity}</span>${o.color?`<span>Color: ${o.color}</span>`:""}${o.size?`<span>Size: ${o.size}</span>`:""}${o.scent?`<span>Scent: ${o.scent}</span>`:""}</div><strong class="order-total">₱${Number(o.total).toLocaleString("en-PH",{minimumFractionDigits:2})}</strong></div><div class="order-item-footer"><span>${o.paymentMethod}</span><span>${o.shippingAddress||"No address"}</span></div></div>`).join("");}
+function setupMobile(){const b=document.getElementById("customerMenuButton"),s=document.getElementById("customerSidebar"),o=document.getElementById("customerSidebarOverlay");b.onclick=()=>{s.classList.toggle("open");o.classList.toggle("active")};o.onclick=()=>{s.classList.remove("open");o.classList.remove("active")}}
+function logout(){if(confirm("Are you sure you want to logout?"))window.location.href="index.html"}
+</script></body></html>

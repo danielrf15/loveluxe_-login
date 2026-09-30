@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Love Luxe by EA - My Account
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body id="customerPage">
+
+
+    <!-- MOBILE HEADER -->
+
+    <header class="customer-mobile-header">
+
+        <button
+            type="button"
+            id="customerMenuButton"
+            class="customer-menu-button"
+        >
+            ☰
+        </button>
+
+
+        <div class="customer-mobile-brand">
+
+            LOVE LUXE
+
+            <span>
+                BY EA • EST. 2024
+            </span>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- SIDEBAR -->
+
+    <aside
+        id="customerSidebar"
+        class="customer-sidebar"
+    >
+
+
+        <!-- BRAND -->
+
+        <div class="customer-brand">
+
+            <div class="customer-brand-title">
+                LOVE LUXE
+            </div>
+
+
+            <div class="customer-brand-subtitle">
+                BY EA • EST. 2024
+            </div>
+
+        </div>
+
+
+
+        <!-- WELCOME -->
+
+        <div class="customer-sidebar-welcome">
+
+            <span>
+                Welcome
+            </span>
+
+
+            <strong data-customer-name>
+                Customer
+            </strong>
+
+        </div>
+
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="customer-nav">
+
+
+            <div class="customer-nav-heading">
+                ACCOUNT
+            </div>
+
+
+
+            <a
+                href="#personal"
+                class="customer-nav-link active"
+                data-section-link="personal"
+            >
+
+                <span>
+                    Personal Information
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="#orders"
+                class="customer-nav-link"
+                data-section-link="orders"
+            >
+
+                <span>
+                    My Orders
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="#settings"
+                class="customer-nav-link"
+                data-section-link="settings"
+            >
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+
+            <a
+                href="catalog.html"
+                class="customer-nav-link"
+            >
+
+                <span>
+                    Back to Shop
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+
+        <!-- LOGOUT -->
+
+        <div class="customer-sidebar-bottom">
+
+            <button
+                type="button"
+                id="customerLogoutButton"
+                class="customer-logout-button"
+            >
+
+                ↪ &nbsp; Logout
+
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- OVERLAY -->
+
+    <div
+        id="customerSidebarOverlay"
+        class="customer-sidebar-overlay"
+    ></div>
+
+
+
+    <!-- MAIN -->
+
+    <main class="customer-main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="customer-topbar">
+
+
+            <div>
+
+                <div class="customer-topbar-label">
+                    CUSTOMER ACCOUNT
+                </div>
+
+
+                <h1>
+                    My Account
+                </h1>
+
+            </div>
+
+
+
+
+        </header>
+
+
+
+        <!-- ACCOUNT MESSAGE -->
+
+        <div
+            id="accountMessage"
+            class="account-message"
+        ></div>
+
+
+
+        <!-- ======================================
+             PERSONAL INFORMATION
+        ======================================= -->
+
+        <section
+            id="personal"
+            class="account-section"
+        >
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <div class="section-small-title">
+                        ACCOUNT
+                    </div>
+
+
+                    <h2>
+                        Personal Information
+                    </h2>
+
+
+                    <p>
+                        Manage your basic account information.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="account-card">
+
+
+                <div class="account-form-grid">
+
+
+                    <!-- FULL NAME -->
+
+                    <div class="form-group">
+
+                        <label for="accountFullName">
+                            Full Name
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="accountFullName"
+                            placeholder="Enter your full name"
+                        >
+
+                    </div>
+
+
+
+                    <!-- USERNAME -->
+
+                    <div class="form-group">
+
+                        <label for="accountUsername">
+                            Username
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="accountUsername"
+                            placeholder="Enter your username"
+                        >
+
+                    </div>
+
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="accountPhone">
+                            Phone Number
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="accountPhone"
+                            placeholder="Enter your phone number"
+                        >
+
+                    </div>
+
+
+
+                    <!-- ACCOUNT TYPE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Account Type
+                        </label>
+
+
+                        <input
+                            type="text"
+                            value="Customer"
+                            readonly
+                            class="readonly-input"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="account-card-footer">
+
+                    <button
+                        type="button"
+                        id="saveAccountButton"
+                        class="primary-button"
+                    >
+                        SAVE CHANGES
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ======================================
+             MY ORDERS
+        ======================================= -->
+
+        <section
+            id="orders"
+            class="account-section"
+        >
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <div class="section-small-title">
+                        ORDERS
+                    </div>
+
+
+                    <h2>
+                        My Orders
+                    </h2>
+
+
+                    <p>
+                        View your recent Love Luxe orders.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="account-card">
+
+
+                <div
+                    id="ordersList"
+                    class="orders-list"
+                >
+
+
+                    <!-- ORDERS ARE LOADED BY SCRIPT.JS -->
+
+
+                    <div class="empty-orders">
+
+                        <div class="empty-orders-icon">
+                            🛍
+                        </div>
+
+
+                        <h3>
+                            No Orders Yet
+                        </h3>
+
+
+                        <p>
+                            Your orders will appear here after you make a purchase.
+                        </p>
+
+
+                        <a
+                            href="catalog.html"
+                            class="primary-button-link"
+                        >
+                            SHOP NOW
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ======================================
+             SETTINGS
+        ======================================= -->
+
+        <section
+            id="settings"
+            class="account-section"
+        >
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <div class="section-small-title">
+                        ACCOUNT SETTINGS
+                    </div>
+
+
+                    <h2>
+                        Settings
+                    </h2>
+
+
+                    <p>
+                        Manage your shipping address and password.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 SHIPPING ADDRESS
+            =================================== -->
+
+            <div
+                id="shipping"
+                class="account-card settings-card"
+            >
+
+
+                <div class="settings-card-heading">
+
+                    <div>
+
+                        <h3>
+                            Shipping Address
+                        </h3>
+
+
+                        <p>
+                            This address will be used when you checkout.
+                        </p>
+
+                    </div>
+
+
+                    <span class="settings-icon">
+                        📍
+                    </span>
+
+                </div>
+
+
+
+                <div class="account-form-grid">
+
+
+                    <!-- HOUSE / UNIT -->
+
+                    <div class="form-group">
+
+                        <label for="houseNumber">
+                            House / Unit Number
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="houseNumber"
+                            placeholder="e.g. 123"
+                        >
+
+                    </div>
+
+
+
+                    <!-- STREET -->
+
+                    <div class="form-group">
+
+                        <label for="street">
+                            Street
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="street"
+                            placeholder="Enter street"
+                        >
+
+                    </div>
+
+
+
+                    <!-- BARANGAY -->
+
+                    <div class="form-group">
+
+                        <label for="barangay">
+                            Barangay
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="barangay"
+                            placeholder="Enter barangay"
+                        >
+
+                    </div>
+
+
+
+                    <!-- CITY -->
+
+                    <div class="form-group">
+
+                        <label for="city">
+                            City / Municipality
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="city"
+                            placeholder="Enter city or municipality"
+                        >
+
+                    </div>
+
+
+
+                    <!-- PROVINCE -->
+
+                    <div class="form-group">
+
+                        <label for="province">
+                            Province
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="province"
+                            placeholder="Enter province"
+                        >
+
+                    </div>
+
+
+
+                    <!-- POSTAL CODE -->
+
+                    <div class="form-group">
+
+                        <label for="postalCode">
+                            Postal Code
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="postalCode"
+                            placeholder="Enter postal code"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="settings-card-footer">
+
+                    <button
+                        type="button"
+                        id="saveShippingButton"
+                        class="primary-button"
+                    >
+                        SAVE SHIPPING ADDRESS
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==================================
+                 CHANGE PASSWORD
+            =================================== -->
+
+            <div
+                id="password"
+                class="account-card settings-card"
+            >
+
+
+                <div class="settings-card-heading">
+
+                    <div>
+
+                        <h3>
+                            Change Password
+                        </h3>
+
+
+                        <p>
+                            Update your account password.
+                        </p>
+
+                    </div>
+
+
+                    <span class="settings-icon">
+                        🔒
+                    </span>
+
+                </div>
+
+
+
+                <div class="password-form">
+
+
+                    <!-- CURRENT PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="currentPassword">
+                            Current Password
+                        </label>
+
+
+                        <input
+                            type="password"
+                            id="currentPassword"
+                            placeholder="Enter current password"
+                        >
+
+                    </div>
+
+
+
+                    <!-- NEW PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="accountNewPassword">
+                            New Password
+                        </label>
+
+
+                        <input
+                            type="password"
+                            id="accountNewPassword"
+                            placeholder="Enter new password"
+                        >
+
+                    </div>
+
+
+
+                    <!-- CONFIRM -->
+
+                    <div class="form-group">
+
+                        <label for="accountConfirmPassword">
+                            Confirm New Password
+                        </label>
+
+
+                        <input
+                            type="password"
+                            id="accountConfirmPassword"
+                            placeholder="Confirm new password"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="settings-card-footer">
+
+                    <button
+                        type="button"
+                        id="changePasswordButton"
+                        class="primary-button"
+                    >
+                        CHANGE PASSWORD
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ACCOUNT SUMMARY -->
+
+        <section class="account-summary-section">
+
+
+            <div class="summary-card">
+
+
+                <div class="summary-title">
+                    ACCOUNT SUMMARY
+                </div>
+
+
+                <div class="summary-grid">
+
+
+                    <div>
+
+                        <span>
+                            Account Type
+                        </span>
+
+                        <strong>
+                            Customer
+                        </strong>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <span>
+                            Username
+                        </span>
+
+                        <strong id="summaryUsername">
+                            —
+                        </strong>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <span>
+                            Orders
+                        </span>
+
+                        <strong id="summaryOrders">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <script src="data.js"></script>
+    <script>
+        const data = window.LoveLuxeData;
+        let currentUser = data.customers[0];
+
+        document.addEventListener("DOMContentLoaded", function () {
+            loadAccount();
+            loadShippingAddress();
+            loadOrders();
+            setupNavigation();
+            setupMobileMenu();
+
+            document.getElementById("saveAccountButton")?.addEventListener("click", saveAccount);
+            document.getElementById("saveShippingButton")?.addEventListener("click", saveShippingAddress);
+            document.getElementById("changePasswordButton")?.addEventListener("click", changePassword);
+            document.getElementById("customerLogoutButton")?.addEventListener("click", logoutCustomer);
+        });
+
+        function loadAccount() {
+            document.getElementById("accountFullName").value = currentUser.fullName || "";
+            document.getElementById("accountUsername").value = currentUser.username || "";
+            document.getElementById("accountPhone").value = currentUser.phone || "";
+            document.getElementById("summaryUsername").textContent = currentUser.username || "—";
+            document.querySelectorAll("[data-customer-name]").forEach(function (element) {
+                element.textContent = currentUser.fullName || "Customer";
+            });
+        }
+
+        function showMessage(message, isError) {
+            const box = document.getElementById("accountMessage");
+            if (!box) return;
+            box.textContent = message;
+            box.className = isError ? "account-message error" : "account-message success";
+        }
+
+        function saveAccount() {
+            const fullName = document.getElementById("accountFullName").value.trim();
+            const username = document.getElementById("accountUsername").value.trim();
+            const phone = document.getElementById("accountPhone").value.trim();
+
+            if (!fullName || !username) {
+                showMessage("Please enter your name and username.", true);
+                return;
+            }
+
+            currentUser.fullName = fullName;
+            currentUser.username = username;
+            currentUser.phone = phone;
+            document.getElementById("summaryUsername").textContent = username;
+            loadAccount();
+            showMessage("Personal information saved successfully for this session.", false);
+        }
+
+        function loadShippingAddress() {
+            const address = currentUser.shippingAddress || {};
+            ["houseNumber", "street", "barangay", "city", "province", "postalCode"].forEach(function (id) {
+                document.getElementById(id).value = address[id] || "";
+            });
+        }
+
+        function saveShippingAddress() {
+            currentUser.shippingAddress = {
+                houseNumber: document.getElementById("houseNumber").value.trim(),
+                street: document.getElementById("street").value.trim(),
+                barangay: document.getElementById("barangay").value.trim(),
+                city: document.getElementById("city").value.trim(),
+                province: document.getElementById("province").value.trim(),
+                postalCode: document.getElementById("postalCode").value.trim()
+            };
+            showMessage("Shipping address saved successfully for this session.", false);
+        }
+
+        function changePassword() {
+            const currentPassword = document.getElementById("currentPassword").value;
+            const newPassword = document.getElementById("accountNewPassword").value;
+            const confirmPassword = document.getElementById("accountConfirmPassword").value;
+
+            if (currentPassword !== currentUser.password) {
+                showMessage("Current password is incorrect.", true);
+                return;
+            }
+            if (!newPassword) {
+                showMessage("Please enter a new password.", true);
+                return;
+            }
+            if (newPassword !== confirmPassword) {
+                showMessage("New passwords do not match.", true);
+                return;
+            }
+
+            currentUser.password = newPassword;
+            document.getElementById("currentPassword").value = "";
+            document.getElementById("accountNewPassword").value = "";
+            document.getElementById("accountConfirmPassword").value = "";
+            showMessage("Password changed successfully for this session.", false);
+        }
+
+        function loadOrders() {
+            const list = document.getElementById("ordersList");
+            const orders = data.orders.filter(function (order) {
+                return order.customerUsername === currentUser.username;
+            }).slice().reverse();
+
+            const summary = document.getElementById("summaryOrders");
+            if (summary) summary.textContent = orders.length;
+            if (!list) return;
+
+            if (!orders.length) {
+                list.innerHTML = `
+                    <div class="empty-orders">
+                        <div class="empty-orders-icon">🛍</div>
+                        <h3>No Orders Yet</h3>
+                        <p>Your orders will appear here after you make a purchase.</p>
+                        <a href="catalog.html" class="primary-button-link">SHOP NOW</a>
+                    </div>`;
+                return;
+            }
+
+            list.innerHTML = orders.map(function (order) {
+                return `
+                    <div class="order-item">
+                        <div class="order-item-top">
+                            <div>
+                                <span class="order-number">${order.orderNumber}</span>
+                                <span class="order-date">${new Date(order.date).toLocaleDateString("en-PH")}</span>
+                            </div>
+                            <span class="order-status">${order.status}</span>
+                        </div>
+                        <div class="order-item-content">
+                            <div>
+                                <strong>${order.productName}</strong>
+                                <span>Quantity: ${order.quantity}</span>
+                            </div>
+                            <strong class="order-total">₱${Number(order.total).toLocaleString("en-PH", {minimumFractionDigits:2})}</strong>
+                        </div>
+                    </div>`;
+            }).join("");
+        }
+
+        function setupNavigation() {
+            document.querySelectorAll("[data-section-link]").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    document.querySelectorAll(".customer-nav-link").forEach(function (item) {
+                        item.classList.remove("active");
+                    });
+                    link.classList.add("active");
+                });
+            });
+        }
+
+        function setupMobileMenu() {
+            const button = document.getElementById("customerMenuButton");
+            const sidebar = document.getElementById("customerSidebar");
+            const overlay = document.getElementById("customerSidebarOverlay");
+            button?.addEventListener("click", function () {
+                sidebar.classList.toggle("open");
+                overlay.classList.toggle("active");
+            });
+            overlay?.addEventListener("click", function () {
+                sidebar.classList.remove("open");
+                overlay.classList.remove("active");
+            });
+        }
+
+        function logoutCustomer() {
+            if (!confirm("Are you sure you want to logout?")) return;
+            data.currentUser = null;
+            window.location.href = "index.html";
+        }
+    </script>
+
+
+</body>
+
+</html>
