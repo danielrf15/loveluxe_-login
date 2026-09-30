@@ -188,7 +188,7 @@ const products = [
         name: "Vitamin E Whitening Cream",
         category: "Body Care",
         price: 180,
-        image: "images/vitamin-e-whitening-cream.jpg",
+        image: "images/vitamine-e-whitening-cream.jpg",
         description:
             "A moisturizing cream for an everyday skincare routine."
     },
