@@ -21,193 +21,151 @@
 
     <style>
 
-        /* ==========================================
-           ACCOUNT PAGE
-        ========================================== */
-
-        .account-page-content {
-            padding: 35px 40px 50px;
+        .account-content {
+            padding: 30px;
+            max-width: 1100px;
         }
-
 
         .account-page-header {
-            margin-bottom: 28px;
+            margin-bottom: 25px;
         }
 
-
-        .account-page-eyebrow {
+        .account-page-header .small-title {
             color: #c5a059;
             font-size: 11px;
-            font-weight: 700;
+            font-weight: bold;
             letter-spacing: 2px;
             margin-bottom: 8px;
         }
 
-
         .account-page-header h2 {
-            font-family: Georgia, serif;
-            font-size: 30px;
+            font-size: 28px;
             margin-bottom: 8px;
         }
-
 
         .account-page-header p {
             color: #777;
             font-size: 14px;
-            line-height: 1.6;
         }
-
 
         .account-card {
-            background: #ffffff;
+            background: white;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
-            padding: 28px;
+            padding: 30px;
             margin-bottom: 25px;
         }
 
+        .account-card h3 {
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
 
-        .settings-card-heading {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
+        .account-card-description {
+            color: #777;
+            font-size: 13px;
             margin-bottom: 25px;
         }
-
-
-        .settings-card-heading h3 {
-            font-size: 18px;
-            margin-bottom: 6px;
-        }
-
-
-        .settings-card-heading p {
-            color: #888;
-            font-size: 12px;
-        }
-
-
-        .settings-icon {
-            font-size: 24px;
-        }
-
 
         .account-form-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
-
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
         }
-
 
         .form-group label {
-            font-size: 12px;
-            font-weight: 700;
-            color: #333;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 8px;
         }
-
 
         .form-group input {
             width: 100%;
-            height: 45px;
-            border: 1px solid #d9dde5;
+            padding: 13px 14px;
+            border: 1px solid #d9dfe7;
             border-radius: 7px;
-            padding: 0 13px;
             font-family: inherit;
-            font-size: 13px;
+            font-size: 14px;
             outline: none;
         }
-
 
         .form-group input:focus {
             border-color: #c5a059;
         }
 
-
-        .password-form {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 20px;
-        }
-
-
-        .settings-card-footer {
+        .account-card-footer {
             margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid #eeeeee;
         }
-
 
         .primary-button {
             border: none;
-            background: #111111;
+            background: #c5a059;
             color: white;
             padding: 12px 20px;
             border-radius: 7px;
-            font-family: inherit;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: .5px;
+            font-weight: bold;
             cursor: pointer;
         }
 
-
         .primary-button:hover {
-            background: #c5a059;
+            background: #ad8845;
         }
 
-
-        .account-message {
-            display: none;
-            padding: 13px 16px;
-            border-radius: 7px;
+        .settings-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
-            font-size: 13px;
         }
 
-
-        .account-message.show {
-            display: block;
+        .settings-icon {
+            font-size: 25px;
         }
 
-
-        .account-message.success {
-            background: #edf8ef;
-            color: #27733b;
+        .password-form {
+            display: grid;
+            gap: 20px;
+            max-width: 600px;
         }
 
-
-        .account-message.error {
-            background: #fff0f0;
-            color: #a72e2e;
+        .sidebar-bottom {
+            margin-top: auto;
+            padding: 15px;
+            border-top: 1px solid #292929;
         }
 
+        .logout-link {
+            margin-bottom: 0;
+            color: #bdbdbd;
+        }
 
-        /* ==========================================
-           MOBILE
-        ========================================== */
+        .logout-link:hover {
+            color: white;
+            background: #1d1d1d;
+        }
 
-        @media (max-width: 768px) {
+        .account-dropdown a.active {
+            background: #c5a059;
+            color: white;
+        }
 
-            .account-page-content {
-                padding: 25px 18px 40px;
-            }
+        .account-dropdown a.active:hover {
+            background: #c5a059;
+            color: white;
+        }
 
+        @media (max-width: 700px) {
 
-            .account-card {
+            .account-content {
                 padding: 20px;
             }
 
-
-            .account-form-grid,
-            .password-form {
+            .account-form-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -227,30 +185,22 @@
 
         <button
             class="menu-button"
-            onclick="openSidebar()"
+            id="menuButton"
             type="button"
         >
             ☰
         </button>
 
-
         <div class="mobile-brand">
-
             LOVE LUXE
-
-            <span>
-                by EA
-            </span>
-
+            <span>by EA</span>
         </div>
 
     </header>
 
 
 
-    <!-- ==========================================
-         SAME SIDEBAR AS CATALOG
-    =========================================== -->
+    <!-- SIDEBAR -->
 
     <aside
         class="shop-sidebar"
@@ -270,7 +220,6 @@
         </div>
 
 
-
         <div class="sidebar-section">
 
             <div class="sidebar-label">
@@ -278,12 +227,9 @@
             </div>
 
 
-            <!-- PRODUCTS -->
-
             <a
                 href="catalog.html"
                 class="sidebar-link"
-                id="productsLink"
             >
 
                 <span>
@@ -295,7 +241,6 @@
                 </span>
 
             </a>
-
 
 
             <!-- MY ACCOUNT -->
@@ -314,15 +259,15 @@
                     My Account
                 </span>
 
-                <span class="account-arrow">
+                <span
+                    class="account-arrow"
+                    id="accountArrow"
+                >
                     ▲
                 </span>
 
             </button>
 
-
-
-            <!-- ACCOUNT DROPDOWN -->
 
             <div
                 class="account-dropdown show"
@@ -348,6 +293,29 @@
 
         </div>
 
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <button
+                type="button"
+                class="sidebar-link logout-link"
+                id="logoutButton"
+            >
+
+                <span>
+                    🚪
+                </span>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </div>
+
     </aside>
 
 
@@ -361,9 +329,7 @@
 
 
 
-    <!-- ==========================================
-         MAIN
-    =========================================== -->
+    <!-- MAIN -->
 
     <main class="shop-main">
 
@@ -387,7 +353,10 @@
 
             <div class="customer-profile">
 
-                <div class="customer-avatar">
+                <div
+                    class="customer-avatar"
+                    id="customerAvatar"
+                >
                     C
                 </div>
 
@@ -412,14 +381,13 @@
 
 
 
-        <!-- ACCOUNT CONTENT -->
+        <!-- CONTENT -->
 
-        <section class="account-page-content">
-
+        <section class="account-content">
 
             <div class="account-page-header">
 
-                <div class="account-page-eyebrow">
+                <div class="small-title">
                     ACCOUNT SETTINGS
                 </div>
 
@@ -434,19 +402,11 @@
             </div>
 
 
-
-            <div
-                id="accountMessage"
-                class="account-message"
-            ></div>
-
-
-
             <!-- SHIPPING ADDRESS -->
 
             <div class="account-card">
 
-                <div class="settings-card-heading">
+                <div class="settings-heading">
 
                     <div>
 
@@ -454,18 +414,17 @@
                             Shipping Address
                         </h3>
 
-                        <p>
+                        <p class="account-card-description">
                             This address will be used when you checkout.
                         </p>
 
                     </div>
 
-                    <span class="settings-icon">
+                    <div class="settings-icon">
                         📍
-                    </span>
+                    </div>
 
                 </div>
-
 
 
                 <div class="account-form-grid">
@@ -486,7 +445,6 @@
                     </div>
 
 
-
                     <div class="form-group">
 
                         <label for="street">
@@ -500,7 +458,6 @@
                         >
 
                     </div>
-
 
 
                     <div class="form-group">
@@ -518,7 +475,6 @@
                     </div>
 
 
-
                     <div class="form-group">
 
                         <label for="city">
@@ -534,7 +490,6 @@
                     </div>
 
 
-
                     <div class="form-group">
 
                         <label for="province">
@@ -548,7 +503,6 @@
                         >
 
                     </div>
-
 
 
                     <div class="form-group">
@@ -568,13 +522,12 @@
                 </div>
 
 
-
-                <div class="settings-card-footer">
+                <div class="account-card-footer">
 
                     <button
                         type="button"
-                        id="saveShippingButton"
                         class="primary-button"
+                        id="saveShippingButton"
                     >
                         SAVE SHIPPING ADDRESS
                     </button>
@@ -589,7 +542,7 @@
 
             <div class="account-card">
 
-                <div class="settings-card-heading">
+                <div class="settings-heading">
 
                     <div>
 
@@ -597,18 +550,17 @@
                             Change Password
                         </h3>
 
-                        <p>
+                        <p class="account-card-description">
                             Update your account password.
                         </p>
 
                     </div>
 
-                    <span class="settings-icon">
+                    <div class="settings-icon">
                         🔒
-                    </span>
+                    </div>
 
                 </div>
-
 
 
                 <div class="password-form">
@@ -629,7 +581,6 @@
                     </div>
 
 
-
                     <div class="form-group">
 
                         <label for="newPassword">
@@ -643,7 +594,6 @@
                         >
 
                     </div>
-
 
 
                     <div class="form-group">
@@ -663,13 +613,12 @@
                 </div>
 
 
-
-                <div class="settings-card-footer">
+                <div class="account-card-footer">
 
                     <button
                         type="button"
-                        id="changePasswordButton"
                         class="primary-button"
+                        id="changePasswordButton"
                     >
                         CHANGE PASSWORD
                     </button>
@@ -680,344 +629,385 @@
 
         </section>
 
+
     </main>
 
 
 
     <script src="data.js"></script>
 
-
     <script>
 
-        /* ==========================================
-           ACCOUNT DROPDOWN
-        ========================================== */
-
-        const accountToggle =
-            document.getElementById("accountToggle");
-
-        const accountDropdown =
-            document.getElementById("accountDropdown");
-
-
-        accountToggle.addEventListener(
-            "click",
+        document.addEventListener(
+            "DOMContentLoaded",
             function () {
 
-                accountDropdown.classList.toggle("show");
 
-                accountToggle.classList.toggle("active");
+                /* =========================
+                   ACCOUNT DROPDOWN
+                ========================= */
 
+                const accountToggle =
+                    document.getElementById(
+                        "accountToggle"
+                    );
 
-                const arrow =
-                    accountToggle.querySelector(
-                        ".account-arrow"
+                const accountDropdown =
+                    document.getElementById(
+                        "accountDropdown"
+                    );
+
+                const accountArrow =
+                    document.getElementById(
+                        "accountArrow"
                     );
 
 
+                accountToggle.addEventListener(
+                    "click",
+                    function () {
+
+                        accountDropdown.classList.toggle(
+                            "show"
+                        );
+
+                        accountToggle.classList.add(
+                            "active"
+                        );
+
+                        if (
+                            accountDropdown.classList.contains(
+                                "show"
+                            )
+                        ) {
+
+                            accountArrow.textContent = "▲";
+
+                        } else {
+
+                            accountArrow.textContent = "▼";
+
+                        }
+
+                    }
+                );
+
+
+                /* =========================
+                   MOBILE SIDEBAR
+                ========================= */
+
+                const sidebar =
+                    document.getElementById(
+                        "shopSidebar"
+                    );
+
+                const overlay =
+                    document.getElementById(
+                        "sidebarOverlay"
+                    );
+
+                const menuButton =
+                    document.getElementById(
+                        "menuButton"
+                    );
+
+
+                menuButton.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.add(
+                            "open"
+                        );
+
+                        overlay.classList.add(
+                            "show"
+                        );
+
+                    }
+                );
+
+
+                overlay.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.remove(
+                            "open"
+                        );
+
+                        overlay.classList.remove(
+                            "show"
+                        );
+
+                    }
+                );
+
+
+                /* =========================
+                   CUSTOMER DATA
+                ========================= */
+
                 if (
-                    accountDropdown.classList.contains("show")
+                    typeof currentUser !== "undefined" &&
+                    currentUser !== null &&
+                    currentUser.role === "customer"
                 ) {
 
-                    arrow.textContent = "▲";
+                    document.getElementById(
+                        "customerName"
+                    ).textContent =
+                        currentUser.fullName ||
+                        "Customer";
 
-                } else {
+                    document.getElementById(
+                        "customerAvatar"
+                    ).textContent =
+                        (
+                            currentUser.fullName ||
+                            "C"
+                        ).charAt(0).toUpperCase();
 
-                    arrow.textContent = "▼";
+
+                    if (
+                        currentUser.shippingAddress
+                    ) {
+
+                        const address =
+                            currentUser.shippingAddress;
+
+                        document.getElementById(
+                            "houseNumber"
+                        ).value =
+                            address.houseNumber || "";
+
+                        document.getElementById(
+                            "street"
+                        ).value =
+                            address.street || "";
+
+                        document.getElementById(
+                            "barangay"
+                        ).value =
+                            address.barangay || "";
+
+                        document.getElementById(
+                            "city"
+                        ).value =
+                            address.city || "";
+
+                        document.getElementById(
+                            "province"
+                        ).value =
+                            address.province || "";
+
+                        document.getElementById(
+                            "postalCode"
+                        ).value =
+                            address.postalCode || "";
+
+                    }
 
                 }
+
+
+                /* =========================
+                   SAVE SHIPPING ADDRESS
+                ========================= */
+
+                document.getElementById(
+                    "saveShippingButton"
+                ).addEventListener(
+                    "click",
+                    function () {
+
+                        if (
+                            typeof currentUser !== "undefined" &&
+                            currentUser !== null
+                        ) {
+
+                            currentUser.shippingAddress = {
+
+                                houseNumber:
+                                    document.getElementById(
+                                        "houseNumber"
+                                    ).value,
+
+                                street:
+                                    document.getElementById(
+                                        "street"
+                                    ).value,
+
+                                barangay:
+                                    document.getElementById(
+                                        "barangay"
+                                    ).value,
+
+                                city:
+                                    document.getElementById(
+                                        "city"
+                                    ).value,
+
+                                province:
+                                    document.getElementById(
+                                        "province"
+                                    ).value,
+
+                                postalCode:
+                                    document.getElementById(
+                                        "postalCode"
+                                    ).value
+
+                            };
+
+                        }
+
+                        alert(
+                            "Shipping address has been updated."
+                        );
+
+                    }
+                );
+
+
+                /* =========================
+                   CHANGE PASSWORD
+                ========================= */
+
+                document.getElementById(
+                    "changePasswordButton"
+                ).addEventListener(
+                    "click",
+                    function () {
+
+                        const currentPassword =
+                            document.getElementById(
+                                "currentPassword"
+                            ).value;
+
+                        const newPassword =
+                            document.getElementById(
+                                "newPassword"
+                            ).value;
+
+                        const confirmPassword =
+                            document.getElementById(
+                                "confirmPassword"
+                            ).value;
+
+
+                        if (
+                            currentPassword === "" ||
+                            newPassword === "" ||
+                            confirmPassword === ""
+                        ) {
+
+                            alert(
+                                "Please complete all password fields."
+                            );
+
+                            return;
+
+                        }
+
+
+                        if (
+                            newPassword !==
+                            confirmPassword
+                        ) {
+
+                            alert(
+                                "The new passwords do not match."
+                            );
+
+                            return;
+
+                        }
+
+
+                        if (
+                            typeof currentUser !== "undefined" &&
+                            currentUser !== null
+                        ) {
+
+                            if (
+                                currentUser.password !==
+                                currentPassword
+                            ) {
+
+                                alert(
+                                    "Current password is incorrect."
+                                );
+
+                                return;
+
+                            }
+
+                            currentUser.password =
+                                newPassword;
+
+                        }
+
+
+                        document.getElementById(
+                            "currentPassword"
+                        ).value = "";
+
+                        document.getElementById(
+                            "newPassword"
+                        ).value = "";
+
+                        document.getElementById(
+                            "confirmPassword"
+                        ).value = "";
+
+
+                        alert(
+                            "Password has been changed."
+                        );
+
+                    }
+                );
+
+
+                /* =========================
+                   LOGOUT
+                ========================= */
+
+                document.getElementById(
+                    "logoutButton"
+                ).addEventListener(
+                    "click",
+                    function () {
+
+                        const confirmLogout =
+                            confirm(
+                                "Are you sure you want to logout?"
+                            );
+
+                        if (!confirmLogout) {
+                            return;
+                        }
+
+                        if (
+                            typeof currentUser !== "undefined"
+                        ) {
+
+                            currentUser = null;
+
+                        }
+
+                        window.location.href =
+                            "index.html";
+
+                    }
+                );
 
             }
         );
 
-
-
-        /* ==========================================
-           MOBILE SIDEBAR
-        ========================================== */
-
-        function openSidebar() {
-
-            document
-                .getElementById("shopSidebar")
-                .classList.add("open");
-
-            document
-                .getElementById("sidebarOverlay")
-                .classList.add("active");
-
-        }
-
-
-        function closeSidebar() {
-
-            document
-                .getElementById("shopSidebar")
-                .classList.remove("open");
-
-            document
-                .getElementById("sidebarOverlay")
-                .classList.remove("active");
-
-        }
-
-
-        document
-            .getElementById("sidebarOverlay")
-            .addEventListener(
-                "click",
-                closeSidebar
-            );
-
-
-
-        /* ==========================================
-           CUSTOMER
-        ========================================== */
-
-        const customer =
-            customers.find(
-                function (user) {
-
-                    return user.role === "customer";
-
-                }
-            );
-
-
-        if (!customer) {
-
-            window.location.href = "index.html";
-
-        } else {
-
-            document.getElementById(
-                "customerName"
-            ).textContent =
-                customer.fullName || "Customer";
-
-
-
-            /* LOAD SHIPPING ADDRESS */
-
-            const address =
-                customer.shippingAddress || {};
-
-
-            document.getElementById(
-                "houseNumber"
-            ).value =
-                address.houseNumber || "";
-
-
-            document.getElementById(
-                "street"
-            ).value =
-                address.street || "";
-
-
-            document.getElementById(
-                "barangay"
-            ).value =
-                address.barangay || "";
-
-
-            document.getElementById(
-                "city"
-            ).value =
-                address.city || "";
-
-
-            document.getElementById(
-                "province"
-            ).value =
-                address.province || "";
-
-
-            document.getElementById(
-                "postalCode"
-            ).value =
-                address.postalCode || "";
-
-        }
-
-
-
-        /* ==========================================
-           SAVE SHIPPING ADDRESS
-        ========================================== */
-
-        document
-            .getElementById("saveShippingButton")
-            .addEventListener(
-                "click",
-                function () {
-
-                    customer.shippingAddress = {
-
-                        houseNumber:
-                            document
-                                .getElementById("houseNumber")
-                                .value
-                                .trim(),
-
-                        street:
-                            document
-                                .getElementById("street")
-                                .value
-                                .trim(),
-
-                        barangay:
-                            document
-                                .getElementById("barangay")
-                                .value
-                                .trim(),
-
-                        city:
-                            document
-                                .getElementById("city")
-                                .value
-                                .trim(),
-
-                        province:
-                            document
-                                .getElementById("province")
-                                .value
-                                .trim(),
-
-                        postalCode:
-                            document
-                                .getElementById("postalCode")
-                                .value
-                                .trim()
-
-                    };
-
-
-                    const message =
-                        document.getElementById(
-                            "accountMessage"
-                        );
-
-
-                    message.textContent =
-                        "Shipping address updated.";
-
-                    message.className =
-                        "account-message success show";
-
-                }
-            );
-
-
-
-        /* ==========================================
-           CHANGE PASSWORD
-        ========================================== */
-
-        document
-            .getElementById("changePasswordButton")
-            .addEventListener(
-                "click",
-                function () {
-
-                    const currentPassword =
-                        document
-                            .getElementById("currentPassword")
-                            .value;
-
-                    const newPassword =
-                        document
-                            .getElementById("newPassword")
-                            .value;
-
-                    const confirmPassword =
-                        document
-                            .getElementById("confirmPassword")
-                            .value;
-
-
-                    const message =
-                        document.getElementById(
-                            "accountMessage"
-                        );
-
-
-                    if (
-                        currentPassword !==
-                        customer.password
-                    ) {
-
-                        message.textContent =
-                            "Current password is incorrect.";
-
-                        message.className =
-                            "account-message error show";
-
-                        return;
-
-                    }
-
-
-                    if (!newPassword) {
-
-                        message.textContent =
-                            "Please enter a new password.";
-
-                        message.className =
-                            "account-message error show";
-
-                        return;
-
-                    }
-
-
-                    if (
-                        newPassword !==
-                        confirmPassword
-                    ) {
-
-                        message.textContent =
-                            "The new passwords do not match.";
-
-                        message.className =
-                            "account-message error show";
-
-                        return;
-
-                    }
-
-
-                    customer.password =
-                        newPassword;
-
-
-                    document.getElementById(
-                        "currentPassword"
-                    ).value = "";
-
-
-                    document.getElementById(
-                        "newPassword"
-                    ).value = "";
-
-
-                    document.getElementById(
-                        "confirmPassword"
-                    ).value = "";
-
-
-                    message.textContent =
-                        "Password changed successfully.";
-
-                    message.className =
-                        "account-message success show";
-
-                }
-            );
-
     </script>
-
 
 </body>
 
