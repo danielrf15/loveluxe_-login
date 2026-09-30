@@ -64,8 +64,6 @@
     >
 
 
-        <!-- BRAND -->
-
         <div class="sidebar-brand">
 
             <div class="brand-title">
@@ -80,14 +78,14 @@
 
 
 
-        <!-- SHOP -->
-
         <div class="sidebar-section">
 
             <div class="sidebar-label">
                 SHOP
             </div>
 
+
+            <!-- PRODUCTS -->
 
             <a
                 href="catalog.html"
@@ -139,23 +137,15 @@
             >
 
                 <a href="personal.html">
-
                     Personal Information
-
                 </a>
-
 
                 <a href="orders.html">
-
                     My Orders
-
                 </a>
 
-
                 <a href="settings.html">
-
                     Settings
-
                 </a>
 
             </div>
@@ -178,7 +168,7 @@
 
 
     <!-- ==========================================
-         MAIN CONTENT
+         MAIN
     =========================================== -->
 
     <main class="shop-main">
@@ -193,48 +183,33 @@
             <div>
 
                 <div class="page-small-title">
-
                     CUSTOMER SHOP
-
                 </div>
 
-
                 <h1>
-
                     Product Management
-
                 </h1>
 
             </div>
 
 
-
             <div class="customer-profile">
 
-
                 <div class="customer-avatar">
-
                     C
-
                 </div>
-
 
                 <div>
 
                     <div class="customer-label">
-
                         Welcome Customer
-
                     </div>
-
 
                     <div
                         class="customer-name"
                         id="customerName"
                     >
-
                         Customer
-
                     </div>
 
                 </div>
@@ -251,41 +226,29 @@
 
         <section class="catalog-header">
 
-
             <div>
 
                 <div class="catalog-eyebrow">
-
                     LOVE LUXE COLLECTION
-
                 </div>
 
-
                 <h2>
-
                     Our Products
-
                 </h2>
 
-
                 <p>
-
                     Browse our available products and
                     choose what you would like to order.
-
                 </p>
 
             </div>
-
 
 
             <div
                 class="product-count"
                 id="productCount"
             >
-
                 Showing 16 product(s)
-
             </div>
 
         </section>
@@ -298,15 +261,11 @@
 
         <section class="catalog-tools">
 
-
             <div class="search-box">
 
                 <span>
-
                     🔍
-
                 </span>
-
 
                 <input
                     type="text"
@@ -327,15 +286,12 @@
 
         <div class="filter-buttons">
 
-
             <button
                 type="button"
                 class="filter-button active"
                 data-category="All"
             >
-
                 All
-
             </button>
 
 
@@ -344,9 +300,7 @@
                 class="filter-button"
                 data-category="Bags"
             >
-
                 Bags
-
             </button>
 
 
@@ -355,9 +309,7 @@
                 class="filter-button"
                 data-category="Clothing"
             >
-
                 Clothing
-
             </button>
 
 
@@ -366,9 +318,7 @@
                 class="filter-button"
                 data-category="Perfume"
             >
-
                 Perfume
-
             </button>
 
 
@@ -377,9 +327,7 @@
                 class="filter-button"
                 data-category="Body Care"
             >
-
                 Body Care
-
             </button>
 
         </div>
@@ -409,23 +357,15 @@
         >
 
             <div class="no-products-icon">
-
                 🔍
-
             </div>
 
-
             <h3>
-
                 No products found
-
             </h3>
 
-
             <p>
-
                 Try another search or category.
-
             </p>
 
         </div>
@@ -438,18 +378,12 @@
 
         <footer class="shop-footer">
 
-
             <div>
-
                 Love Luxe by EA
-
             </div>
 
-
             <div>
-
-                Products • Bags • Perfume • Body Care
-
+                Products • Bags • Clothing • Perfume • Body Care
             </div>
 
         </footer>
@@ -460,14 +394,13 @@
 
 
     <!-- ==========================================
-         CHECKOUT MODAL
+         PRODUCT / CHECKOUT MODAL
     =========================================== -->
 
     <div
         class="checkout-modal"
         id="checkoutModal"
     >
-
 
         <div class="checkout-box">
 
@@ -479,9 +412,7 @@
                 class="close-checkout"
                 id="closeCheckout"
             >
-
                 ×
-
             </button>
 
 
@@ -494,7 +425,6 @@
                 =================================== -->
 
                 <div class="checkout-image-area">
-
 
                     <img
                         id="checkoutImage"
@@ -560,24 +490,18 @@
 
                     <div class="quantity-section">
 
-
                         <label>
-
                             Quantity
-
                         </label>
 
 
                         <div class="quantity-controls">
 
-
                             <button
                                 type="button"
                                 id="decreaseQuantity"
                             >
-
                                 −
-
                             </button>
 
 
@@ -594,9 +518,7 @@
                                 type="button"
                                 id="increaseQuantity"
                             >
-
                                 +
-
                             </button>
 
                         </div>
@@ -605,15 +527,12 @@
 
 
 
-                    <!-- SHIPPING -->
+                    <!-- SHIPPING ADDRESS -->
 
                     <div class="checkout-address-section">
 
-
                         <label>
-
                             Shipping Address
-
                         </label>
 
 
@@ -621,9 +540,7 @@
                             class="checkout-address"
                             id="checkoutAddress"
                         >
-
                             No shipping address saved.
-
                         </div>
 
                     </div>
@@ -634,44 +551,32 @@
 
                     <div class="payment-section">
 
-
-                        <label for="paymentMethod">
-
+                        <label
+                            for="paymentMethod"
+                        >
                             Payment Method
-
                         </label>
 
 
-                        <select id="paymentMethod">
-
+                        <select
+                            id="paymentMethod"
+                        >
 
                             <option value="Cash on Delivery">
-
                                 Cash on Delivery
-
                             </option>
-
 
                             <option value="GCash">
-
                                 GCash
-
                             </option>
-
 
                             <option value="Bank Transfer">
-
                                 Bank Transfer
-
                             </option>
-
 
                             <option value="Card">
-
                                 Card
-
                             </option>
-
 
                         </select>
 
@@ -683,18 +588,13 @@
 
                     <div class="checkout-total-row">
 
-
                         <span>
-
                             Total
-
                         </span>
 
 
                         <strong id="checkoutTotal">
-
                             ₱0.00
-
                         </strong>
 
                     </div>
@@ -708,9 +608,7 @@
                         class="place-order-button"
                         id="placeOrderButton"
                     >
-
                         PLACE ORDER
-
                     </button>
 
 
@@ -719,6 +617,7 @@
                         id="checkoutMessage"
                     >
                     </div>
+
 
                 </div>
 
@@ -731,15 +630,10 @@
 
 
     <!-- ==========================================
-         DATA FIRST
+         IMPORTANT SCRIPT ORDER
     =========================================== -->
 
     <script src="data.js"></script>
-
-
-    <!-- ==========================================
-         CATALOG JAVASCRIPT
-    =========================================== -->
 
     <script src="catalog.js"></script>
 
