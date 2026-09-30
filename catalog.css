@@ -153,7 +153,7 @@ body {
 
     width: 100%;
 
-    padding: 10px 15px;
+    padding: 11px 15px;
 
     color: #bdbdbd;
 
@@ -162,11 +162,30 @@ body {
     font-size: 13px;
 
     border-radius: 6px;
+
+    margin-bottom: 3px;
+
+    transition: 0.15s ease;
 }
 
 .account-dropdown a:hover {
     color: white;
     background: #1d1d1d;
+}
+
+
+/* ==========================================
+   ACTIVE ACCOUNT DROPDOWN ITEM
+========================================== */
+
+.account-dropdown a.active {
+    background: #c5a059;
+    color: white;
+}
+
+.account-dropdown a.active:hover {
+    background: #c5a059;
+    color: white;
 }
 
 
@@ -787,9 +806,6 @@ body {
 
     background: white;
 }
-
-
-/* Remove browser number arrows */
 
 .quantity-controls input::-webkit-outer-spin-button,
 .quantity-controls input::-webkit-inner-spin-button {
