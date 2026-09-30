@@ -1,770 +1,1026 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* ==========================================
+   LOVE LUXE PRODUCT CATALOG
+========================================== */
+
+
+/* ==========================================
+   CUSTOMER ACCESS
+========================================== */
+
+let currentUser = null;
+
+try {
+
+    currentUser = JSON.parse(
+        localStorage.getItem("loveLuxeCurrentUser")
+    );
+
+} catch (error) {
+
+    currentUser = null;
+
 }
 
-body {
-    font-family: "Plus Jakarta Sans", Arial, sans-serif;
-    background: #f5f6fa;
-    color: #111111;
+
+if (
+    !currentUser ||
+    currentUser.role !== "customer"
+) {
+
+    window.location.href = "index.html";
+
 }
 
 
 /* ==========================================
-   SIDEBAR
+   PRODUCTS
 ========================================== */
 
-.shop-sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
+const products = [
 
-    width: 260px;
-    height: 100vh;
+    {
+        id: 1,
+        name: "Sophia Skirt",
+        category: "Clothing",
+        price: 790,
+        image: "images/sophia-skirt.jpg",
+        images: [
+            "images/sophia-skirt.jpg",
+            "images/sophia-skirt-2.jpg"
+        ],
+        colors: [
+            "Black and White Polka",
+            "Light Blue",
+            "Gray",
+            "Black"
+        ],
+        sizes: [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "2XL",
+            "3XL"
+        ],
+        description:
+            "A simple and stylish skirt that is easy to pair with different outfits."
+    },
 
-    background: #111111;
-    color: white;
 
-    z-index: 1000;
+    {
+        id: 2,
+        name: "Nov-Mardi T-Shirt",
+        category: "Clothing",
+        price: 450,
+        image: "images/nov-mardi-tshirt.jpg",
+        images: [
+            "images/nov-mardi-tshirt.jpg",
+            "images/nov-mardi-tshirt-2.jpg"
+        ],
+        colors: [
+            "White",
+            "Pink",
+            "Black"
+        ],
+        sizes: [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "2XL",
+            "3XL"
+        ],
+        description:
+            "A comfortable everyday t-shirt with a simple and casual style."
+    },
 
-    display: flex;
-    flex-direction: column;
 
-    overflow-x: hidden;
-    overflow-y: auto;
-}
+    {
+        id: 3,
+        name: "Basic Chic01 Terno",
+        category: "Clothing",
+        price: 950,
+        image: "images/basic-chic01-terno.jpg",
+        images: [
+            "images/basic-chic01-terno.jpg",
+            "images/basic-chic01-terno-2.jpg"
+        ],
+        sizes: [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "2XL",
+            "3XL"
+        ],
+        description:
+            "A stylish terno set designed for a simple and comfortable look."
+    },
 
-.sidebar-brand {
-    height: 125px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    {
+        id: 4,
+        name: "Sami T-Shirt",
+        category: "Clothing",
+        price: 790,
+        image: "images/sami-tshirt.jpg",
+        images: [
+            "images/sami-tshirt.jpg",
+            "images/sami-tshirt-2.jpg"
+        ],
+        colors: [
+            "Brown",
+            "Tan",
+            "Pink",
+            "Black",
+            "Light Blue"
+        ],
+        description:
+            "A casual t-shirt that can be worn for everyday activities."
+    },
 
-    border-bottom: 1px solid #292929;
 
-    flex-shrink: 0;
-}
+    {
+        id: 5,
+        name: "Alada Soap",
+        category: "Body Care",
+        price: 350,
+        image: "images/alada-soap.jpg",
+        images: [
+            "images/alada-soap.jpg",
+            "images/alada-soap-2.jpg"
+        ],
+        description:
+            "A body care soap for a simple everyday skincare routine."
+    },
 
-.brand-title {
-    font-family: Georgia, serif;
-    color: #c5a059;
-    font-size: 27px;
-    letter-spacing: 2px;
-}
 
-.brand-subtitle {
-    margin-top: 6px;
-    color: #999999;
-    font-size: 9px;
-    letter-spacing: 3px;
-}
+    {
+        id: 6,
+        name: "Dewy Gluta Soap",
+        category: "Body Care",
+        price: 199,
+        image: "images/dewy-gluta-soap.jpg",
+        images: [
+            "images/dewy-gluta-soap.jpg",
+            "images/dewy-gluta-soap-2.jpg"
+        ],
+        description:
+            "A cleansing soap made for everyday personal care."
+    },
 
-.sidebar-section {
-    padding: 25px 15px 0;
-}
 
-.sidebar-label {
-    color: #858585;
-    font-size: 11px;
-    letter-spacing: 2px;
-    font-weight: bold;
+    {
+        id: 7,
+        name: "Serene Skin Soap",
+        category: "Body Care",
+        price: 299,
+        image: "images/serene-skin-soap.jpg",
+        description:
+            "A gentle body care product for everyday use."
+    },
 
-    margin: 0 20px 12px;
-}
 
-.sidebar-link {
-    width: 100%;
-    max-width: 100%;
-    min-height: 55px;
+    {
+        id: 8,
+        name: "Vitamin E Whitening Cream",
+        category: "Body Care",
+        price: 180,
+        image: "images/vitamin-e-whitening-cream.jpg",
+        description:
+            "A moisturizing cream for an everyday skincare routine."
+    },
 
-    padding: 0 20px;
 
-    display: flex;
-    align-items: center;
+    {
+        id: 9,
+        name: "Mini Enzo",
+        category: "Bags",
+        price: 3590,
+        image: "images/mini-enzo.jpg",
+        images: [
+            "images/mini-enzo.jpg",
+            "images/mini-enzo-2.jpg"
+        ],
+        colors: [
+            "Black",
+            "Green",
+            "Red",
+            "Blue"
+        ],
+        description:
+            "A compact and stylish bag that works well for everyday use."
+    },
 
-    gap: 12px;
 
-    text-decoration: none;
+    {
+        id: 10,
+        name: "Mini Bucket Bag",
+        category: "Bags",
+        price: 2090,
+        image: "images/mini-bucket-bag.jpg",
+        images: [
+            "images/mini-bucket-bag.jpg",
+            "images/mini-bucket-bag-2.jpg"
+        ],
+        colors: [
+            "Dark Blue",
+            "Grayish Blue",
+            "Blue",
+            "Blue Stripes"
+        ],
+        description:
+            "A small bucket-style bag with a simple and fashionable design."
+    },
 
-    color: #bdbdbd;
-    background: transparent;
 
-    border: none;
-    border-radius: 8px;
+    {
+        id: 11,
+        name: "Anytime Medium",
+        category: "Bags",
+        price: 2890,
+        image: "images/anytime-medium.jpg",
+        images: [
+            "images/anytime-medium.jpg",
+            "images/anytime-medium-2.jpg"
+        ],
+        colors: [
+            "Black",
+            "Tantaupe",
+            "Tantaupe Two",
+            "White",
+            "Clay Two"
+        ],
+        description:
+            "A medium-sized everyday bag with enough space for your essentials."
+    },
 
-    font-family: inherit;
-    font-size: 15px;
 
-    text-align: left;
+    {
+        id: 12,
+        name: "Emilio Barrel",
+        category: "Bags",
+        price: 3590,
+        image: "images/emilio-barrel.jpg",
+        images: [
+            "images/emilio-barrel.jpg",
+            "images/emilio-barrel-2.jpg"
+        ],
+        colors: [
+            "Dark Brown",
+            "Red",
+            "Green",
+            "Black"
+        ],
+        description:
+            "A barrel-style bag with a clean and modern appearance."
+    },
 
-    cursor: pointer;
 
-    margin-bottom: 7px;
+    {
+        id: 13,
+        name: "Victoria's Secret Perfume",
+        category: "Perfume",
+        price: 700,
+        image: "images/victorias-secret-perfume.jpg",
+        images: [
+            "images/victorias-secret-perfume.jpg",
+            "images/victorias-secret-perfume-2.jpg"
+        ],
+        scents: [
+            "Bare Vanilla",
+            "Aqua Kiss",
+            "Vanilla Lace",
+            "Midnight Bloom",
+            "Love Spell",
+            "Pure Seduction",
+            "Velvet Petals"
+        ],
+        description:
+            "A fragrance option for everyday wear."
+    },
 
-    overflow: hidden;
-}
 
-.sidebar-link:hover {
-    color: white;
-    background: #1d1d1d;
-}
+    {
+        id: 14,
+        name: "Bath & Body Works Perfume",
+        category: "Perfume",
+        price: 600,
+        image: "images/bath-body-works-perfume.jpg",
+        scents: [
+            "Pure Wonder",
+            "Hello Beautiful",
+            "A Thousand Wishes",
+            "You're the One",
+            "Vanilla Ease"
+        ],
+        description:
+            "A fragrance designed for a fresh everyday scent."
+    },
 
-.sidebar-link.active {
-    background: #c5a059;
-    color: white;
-}
 
-.sidebar-link span:nth-child(2) {
-    white-space: nowrap;
+    {
+        id: 15,
+        name: "Smart Collection Perfume",
+        category: "Perfume",
+        price: 350,
+        image: "images/smart-collection-perfume.jpg",
+        scents: [
+            "Chanel N'5"
+        ],
+        description:
+            "An affordable fragrance option for everyday use."
+    },
+
+
+    {
+        id: 16,
+        name: "Lattafa YARA",
+        category: "Perfume",
+        price: 390,
+        image: "images/lattafa-yara.jpg",
+        description:
+            "A popular fragrance choice with a soft and pleasant scent."
+    }
+
+];
+
+
+/* ==========================================
+   VARIABLES
+========================================== */
+
+let selectedCategory = "All";
+
+let selectedProduct = null;
+
+let selectedQuantity = 1;
+
+let selectedColor = "";
+
+let selectedSize = "";
+
+let selectedScent = "";
+
+
+/* ==========================================
+   ELEMENTS
+========================================== */
+
+const productGrid =
+    document.getElementById("productGrid");
+
+const productCount =
+    document.getElementById("productCount");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const noProducts =
+    document.getElementById("noProducts");
+
+const filterButtons =
+    document.querySelectorAll(".filter-button");
+
+const customerName =
+    document.getElementById("customerName");
+
+
+/* ==========================================
+   CUSTOMER NAME
+========================================== */
+
+if (customerName && currentUser) {
+
+    customerName.textContent =
+        currentUser.fullName ||
+        "Customer";
+
 }
 
 
 /* ==========================================
-   MY ACCOUNT
+   PRICE
 ========================================== */
 
-.sidebar-account-wrapper {
-    width: 100%;
-}
+function formatPrice(price) {
 
-.account-toggle {
-    appearance: none;
-}
+    return "₱" +
+        Number(price).toLocaleString(
+            "en-PH",
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
 
-.account-toggle.active {
-    background: #c5a059;
-    color: white;
-}
-
-.account-arrow {
-    margin-left: auto;
-    font-size: 9px;
-    flex-shrink: 0;
-}
-
-.account-dropdown {
-    display: none;
-
-    width: 100%;
-
-    padding: 2px 5px 8px;
-}
-
-.account-dropdown.show {
-    display: block;
-}
-
-.account-dropdown a {
-    display: block;
-
-    width: 100%;
-
-    padding: 10px 15px;
-
-    color: #bdbdbd;
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-    border-radius: 6px;
-}
-
-.account-dropdown a:hover {
-    color: white;
-    background: #1d1d1d;
 }
 
 
 /* ==========================================
-   MAIN
+   DISPLAY PRODUCTS
 ========================================== */
 
-.shop-main {
-    margin-left: 260px;
+function displayProducts() {
 
-    min-height: 100vh;
+    const searchText =
+        searchInput
+            ? searchInput.value
+                .toLowerCase()
+                .trim()
+            : "";
 
-    padding: 35px 45px 60px;
+
+    const filteredProducts =
+        products.filter(function(product) {
+
+            const categoryMatch =
+                selectedCategory === "All" ||
+                product.category === selectedCategory;
+
+
+            const searchMatch =
+                product.name
+                    .toLowerCase()
+                    .includes(searchText) ||
+
+                product.category
+                    .toLowerCase()
+                    .includes(searchText);
+
+
+            return categoryMatch &&
+                searchMatch;
+
+        });
+
+
+    productCount.textContent =
+        filteredProducts.length +
+        (
+            filteredProducts.length === 1
+                ? " product"
+                : " products"
+        );
+
+
+    if (filteredProducts.length === 0) {
+
+        productGrid.innerHTML = "";
+
+        noProducts.style.display = "block";
+
+        return;
+    }
+
+
+    noProducts.style.display = "none";
+
+
+    productGrid.innerHTML =
+        filteredProducts.map(function(product) {
+
+            return `
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            src="${product.image}"
+                            alt="${product.name}"
+                        >
+
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <div class="product-category">
+                            ${product.category}
+                        </div>
+
+
+                        <div class="product-name">
+                            ${product.name}
+                        </div>
+
+
+                        <div class="product-description">
+                            ${product.description}
+                        </div>
+
+
+                        <div class="product-bottom">
+
+                            <div class="product-price">
+                                ${formatPrice(product.price)}
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="view-button"
+                                data-product-id="${product.id}"
+                            >
+                                VIEW
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            `;
+
+        }).join("");
+
+
+    document
+        .querySelectorAll(".view-button")
+        .forEach(function(button) {
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    viewProduct(
+                        Number(
+                            button.dataset.productId
+                        )
+                    );
+
+                }
+            );
+
+        });
+
 }
 
 
 /* ==========================================
-   TOP BAR
+   CATEGORY FILTER
 ========================================== */
 
-.shop-topbar {
-    display: flex;
+filterButtons.forEach(function(button) {
 
-    align-items: center;
-    justify-content: space-between;
+    button.addEventListener(
+        "click",
+        function() {
 
-    border-bottom: 1px solid #e0e2e6;
+            filterButtons.forEach(
+                function(item) {
 
-    padding-bottom: 25px;
-}
+                    item.classList.remove(
+                        "active"
+                    );
 
-.page-small-title {
-    color: #c5a059;
-
-    font-size: 11px;
-
-    letter-spacing: 3px;
-
-    font-weight: bold;
-
-    margin-bottom: 7px;
-}
-
-.shop-topbar h1 {
-    font-family: Georgia, serif;
-
-    font-size: 34px;
-
-    font-weight: normal;
-}
-
-.customer-profile {
-    display: flex;
-    align-items: center;
-
-    gap: 12px;
-}
-
-.customer-avatar {
-    width: 48px;
-    height: 48px;
-
-    border-radius: 50%;
-
-    background: #c5a059;
-
-    color: white;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-weight: bold;
-}
-
-.customer-label {
-    color: #777777;
-    font-size: 12px;
-}
-
-.customer-name {
-    font-weight: bold;
-    font-size: 14px;
-}
+                }
+            );
 
 
-/* ==========================================
-   CATALOG HEADER
-========================================== */
+            button.classList.add(
+                "active"
+            );
 
-.catalog-header {
-    display: flex;
 
-    align-items: flex-end;
-    justify-content: space-between;
+            selectedCategory =
+                button.dataset.category;
 
-    margin-top: 35px;
 
-    margin-bottom: 25px;
-}
+            displayProducts();
 
-.catalog-eyebrow {
-    color: #c5a059;
+        }
+    );
 
-    font-size: 11px;
-
-    letter-spacing: 2px;
-
-    font-weight: bold;
-
-    margin-bottom: 8px;
-}
-
-.catalog-header h2 {
-    font-family: Georgia, serif;
-
-    font-size: 34px;
-
-    font-weight: normal;
-}
-
-.catalog-header p {
-    color: #777777;
-
-    font-size: 14px;
-
-    margin-top: 8px;
-}
-
-.product-count {
-    color: #777777;
-    font-size: 13px;
-}
+});
 
 
 /* ==========================================
    SEARCH
 ========================================== */
 
-.catalog-tools {
-    margin-top: 20px;
-}
+searchInput?.addEventListener(
+    "input",
+    displayProducts
+);
 
-.search-box {
-    width: 100%;
 
-    height: 50px;
+/* ==========================================
+   CHECKOUT ELEMENTS
+========================================== */
 
-    display: flex;
-    align-items: center;
+const checkoutModal =
+    document.getElementById(
+        "checkoutModal"
+    );
 
-    gap: 12px;
+const checkoutImage =
+    document.getElementById(
+        "checkoutImage"
+    );
 
-    background: white;
+const checkoutThumbnails =
+    document.getElementById(
+        "checkoutThumbnails"
+    );
 
-    border: 1px solid #d9dce1;
+const checkoutName =
+    document.getElementById(
+        "checkoutName"
+    );
 
-    border-radius: 8px;
+const checkoutCategory =
+    document.getElementById(
+        "checkoutCategory"
+    );
 
-    padding: 0 16px;
-}
+const checkoutDescription =
+    document.getElementById(
+        "checkoutDescription"
+    );
 
-.search-box span {
-    font-size: 18px;
-}
+const checkoutPrice =
+    document.getElementById(
+        "checkoutPrice"
+    );
 
-.search-box input {
-    width: 100%;
+const checkoutQuantity =
+    document.getElementById(
+        "checkoutQuantity"
+    );
 
-    height: 100%;
+const checkoutTotal =
+    document.getElementById(
+        "checkoutTotal"
+    );
 
-    border: none;
+const checkoutAddress =
+    document.getElementById(
+        "checkoutAddress"
+    );
 
-    outline: none;
+const checkoutMessage =
+    document.getElementById(
+        "checkoutMessage"
+    );
 
-    font-size: 14px;
+const productOptions =
+    document.getElementById(
+        "productOptions"
+    );
 
-    font-family: inherit;
+
+/* ==========================================
+   VIEW PRODUCT
+========================================== */
+
+function viewProduct(productId) {
+
+    selectedProduct =
+        products.find(function(product) {
+
+            return product.id === productId;
+
+        });
+
+
+    if (!selectedProduct) {
+        return;
+    }
+
+
+    selectedQuantity = 1;
+
+    selectedColor = "";
+
+    selectedSize = "";
+
+    selectedScent = "";
+
+
+    checkoutImage.src =
+        selectedProduct.image;
+
+    checkoutImage.alt =
+        selectedProduct.name;
+
+
+    checkoutName.textContent =
+        selectedProduct.name;
+
+
+    checkoutCategory.textContent =
+        selectedProduct.category;
+
+
+    checkoutDescription.textContent =
+        selectedProduct.description;
+
+
+    checkoutPrice.textContent =
+        formatPrice(
+            selectedProduct.price
+        );
+
+
+    displayProductImages(
+        selectedProduct
+    );
+
+
+    displayProductOptions(
+        selectedProduct
+    );
+
+
+    updateCheckoutQuantity();
+
+    displayShippingAddress();
+
+
+    checkoutMessage.textContent = "";
+
+
+    checkoutModal.classList.add(
+        "show"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
 }
 
 
 /* ==========================================
-   FILTER BUTTONS
+   PRODUCT IMAGES
 ========================================== */
 
-.filter-buttons {
-    display: flex;
+function displayProductImages(product) {
 
-    flex-wrap: wrap;
+    checkoutThumbnails.innerHTML = "";
 
-    gap: 8px;
 
-    margin-top: 20px;
+    const images =
+        product.images ||
+        [product.image];
 
-    margin-bottom: 28px;
-}
 
-.filter-button {
-    border: 1px solid #d8dbe0;
+    images.forEach(function(image, index) {
 
-    background: white;
+        const thumbnail =
+            document.createElement("img");
 
-    color: #555555;
 
-    padding: 10px 18px;
+        thumbnail.src = image;
 
-    border-radius: 7px;
+        thumbnail.alt =
+            product.name;
 
-    cursor: pointer;
+        thumbnail.className =
+            "checkout-thumbnail";
 
-    font-size: 14px;
 
-    font-family: inherit;
-}
+        if (index === 0) {
 
-.filter-button:hover {
-    border-color: #c5a059;
-}
+            thumbnail.classList.add(
+                "active"
+            );
 
-.filter-button.active {
-    background: #c5a059;
+        }
 
-    color: white;
 
-    border-color: #c5a059;
+        thumbnail.onerror =
+            function() {
+
+                this.style.display =
+                    "none";
+
+            };
+
+
+        thumbnail.addEventListener(
+            "click",
+            function() {
+
+                checkoutImage.src =
+                    image;
+
+
+                document
+                    .querySelectorAll(
+                        ".checkout-thumbnail"
+                    )
+                    .forEach(function(item) {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                thumbnail.classList.add(
+                    "active"
+                );
+
+            }
+        );
+
+
+        checkoutThumbnails.appendChild(
+            thumbnail
+        );
+
+    });
+
 }
 
 
 /* ==========================================
-   PRODUCT GRID
+   PRODUCT OPTIONS
 ========================================== */
 
-.product-grid {
-    display: grid;
+function displayProductOptions(product) {
 
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
+    productOptions.innerHTML = "";
 
-    gap: 22px;
-}
 
-.product-card {
-    background: white;
+    if (
+        product.colors &&
+        product.colors.length > 0
+    ) {
 
-    border: 1px solid #e1e3e6;
+        const wrapper =
+            document.createElement("div");
 
-    border-radius: 12px;
+        wrapper.className =
+            "option-group";
 
-    overflow: hidden;
 
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
+        const label =
+            document.createElement("label");
 
-.product-card:hover {
-    transform: translateY(-3px);
+        label.textContent =
+            "Color";
 
-    box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.08);
-}
 
-.product-image {
-    width: 100%;
+        const select =
+            document.createElement("select");
 
-    height: 240px;
+        select.innerHTML =
+            `<option value="">
+                Select color
+            </option>`;
 
-    background: #f4f4f4;
 
-    display: flex;
+        product.colors.forEach(function(color) {
 
-    align-items: center;
-    justify-content: center;
+            select.innerHTML +=
+                `<option value="${color}">
+                    ${color}
+                </option>`;
 
-    overflow: hidden;
-}
+        });
 
-.product-image img {
-    width: 100%;
-    height: 100%;
 
-    object-fit: cover;
-}
+        select.addEventListener(
+            "change",
+            function() {
 
-.product-info {
-    padding: 18px;
-}
+                selectedColor =
+                    select.value;
 
-.product-category {
-    color: #c5a059;
+            }
+        );
 
-    font-size: 11px;
 
-    letter-spacing: 1.5px;
+        wrapper.appendChild(label);
 
-    text-transform: uppercase;
+        wrapper.appendChild(select);
 
-    margin-bottom: 7px;
-}
+        productOptions.appendChild(wrapper);
 
-.product-name {
-    font-size: 17px;
+    }
 
-    font-weight: 600;
 
-    min-height: 42px;
-}
+    if (
+        product.sizes &&
+        product.sizes.length > 0
+    ) {
 
-.product-description {
-    color: #777777;
+        const wrapper =
+            document.createElement("div");
 
-    font-size: 12px;
+        wrapper.className =
+            "option-group";
 
-    line-height: 1.5;
 
-    margin-top: 8px;
+        const label =
+            document.createElement("label");
 
-    min-height: 36px;
-}
+        label.textContent =
+            "Size";
 
-.product-bottom {
-    display: flex;
 
-    align-items: center;
+        const select =
+            document.createElement("select");
 
-    justify-content: space-between;
+        select.innerHTML =
+            `<option value="">
+                Select size
+            </option>`;
 
-    margin-top: 15px;
 
-    gap: 10px;
-}
+        product.sizes.forEach(function(size) {
 
-.product-price {
-    font-weight: bold;
+            select.innerHTML +=
+                `<option value="${size}">
+                    ${size}
+                </option>`;
 
-    font-size: 16px;
-}
+        });
 
-.view-button {
-    border: none;
 
-    background: #111111;
+        select.addEventListener(
+            "change",
+            function() {
 
-    color: white;
+                selectedSize =
+                    select.value;
 
-    border-radius: 6px;
+            }
+        );
 
-    padding: 9px 15px;
 
-    cursor: pointer;
+        wrapper.appendChild(label);
 
-    font-size: 12px;
+        wrapper.appendChild(select);
 
-    letter-spacing: 0.5px;
-}
+        productOptions.appendChild(wrapper);
 
-.view-button:hover {
-    background: #c5a059;
-}
+    }
 
 
-/* ==========================================
-   NO PRODUCTS
-========================================== */
+    if (
+        product.scents &&
+        product.scents.length > 0
+    ) {
 
-.no-products {
-    text-align: center;
+        const wrapper =
+            document.createElement("div");
 
-    padding: 80px 20px;
-}
+        wrapper.className =
+            "option-group";
 
-.no-products h3 {
-    font-family: Georgia, serif;
 
-    font-weight: normal;
+        const label =
+            document.createElement("label");
 
-    margin-bottom: 8px;
-}
+        label.textContent =
+            "Scent";
 
-.no-products p {
-    color: #777777;
-}
 
+        const select =
+            document.createElement("select");
 
-/* ==========================================
-   CHECKOUT MODAL
-========================================== */
+        select.innerHTML =
+            `<option value="">
+                Select scent
+            </option>`;
 
-.checkout-modal {
-    position: fixed !important;
 
-    inset: 0;
+        product.scents.forEach(function(scent) {
 
-    width: 100vw;
-    height: 100vh;
+            select.innerHTML +=
+                `<option value="${scent}">
+                    ${scent}
+                </option>`;
 
-    background: rgba(0, 0, 0, 0.6);
+        });
 
-    display: none;
 
-    align-items: center;
-    justify-content: center;
+        select.addEventListener(
+            "change",
+            function() {
 
-    padding: 20px;
+                selectedScent =
+                    select.value;
 
-    z-index: 9999;
-}
+            }
+        );
 
-.checkout-modal.show {
-    display: flex !important;
-}
 
-.checkout-box {
-    position: relative;
+        wrapper.appendChild(label);
 
-    width: 100%;
+        wrapper.appendChild(select);
 
-    max-width: 760px;
+        productOptions.appendChild(wrapper);
 
-    max-height: 90vh;
+    }
 
-    overflow-y: auto;
-
-    background: white;
-
-    border-radius: 14px;
-
-    padding: 30px;
-}
-
-.close-checkout {
-    position: absolute;
-
-    right: 18px;
-    top: 18px;
-
-    width: 35px;
-    height: 35px;
-
-    border: none;
-
-    background: #f2f2f2;
-
-    border-radius: 50%;
-
-    font-size: 25px;
-
-    cursor: pointer;
-
-    color: #444;
-
-    z-index: 5;
-}
-
-.close-checkout:hover {
-    background: #c5a059;
-
-    color: white;
-}
-
-.checkout-content {
-    display: flex;
-
-    gap: 25px;
-}
-
-.checkout-image-area {
-    width: 260px;
-
-    flex-shrink: 0;
-}
-
-#checkoutImage {
-    width: 260px;
-    height: 260px;
-
-    object-fit: cover;
-
-    border-radius: 9px;
-
-    background: #f4f4f4;
-}
-
-.product-gallery {
-    display: flex;
-
-    gap: 8px;
-
-    margin-top: 10px;
-
-    flex-wrap: wrap;
-}
-
-.checkout-thumbnail {
-    width: 55px;
-    height: 55px;
-
-    object-fit: cover;
-
-    border-radius: 5px;
-
-    border: 2px solid transparent;
-
-    cursor: pointer;
-}
-
-.checkout-thumbnail.active {
-    border-color: #c5a059;
-}
-
-.checkout-details {
-    flex: 1;
-}
-
-.checkout-category {
-    color: #c5a059;
-
-    font-size: 11px;
-
-    text-transform: uppercase;
-
-    letter-spacing: 1.5px;
-}
-
-.checkout-details h2 {
-    font-family: Georgia, serif;
-
-    font-size: 28px;
-
-    font-weight: normal;
-
-    margin-top: 7px;
-}
-
-.checkout-description {
-    color: #777777;
-
-    font-size: 13px;
-
-    line-height: 1.5;
-
-    margin-top: 10px;
-}
-
-.checkout-price {
-    margin-top: 14px;
-
-    font-size: 19px;
-
-    font-weight: bold;
-}
-
-
-/* ==========================================
-   OPTIONS
-========================================== */
-
-.product-options {
-    margin-top: 20px;
-}
-
-.option-group {
-    margin-bottom: 14px;
-}
-
-.option-group label {
-    display: block;
-
-    font-size: 13px;
-
-    font-weight: bold;
-
-    margin-bottom: 7px;
-}
-
-.option-group select {
-    width: 100%;
-
-    height: 42px;
-
-    padding: 0 10px;
-
-    border: 1px solid #d8d8d8;
-
-    border-radius: 6px;
-
-    background: white;
-
-    font-family: inherit;
 }
 
 
@@ -772,418 +1028,549 @@ body {
    QUANTITY
 ========================================== */
 
-.quantity-section {
-    margin-top: 20px;
+function updateCheckoutQuantity() {
+
+    checkoutQuantity.textContent =
+        selectedQuantity;
+
+
+    const total =
+        selectedProduct.price *
+        selectedQuantity;
+
+
+    checkoutTotal.textContent =
+        formatPrice(total);
+
 }
 
-.quantity-section label {
-    display: block;
 
-    font-size: 13px;
+document
+    .getElementById(
+        "decreaseQuantity"
+    )
+    ?.addEventListener(
+        "click",
+        function() {
 
-    font-weight: bold;
+            if (selectedQuantity > 1) {
 
-    margin-bottom: 8px;
-}
+                selectedQuantity--;
 
-.quantity-controls {
-    display: inline-flex;
+                updateCheckoutQuantity();
 
-    align-items: center;
+            }
 
-    border: 1px solid #d8d8d8;
+        }
+    );
 
-    border-radius: 7px;
 
-    overflow: hidden;
-}
+document
+    .getElementById(
+        "increaseQuantity"
+    )
+    ?.addEventListener(
+        "click",
+        function() {
 
-.quantity-controls button {
-    width: 42px;
-    height: 42px;
+            if (selectedQuantity < 99) {
 
-    border: none;
+                selectedQuantity++;
 
-    background: #f5f5f5;
+                updateCheckoutQuantity();
 
-    font-size: 20px;
+            }
 
-    cursor: pointer;
-}
+        }
+    );
 
-.quantity-controls button:hover {
-    background: #c5a059;
 
-    color: white;
-}
+/* ==========================================
+   SHIPPING ADDRESS
+========================================== */
 
-.quantity-controls span {
-    width: 50px;
+function displayShippingAddress() {
 
-    text-align: center;
+    if (!checkoutAddress) {
+        return;
+    }
 
-    font-weight: bold;
+
+    let user = null;
+
+
+    try {
+
+        user = JSON.parse(
+            localStorage.getItem(
+                "loveLuxeCurrentUser"
+            )
+        );
+
+    } catch (error) {
+
+        user = null;
+
+    }
+
+
+    if (
+        !user ||
+        !user.shippingAddress
+    ) {
+
+        checkoutAddress.textContent =
+            "No shipping address saved.";
+
+        return;
+
+    }
+
+
+    const address =
+        user.shippingAddress;
+
+
+    const parts = [
+
+        address.houseNumber,
+        address.street,
+        address.barangay,
+        address.city,
+        address.province,
+        address.postalCode
+
+    ].filter(function(part) {
+
+        return part &&
+            String(part).trim() !== "";
+
+    });
+
+
+    if (parts.length === 0) {
+
+        checkoutAddress.textContent =
+            "No shipping address saved.";
+
+        return;
+
+    }
+
+
+    checkoutAddress.textContent =
+        parts.join(", ");
+
 }
 
 
 /* ==========================================
-   SHIPPING
+   CLOSE CHECKOUT
 ========================================== */
 
-.checkout-address-section {
-    margin-top: 22px;
+function closeCheckout() {
 
-    padding: 16px;
+    if (!checkoutModal) {
+        return;
+    }
 
-    background: #fafafa;
 
-    border: 1px solid #e8e8e8;
+    checkoutModal.classList.remove(
+        "show"
+    );
 
-    border-radius: 8px;
+
+    document.body.style.overflow =
+        "";
+
 }
 
-.checkout-address-section label {
-    display: block;
 
-    font-weight: bold;
+document
+    .getElementById(
+        "closeCheckout"
+    )
+    ?.addEventListener(
+        "click",
+        closeCheckout
+    );
 
-    font-size: 13px;
 
-    margin-bottom: 8px;
-}
+checkoutModal?.addEventListener(
+    "click",
+    function(event) {
 
-.checkout-address {
-    color: #666666;
+        if (
+            event.target ===
+            checkoutModal
+        ) {
 
-    font-size: 13px;
+            closeCheckout();
 
-    line-height: 1.6;
+        }
+
+    }
+);
+
+
+/* ==========================================
+   PLACE ORDER
+========================================== */
+
+document
+    .getElementById(
+        "placeOrderButton"
+    )
+    ?.addEventListener(
+        "click",
+        placeOrder
+    );
+
+
+function placeOrder() {
+
+    if (!selectedProduct) {
+        return;
+    }
+
+
+    const user =
+        currentUser;
+
+
+    if (
+        !user ||
+        user.role !== "customer"
+    ) {
+
+        window.location.href =
+            "index.html";
+
+        return;
+
+    }
+
+
+    const address =
+        user.shippingAddress;
+
+
+    const addressParts = [
+
+        address?.houseNumber,
+        address?.street,
+        address?.barangay,
+        address?.city,
+        address?.province,
+        address?.postalCode
+
+    ].filter(function(part) {
+
+        return part &&
+            String(part).trim() !== "";
+
+    });
+
+
+    if (addressParts.length === 0) {
+
+        checkoutMessage.textContent =
+            "Please add your shipping address first.";
+
+        checkoutMessage.style.color =
+            "#c0392b";
+
+        return;
+
+    }
+
+
+    if (
+        selectedProduct.colors &&
+        !selectedColor
+    ) {
+
+        checkoutMessage.textContent =
+            "Please select a color.";
+
+        checkoutMessage.style.color =
+            "#c0392b";
+
+        return;
+
+    }
+
+
+    if (
+        selectedProduct.sizes &&
+        !selectedSize
+    ) {
+
+        checkoutMessage.textContent =
+            "Please select a size.";
+
+        checkoutMessage.style.color =
+            "#c0392b";
+
+        return;
+
+    }
+
+
+    if (
+        selectedProduct.scents &&
+        !selectedScent
+    ) {
+
+        checkoutMessage.textContent =
+            "Please select a scent.";
+
+        checkoutMessage.style.color =
+            "#c0392b";
+
+        return;
+
+    }
+
+
+    const paymentMethod =
+        document.getElementById(
+            "paymentMethod"
+        )?.value ||
+        "Cash on Delivery";
+
+
+    const total =
+        selectedProduct.price *
+        selectedQuantity;
+
+
+    const orderNumber =
+        "LL-" +
+        Date.now()
+            .toString()
+            .slice(-8);
+
+
+    const order = {
+
+        orderNumber:
+            orderNumber,
+
+        customerUsername:
+            user.username,
+
+        customerName:
+            user.fullName,
+
+        productId:
+            selectedProduct.id,
+
+        productName:
+            selectedProduct.name,
+
+        category:
+            selectedProduct.category,
+
+        quantity:
+            selectedQuantity,
+
+        color:
+            selectedColor,
+
+        size:
+            selectedSize,
+
+        scent:
+            selectedScent,
+
+        unitPrice:
+            selectedProduct.price,
+
+        total:
+            total,
+
+        shippingAddress:
+            addressParts.join(", "),
+
+        paymentMethod:
+            paymentMethod,
+
+        date:
+            new Date().toISOString(),
+
+        status:
+            "Pending"
+
+    };
+
+
+    let orders = [];
+
+
+    try {
+
+        orders =
+            JSON.parse(
+                localStorage.getItem(
+                    "loveLuxeOrders"
+                )
+            ) || [];
+
+    } catch (error) {
+
+        orders = [];
+
+    }
+
+
+    orders.push(order);
+
+
+    localStorage.setItem(
+        "loveLuxeOrders",
+        JSON.stringify(orders)
+    );
+
+
+    checkoutMessage.textContent =
+        "Order placed successfully!";
+
+    checkoutMessage.style.color =
+        "#16834a";
+
+
+    setTimeout(function() {
+
+        closeCheckout();
+
+        alert(
+            "Order placed successfully!\n\n" +
+            "Order #: " +
+            orderNumber +
+            "\n" +
+            "Product: " +
+            selectedProduct.name +
+            "\n" +
+            "Quantity: " +
+            selectedQuantity +
+            "\n" +
+            "Total: " +
+            formatPrice(total)
+        );
+
+    }, 500);
+
 }
 
 
 /* ==========================================
-   PAYMENT
+   MY ACCOUNT DROPDOWN
 ========================================== */
 
-.payment-section {
-    margin-top: 20px;
-}
+const accountToggle =
+    document.getElementById(
+        "accountToggle"
+    );
 
-.payment-section label {
-    display: block;
+const accountDropdown =
+    document.getElementById(
+        "accountDropdown"
+    );
 
-    font-weight: bold;
+const productsLink =
+    document.querySelector(
+        '.sidebar-link[href="catalog.html"]'
+    );
 
-    font-size: 13px;
 
-    margin-bottom: 8px;
-}
+accountToggle?.addEventListener(
+    "click",
+    function(event) {
 
-.payment-section select {
-    width: 100%;
+        event.preventDefault();
 
-    height: 42px;
+        event.stopPropagation();
 
-    border: 1px solid #d8d8d8;
 
-    border-radius: 7px;
+        productsLink?.classList.remove(
+            "active"
+        );
 
-    padding: 0 10px;
 
-    background: white;
+        accountToggle.classList.toggle(
+            "active"
+        );
 
-    font-family: inherit;
-}
+
+        accountDropdown?.classList.toggle(
+            "show"
+        );
+
+    }
+);
 
 
 /* ==========================================
-   TOTAL
+   MOBILE SIDEBAR
 ========================================== */
 
-.checkout-total-row {
-    display: flex;
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
 
-    justify-content: space-between;
+const shopSidebar =
+    document.getElementById(
+        "shopSidebar"
+    );
 
-    align-items: center;
+const sidebarOverlay =
+    document.getElementById(
+        "sidebarOverlay"
+    );
 
-    border-top: 1px solid #e5e5e5;
 
-    margin-top: 25px;
+function openSidebar() {
 
-    padding-top: 20px;
+    shopSidebar?.classList.add(
+        "open"
+    );
+
+    sidebarOverlay?.classList.add(
+        "active"
+    );
+
 }
 
-.checkout-total-row span {
-    font-size: 17px;
 
-    font-weight: bold;
+function closeSidebar() {
+
+    shopSidebar?.classList.remove(
+        "open"
+    );
+
+    sidebarOverlay?.classList.remove(
+        "active"
+    );
+
 }
 
-.checkout-total-row strong {
-    font-size: 23px;
-}
+
+menuButton?.addEventListener(
+    "click",
+    openSidebar
+);
+
+
+sidebarOverlay?.addEventListener(
+    "click",
+    closeSidebar
+);
 
 
 /* ==========================================
-   ORDER BUTTON
+   INITIAL DISPLAY
 ========================================== */
 
-.place-order-button {
-    width: 100%;
-
-    height: 50px;
-
-    border: none;
-
-    border-radius: 7px;
-
-    background: #111111;
-
-    color: white;
-
-    margin-top: 20px;
-
-    font-size: 14px;
-
-    font-weight: bold;
-
-    letter-spacing: 1px;
-
-    cursor: pointer;
-}
-
-.place-order-button:hover {
-    background: #c5a059;
-}
-
-.checkout-message {
-    text-align: center;
-
-    margin-top: 12px;
-
-    font-size: 13px;
-}
-
-
-/* ==========================================
-   FOOTER
-========================================== */
-
-.shop-footer {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    border-top: 1px solid #e0e2e6;
-
-    margin-top: 55px;
-
-    padding-top: 25px;
-
-    color: #777777;
-
-    font-size: 13px;
-}
-
-
-/* ==========================================
-   MOBILE HEADER
-========================================== */
-
-.mobile-header {
-    display: none;
-}
-
-
-/* ==========================================
-   SIDEBAR OVERLAY
-========================================== */
-
-.sidebar-overlay {
-    display: none;
-}
-
-
-/* ==========================================
-   RESPONSIVE
-========================================== */
-
-@media (max-width: 1200px) {
-
-    .product-grid {
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-    }
-
-}
-
-
-@media (max-width: 900px) {
-
-    .shop-sidebar {
-        width: 260px;
-
-        transform: translateX(-100%);
-
-        transition: transform 0.25s ease;
-    }
-
-    .shop-sidebar.open {
-        transform: translateX(0);
-    }
-
-    .mobile-header {
-        display: flex;
-
-        position: fixed;
-
-        top: 0;
-        left: 0;
-
-        width: 100%;
-
-        height: 62px;
-
-        background: #111111;
-
-        align-items: center;
-
-        padding: 0 17px;
-
-        z-index: 1200;
-    }
-
-    .menu-button {
-        border: none;
-
-        background: transparent;
-
-        color: white;
-
-        font-size: 25px;
-
-        cursor: pointer;
-
-        margin-right: 15px;
-    }
-
-    .mobile-brand {
-        font-family: Georgia, serif;
-
-        color: #c5a059;
-
-        font-size: 19px;
-    }
-
-    .mobile-brand span {
-        display: block;
-
-        font-family: Arial, sans-serif;
-
-        color: #999999;
-
-        font-size: 7px;
-
-        letter-spacing: 2px;
-    }
-
-    .sidebar-overlay.active {
-        display: block;
-
-        position: fixed;
-
-        inset: 0;
-
-        background: rgba(0, 0, 0, 0.45);
-
-        z-index: 1100;
-    }
-
-    .shop-main {
-        margin-left: 0;
-
-        padding: 90px 25px 50px;
-    }
-
-    .product-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-}
-
-
-@media (max-width: 600px) {
-
-    .shop-main {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-
-    .shop-topbar {
-        align-items: flex-start;
-
-        gap: 15px;
-    }
-
-    .shop-topbar h1 {
-        font-size: 28px;
-    }
-
-    .customer-profile {
-        display: none;
-    }
-
-    .catalog-header {
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        gap: 12px;
-    }
-
-    .filter-buttons {
-        overflow-x: auto;
-
-        flex-wrap: nowrap;
-
-        padding-bottom: 5px;
-    }
-
-    .filter-button {
-        white-space: nowrap;
-    }
-
-    .product-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .product-image {
-        height: 280px;
-    }
-
-    .checkout-content {
-        flex-direction: column;
-    }
-
-    .checkout-image-area {
-        width: 100%;
-    }
-
-    #checkoutImage {
-        width: 100%;
-        height: 240px;
-    }
-
-    .shop-footer {
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 10px;
-    }
-
-}
+displayProducts();
