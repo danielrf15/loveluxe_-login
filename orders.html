@@ -19,10 +19,211 @@
         href="catalog.css"
     >
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <style>
+
+        /* ==========================================
+           ACCOUNT PAGE
+        ========================================== */
+
+        .account-page-content {
+            padding: 35px 40px 50px;
+        }
+
+
+        .account-page-header {
+            margin-bottom: 28px;
+        }
+
+
+        .account-page-eyebrow {
+            color: #c5a059;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+
+        .account-page-header h2 {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+
+        .account-page-header p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+
+        .account-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 28px;
+        }
+
+
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+
+        .order-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 18px;
+            background: #ffffff;
+        }
+
+
+        .order-item-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+
+        .order-number {
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+
+        .order-date {
+            color: #888;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+
+        .order-status {
+            background: #f5f0e7;
+            color: #9a783d;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+
+        .order-item-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 18px 0;
+        }
+
+
+        .order-item-content strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+
+        .order-item-content span {
+            color: #777;
+            font-size: 12px;
+        }
+
+
+        .order-total {
+            white-space: nowrap;
+        }
+
+
+        .order-item-footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            color: #777;
+            font-size: 11px;
+            padding-top: 14px;
+            border-top: 1px solid #eeeeee;
+        }
+
+
+        .empty-orders {
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+
+        .empty-orders-icon {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+
+        .empty-orders h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+
+        .empty-orders p {
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+
+        .primary-button-link {
+            display: inline-block;
+            background: #111111;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 7px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+
+        .primary-button-link:hover {
+            background: #c5a059;
+        }
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 768px) {
+
+            .account-page-content {
+                padding: 25px 18px 40px;
+            }
+
+
+            .account-card {
+                padding: 18px;
+            }
+
+
+            .order-item-top,
+            .order-item-content,
+            .order-item-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+
+            .order-total {
+                margin-top: 5px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -30,19 +231,18 @@
 <body>
 
 
-    <!-- ==========================================
-         MOBILE HEADER
-    =========================================== -->
+    <!-- MOBILE HEADER -->
 
     <header class="mobile-header">
 
         <button
             class="menu-button"
-            type="button"
             onclick="openSidebar()"
+            type="button"
         >
             ☰
         </button>
+
 
         <div class="mobile-brand">
 
@@ -57,8 +257,9 @@
     </header>
 
 
+
     <!-- ==========================================
-         SIDEBAR
+         SAME SIDEBAR AS CATALOG
     =========================================== -->
 
     <aside
@@ -79,6 +280,7 @@
         </div>
 
 
+
         <div class="sidebar-section">
 
             <div class="sidebar-label">
@@ -86,9 +288,12 @@
             </div>
 
 
+            <!-- PRODUCTS -->
+
             <a
                 href="catalog.html"
                 class="sidebar-link"
+                id="productsLink"
             >
 
                 <span>
@@ -101,6 +306,9 @@
 
             </a>
 
+
+
+            <!-- MY ACCOUNT -->
 
             <button
                 type="button"
@@ -123,14 +331,15 @@
             </button>
 
 
+
+            <!-- ACCOUNT DROPDOWN -->
+
             <div
                 class="account-dropdown show"
                 id="accountDropdown"
             >
 
-                <a
-                    href="personal.html"
-                >
+                <a href="personal.html">
                     Personal Information
                 </a>
 
@@ -141,9 +350,7 @@
                     My Orders
                 </a>
 
-                <a
-                    href="settings.html"
-                >
+                <a href="settings.html">
                     Settings
                 </a>
 
@@ -154,9 +361,8 @@
     </aside>
 
 
-    <!-- ==========================================
-         SIDEBAR OVERLAY
-    =========================================== -->
+
+    <!-- OVERLAY -->
 
     <div
         class="sidebar-overlay"
@@ -164,18 +370,21 @@
     ></div>
 
 
+
     <!-- ==========================================
          MAIN
     =========================================== -->
 
-    <main class="customer-main">
+    <main class="shop-main">
 
 
-        <header class="customer-topbar">
+        <!-- TOP BAR -->
+
+        <div class="shop-topbar">
 
             <div>
 
-                <div class="customer-topbar-label">
+                <div class="page-small-title">
                     CUSTOMER ACCOUNT
                 </div>
 
@@ -185,308 +394,129 @@
 
             </div>
 
-        </header>
 
+            <div class="customer-profile">
 
-        <!-- ORDERS -->
-
-        <section class="account-section">
-
-            <div class="section-heading">
+                <div class="customer-avatar">
+                    C
+                </div>
 
                 <div>
 
-                    <div class="section-small-title">
-                        ORDERS
+                    <div class="customer-label">
+                        Welcome Customer
                     </div>
 
-                    <h2>
-                        My Orders
-                    </h2>
-
-                    <p>
-                        View your recent Love Luxe orders.
-                    </p>
+                    <div
+                        class="customer-name"
+                        id="customerName"
+                    >
+                        Customer
+                    </div>
 
                 </div>
 
             </div>
 
+        </div>
 
-            <div
-                class="account-card"
-                id="ordersList"
-            ></div>
+
+
+        <!-- ACCOUNT CONTENT -->
+
+        <section class="account-page-content">
+
+
+            <div class="account-page-header">
+
+                <div class="account-page-eyebrow">
+                    ORDERS
+                </div>
+
+                <h2>
+                    My Orders
+                </h2>
+
+                <p>
+                    View your recent Love Luxe orders.
+                </p>
+
+            </div>
+
+
+
+            <div class="account-card">
+
+                <div
+                    id="ordersList"
+                    class="orders-list"
+                ></div>
+
+            </div>
 
         </section>
-
 
     </main>
 
 
-    <!-- ==========================================
-         DATA
-    =========================================== -->
 
     <script src="data.js"></script>
 
 
     <script>
 
-        const data = window.LoveLuxeData;
-
-        const user = data.customers[0];
-
-
         /* ==========================================
-           PAGE LOAD
+           ACCOUNT DROPDOWN
         ========================================== */
 
-        document.addEventListener(
-            "DOMContentLoaded",
+        const accountToggle =
+            document.getElementById("accountToggle");
+
+        const accountDropdown =
+            document.getElementById("accountDropdown");
+
+
+        accountToggle.addEventListener(
+            "click",
             function () {
 
-                loadOrders();
+                accountDropdown.classList.toggle("show");
 
-                setupSidebar();
+                accountToggle.classList.toggle("active");
+
+
+                const arrow =
+                    accountToggle.querySelector(
+                        ".account-arrow"
+                    );
+
+
+                if (
+                    accountDropdown.classList.contains("show")
+                ) {
+
+                    arrow.textContent = "▲";
+
+                } else {
+
+                    arrow.textContent = "▼";
+
+                }
 
             }
         );
 
 
-        /* ==========================================
-           LOAD ORDERS
-        ========================================== */
-
-        function loadOrders() {
-
-            const list =
-                document.getElementById(
-                    "ordersList"
-                );
-
-
-            const customerOrders =
-                data.orders
-                    .filter(
-                        function (order) {
-
-                            return (
-                                order.customerUsername ===
-                                user.username
-                            );
-
-                        }
-                    )
-                    .slice()
-                    .reverse();
-
-
-            if (customerOrders.length === 0) {
-
-                list.innerHTML = `
-
-                    <div class="empty-orders">
-
-                        <div class="empty-orders-icon">
-                            🛍
-                        </div>
-
-                        <h3>
-                            No Orders Yet
-                        </h3>
-
-                        <p>
-                            Your orders will appear here after you make a purchase.
-                        </p>
-
-                        <a
-                            href="catalog.html"
-                            class="primary-button-link"
-                        >
-                            SHOP NOW
-                        </a>
-
-                    </div>
-
-                `;
-
-                return;
-
-            }
-
-
-            list.innerHTML =
-                customerOrders
-                    .map(
-                        function (order) {
-
-                            return `
-
-                                <div class="order-item">
-
-                                    <div class="order-item-top">
-
-                                        <div>
-
-                                            <span class="order-number">
-                                                ${order.orderNumber}
-                                            </span>
-
-                                            <span class="order-date">
-                                                ${new Date(
-                                                    order.date
-                                                ).toLocaleDateString(
-                                                    "en-PH"
-                                                )}
-                                            </span>
-
-                                        </div>
-
-                                        <span class="order-status">
-                                            ${order.status}
-                                        </span>
-
-                                    </div>
-
-
-                                    <div class="order-item-content">
-
-                                        <div>
-
-                                            <strong>
-                                                ${order.productName}
-                                            </strong>
-
-                                            <span>
-                                                Category:
-                                                ${order.category}
-                                            </span>
-
-                                            <span>
-                                                Quantity:
-                                                ${order.quantity}
-                                            </span>
-
-                                            ${
-                                                order.color
-                                                    ? `
-                                                        <span>
-                                                            Color:
-                                                            ${order.color}
-                                                        </span>
-                                                    `
-                                                    : ""
-                                            }
-
-                                            ${
-                                                order.size
-                                                    ? `
-                                                        <span>
-                                                            Size:
-                                                            ${order.size}
-                                                        </span>
-                                                    `
-                                                    : ""
-                                            }
-
-                                            ${
-                                                order.scent
-                                                    ? `
-                                                        <span>
-                                                            Scent:
-                                                            ${order.scent}
-                                                        </span>
-                                                    `
-                                                    : ""
-                                            }
-
-                                        </div>
-
-
-                                        <strong class="order-total">
-
-                                            ₱${Number(
-                                                order.total
-                                            ).toLocaleString(
-                                                "en-PH",
-                                                {
-                                                    minimumFractionDigits: 2
-                                                }
-                                            )}
-
-                                        </strong>
-
-                                    </div>
-
-
-                                    <div class="order-item-footer">
-
-                                        <span>
-                                            ${order.paymentMethod}
-                                        </span>
-
-                                        <span>
-                                            ${
-                                                order.shippingAddress ||
-                                                "No address"
-                                            }
-                                        </span>
-
-                                    </div>
-
-                                </div>
-
-                            `;
-
-                        }
-                    )
-                    .join("");
-
-        }
-
 
         /* ==========================================
-           SIDEBAR
+           MOBILE SIDEBAR
         ========================================== */
-
-        function setupSidebar() {
-
-            const toggle =
-                document.getElementById(
-                    "accountToggle"
-                );
-
-
-            const dropdown =
-                document.getElementById(
-                    "accountDropdown"
-                );
-
-
-            toggle.onclick =
-                function () {
-
-                    dropdown.classList.toggle("show");
-
-                    toggle.classList.toggle("active");
-
-                };
-
-
-            document
-                .getElementById("sidebarOverlay")
-                .onclick = closeSidebar;
-
-        }
-
 
         function openSidebar() {
 
             document
                 .getElementById("shopSidebar")
                 .classList.add("open");
-
 
             document
                 .getElementById("sidebarOverlay")
@@ -501,10 +531,186 @@
                 .getElementById("shopSidebar")
                 .classList.remove("open");
 
-
             document
                 .getElementById("sidebarOverlay")
                 .classList.remove("active");
+
+        }
+
+
+        document
+            .getElementById("sidebarOverlay")
+            .addEventListener(
+                "click",
+                closeSidebar
+            );
+
+
+
+        /* ==========================================
+           CUSTOMER
+        ========================================== */
+
+        const customer =
+            customers.find(
+                function (user) {
+
+                    return user.role === "customer";
+
+                }
+            );
+
+
+        if (!customer) {
+
+            window.location.href = "index.html";
+
+        } else {
+
+            document.getElementById(
+                "customerName"
+            ).textContent =
+                customer.fullName || "Customer";
+
+        }
+
+
+
+        /* ==========================================
+           LOAD ORDERS
+        ========================================== */
+
+        const ordersList =
+            document.getElementById("ordersList");
+
+
+        const customerOrders =
+            orders.filter(
+                function (order) {
+
+                    return (
+                        order.customerUsername ===
+                        customer.username
+                    );
+
+                }
+            );
+
+
+        if (customerOrders.length === 0) {
+
+            ordersList.innerHTML = `
+
+                <div class="empty-orders">
+
+                    <div class="empty-orders-icon">
+                        🛍
+                    </div>
+
+                    <h3>
+                        No Orders Yet
+                    </h3>
+
+                    <p>
+                        Your orders will appear here after you make a purchase.
+                    </p>
+
+                    <a
+                        href="catalog.html"
+                        class="primary-button-link"
+                    >
+                        SHOP NOW
+                    </a>
+
+                </div>
+
+            `;
+
+        } else {
+
+            ordersList.innerHTML =
+                customerOrders
+                    .slice()
+                    .reverse()
+                    .map(
+                        function (order) {
+
+                            return `
+
+                                <div class="order-item">
+
+                                    <div class="order-item-top">
+
+                                        <div>
+
+                                            <span class="order-number">
+                                                ${order.orderNumber || "Order"}
+                                            </span>
+
+                                            <span class="order-date">
+                                                ${order.date || ""}
+                                            </span>
+
+                                        </div>
+
+                                        <span class="order-status">
+                                            ${order.status || "Pending"}
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="order-item-content">
+
+                                        <div>
+
+                                            <strong>
+                                                ${order.productName || "Product"}
+                                            </strong>
+
+                                            <span>
+                                                ${order.category || ""}
+                                                •
+                                                Quantity:
+                                                ${order.quantity || 1}
+                                            </span>
+
+                                        </div>
+
+
+                                        <strong class="order-total">
+                                            ₱${Number(
+                                                order.total || 0
+                                            ).toLocaleString(
+                                                "en-PH",
+                                                {
+                                                    minimumFractionDigits: 2
+                                                }
+                                            )}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="order-item-footer">
+
+                                        <span>
+                                            ${order.paymentMethod || ""}
+                                        </span>
+
+                                        <span>
+                                            ${order.shippingAddress || ""}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            `;
+
+                        }
+                    )
+                    .join("");
 
         }
 
