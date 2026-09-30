@@ -19,10 +19,201 @@
         href="catalog.css"
     >
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <style>
+
+        /* ==========================================
+           ACCOUNT PAGE
+        ========================================== */
+
+        .account-page-content {
+            padding: 35px 40px 50px;
+        }
+
+
+        .account-page-header {
+            margin-bottom: 28px;
+        }
+
+
+        .account-page-eyebrow {
+            color: #c5a059;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+
+        .account-page-header h2 {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+
+        .account-page-header p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+
+        .account-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+        }
+
+
+        .settings-card-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+
+        .settings-card-heading h3 {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+
+        .settings-card-heading p {
+            color: #888;
+            font-size: 12px;
+        }
+
+
+        .settings-icon {
+            font-size: 24px;
+        }
+
+
+        .account-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+
+        .form-group label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #333;
+        }
+
+
+        .form-group input {
+            width: 100%;
+            height: 45px;
+            border: 1px solid #d9dde5;
+            border-radius: 7px;
+            padding: 0 13px;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+        }
+
+
+        .form-group input:focus {
+            border-color: #c5a059;
+        }
+
+
+        .password-form {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+
+        .settings-card-footer {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eeeeee;
+        }
+
+
+        .primary-button {
+            border: none;
+            background: #111111;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 7px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            cursor: pointer;
+        }
+
+
+        .primary-button:hover {
+            background: #c5a059;
+        }
+
+
+        .account-message {
+            display: none;
+            padding: 13px 16px;
+            border-radius: 7px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+
+        .account-message.show {
+            display: block;
+        }
+
+
+        .account-message.success {
+            background: #edf8ef;
+            color: #27733b;
+        }
+
+
+        .account-message.error {
+            background: #fff0f0;
+            color: #a72e2e;
+        }
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 768px) {
+
+            .account-page-content {
+                padding: 25px 18px 40px;
+            }
+
+
+            .account-card {
+                padding: 20px;
+            }
+
+
+            .account-form-grid,
+            .password-form {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -30,19 +221,18 @@
 <body>
 
 
-    <!-- ==========================================
-         MOBILE HEADER
-    =========================================== -->
+    <!-- MOBILE HEADER -->
 
     <header class="mobile-header">
 
         <button
             class="menu-button"
-            type="button"
             onclick="openSidebar()"
+            type="button"
         >
             ☰
         </button>
+
 
         <div class="mobile-brand">
 
@@ -57,8 +247,9 @@
     </header>
 
 
+
     <!-- ==========================================
-         SIDEBAR
+         SAME SIDEBAR AS CATALOG
     =========================================== -->
 
     <aside
@@ -79,6 +270,7 @@
         </div>
 
 
+
         <div class="sidebar-section">
 
             <div class="sidebar-label">
@@ -86,9 +278,12 @@
             </div>
 
 
+            <!-- PRODUCTS -->
+
             <a
                 href="catalog.html"
                 class="sidebar-link"
+                id="productsLink"
             >
 
                 <span>
@@ -101,6 +296,9 @@
 
             </a>
 
+
+
+            <!-- MY ACCOUNT -->
 
             <button
                 type="button"
@@ -123,20 +321,19 @@
             </button>
 
 
+
+            <!-- ACCOUNT DROPDOWN -->
+
             <div
                 class="account-dropdown show"
                 id="accountDropdown"
             >
 
-                <a
-                    href="personal.html"
-                >
+                <a href="personal.html">
                     Personal Information
                 </a>
 
-                <a
-                    href="orders.html"
-                >
+                <a href="orders.html">
                     My Orders
                 </a>
 
@@ -154,9 +351,8 @@
     </aside>
 
 
-    <!-- ==========================================
-         SIDEBAR OVERLAY
-    =========================================== -->
+
+    <!-- OVERLAY -->
 
     <div
         class="sidebar-overlay"
@@ -164,18 +360,21 @@
     ></div>
 
 
+
     <!-- ==========================================
          MAIN
     =========================================== -->
 
-    <main class="customer-main">
+    <main class="shop-main">
 
 
-        <header class="customer-topbar">
+        <!-- TOP BAR -->
+
+        <div class="shop-topbar">
 
             <div>
 
-                <div class="customer-topbar-label">
+                <div class="page-small-title">
                     CUSTOMER ACCOUNT
                 </div>
 
@@ -185,43 +384,89 @@
 
             </div>
 
-        </header>
 
+            <div class="customer-profile">
 
-        <div
-            id="accountMessage"
-            class="account-message"
-        ></div>
-
-
-        <!-- ==========================================
-             SHIPPING ADDRESS
-        =========================================== -->
-
-        <section class="account-section">
-
-            <div class="section-heading">
+                <div class="customer-avatar">
+                    C
+                </div>
 
                 <div>
 
-                    <div class="section-small-title">
-                        ACCOUNT SETTINGS
+                    <div class="customer-label">
+                        Welcome Customer
                     </div>
 
-                    <h2>
-                        Shipping Address
-                    </h2>
-
-                    <p>
-                        This address will be used when you checkout.
-                    </p>
+                    <div
+                        class="customer-name"
+                        id="customerName"
+                    >
+                        Customer
+                    </div>
 
                 </div>
 
             </div>
 
+        </div>
 
-            <div class="account-card settings-card">
+
+
+        <!-- ACCOUNT CONTENT -->
+
+        <section class="account-page-content">
+
+
+            <div class="account-page-header">
+
+                <div class="account-page-eyebrow">
+                    ACCOUNT SETTINGS
+                </div>
+
+                <h2>
+                    Settings
+                </h2>
+
+                <p>
+                    Manage your shipping address and password.
+                </p>
+
+            </div>
+
+
+
+            <div
+                id="accountMessage"
+                class="account-message"
+            ></div>
+
+
+
+            <!-- SHIPPING ADDRESS -->
+
+            <div class="account-card">
+
+                <div class="settings-card-heading">
+
+                    <div>
+
+                        <h3>
+                            Shipping Address
+                        </h3>
+
+                        <p>
+                            This address will be used when you checkout.
+                        </p>
+
+                    </div>
+
+                    <span class="settings-icon">
+                        📍
+                    </span>
+
+                </div>
+
+
 
                 <div class="account-form-grid">
 
@@ -233,12 +478,13 @@
                         </label>
 
                         <input
-                            id="houseNumber"
                             type="text"
+                            id="houseNumber"
                             placeholder="e.g. 123"
                         >
 
                     </div>
+
 
 
                     <div class="form-group">
@@ -248,12 +494,13 @@
                         </label>
 
                         <input
-                            id="street"
                             type="text"
+                            id="street"
                             placeholder="Enter street"
                         >
 
                     </div>
+
 
 
                     <div class="form-group">
@@ -263,12 +510,13 @@
                         </label>
 
                         <input
-                            id="barangay"
                             type="text"
+                            id="barangay"
                             placeholder="Enter barangay"
                         >
 
                     </div>
+
 
 
                     <div class="form-group">
@@ -278,12 +526,13 @@
                         </label>
 
                         <input
-                            id="city"
                             type="text"
+                            id="city"
                             placeholder="Enter city or municipality"
                         >
 
                     </div>
+
 
 
                     <div class="form-group">
@@ -293,12 +542,13 @@
                         </label>
 
                         <input
-                            id="province"
                             type="text"
+                            id="province"
                             placeholder="Enter province"
                         >
 
                     </div>
+
 
 
                     <div class="form-group">
@@ -308,15 +558,15 @@
                         </label>
 
                         <input
-                            id="postalCode"
                             type="text"
+                            id="postalCode"
                             placeholder="Enter postal code"
                         >
 
                     </div>
 
-
                 </div>
+
 
 
                 <div class="settings-card-footer">
@@ -333,37 +583,33 @@
 
             </div>
 
-        </section>
 
 
-        <!-- ==========================================
-             CHANGE PASSWORD
-        =========================================== -->
+            <!-- CHANGE PASSWORD -->
 
-        <section class="account-section">
+            <div class="account-card">
 
-            <div class="section-heading">
+                <div class="settings-card-heading">
 
-                <div>
+                    <div>
 
-                    <div class="section-small-title">
-                        SECURITY
+                        <h3>
+                            Change Password
+                        </h3>
+
+                        <p>
+                            Update your account password.
+                        </p>
+
                     </div>
 
-                    <h2>
-                        Change Password
-                    </h2>
-
-                    <p>
-                        Update your account password.
-                    </p>
+                    <span class="settings-icon">
+                        🔒
+                    </span>
 
                 </div>
 
-            </div>
 
-
-            <div class="account-card settings-card">
 
                 <div class="password-form">
 
@@ -383,6 +629,7 @@
                     </div>
 
 
+
                     <div class="form-group">
 
                         <label for="newPassword">
@@ -396,6 +643,7 @@
                         >
 
                     </div>
+
 
 
                     <div class="form-group">
@@ -412,8 +660,8 @@
 
                     </div>
 
-
                 </div>
+
 
 
                 <div class="settings-card-footer">
@@ -432,58 +680,128 @@
 
         </section>
 
-
     </main>
 
 
-    <!-- ==========================================
-         DATA
-    =========================================== -->
 
     <script src="data.js"></script>
 
 
     <script>
 
-        const data = window.LoveLuxeData;
-
-        const user = data.customers[0];
-
-
         /* ==========================================
-           PAGE LOAD
+           ACCOUNT DROPDOWN
         ========================================== */
 
-        document.addEventListener(
-            "DOMContentLoaded",
+        const accountToggle =
+            document.getElementById("accountToggle");
+
+        const accountDropdown =
+            document.getElementById("accountDropdown");
+
+
+        accountToggle.addEventListener(
+            "click",
             function () {
 
-                loadAddress();
+                accountDropdown.classList.toggle("show");
 
-                document.getElementById(
-                    "saveShippingButton"
-                ).onclick = saveAddress;
+                accountToggle.classList.toggle("active");
 
 
-                document.getElementById(
-                    "changePasswordButton"
-                ).onclick = changePassword;
+                const arrow =
+                    accountToggle.querySelector(
+                        ".account-arrow"
+                    );
 
 
-                setupSidebar();
+                if (
+                    accountDropdown.classList.contains("show")
+                ) {
+
+                    arrow.textContent = "▲";
+
+                } else {
+
+                    arrow.textContent = "▼";
+
+                }
 
             }
         );
 
 
+
         /* ==========================================
-           LOAD SHIPPING ADDRESS
+           MOBILE SIDEBAR
         ========================================== */
 
-        function loadAddress() {
+        function openSidebar() {
+
+            document
+                .getElementById("shopSidebar")
+                .classList.add("open");
+
+            document
+                .getElementById("sidebarOverlay")
+                .classList.add("active");
+
+        }
+
+
+        function closeSidebar() {
+
+            document
+                .getElementById("shopSidebar")
+                .classList.remove("open");
+
+            document
+                .getElementById("sidebarOverlay")
+                .classList.remove("active");
+
+        }
+
+
+        document
+            .getElementById("sidebarOverlay")
+            .addEventListener(
+                "click",
+                closeSidebar
+            );
+
+
+
+        /* ==========================================
+           CUSTOMER
+        ========================================== */
+
+        const customer =
+            customers.find(
+                function (user) {
+
+                    return user.role === "customer";
+
+                }
+            );
+
+
+        if (!customer) {
+
+            window.location.href = "index.html";
+
+        } else {
+
+            document.getElementById(
+                "customerName"
+            ).textContent =
+                customer.fullName || "Customer";
+
+
+
+            /* LOAD SHIPPING ADDRESS */
 
             const address =
-                user.shippingAddress || {};
+                customer.shippingAddress || {};
 
 
             document.getElementById(
@@ -524,225 +842,179 @@
         }
 
 
+
         /* ==========================================
-           SAVE ADDRESS
+           SAVE SHIPPING ADDRESS
         ========================================== */
 
-        function saveAddress() {
+        document
+            .getElementById("saveShippingButton")
+            .addEventListener(
+                "click",
+                function () {
 
-            user.shippingAddress = {
+                    customer.shippingAddress = {
 
-                houseNumber:
-                    document.getElementById(
-                        "houseNumber"
-                    ).value.trim(),
+                        houseNumber:
+                            document
+                                .getElementById("houseNumber")
+                                .value
+                                .trim(),
 
-                street:
-                    document.getElementById(
-                        "street"
-                    ).value.trim(),
+                        street:
+                            document
+                                .getElementById("street")
+                                .value
+                                .trim(),
 
-                barangay:
-                    document.getElementById(
-                        "barangay"
-                    ).value.trim(),
+                        barangay:
+                            document
+                                .getElementById("barangay")
+                                .value
+                                .trim(),
 
-                city:
-                    document.getElementById(
-                        "city"
-                    ).value.trim(),
+                        city:
+                            document
+                                .getElementById("city")
+                                .value
+                                .trim(),
 
-                province:
-                    document.getElementById(
-                        "province"
-                    ).value.trim(),
+                        province:
+                            document
+                                .getElementById("province")
+                                .value
+                                .trim(),
 
-                postalCode:
-                    document.getElementById(
-                        "postalCode"
-                    ).value.trim()
+                        postalCode:
+                            document
+                                .getElementById("postalCode")
+                                .value
+                                .trim()
 
-            };
+                    };
 
 
-            showMessage(
-                "Shipping address saved successfully for this session.",
-                false
+                    const message =
+                        document.getElementById(
+                            "accountMessage"
+                        );
+
+
+                    message.textContent =
+                        "Shipping address updated.";
+
+                    message.className =
+                        "account-message success show";
+
+                }
             );
 
-        }
 
 
         /* ==========================================
            CHANGE PASSWORD
         ========================================== */
 
-        function changePassword() {
-
-            const current =
-                document.getElementById(
-                    "currentPassword"
-                ).value;
-
-
-            const newPassword =
-                document.getElementById(
-                    "newPassword"
-                ).value;
-
-
-            const confirmPassword =
-                document.getElementById(
-                    "confirmPassword"
-                ).value;
-
-
-            if (current !== user.password) {
-
-                showMessage(
-                    "Current password is incorrect.",
-                    true
-                );
-
-                return;
-
-            }
-
-
-            if (!newPassword) {
-
-                showMessage(
-                    "Please enter a new password.",
-                    true
-                );
-
-                return;
-
-            }
-
-
-            if (newPassword !== confirmPassword) {
-
-                showMessage(
-                    "New passwords do not match.",
-                    true
-                );
-
-                return;
-
-            }
-
-
-            user.password = newPassword;
-
-
-            document.getElementById(
-                "currentPassword"
-            ).value = "";
-
-
-            document.getElementById(
-                "newPassword"
-            ).value = "";
-
-
-            document.getElementById(
-                "confirmPassword"
-            ).value = "";
-
-
-            showMessage(
-                "Password changed successfully for this session.",
-                false
-            );
-
-        }
-
-
-        /* ==========================================
-           MESSAGE
-        ========================================== */
-
-        function showMessage(text, error) {
-
-            const box =
-                document.getElementById(
-                    "accountMessage"
-                );
-
-
-            box.textContent = text;
-
-
-            box.className =
-                error
-                    ? "account-message error"
-                    : "account-message success";
-
-        }
-
-
-        /* ==========================================
-           SIDEBAR
-        ========================================== */
-
-        function setupSidebar() {
-
-            const toggle =
-                document.getElementById(
-                    "accountToggle"
-                );
-
-
-            const dropdown =
-                document.getElementById(
-                    "accountDropdown"
-                );
-
-
-            toggle.onclick =
+        document
+            .getElementById("changePasswordButton")
+            .addEventListener(
+                "click",
                 function () {
 
-                    dropdown.classList.toggle("show");
+                    const currentPassword =
+                        document
+                            .getElementById("currentPassword")
+                            .value;
 
-                    toggle.classList.toggle("active");
+                    const newPassword =
+                        document
+                            .getElementById("newPassword")
+                            .value;
 
-                };
-
-
-            document
-                .getElementById("sidebarOverlay")
-                .onclick = closeSidebar;
-
-        }
-
-
-        function openSidebar() {
-
-            document
-                .getElementById("shopSidebar")
-                .classList.add("open");
+                    const confirmPassword =
+                        document
+                            .getElementById("confirmPassword")
+                            .value;
 
 
-            document
-                .getElementById("sidebarOverlay")
-                .classList.add("active");
-
-        }
-
-
-        function closeSidebar() {
-
-            document
-                .getElementById("shopSidebar")
-                .classList.remove("open");
+                    const message =
+                        document.getElementById(
+                            "accountMessage"
+                        );
 
 
-            document
-                .getElementById("sidebarOverlay")
-                .classList.remove("active");
+                    if (
+                        currentPassword !==
+                        customer.password
+                    ) {
 
-        }
+                        message.textContent =
+                            "Current password is incorrect.";
+
+                        message.className =
+                            "account-message error show";
+
+                        return;
+
+                    }
+
+
+                    if (!newPassword) {
+
+                        message.textContent =
+                            "Please enter a new password.";
+
+                        message.className =
+                            "account-message error show";
+
+                        return;
+
+                    }
+
+
+                    if (
+                        newPassword !==
+                        confirmPassword
+                    ) {
+
+                        message.textContent =
+                            "The new passwords do not match.";
+
+                        message.className =
+                            "account-message error show";
+
+                        return;
+
+                    }
+
+
+                    customer.password =
+                        newPassword;
+
+
+                    document.getElementById(
+                        "currentPassword"
+                    ).value = "";
+
+
+                    document.getElementById(
+                        "newPassword"
+                    ).value = "";
+
+
+                    document.getElementById(
+                        "confirmPassword"
+                    ).value = "";
+
+
+                    message.textContent =
+                        "Password changed successfully.";
+
+                    message.className =
+                        "account-message success show";
+
+                }
+            );
 
     </script>
 
