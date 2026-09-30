@@ -1,47 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Luxe by EA - Sign In</title>
-    <link rel="stylesheet" href="style.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Love Luxe by EA - Login
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
+
 <body>
 
-<div class="auth-container">
-    <div class="auth-card">
 
-        <div class="auth-brand">LOVE LUXE</div>
-        <div class="auth-subtitle">BY EA • EST. 2024</div>
+    <!-- ==========================================
+         LOGIN PAGE
+    =========================================== -->
 
-        <h1>Sign In</h1>
-        <p class="welcome-text">Welcome back to Love Luxe</p>
+    <div class="login-container">
 
-        <form id="loginForm">
-            <label for="username">Username</label>
-            <input id="username" type="text" placeholder="Enter your username" required>
 
-            <label for="password">Password</label>
-            <input id="password" type="password" placeholder="Enter your password" required>
+        <!-- ==========================================
+             BRAND
+        =========================================== -->
 
-            <div class="forgot-row">
-                <a href="forgot-password.html">Forgot Password?</a>
+        <div class="brand">
+
+            <div class="brand-title">
+                LOVE LUXE
             </div>
 
-            <button type="submit" class="auth-button">SIGN IN</button>
-        </form>
+            <div class="brand-subtitle">
+                BY EA • EST. 2024
+            </div>
 
-        <div id="loginMessage" class="auth-message"></div>
+        </div>
 
-        <div class="or-divider"><span>OR</span></div>
 
-        <p class="signup-text">Don't have an account?</p>
-        <a href="signup.html" class="signup-link">Sign Up</a>
+
+        <!-- ==========================================
+             LOGIN CARD
+        =========================================== -->
+
+        <div class="login-card">
+
+
+            <!-- HEADING -->
+
+            <div class="login-heading">
+
+                <div class="small-title">
+                    WELCOME BACK
+                </div>
+
+                <h1>
+                    Sign In
+                </h1>
+
+                <p>
+                    Sign in to your Love Luxe account
+                </p>
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 LOGIN FORM
+            =========================================== -->
+
+            <form
+                id="loginForm"
+                class="login-form"
+            >
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- FORGOT PASSWORD -->
+
+                <div class="forgot-password-container">
+
+                    <a
+                        href="forgot-password.html"
+                        class="forgot-password"
+                    >
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+
+
+                <!-- LOGIN MESSAGE -->
+
+                <div
+                    id="loginMessage"
+                    class="auth-message"
+                ></div>
+
+
+
+                <!-- SIGN IN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="main-button"
+                >
+                    SIGN IN
+                </button>
+
+
+            </form>
+
+
+
+            <!-- ==========================================
+                 SIGN UP
+            =========================================== -->
+
+            <div class="signup-link-container">
+
+                <span>
+                    Don't have an account?
+                </span>
+
+                <a
+                    href="signup.html"
+                    class="signup-link"
+                >
+                    Create Account
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ==========================================
+             FOOTER
+        =========================================== -->
+
+        <div class="login-footer">
+
+            Love Luxe by EA • Est. 2024
+
+        </div>
+
 
     </div>
-</div>
 
-<script src="data.js"></script>
-<script src="script.js"></script>
+
+
+    <!-- ==========================================
+         ARRAY DATA
+         
+         IMPORTANT:
+         data.js MUST COME BEFORE script.js
+    =========================================== -->
+
+    <script src="data.js"></script>
+
+    <script src="script.js"></script>
+
+
 </body>
+
 </html>
