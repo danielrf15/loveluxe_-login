@@ -3,12 +3,12 @@
    ARRAY-ONLY VERSION
 ========================================== */
 
-const data =
+const loveLuxeData =
     window.LoveLuxeData;
 
 
 /* ==========================================
-   ADMIN PRODUCTS ARRAY
+   ADMIN PRODUCTS
 ========================================== */
 
 const adminProducts = [
@@ -18,8 +18,7 @@ const adminProducts = [
         name: "Sophia Skirt",
         category: "Clothing",
         price: 790,
-        stock: 20,
-        image: "images/sophia-skirt.jpg"
+        stock: 20
     },
 
     {
@@ -27,8 +26,7 @@ const adminProducts = [
         name: "Nov-Mardi T-Shirt",
         category: "Clothing",
         price: 450,
-        stock: 20,
-        image: "images/nov-mardi-tshirt.jpg"
+        stock: 20
     },
 
     {
@@ -36,8 +34,7 @@ const adminProducts = [
         name: "Basic Chic01 Terno",
         category: "Clothing",
         price: 950,
-        stock: 20,
-        image: "images/basic-chic01-terno.jpg"
+        stock: 20
     },
 
     {
@@ -45,8 +42,7 @@ const adminProducts = [
         name: "Sami T-Shirt",
         category: "Clothing",
         price: 790,
-        stock: 20,
-        image: "images/sami-tshirt.jpg"
+        stock: 20
     },
 
     {
@@ -54,8 +50,7 @@ const adminProducts = [
         name: "Alada Soap",
         category: "Body Care",
         price: 350,
-        stock: 10,
-        image: "images/alada-soap.jpg"
+        stock: 20
     },
 
     {
@@ -63,8 +58,7 @@ const adminProducts = [
         name: "Dewy Gluta Soap",
         category: "Body Care",
         price: 199,
-        stock: 10,
-        image: "images/dewy-gluta-soap.jpg"
+        stock: 20
     },
 
     {
@@ -72,8 +66,7 @@ const adminProducts = [
         name: "Serene Skin Soap",
         category: "Body Care",
         price: 299,
-        stock: 10,
-        image: "images/serene-skin-soap.jpg"
+        stock: 20
     },
 
     {
@@ -81,8 +74,7 @@ const adminProducts = [
         name: "Vitamin E Whitening Cream",
         category: "Body Care",
         price: 180,
-        stock: 10,
-        image: "images/vitamin-e-whitening-cream.jpg"
+        stock: 20
     },
 
     {
@@ -90,8 +82,7 @@ const adminProducts = [
         name: "Mini Enzo",
         category: "Bags",
         price: 3590,
-        stock: 18,
-        image: "images/mini-enzo.jpg"
+        stock: 20
     },
 
     {
@@ -99,8 +90,7 @@ const adminProducts = [
         name: "Mini Bucket Bag",
         category: "Bags",
         price: 2090,
-        stock: 18,
-        image: "images/mini-bucket-bag.jpg"
+        stock: 20
     },
 
     {
@@ -108,8 +98,7 @@ const adminProducts = [
         name: "Anytime Medium",
         category: "Bags",
         price: 2890,
-        stock: 18,
-        image: "images/anytime-medium.jpg"
+        stock: 20
     },
 
     {
@@ -117,8 +106,7 @@ const adminProducts = [
         name: "Emilio Barrel",
         category: "Bags",
         price: 3590,
-        stock: 18,
-        image: "images/emilio-barrel.jpg"
+        stock: 20
     },
 
     {
@@ -126,8 +114,7 @@ const adminProducts = [
         name: "Victoria's Secret Perfume",
         category: "Perfume",
         price: 700,
-        stock: 5,
-        image: "images/victorias-secret-perfume.jpg"
+        stock: 20
     },
 
     {
@@ -135,8 +122,7 @@ const adminProducts = [
         name: "Bath & Body Works Perfume",
         category: "Perfume",
         price: 600,
-        stock: 5,
-        image: "images/bath-body-works-perfume.jpg"
+        stock: 20
     },
 
     {
@@ -144,8 +130,7 @@ const adminProducts = [
         name: "Smart Collection Perfume",
         category: "Perfume",
         price: 350,
-        stock: 5,
-        image: "images/smart-collection-perfume.jpg"
+        stock: 20
     },
 
     {
@@ -153,15 +138,14 @@ const adminProducts = [
         name: "Lattafa YARA",
         category: "Perfume",
         price: 390,
-        stock: 5,
-        image: "images/lattafa-yara.jpg"
+        stock: 20
     }
 
 ];
 
 
 /* ==========================================
-   MONEY FORMAT
+   FORMAT MONEY
 ========================================== */
 
 function money(value) {
@@ -170,8 +154,7 @@ function money(value) {
         Number(value).toLocaleString(
             "en-PH",
             {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
+                minimumFractionDigits: 2
             }
         );
 
@@ -184,157 +167,254 @@ function money(value) {
 
 function toggleSidebar() {
 
-    document
-        .getElementById("sidebar")
-        ?.classList.toggle("open");
+    const sidebar =
+        document.getElementById("sidebar");
+
+    const overlay =
+        document.getElementById("sidebarOverlay");
 
 
-    document
-        .getElementById("sidebarOverlay")
-        ?.classList.toggle("active");
+    if (sidebar) {
+
+        sidebar.classList.toggle("open");
+
+    }
+
+
+    if (overlay) {
+
+        overlay.classList.toggle("active");
+
+    }
 
 }
 
 
 function closeSidebar() {
 
-    document
-        .getElementById("sidebar")
-        ?.classList.remove("open");
+    const sidebar =
+        document.getElementById("sidebar");
+
+    const overlay =
+        document.getElementById("sidebarOverlay");
 
 
-    document
-        .getElementById("sidebarOverlay")
-        ?.classList.remove("active");
+    if (sidebar) {
+
+        sidebar.classList.remove("open");
+
+    }
+
+
+    if (overlay) {
+
+        overlay.classList.remove("active");
+
+    }
 
 }
 
 
 /* ==========================================
-   ADMIN VIEW
+   PAGE VIEW
 ========================================== */
 
-function showAdminView(view) {
+function showAdminView(page) {
 
-    const dashboard =
+    const dashboardView =
         document.getElementById(
             "dashboardView"
         );
 
-
-    const product =
+    const productView =
         document.getElementById(
             "productView"
         );
 
 
-    const dashboardLink =
-        document.getElementById(
-            "dashboardLink"
+    if (dashboardView) {
+
+        dashboardView.classList.remove(
+            "active-view"
+        );
+
+    }
+
+
+    if (productView) {
+
+        productView.classList.remove(
+            "active-view"
+        );
+
+    }
+
+
+    if (page === "product") {
+
+        if (productView) {
+
+            productView.classList.add(
+                "active-view"
+            );
+
+        }
+
+    }
+
+    else {
+
+        if (dashboardView) {
+
+            dashboardView.classList.add(
+                "active-view"
+            );
+
+        }
+
+    }
+
+
+    document
+        .querySelectorAll(
+            ".page-active, .active-sub"
+        )
+        .forEach(
+            function(item) {
+
+                item.classList.remove(
+                    "page-active"
+                );
+
+                item.classList.remove(
+                    "active-sub"
+                );
+
+            }
         );
 
 
-    const productLink =
-        document.getElementById(
-            "productLink"
-        );
+    if (page === "product") {
 
+        const productLink =
+            document.getElementById(
+                "productLink"
+            );
 
-    dashboard?.classList.toggle(
-        "active-view",
-        view === "dashboard"
-    );
+        if (productLink) {
 
+            productLink.classList.add(
+                "active-sub"
+            );
 
-    product?.classList.toggle(
-        "active-view",
-        view === "product"
-    );
+        }
 
+    }
 
-    dashboardLink?.classList.toggle(
-        "page-active",
-        view === "dashboard"
-    );
+    else {
 
+        const dashboardLink =
+            document.getElementById(
+                "dashboardLink"
+            );
 
-    productLink?.classList.toggle(
-        "active-sub",
-        view === "product"
-    );
+        if (dashboardLink) {
+
+            dashboardLink.classList.add(
+                "page-active"
+            );
+
+        }
+
+    }
 
 
     closeSidebar();
-
-
-    if (view === "product") {
-
-        renderProducts();
-
-    }
 
 }
 
 
 /* ==========================================
-   DISPLAY PRODUCTS
+   RENDER PRODUCTS
 ========================================== */
 
 function renderProducts() {
 
-    const emptyBox =
+    const productList =
         document.querySelector(
-            "#productView .no-products"
+            ".product-list-card .no-products"
         );
 
 
-    if (!emptyBox) {
+    if (!productList) {
         return;
     }
 
 
-    emptyBox.innerHTML =
-        adminProducts
-            .map(
-                function (product) {
+    if (adminProducts.length === 0) {
 
-                    return `
+        productList.textContent =
+            "No products found.";
 
-                        <div
-                            style="
-                                padding:16px 0;
-                                border-bottom:1px solid #edf0f3;
-                            "
-                        >
+        return;
+    }
 
-                            <strong>
-                                ${product.code}
-                                -
-                                ${product.name}
-                            </strong>
 
-                            <div
-                                style="
-                                    margin-top:5px;
-                                    color:#718096;
-                                    font-size:13px;
-                                "
-                            >
-                                ${product.category}
-                                •
-                                ${money(product.price)}
-                                •
-                                Stock:
-                                ${product.stock}
-                            </div>
+    productList.innerHTML = "";
 
-                        </div>
 
-                    `;
+    adminProducts.forEach(
+        function(product) {
 
-                }
-            )
-            .join("");
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.style.display =
+                "grid";
+
+            row.style.gridTemplateColumns =
+                "100px 1fr 120px 120px";
+
+            row.style.gap =
+                "15px";
+
+            row.style.padding =
+                "14px 0";
+
+            row.style.borderBottom =
+                "1px solid #e2e8f0";
+
+
+            row.innerHTML = `
+
+                <strong>
+                    ${product.code}
+                </strong>
+
+                <span>
+                    ${product.name}
+                </span>
+
+                <span>
+                    ${product.category}
+                </span>
+
+                <span>
+                    ${money(product.price)}
+                </span>
+
+            `;
+
+
+            productList.appendChild(
+                row
+            );
+
+        }
+    );
 
 }
 
@@ -345,19 +425,12 @@ function renderProducts() {
 
 function adminLogout() {
 
-    if (
-        !confirm(
-            "Are you sure you want to logout?"
-        )
-    ) {
+    if (loveLuxeData) {
 
-        return;
+        loveLuxeData.currentUser =
+            null;
 
     }
-
-
-    data.currentUser =
-        null;
 
 
     window.location.href =
@@ -367,20 +440,27 @@ function adminLogout() {
 
 
 /* ==========================================
-   PAGE LOAD
+   START
 ========================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
-    function () {
+    function() {
 
-        document
-            .getElementById(
+        renderProducts();
+
+
+        const dashboardLink =
+            document.getElementById(
                 "dashboardLink"
-            )
-            ?.addEventListener(
+            );
+
+
+        if (dashboardLink) {
+
+            dashboardLink.addEventListener(
                 "click",
-                function (event) {
+                function(event) {
 
                     event.preventDefault();
 
@@ -391,14 +471,20 @@ document.addEventListener(
                 }
             );
 
+        }
 
-        document
-            .getElementById(
+
+        const productLink =
+            document.getElementById(
                 "productLink"
-            )
-            ?.addEventListener(
+            );
+
+
+        if (productLink) {
+
+            productLink.addEventListener(
                 "click",
-                function (event) {
+                function(event) {
 
                     event.preventDefault();
 
@@ -409,18 +495,23 @@ document.addEventListener(
                 }
             );
 
+        }
 
-        document
-            .getElementById(
+
+        const overlay =
+            document.getElementById(
                 "sidebarOverlay"
-            )
-            ?.addEventListener(
+            );
+
+
+        if (overlay) {
+
+            overlay.addEventListener(
                 "click",
                 closeSidebar
             );
 
-
-        renderProducts();
+        }
 
     }
 );
