@@ -1,12 +1,490 @@
 /* ==========================================
-   LOVE LUXE BY EA
-   CUSTOMER CATALOG
-   ARRAY ONLY
+   LOVE LUXE PRODUCT CATALOG
+   ARRAY-ONLY VERSION
 ========================================== */
 
 
 /* ==========================================
-   CATALOG VARIABLES
+   SHARED DATA
+========================================== */
+
+const loveLuxeData =
+    window.LoveLuxeData;
+
+
+const customers =
+    loveLuxeData.customers;
+
+
+const orders =
+    loveLuxeData.orders;
+
+
+/*
+    Array-only project.
+
+    No localStorage.
+    No sessionStorage.
+    No cookies.
+*/
+
+
+let currentUser =
+    customers[0];
+
+
+/* ==========================================
+   PRODUCTS
+========================================== */
+
+const products = [
+
+    /* ======================================
+       CLOTHING
+    ====================================== */
+
+    {
+        id: 1,
+
+        name: "Sophia Skirt",
+
+        category: "Clothing",
+
+        price: 790,
+
+        image:
+            "images/sophia-skirt.jpg",
+
+        images: [
+            "images/sophia-skirt.jpg",
+            "images/sophia-skirt-2.jpg"
+        ],
+
+        colors: [
+            "Black and White Polka",
+            "Light Blue",
+            "Gray",
+            "Black"
+        ],
+
+        sizes: [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "2XL",
+            "3XL"
+        ],
+
+        description:
+            "A simple and stylish skirt that is easy to pair with different outfits."
+    },
+
+
+    {
+        id: 2,
+
+        name: "Nov-Mardi T-Shirt",
+
+        category: "Clothing",
+
+        price: 450,
+
+        image:
+            "images/nov-mardi-tshirt.jpg",
+
+        images: [
+            "images/nov-mardi-tshirt.jpg",
+            "images/nov-mardi-tshirt-2.jpg"
+        ],
+
+        colors: [
+            "White",
+            "Pink",
+            "Black"
+        ],
+
+        sizes: [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "2XL",
+            "3XL"
+        ],
+
+        description:
+            "A comfortable everyday t-shirt with a simple and casual style."
+    },
+
+
+    {
+        id: 3,
+
+        name: "Basic Chic01 Terno",
+
+        category: "Clothing",
+
+        price: 950,
+
+        image:
+            "images/basic-chic01-terno.jpg",
+
+        images: [
+            "images/basic-chic01-terno.jpg",
+            "images/basic-chic01-terno-2.jpg"
+        ],
+
+        sizes: [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "2XL",
+            "3XL"
+        ],
+
+        description:
+            "A stylish terno set designed for a simple and comfortable look."
+    },
+
+
+    {
+        id: 4,
+
+        name: "Sami T-Shirt",
+
+        category: "Clothing",
+
+        price: 790,
+
+        image:
+            "images/sami-tshirt.jpg",
+
+        images: [
+            "images/sami-tshirt.jpg",
+            "images/sami-tshirt-2.jpg"
+        ],
+
+        colors: [
+            "Brown",
+            "Tan",
+            "Pink",
+            "Black",
+            "Light Blue"
+        ],
+
+        description:
+            "A casual t-shirt that can be worn for everyday activities."
+    },
+
+
+    /* ======================================
+       BODY CARE
+    ====================================== */
+
+    {
+        id: 5,
+
+        name: "Alada Soap",
+
+        category: "Body Care",
+
+        price: 350,
+
+        image:
+            "images/alada-soap.jpg",
+
+        images: [
+            "images/alada-soap.jpg",
+            "images/alada-soap-2.jpg"
+        ],
+
+        description:
+            "A body care soap for a simple everyday skincare routine."
+    },
+
+
+    {
+        id: 6,
+
+        name: "Dewy Gluta Soap",
+
+        category: "Body Care",
+
+        price: 199,
+
+        image:
+            "images/dewy-gluta-soap.jpg",
+
+        images: [
+            "images/dewy-gluta-soap.jpg",
+            "images/dewy-gluta-soap-2.jpg"
+        ],
+
+        description:
+            "A cleansing soap made for everyday personal care."
+    },
+
+
+    {
+        id: 7,
+
+        name: "Serene Skin Soap",
+
+        category: "Body Care",
+
+        price: 299,
+
+        image:
+            "images/serene-skin-soap.jpg",
+
+        description:
+            "A gentle body care product for everyday use."
+    },
+
+
+    {
+        id: 8,
+
+        name: "Vitamin E Whitening Cream",
+
+        category: "Body Care",
+
+        price: 180,
+
+        image:
+            "images/vitamin-e-whitening-cream.jpg",
+
+        description:
+            "A moisturizing cream for an everyday skincare routine."
+    },
+
+
+    /* ======================================
+       BAGS
+    ====================================== */
+
+    {
+        id: 9,
+
+        name: "Mini Enzo",
+
+        category: "Bags",
+
+        price: 3590,
+
+        image:
+            "images/mini-enzo.jpg",
+
+        images: [
+            "images/mini-enzo.jpg",
+            "images/mini-enzo-2.jpg"
+        ],
+
+        colors: [
+            "Black",
+            "Green",
+            "Red",
+            "Blue"
+        ],
+
+        description:
+            "A compact and stylish bag that works well for everyday use."
+    },
+
+
+    {
+        id: 10,
+
+        name: "Mini Bucket Bag",
+
+        category: "Bags",
+
+        price: 2090,
+
+        image:
+            "images/mini-bucket-bag.jpg",
+
+        images: [
+            "images/mini-bucket-bag.jpg",
+            "images/mini-bucket-bag-2.jpg"
+        ],
+
+        colors: [
+            "Dark Blue",
+            "Grayish Blue",
+            "Blue",
+            "Blue Stripes"
+        ],
+
+        description:
+            "A small bucket-style bag with a simple and fashionable design."
+    },
+
+
+    {
+        id: 11,
+
+        name: "Anytime Medium",
+
+        category: "Bags",
+
+        price: 2890,
+
+        image:
+            "images/anytime-medium.jpg",
+
+        images: [
+            "images/anytime-medium.jpg",
+            "images/anytime-medium-2.jpg"
+        ],
+
+        colors: [
+            "Black",
+            "Tantaupe",
+            "Tantaupe Two",
+            "White",
+            "Clay Two"
+        ],
+
+        description:
+            "A medium-sized everyday bag with enough space for your essentials."
+    },
+
+
+    {
+        id: 12,
+
+        name: "Emilio Barrel",
+
+        category: "Bags",
+
+        price: 3590,
+
+        image:
+            "images/emilio-barrel.jpg",
+
+        images: [
+            "images/emilio-barrel.jpg",
+            "images/emilio-barrel-2.jpg"
+        ],
+
+        colors: [
+            "Dark Brown",
+            "Red",
+            "Green",
+            "Black"
+        ],
+
+        description:
+            "A barrel-style bag with a clean and modern appearance."
+    },
+
+
+    /* ======================================
+       PERFUME
+    ====================================== */
+
+    {
+        id: 13,
+
+        name: "Victoria's Secret Perfume",
+
+        category: "Perfume",
+
+        price: 700,
+
+        image:
+            "images/victorias-secret-perfume.jpg",
+
+        images: [
+            "images/victorias-secret-perfume.jpg",
+            "images/victorias-secret-perfume-2.jpg"
+        ],
+
+        scents: [
+            "Bare Vanilla",
+            "Aqua Kiss",
+            "Vanilla Lace",
+            "Midnight Bloom",
+            "Love Spell",
+            "Pure Seduction",
+            "Velvet Petals"
+        ],
+
+        description:
+            "A fragrance option for everyday wear."
+    },
+
+
+    {
+        id: 14,
+
+        name: "Bath & Body Works Perfume",
+
+        category: "Perfume",
+
+        price: 600,
+
+        image:
+            "images/bath-body-works-perfume.jpg",
+
+        scents: [
+            "Pure Wonder",
+            "Hello Beautiful",
+            "A Thousand Wishes",
+            "You're the One",
+            "Vanilla Ease"
+        ],
+
+        description:
+            "A fragrance designed for a fresh everyday scent."
+    },
+
+
+    {
+        id: 15,
+
+        name: "Smart Collection Perfume",
+
+        category: "Perfume",
+
+        price: 350,
+
+        image:
+            "images/smart-collection-perfume.jpg",
+
+        scents: [
+            "Chanel N'5"
+        ],
+
+        description:
+            "An affordable fragrance option for everyday use."
+    },
+
+
+    {
+        id: 16,
+
+        name: "Lattafa YARA",
+
+        category: "Perfume",
+
+        price: 390,
+
+        image:
+            "images/lattafa-yara.jpg",
+
+        description:
+            "A popular fragrance choice with a soft and pleasant scent."
+    }
+
+];
+
+
+/* ==========================================
+   VARIABLES
 ========================================== */
 
 let selectedCategory = "All";
@@ -23,7 +501,7 @@ let selectedScent = "";
 
 
 /* ==========================================
-   PAGE ELEMENTS
+   ELEMENTS
 ========================================== */
 
 const productGrid =
@@ -62,13 +540,72 @@ const customerName =
     );
 
 
+const checkoutModal =
+    document.getElementById(
+        "checkoutModal"
+    );
+
+
+const checkoutProductImage =
+    document.getElementById(
+        "checkoutProductImage"
+    );
+
+
+const checkoutProductName =
+    document.getElementById(
+        "checkoutProductName"
+    );
+
+
+const checkoutProductCategory =
+    document.getElementById(
+        "checkoutProductCategory"
+    );
+
+
+const checkoutProductPrice =
+    document.getElementById(
+        "checkoutProductPrice"
+    );
+
+
+const checkoutTotal =
+    document.getElementById(
+        "checkoutTotal"
+    );
+
+
+const quantityInput =
+    document.getElementById(
+        "quantityInput"
+    );
+
+
+const productOptions =
+    document.getElementById(
+        "productOptions"
+    );
+
+
+const checkoutMessage =
+    document.getElementById(
+        "checkoutMessage"
+    );
+
+
+const paymentMethod =
+    document.getElementById(
+        "paymentMethod"
+    );
+
+
 /* ==========================================
    CUSTOMER NAME
 ========================================== */
 
 if (
     customerName &&
-    typeof currentUser !== "undefined" &&
     currentUser
 ) {
 
@@ -102,11 +639,6 @@ function formatPrice(price) {
 ========================================== */
 
 function displayProducts() {
-
-    if (!productGrid) {
-        return;
-    }
-
 
     const searchText =
         searchInput
@@ -145,10 +677,6 @@ function displayProducts() {
         );
 
 
-    /* ======================================
-       PRODUCT COUNT
-    ====================================== */
-
     if (productCount) {
 
         productCount.textContent =
@@ -159,166 +687,108 @@ function displayProducts() {
     }
 
 
-    /* ======================================
-       NO PRODUCTS
-    ====================================== */
-
     if (
         filteredProducts.length === 0
     ) {
 
         productGrid.innerHTML = "";
 
-
-        if (noProducts) {
-
-            noProducts.style.display =
-                "block";
-
-        }
-
+        noProducts.style.display =
+            "block";
 
         return;
 
     }
 
 
-    if (noProducts) {
-
-        noProducts.style.display =
-            "none";
-
-    }
+    noProducts.style.display =
+        "none";
 
 
-    /* ======================================
-       PRODUCT CARDS
-    ====================================== */
+    productGrid.innerHTML =
+        filteredProducts.map(
+            function(product) {
 
-    productGrid.innerHTML = "";
+                return `
 
+                    <article class="product-card">
 
-    filteredProducts.forEach(
-        function(product) {
+                        <div class="product-image">
 
-            const card =
-                document.createElement(
-                    "article"
-                );
+                            <img
+                                src="${product.image}"
+                                alt="${product.name}"
+                            >
 
-
-            card.className =
-                "product-card";
+                        </div>
 
 
-            card.innerHTML = `
+                        <div class="product-info">
 
-                <div class="product-image">
-
-                    <img
-                        src="${product.image}"
-                        alt="${product.name}"
-                    >
-
-                </div>
+                            <div class="product-category">
+                                ${product.category}
+                            </div>
 
 
-                <div class="product-info">
-
-                    <div class="product-category">
-
-                        ${product.category}
-
-                    </div>
+                            <div class="product-name">
+                                ${product.name}
+                            </div>
 
 
-                    <h3 class="product-name">
-
-                        ${product.name}
-
-                    </h3>
+                            <div class="product-description">
+                                ${product.description}
+                            </div>
 
 
-                    <p class="product-description">
+                            <div class="product-bottom">
 
-                        ${product.description}
-
-                    </p>
-
-
-                    <div class="product-bottom">
-
-                        <span class="product-price">
-
-                            ${formatPrice(
-                                product.price
-                            )}
-
-                        </span>
+                                <div class="product-price">
+                                    ${formatPrice(product.price)}
+                                </div>
 
 
-                        <button
-                            type="button"
-                            class="view-button"
-                            data-product-id="${product.id}"
-                        >
+                                <button
+                                    type="button"
+                                    class="view-button"
+                                    data-product-id="${product.id}"
+                                >
+                                    VIEW
+                                </button>
 
-                            VIEW
+                            </div>
 
-                        </button>
+                        </div>
 
-                    </div>
+                    </article>
 
-                </div>
+                `;
 
-            `;
-
-
-            productGrid.appendChild(
-                card
-            );
+            }
+        ).join("");
 
 
-            /* ==================================
-               VIEW BUTTON
-            ================================== */
+    document
+        .querySelectorAll(
+            ".view-button"
+        )
+        .forEach(
+            function(button) {
 
-            const viewButton =
-                card.querySelector(
-                    ".view-button"
-                );
-
-
-            if (viewButton) {
-
-                viewButton.addEventListener(
+                button.addEventListener(
                     "click",
-                    function(event) {
-
-                        event.preventDefault();
-
-                        event.stopPropagation();
-
-
-                        const productId =
-                            Number(
-                                viewButton.getAttribute(
-                                    "data-product-id"
-                                )
-                            );
-
+                    function() {
 
                         viewProduct(
-                            productId
+                            Number(
+                                button.dataset.productId
+                            )
                         );
 
                     }
                 );
 
             }
-
-        }
-    );
+        );
 
 }
 
@@ -332,10 +802,7 @@ filterButtons.forEach(
 
         button.addEventListener(
             "click",
-            function(event) {
-
-                event.preventDefault();
-
+            function() {
 
                 filterButtons.forEach(
                     function(item) {
@@ -367,6 +834,65 @@ filterButtons.forEach(
 
 
 /* ==========================================
+   SIDEBAR CATEGORY BUTTONS
+========================================== */
+
+const sidebarCategoryButtons =
+    document.querySelectorAll(
+        ".category-sidebar-link"
+    );
+
+
+sidebarCategoryButtons.forEach(
+    function(button) {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                const category =
+                    button.dataset.sidebarCategory;
+
+
+                selectedCategory =
+                    category;
+
+
+                filterButtons.forEach(
+                    function(filterButton) {
+
+                        filterButton.classList.remove(
+                            "active"
+                        );
+
+
+                        if (
+                            filterButton.dataset.category ===
+                            category
+                        ) {
+
+                            filterButton.classList.add(
+                                "active"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                displayProducts();
+
+                closeSidebar();
+
+            }
+        );
+
+    }
+);
+
+
+/* ==========================================
    SEARCH
 ========================================== */
 
@@ -385,145 +911,26 @@ if (searchInput) {
 
 
 /* ==========================================
-   CHECKOUT ELEMENTS
-========================================== */
-
-const checkoutModal =
-    document.getElementById(
-        "checkoutModal"
-    );
-
-
-const checkoutImage =
-    document.getElementById(
-        "checkoutImage"
-    );
-
-
-const checkoutThumbnails =
-    document.getElementById(
-        "checkoutThumbnails"
-    );
-
-
-const checkoutCategory =
-    document.getElementById(
-        "checkoutCategory"
-    );
-
-
-const checkoutName =
-    document.getElementById(
-        "checkoutName"
-    );
-
-
-const checkoutDescription =
-    document.getElementById(
-        "checkoutDescription"
-    );
-
-
-const checkoutPrice =
-    document.getElementById(
-        "checkoutPrice"
-    );
-
-
-const productOptions =
-    document.getElementById(
-        "productOptions"
-    );
-
-
-const checkoutQuantity =
-    document.getElementById(
-        "checkoutQuantity"
-    );
-
-
-const checkoutAddress =
-    document.getElementById(
-        "checkoutAddress"
-    );
-
-
-const paymentMethod =
-    document.getElementById(
-        "paymentMethod"
-    );
-
-
-const checkoutTotal =
-    document.getElementById(
-        "checkoutTotal"
-    );
-
-
-const checkoutMessage =
-    document.getElementById(
-        "checkoutMessage"
-    );
-
-
-const placeOrderButton =
-    document.getElementById(
-        "placeOrderButton"
-    );
-
-
-const closeCheckoutButton =
-    document.getElementById(
-        "closeCheckout"
-    );
-
-
-const decreaseQuantity =
-    document.getElementById(
-        "decreaseQuantity"
-    );
-
-
-const increaseQuantity =
-    document.getElementById(
-        "increaseQuantity"
-    );
-
-
-/* ==========================================
    VIEW PRODUCT
 ========================================== */
 
 function viewProduct(productId) {
 
-    /* Find product from array */
-
     selectedProduct =
         products.find(
             function(product) {
 
-                return Number(product.id) ===
-                    Number(productId);
+                return product.id ===
+                    productId;
 
             }
         );
 
 
-    /* Stop if product doesn't exist */
-
     if (!selectedProduct) {
-
-        console.log(
-            "Product not found:",
-            productId
-        );
-
         return;
-
     }
 
-
-    /* Reset selections */
 
     selectedQuantity = 1;
 
@@ -534,64 +941,36 @@ function viewProduct(productId) {
     selectedScent = "";
 
 
-    /* ======================================
-       PRODUCT IMAGE
-    ====================================== */
+    if (checkoutProductImage) {
 
-    if (checkoutImage) {
-
-        checkoutImage.src =
+        checkoutProductImage.src =
             selectedProduct.image;
 
-        checkoutImage.alt =
+        checkoutProductImage.alt =
             selectedProduct.name;
 
     }
 
 
-    /* ======================================
-       PRODUCT CATEGORY
-    ====================================== */
+    if (checkoutProductName) {
 
-    if (checkoutCategory) {
+        checkoutProductName.textContent =
+            selectedProduct.name;
 
-        checkoutCategory.textContent =
+    }
+
+
+    if (checkoutProductCategory) {
+
+        checkoutProductCategory.textContent =
             selectedProduct.category;
 
     }
 
 
-    /* ======================================
-       PRODUCT NAME
-    ====================================== */
+    if (checkoutProductPrice) {
 
-    if (checkoutName) {
-
-        checkoutName.textContent =
-            selectedProduct.name;
-
-    }
-
-
-    /* ======================================
-       PRODUCT DESCRIPTION
-    ====================================== */
-
-    if (checkoutDescription) {
-
-        checkoutDescription.textContent =
-            selectedProduct.description;
-
-    }
-
-
-    /* ======================================
-       PRODUCT PRICE
-    ====================================== */
-
-    if (checkoutPrice) {
-
-        checkoutPrice.textContent =
+        checkoutProductPrice.textContent =
             formatPrice(
                 selectedProduct.price
             );
@@ -599,52 +978,20 @@ function viewProduct(productId) {
     }
 
 
-    /* ======================================
-       QUANTITY
-    ====================================== */
+    if (quantityInput) {
 
-    if (checkoutQuantity) {
-
-        checkoutQuantity.value = 1;
+        quantityInput.value = 1;
 
     }
 
-
-    /* ======================================
-       IMAGES
-    ====================================== */
-
-    displayProductImages(
-        selectedProduct
-    );
-
-
-    /* ======================================
-       OPTIONS
-    ====================================== */
 
     displayProductOptions(
         selectedProduct
     );
 
 
-    /* ======================================
-       ADDRESS
-    ====================================== */
+    updateTotal();
 
-    displayShippingAddress();
-
-
-    /* ======================================
-       TOTAL
-    ====================================== */
-
-    updateCheckoutTotal();
-
-
-    /* ======================================
-       CLEAR MESSAGE
-    ====================================== */
 
     if (checkoutMessage) {
 
@@ -653,138 +1000,16 @@ function viewProduct(productId) {
     }
 
 
-    /* ======================================
-       OPEN MODAL
-    ====================================== */
-
     if (checkoutModal) {
 
         checkoutModal.classList.add(
             "show"
         );
 
-
-        checkoutModal.style.display =
-            "flex";
-
-
         document.body.style.overflow =
             "hidden";
 
     }
-
-}
-
-
-/* ==========================================
-   PRODUCT IMAGES
-========================================== */
-
-function displayProductImages(
-    product
-) {
-
-    if (!checkoutThumbnails) {
-        return;
-    }
-
-
-    checkoutThumbnails.innerHTML = "";
-
-
-    let images = [];
-
-
-    if (
-        product.images &&
-        product.images.length > 0
-    ) {
-
-        images =
-            product.images;
-
-    }
-
-    else {
-
-        images = [
-            product.image
-        ];
-
-    }
-
-
-    images.forEach(
-        function(image, index) {
-
-            const thumbnail =
-                document.createElement(
-                    "img"
-                );
-
-
-            thumbnail.src =
-                image;
-
-
-            thumbnail.alt =
-                product.name;
-
-
-            thumbnail.className =
-                "checkout-thumbnail";
-
-
-            if (index === 0) {
-
-                thumbnail.classList.add(
-                    "active"
-                );
-
-            }
-
-
-            thumbnail.addEventListener(
-                "click",
-                function() {
-
-                    if (checkoutImage) {
-
-                        checkoutImage.src =
-                            image;
-
-                    }
-
-
-                    document
-                        .querySelectorAll(
-                            ".checkout-thumbnail"
-                        )
-                        .forEach(
-                            function(item) {
-
-                                item.classList.remove(
-                                    "active"
-                                );
-
-                            }
-                        );
-
-
-                    thumbnail.classList.add(
-                        "active"
-                    );
-
-                }
-            );
-
-
-            checkoutThumbnails.appendChild(
-                thumbnail
-            );
-
-        }
-    );
 
 }
 
@@ -802,25 +1027,24 @@ function displayProductOptions(
     }
 
 
-    productOptions.innerHTML = "";
+    productOptions.innerHTML =
+        "";
 
 
-    /* ======================================
-       COLOR
-    ====================================== */
+    /* COLOR */
 
     if (
         product.colors &&
         product.colors.length > 0
     ) {
 
-        const group =
+        const wrapper =
             document.createElement(
                 "div"
             );
 
 
-        group.className =
+        wrapper.className =
             "option-group";
 
 
@@ -840,23 +1064,12 @@ function displayProductOptions(
             );
 
 
-        const defaultOption =
-            document.createElement(
-                "option"
-            );
-
-
-        defaultOption.value =
-            "";
-
-
-        defaultOption.textContent =
-            "Select color";
-
-
-        select.appendChild(
-            defaultOption
-        );
+        select.innerHTML =
+            `
+                <option value="">
+                    Select color
+                </option>
+            `;
 
 
         product.colors.forEach(
@@ -870,7 +1083,6 @@ function displayProductOptions(
 
                 option.value =
                     color;
-
 
                 option.textContent =
                     color;
@@ -895,39 +1107,37 @@ function displayProductOptions(
         );
 
 
-        group.appendChild(
+        wrapper.appendChild(
             label
         );
 
 
-        group.appendChild(
+        wrapper.appendChild(
             select
         );
 
 
         productOptions.appendChild(
-            group
+            wrapper
         );
 
     }
 
 
-    /* ======================================
-       SIZE
-    ====================================== */
+    /* SIZE */
 
     if (
         product.sizes &&
         product.sizes.length > 0
     ) {
 
-        const group =
+        const wrapper =
             document.createElement(
                 "div"
             );
 
 
-        group.className =
+        wrapper.className =
             "option-group";
 
 
@@ -947,23 +1157,12 @@ function displayProductOptions(
             );
 
 
-        const defaultOption =
-            document.createElement(
-                "option"
-            );
-
-
-        defaultOption.value =
-            "";
-
-
-        defaultOption.textContent =
-            "Select size";
-
-
-        select.appendChild(
-            defaultOption
-        );
+        select.innerHTML =
+            `
+                <option value="">
+                    Select size
+                </option>
+            `;
 
 
         product.sizes.forEach(
@@ -977,7 +1176,6 @@ function displayProductOptions(
 
                 option.value =
                     size;
-
 
                 option.textContent =
                     size;
@@ -1002,39 +1200,37 @@ function displayProductOptions(
         );
 
 
-        group.appendChild(
+        wrapper.appendChild(
             label
         );
 
 
-        group.appendChild(
+        wrapper.appendChild(
             select
         );
 
 
         productOptions.appendChild(
-            group
+            wrapper
         );
 
     }
 
 
-    /* ======================================
-       SCENT
-    ====================================== */
+    /* SCENT */
 
     if (
         product.scents &&
         product.scents.length > 0
     ) {
 
-        const group =
+        const wrapper =
             document.createElement(
                 "div"
             );
 
 
-        group.className =
+        wrapper.className =
             "option-group";
 
 
@@ -1054,23 +1250,12 @@ function displayProductOptions(
             );
 
 
-        const defaultOption =
-            document.createElement(
-                "option"
-            );
-
-
-        defaultOption.value =
-            "";
-
-
-        defaultOption.textContent =
-            "Select scent";
-
-
-        select.appendChild(
-            defaultOption
-        );
+        select.innerHTML =
+            `
+                <option value="">
+                    Select scent
+                </option>
+            `;
 
 
         product.scents.forEach(
@@ -1084,7 +1269,6 @@ function displayProductOptions(
 
                 option.value =
                     scent;
-
 
                 option.textContent =
                     scent;
@@ -1109,18 +1293,18 @@ function displayProductOptions(
         );
 
 
-        group.appendChild(
+        wrapper.appendChild(
             label
         );
 
 
-        group.appendChild(
+        wrapper.appendChild(
             select
         );
 
 
         productOptions.appendChild(
-            group
+            wrapper
         );
 
     }
@@ -1129,19 +1313,49 @@ function displayProductOptions(
 
 
 /* ==========================================
-   UPDATE TOTAL
+   QUANTITY
 ========================================== */
 
-function updateCheckoutTotal() {
+function updateTotal() {
 
     if (
         !selectedProduct ||
-        !checkoutTotal
+        !quantityInput
+    ) {
+        return;
+    }
+
+
+    let quantity =
+        parseInt(
+            quantityInput.value,
+            10
+        );
+
+
+    if (
+        isNaN(quantity) ||
+        quantity < 1
     ) {
 
-        return;
+        quantity = 1;
 
     }
+
+
+    if (quantity > 99) {
+
+        quantity = 99;
+
+    }
+
+
+    selectedQuantity =
+        quantity;
+
+
+    quantityInput.value =
+        selectedQuantity;
 
 
     const total =
@@ -1149,125 +1363,58 @@ function updateCheckoutTotal() {
         selectedQuantity;
 
 
-    checkoutTotal.textContent =
-        formatPrice(total);
+    if (checkoutTotal) {
+
+        checkoutTotal.textContent =
+            formatPrice(total);
+
+    }
 
 }
 
 
 /* ==========================================
-   DECREASE QUANTITY
+   MINUS BUTTON
 ========================================== */
 
-if (decreaseQuantity) {
+const quantityMinus =
+    document.getElementById(
+        "quantityMinus"
+    );
 
-    decreaseQuantity.addEventListener(
+
+if (quantityMinus) {
+
+    quantityMinus.addEventListener(
         "click",
         function() {
 
-            if (
-                selectedQuantity > 1
-            ) {
-
-                selectedQuantity--;
-
-            }
-
-
-            if (checkoutQuantity) {
-
-                checkoutQuantity.value =
-                    selectedQuantity;
-
-            }
-
-
-            updateCheckoutTotal();
-
-        }
-    );
-
-}
-
-
-/* ==========================================
-   INCREASE QUANTITY
-========================================== */
-
-if (increaseQuantity) {
-
-    increaseQuantity.addEventListener(
-        "click",
-        function() {
-
-            if (
-                selectedQuantity < 99
-            ) {
-
-                selectedQuantity++;
-
-            }
-
-
-            if (checkoutQuantity) {
-
-                checkoutQuantity.value =
-                    selectedQuantity;
-
-            }
-
-
-            updateCheckoutTotal();
-
-        }
-    );
-
-}
-
-
-/* ==========================================
-   TYPABLE QUANTITY
-========================================== */
-
-if (checkoutQuantity) {
-
-    checkoutQuantity.addEventListener(
-        "input",
-        function() {
-
-            let value =
+            let quantity =
                 parseInt(
-                    checkoutQuantity.value,
+                    quantityInput.value,
                     10
                 );
 
 
             if (
-                isNaN(value) ||
-                value < 1
+                isNaN(quantity) ||
+                quantity <= 1
             ) {
 
-                value = 1;
+                quantity = 1;
+
+            } else {
+
+                quantity--;
 
             }
 
 
-            if (value > 99) {
-
-                value = 99;
-
-            }
+            quantityInput.value =
+                quantity;
 
 
-            selectedQuantity =
-                value;
-
-
-            checkoutQuantity.value =
-                selectedQuantity;
-
-
-            updateCheckoutTotal();
+            updateTotal();
 
         }
     );
@@ -1276,107 +1423,119 @@ if (checkoutQuantity) {
 
 
 /* ==========================================
-   SHIPPING ADDRESS
+   PLUS BUTTON
 ========================================== */
 
-function displayShippingAddress() {
-
-    if (!checkoutAddress) {
-        return;
-    }
-
-
-    if (
-        typeof currentUser ===
-        "undefined" ||
-        !currentUser
-    ) {
-
-        checkoutAddress.textContent =
-            "No shipping address saved.";
-
-        return;
-
-    }
+const quantityPlus =
+    document.getElementById(
+        "quantityPlus"
+    );
 
 
-    if (
-        !currentUser.shippingAddress
-    ) {
+if (quantityPlus) {
 
-        checkoutAddress.textContent =
-            "No shipping address saved.";
+    quantityPlus.addEventListener(
+        "click",
+        function() {
 
-        return;
-
-    }
-
-
-    if (
-        typeof currentUser.shippingAddress ===
-        "string"
-    ) {
-
-        checkoutAddress.textContent =
-            currentUser.shippingAddress;
-
-        return;
-
-    }
+            let quantity =
+                parseInt(
+                    quantityInput.value,
+                    10
+                );
 
 
-    if (
-        typeof currentUser.shippingAddress ===
-        "object"
-    ) {
+            if (
+                isNaN(quantity) ||
+                quantity < 1
+            ) {
 
-        const address =
-            currentUser.shippingAddress;
+                quantity = 1;
 
-
-        const parts = [
-
-            address.houseNumber,
-
-            address.street,
-
-            address.barangay,
-
-            address.city,
-
-            address.province,
-
-            address.postalCode
-
-        ];
+            }
 
 
-        const finalAddress =
-            parts
-                .filter(
-                    function(item) {
+            if (quantity < 99) {
 
-                        return (
-                            item &&
-                            String(item).trim() !== ""
-                        );
+                quantity++;
 
-                    }
-                )
-                .join(", ");
+            }
 
 
-        checkoutAddress.textContent =
-            finalAddress ||
-            "No shipping address saved.";
+            quantityInput.value =
+                quantity;
 
-    }
+
+            updateTotal();
+
+        }
+    );
 
 }
 
 
 /* ==========================================
-   CLOSE PRODUCT MODAL
+   TYPED QUANTITY
+========================================== */
+
+if (quantityInput) {
+
+    quantityInput.addEventListener(
+        "input",
+        function() {
+
+            updateTotal();
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   PAYMENT METHOD
+========================================== */
+
+if (paymentMethod) {
+
+    paymentMethod.addEventListener(
+        "change",
+        function() {
+
+            const referenceField =
+                document.getElementById(
+                    "referenceField"
+                );
+
+
+            if (!referenceField) {
+                return;
+            }
+
+
+            if (
+                paymentMethod.value ===
+                "Cash"
+            ) {
+
+                referenceField.style.display =
+                    "none";
+
+            } else {
+
+                referenceField.style.display =
+                    "block";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   CLOSE CHECKOUT
 ========================================== */
 
 function closeCheckout() {
@@ -1387,10 +1546,6 @@ function closeCheckout() {
             "show"
         );
 
-
-        checkoutModal.style.display =
-            "none";
-
     }
 
 
@@ -1400,29 +1555,21 @@ function closeCheckout() {
 }
 
 
-/* ==========================================
-   CLOSE BUTTON
-========================================== */
+const closeCheckoutButton =
+    document.getElementById(
+        "closeCheckout"
+    );
+
 
 if (closeCheckoutButton) {
 
     closeCheckoutButton.addEventListener(
         "click",
-        function(event) {
-
-            event.preventDefault();
-
-            closeCheckout();
-
-        }
+        closeCheckout
     );
 
 }
 
-
-/* ==========================================
-   CLICK OUTSIDE MODAL
-========================================== */
 
 if (checkoutModal) {
 
@@ -1446,28 +1593,14 @@ if (checkoutModal) {
 
 
 /* ==========================================
-   ESCAPE KEY
-========================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            closeCheckout();
-
-        }
-
-    }
-);
-
-
-/* ==========================================
    PLACE ORDER
 ========================================== */
+
+const placeOrderButton =
+    document.getElementById(
+        "placeOrderButton"
+    );
+
 
 if (placeOrderButton) {
 
@@ -1486,19 +1619,81 @@ function placeOrder() {
     }
 
 
+    if (
+        !currentUser ||
+        currentUser.role !==
+        "customer"
+    ) {
+
+        window.location.href =
+            "index.html";
+
+        return;
+
+    }
+
+
     /* ======================================
-       COLOR CHECK
+       SHIPPING ADDRESS
+    ====================================== */
+
+    const address =
+        currentUser.shippingAddress ||
+        {};
+
+
+    const addressParts = [
+
+        address.houseNumber,
+
+        address.street,
+
+        address.barangay,
+
+        address.city,
+
+        address.province,
+
+        address.postalCode
+
+    ].filter(
+        function(part) {
+
+            return (
+                part &&
+                String(part).trim() !== ""
+            );
+
+        }
+    );
+
+
+    if (
+        addressParts.length === 0
+    ) {
+
+        showCheckoutMessage(
+            "Please add your shipping address first.",
+            "#c0392b"
+        );
+
+        return;
+
+    }
+
+
+    /* ======================================
+       PRODUCT OPTIONS
     ====================================== */
 
     if (
         selectedProduct.colors &&
-        selectedProduct.colors.length > 0 &&
         !selectedColor
     ) {
 
         showCheckoutMessage(
             "Please select a color.",
-            "red"
+            "#c0392b"
         );
 
         return;
@@ -1506,19 +1701,14 @@ function placeOrder() {
     }
 
 
-    /* ======================================
-       SIZE CHECK
-    ====================================== */
-
     if (
         selectedProduct.sizes &&
-        selectedProduct.sizes.length > 0 &&
         !selectedSize
     ) {
 
         showCheckoutMessage(
             "Please select a size.",
-            "red"
+            "#c0392b"
         );
 
         return;
@@ -1526,19 +1716,14 @@ function placeOrder() {
     }
 
 
-    /* ======================================
-       SCENT CHECK
-    ====================================== */
-
     if (
         selectedProduct.scents &&
-        selectedProduct.scents.length > 0 &&
         !selectedScent
     ) {
 
         showCheckoutMessage(
             "Please select a scent.",
-            "red"
+            "#c0392b"
         );
 
         return;
@@ -1553,65 +1738,47 @@ function placeOrder() {
     const selectedPayment =
         paymentMethod
             ? paymentMethod.value
-            : "Cash on Delivery";
+            : "";
 
 
-    /* ======================================
-       TOTAL
-    ====================================== */
+    if (!selectedPayment) {
+
+        showCheckoutMessage(
+            "Please select a payment method.",
+            "#c0392b"
+        );
+
+        return;
+
+    }
+
 
     const total =
         selectedProduct.price *
         selectedQuantity;
 
 
-    /* ======================================
-       CUSTOMER
-    ====================================== */
-
-    let username =
-        "guest";
-
-
-    let fullName =
-        "Guest Customer";
-
-
-    if (
-        typeof currentUser !==
-        "undefined" &&
-        currentUser
-    ) {
-
-        username =
-            currentUser.username ||
-            "guest";
-
-
-        fullName =
-            currentUser.fullName ||
-            "Guest Customer";
-
-    }
+    const orderNumber =
+        "LL-" +
+        Date.now()
+            .toString()
+            .slice(-8);
 
 
     /* ======================================
-       ORDER
+       CREATE ORDER
     ====================================== */
 
     const order = {
 
         orderNumber:
-            "LL-" +
-            Date.now()
-                .toString()
-                .slice(-8),
+            orderNumber,
 
         customerUsername:
-            username,
+            currentUser.username,
 
         customerName:
-            fullName,
+            currentUser.fullName,
 
         productId:
             selectedProduct.id,
@@ -1640,6 +1807,9 @@ function placeOrder() {
         total:
             total,
 
+        shippingAddress:
+            addressParts.join(", "),
+
         paymentMethod:
             selectedPayment,
 
@@ -1653,7 +1823,7 @@ function placeOrder() {
 
 
     /* ======================================
-       ADD TO ARRAY
+       ARRAY
     ====================================== */
 
     orders.push(
@@ -1661,13 +1831,9 @@ function placeOrder() {
     );
 
 
-    /* ======================================
-       SUCCESS MESSAGE
-    ====================================== */
-
     showCheckoutMessage(
         "Order placed successfully!",
-        "green"
+        "#16834a"
     );
 
 
@@ -1676,8 +1842,24 @@ function placeOrder() {
 
             closeCheckout();
 
+
+            alert(
+                "Order placed successfully!\n\n" +
+                "Order #: " +
+                orderNumber +
+                "\n" +
+                "Product: " +
+                selectedProduct.name +
+                "\n" +
+                "Quantity: " +
+                selectedQuantity +
+                "\n" +
+                "Total: " +
+                formatPrice(total)
+            );
+
         },
-        700
+        500
     );
 
 }
@@ -1729,10 +1911,7 @@ const productsLink =
     );
 
 
-if (
-    accountToggle &&
-    accountDropdown
-) {
+if (accountToggle) {
 
     accountToggle.addEventListener(
         "click",
@@ -1743,9 +1922,13 @@ if (
             event.stopPropagation();
 
 
-            accountDropdown.classList.toggle(
-                "show"
-            );
+            if (productsLink) {
+
+                productsLink.classList.remove(
+                    "active"
+                );
+
+            }
 
 
             accountToggle.classList.toggle(
@@ -1753,10 +1936,10 @@ if (
             );
 
 
-            if (productsLink) {
+            if (accountDropdown) {
 
-                productsLink.classList.remove(
-                    "active"
+                accountDropdown.classList.toggle(
+                    "show"
                 );
 
             }
@@ -1768,7 +1951,7 @@ if (
 
 
 /* ==========================================
-   CLOSE DROPDOWN OUTSIDE
+   CLOSE ACCOUNT DROPDOWN
 ========================================== */
 
 document.addEventListener(
@@ -1776,34 +1959,61 @@ document.addEventListener(
     function(event) {
 
         if (
+            accountDropdown &&
             accountToggle &&
-            accountDropdown
+            !accountDropdown.contains(
+                event.target
+            ) &&
+            !accountToggle.contains(
+                event.target
+            )
         ) {
 
-            if (
-                !accountToggle.contains(
-                    event.target
-                ) &&
-                !accountDropdown.contains(
-                    event.target
-                )
-            ) {
-
-                accountDropdown.classList.remove(
-                    "show"
-                );
+            accountDropdown.classList.remove(
+                "show"
+            );
 
 
-                accountToggle.classList.remove(
-                    "active"
-                );
-
-            }
+            accountToggle.classList.remove(
+                "active"
+            );
 
         }
 
     }
 );
+
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+const logoutButton =
+    document.getElementById(
+        "logoutButton"
+    );
+
+
+if (logoutButton) {
+
+    logoutButton.addEventListener(
+        "click",
+        function() {
+
+            /*
+                No browser storage is used.
+
+                Simply return to the
+                login page.
+            */
+
+            window.location.href =
+                "index.html";
+
+        }
+    );
+
+}
 
 
 /* ==========================================
@@ -1822,9 +2032,11 @@ const sidebarOverlay =
     );
 
 
-/* ==========================================
-   OPEN SIDEBAR
-========================================== */
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
 
 function openSidebar() {
 
@@ -1848,10 +2060,6 @@ function openSidebar() {
 }
 
 
-/* ==========================================
-   CLOSE SIDEBAR
-========================================== */
-
 function closeSidebar() {
 
     if (shopSidebar) {
@@ -1874,22 +2082,36 @@ function closeSidebar() {
 }
 
 
-/* ==========================================
-   OVERLAY CLICK
-========================================== */
+if (menuButton) {
+
+    menuButton.addEventListener(
+        "click",
+        function() {
+
+            openSidebar();
+
+        }
+    );
+
+}
+
 
 if (sidebarOverlay) {
 
     sidebarOverlay.addEventListener(
         "click",
-        closeSidebar
+        function() {
+
+            closeSidebar();
+
+        }
     );
 
 }
 
 
 /* ==========================================
-   INITIALIZE
+   INITIAL DISPLAY
 ========================================== */
 
 displayProducts();
