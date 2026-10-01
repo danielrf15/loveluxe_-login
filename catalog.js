@@ -8,11 +8,17 @@
 ========================================== */
 
 const loveLuxeData = window.LoveLuxeData;
-const customers = loveLuxeData.customers;
-const orders = loveLuxeData.orders;
+
+const customers =
+    loveLuxeData.customers;
+
+const orders =
+    loveLuxeData.orders;
 
 // Arrays only. No browser storage is used.
-let currentUser = customers[0];
+let currentUser =
+    customers[0];
+
 
 /* ==========================================
    PRODUCTS
@@ -1222,7 +1228,8 @@ function displayShippingAddress() {
     }
 
 
-    const user = currentUser;
+    const user =
+        currentUser;
 
 
     if (
@@ -1598,6 +1605,43 @@ accountToggle?.addEventListener(
         accountDropdown?.classList.toggle(
             "show"
         );
+
+    }
+);
+
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+const logoutButton =
+    document.getElementById(
+        "logoutButton"
+    );
+
+
+logoutButton?.addEventListener(
+    "click",
+    function() {
+
+        /*
+         * Clear the current array user.
+         * No localStorage is used.
+         */
+
+        loveLuxeData.currentUser =
+            null;
+
+        currentUser =
+            null;
+
+
+        /*
+         * Return to the login page.
+         */
+
+        window.location.href =
+            "index.html";
 
     }
 );
