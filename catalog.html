@@ -11,7 +11,7 @@
     >
 
     <title>
-        Love Luxe by EA - Products
+        Love Luxe by EA - Customer Shop
     </title>
 
     <link
@@ -19,13 +19,243 @@
         href="catalog.css"
     >
 
+    <style>
+
+        /* ==========================================
+           SPA VIEWS
+        ========================================== */
+
+        .spa-view {
+            display: none;
+        }
+
+        .spa-view.active {
+            display: block;
+        }
+
+
+        /* ==========================================
+           ACCOUNT PAGE
+        ========================================== */
+
+        .spa-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .spa-card h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .spa-card p {
+            color: #64748b;
+            margin-top: 0;
+        }
+
+
+        /* ==========================================
+           PERSONAL INFORMATION
+        ========================================== */
+
+        .personal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .personal-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .personal-item span {
+            display: block;
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 6px;
+        }
+
+        .personal-item strong {
+            display: block;
+            color: #111111;
+            word-break: break-word;
+        }
+
+
+        /* ==========================================
+           ORDERS
+        ========================================== */
+
+        .orders-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .order-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .order-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .order-number {
+            font-weight: 700;
+            color: #111111;
+        }
+
+        .order-status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #fff7e6;
+            color: #9a6b00;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .order-details {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .order-detail {
+            background: #f8fafc;
+            border-radius: 9px;
+            padding: 12px;
+        }
+
+        .order-detail span {
+            display: block;
+            font-size: 11px;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .order-detail strong {
+            color: #111111;
+            word-break: break-word;
+        }
+
+        .order-total {
+            margin-top: 18px;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .order-total strong {
+            color: #c5a059;
+            font-size: 20px;
+        }
+
+        .no-orders {
+            background: #ffffff;
+            border: 1px dashed #cbd5e1;
+            border-radius: 14px;
+            padding: 45px 20px;
+            text-align: center;
+        }
+
+        .no-orders h3 {
+            margin-bottom: 8px;
+        }
+
+        .no-orders p {
+            color: #64748b;
+            margin: 0;
+        }
+
+
+        /* ==========================================
+           SETTINGS
+        ========================================== */
+
+        .settings-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 18px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .settings-row:last-child {
+            border-bottom: none;
+        }
+
+        .settings-row strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .settings-row span {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .settings-button {
+            border: none;
+            background: #111111;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 700px) {
+
+            .personal-grid,
+            .order-details {
+                grid-template-columns: 1fr;
+            }
+
+            .order-top {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .settings-row {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 
 <body>
 
 
-    <!-- MOBILE HEADER -->
+    <!-- ==========================================
+         MOBILE HEADER
+    =========================================== -->
 
     <header class="mobile-header">
 
@@ -46,7 +276,9 @@
 
 
 
-    <!-- SIDEBAR -->
+    <!-- ==========================================
+         SIDEBAR
+    =========================================== -->
 
     <aside
         class="shop-sidebar"
@@ -76,9 +308,10 @@
             <!-- PRODUCTS -->
 
             <a
-                href="catalog.html"
+                href="#products"
                 class="sidebar-link active"
                 id="productsLink"
+                data-view="products"
             >
 
                 <span>
@@ -107,43 +340,35 @@
             </button>
 
 
-            <!-- MY ACCOUNT DROPDOWN -->
-
             <div
                 class="account-dropdown"
                 id="accountDropdown"
             >
 
-                <a href="personal.html">
+                <a
+                    href="#personal"
+                    data-view="personal"
+                >
                     Personal Information
                 </a>
 
-                <a href="orders.html">
+
+                <a
+                    href="#orders"
+                    data-view="orders"
+                >
                     My Orders
                 </a>
 
-                <a href="settings.html">
+
+                <a
+                    href="#settings"
+                    data-view="settings"
+                >
                     Settings
                 </a>
 
             </div>
-
-
-            <!-- LOGOUT
-                 THIS IS OUTSIDE MY ACCOUNT
-                 SO IT WILL ONLY APPEAR ONCE -->
-
-            <button
-                type="button"
-                class="sidebar-link logout-link"
-                id="logoutButton"
-            >
-
-                <span>
-                    Logout
-                </span>
-
-            </button>
 
         </div>
 
@@ -151,7 +376,9 @@
 
 
 
-    <!-- SIDEBAR OVERLAY -->
+    <!-- ==========================================
+         SIDEBAR OVERLAY
+    =========================================== -->
 
     <div
         class="sidebar-overlay"
@@ -160,12 +387,16 @@
 
 
 
-    <!-- MAIN -->
+    <!-- ==========================================
+         MAIN
+    =========================================== -->
 
     <main class="shop-main">
 
 
-        <!-- TOP BAR -->
+        <!-- ======================================
+             TOP BAR
+        ======================================= -->
 
         <div class="shop-topbar">
 
@@ -175,7 +406,7 @@
                     CUSTOMER SHOP
                 </div>
 
-                <h1>
+                <h1 id="pageTitle">
                     Product Management
                 </h1>
 
@@ -209,145 +440,396 @@
 
 
 
-        <!-- SHOP HEADER -->
+        <!-- ==========================================
+             PRODUCTS VIEW
+        =========================================== -->
 
-        <section class="catalog-header">
+        <section
+            class="spa-view active"
+            id="productsView"
+        >
 
-            <div>
 
-                <div class="catalog-eyebrow">
-                    LOVE LUXE COLLECTION
+            <!-- SHOP HEADER -->
+
+            <section class="catalog-header">
+
+                <div>
+
+                    <div class="catalog-eyebrow">
+                        LOVE LUXE COLLECTION
+                    </div>
+
+                    <h2>
+                        Our Products
+                    </h2>
+
+                    <p>
+                        Browse our available products and
+                        choose what you would like to order.
+                    </p>
+
                 </div>
 
+
+                <div
+                    class="product-count"
+                    id="productCount"
+                >
+                    Showing 16 product(s)
+                </div>
+
+            </section>
+
+
+
+            <!-- SEARCH -->
+
+            <section class="catalog-tools">
+
+                <div class="search-box">
+
+                    <span>
+                        🔍
+                    </span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search products..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+            </section>
+
+
+
+            <!-- CATEGORY FILTERS -->
+
+            <div class="filter-buttons">
+
+                <button
+                    type="button"
+                    class="filter-button active"
+                    data-category="All"
+                >
+                    All
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-button"
+                    data-category="Bags"
+                >
+                    Bags
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-button"
+                    data-category="Clothing"
+                >
+                    Clothing
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-button"
+                    data-category="Perfume"
+                >
+                    Perfume
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-button"
+                    data-category="Body Care"
+                >
+                    Body Care
+                </button>
+
+            </div>
+
+
+
+            <!-- PRODUCT GRID -->
+
+            <section
+                class="product-grid"
+                id="productGrid"
+            >
+            </section>
+
+
+
+            <!-- NO PRODUCTS -->
+
+            <div
+                class="no-products"
+                id="noProducts"
+                style="display: none;"
+            >
+
+                <div class="no-products-icon">
+                    🔍
+                </div>
+
+                <h3>
+                    No products found
+                </h3>
+
+                <p>
+                    Try another search or category.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================================
+             PERSONAL INFORMATION VIEW
+        =========================================== -->
+
+        <section
+            class="spa-view"
+            id="personalView"
+        >
+
+            <div class="catalog-header">
+
+                <div>
+
+                    <div class="catalog-eyebrow">
+                        CUSTOMER ACCOUNT
+                    </div>
+
+                    <h2>
+                        Personal Information
+                    </h2>
+
+                    <p>
+                        View your customer information.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="spa-card">
+
                 <h2>
-                    Our Products
+                    Account Information
                 </h2>
 
                 <p>
-                    Browse our available products and
-                    choose what you would like to order.
+                    Your basic customer information.
                 </p>
+
+
+                <div class="personal-grid">
+
+                    <div class="personal-item">
+
+                        <span>
+                            Full Name
+                        </span>
+
+                        <strong id="personalFullName">
+                            Customer
+                        </strong>
+
+                    </div>
+
+
+                    <div class="personal-item">
+
+                        <span>
+                            Username
+                        </span>
+
+                        <strong id="personalUsername">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="personal-item">
+
+                        <span>
+                            Email
+                        </span>
+
+                        <strong id="personalEmail">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="personal-item">
+
+                        <span>
+                            Account Role
+                        </span>
+
+                        <strong id="personalRole">
+                            Customer
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================================
+             MY ORDERS VIEW
+        =========================================== -->
+
+        <section
+            class="spa-view"
+            id="ordersView"
+        >
+
+            <div class="catalog-header">
+
+                <div>
+
+                    <div class="catalog-eyebrow">
+                        CUSTOMER ACCOUNT
+                    </div>
+
+                    <h2>
+                        My Orders
+                    </h2>
+
+                    <p>
+                        View the orders you placed during this session.
+                    </p>
+
+                </div>
 
             </div>
 
 
             <div
-                class="product-count"
-                id="productCount"
+                class="orders-container"
+                id="ordersContainer"
             >
-                Showing 16 product(s)
             </div>
 
         </section>
 
 
 
-        <!-- SEARCH -->
-
-        <section class="catalog-tools">
-
-            <div class="search-box">
-
-                <span>
-                    🔍
-                </span>
-
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search products..."
-                    autocomplete="off"
-                >
-
-            </div>
-
-        </section>
-
-
-
-        <!-- CATEGORY FILTERS -->
-
-        <div class="filter-buttons">
-
-            <button
-                type="button"
-                class="filter-button active"
-                data-category="All"
-            >
-                All
-            </button>
-
-            <button
-                type="button"
-                class="filter-button"
-                data-category="Bags"
-            >
-                Bags
-            </button>
-
-            <button
-                type="button"
-                class="filter-button"
-                data-category="Clothing"
-            >
-                Clothing
-            </button>
-
-            <button
-                type="button"
-                class="filter-button"
-                data-category="Perfume"
-            >
-                Perfume
-            </button>
-
-            <button
-                type="button"
-                class="filter-button"
-                data-category="Body Care"
-            >
-                Body Care
-            </button>
-
-        </div>
-
-
-
-        <!-- PRODUCT GRID -->
+        <!-- ==========================================
+             SETTINGS VIEW
+        =========================================== -->
 
         <section
-            class="product-grid"
-            id="productGrid"
+            class="spa-view"
+            id="settingsView"
         >
+
+            <div class="catalog-header">
+
+                <div>
+
+                    <div class="catalog-eyebrow">
+                        CUSTOMER ACCOUNT
+                    </div>
+
+                    <h2>
+                        Settings
+                    </h2>
+
+                    <p>
+                        Manage your customer account settings.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="spa-card">
+
+                <div class="settings-row">
+
+                    <div>
+
+                        <strong>
+                            Shipping Address
+                        </strong>
+
+                        <span>
+                            Address used during checkout.
+                        </span>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="settings-button"
+                        id="viewAddressButton"
+                    >
+                        View Address
+                    </button>
+
+                </div>
+
+
+                <div class="settings-row">
+
+                    <div>
+
+                        <strong>
+                            Password
+                        </strong>
+
+                        <span>
+                            Manage your account password.
+                        </span>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="settings-button"
+                        id="passwordButton"
+                    >
+                        Change Password
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="spa-card"
+                id="settingsMessage"
+                style="display: none;"
+            >
+            </div>
+
         </section>
 
 
 
-        <!-- NO PRODUCTS -->
-
-        <div
-            class="no-products"
-            id="noProducts"
-            style="display: none;"
-        >
-
-            <div class="no-products-icon">
-                🔍
-            </div>
-
-            <h3>
-                No products found
-            </h3>
-
-            <p>
-                Try another search or category.
-            </p>
-
-        </div>
-
-
-
-        <!-- FOOTER -->
+        <!-- ==========================================
+             FOOTER
+        =========================================== -->
 
         <footer class="shop-footer">
 
@@ -579,94 +1061,13 @@
 
 
 
+    <!-- ==========================================
+         DATA + JAVASCRIPT
+    =========================================== -->
+
     <script src="data.js"></script>
     <script src="catalog.js"></script>
 
-    <script>
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            function () {
-
-                const accountToggle =
-                    document.getElementById(
-                        "accountToggle"
-                    );
-
-                const accountDropdown =
-                    document.getElementById(
-                        "accountDropdown"
-                    );
-
-                const productsLink =
-                    document.getElementById(
-                        "productsLink"
-                    );
-
-                const links =
-                    accountDropdown.querySelectorAll(
-                        "a"
-                    );
-
-                const page =
-                    window.location.pathname
-                        .split("/")
-                        .pop()
-                        .toLowerCase();
-
-
-                /*
-                 * ACCOUNT PAGE HIGHLIGHT
-                 */
-
-                if (
-                    page !== "catalog.html" &&
-                    page !== ""
-                ) {
-
-                    productsLink.classList.remove(
-                        "active"
-                    );
-
-                    accountToggle.classList.add(
-                        "active"
-                    );
-
-                    accountDropdown.classList.add(
-                        "show"
-                    );
-
-
-                    links.forEach(
-                        function (link) {
-
-                            const linkPage =
-                                link
-                                    .getAttribute(
-                                        "href"
-                                    )
-                                    .toLowerCase();
-
-
-                            if (
-                                linkPage === page
-                            ) {
-
-                                link.classList.add(
-                                    "selected"
-                                );
-
-                            }
-
-                        }
-                    );
-
-                }
-
-            }
-        );
-
-    </script>
 
 </body>
 
