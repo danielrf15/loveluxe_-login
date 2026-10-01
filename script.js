@@ -5,44 +5,18 @@
 
 
 /* ==========================================
-   ADMIN ACCOUNT
+   SHARED ARRAY DATA
 ========================================== */
 
-const adminAccount = {
+const loveLuxeData = window.LoveLuxeData;
 
-    username: "admin",
+const adminAccount = loveLuxeData.adminAccount;
 
-    password: "Admin123",
+const customers = loveLuxeData.customers;
 
-    fullName: "Love Luxe Admin",
+const orders = loveLuxeData.orders;
 
-    role: "admin"
-
-};
-
-
-
-/* ==========================================
-   CUSTOMER ARRAY
-========================================== */
-
-const customers = [];
-
-
-
-/* ==========================================
-   ORDER ARRAY
-========================================== */
-
-const orders = [];
-
-
-
-/* ==========================================
-   CURRENT USER
-========================================== */
-
-let currentUser = null;
+let currentUser = loveLuxeData.currentUser;
 
 
 
@@ -463,6 +437,7 @@ function login(event) {
             role: "admin"
         };
 
+        loveLuxeData.currentUser = currentUser;
 
         openApplication();
 
@@ -506,6 +481,7 @@ function login(event) {
 
 
     currentUser = customer;
+    loveLuxeData.currentUser = currentUser;
 
 
     document
@@ -677,6 +653,8 @@ function signup(event) {
     currentUser =
         newCustomer;
 
+    loveLuxeData.currentUser = currentUser;
+
 
     message.textContent =
         "Account created successfully!";
@@ -831,16 +809,12 @@ function openApplication() {
 
     updateUserDisplay();
 
-
-    if (
+    document.getElementById(
+        "adminNavigation"
+    ).style.display =
         currentUser.role === "admin"
-    ) {
-
-        document.getElementById(
-            "adminNavigation"
-        ).style.display = "block";
-
-    }
+            ? "block"
+            : "none";
 
 }
 
@@ -1110,8 +1084,6 @@ function showView(viewName) {
             "pageTitle"
         ).textContent =
             "Settings";
-
-        loadAddress();
 
     }
 
@@ -1414,7 +1386,10 @@ function setupCheckout() {
         .getElementById("checkoutPayment")
         .addEventListener(
             "change",
-            updateCheckoutTotal
+            function () {
+                renderPaymentFields();
+                updateCheckoutTotal();
+            }
         );
 
 
@@ -1510,6 +1485,7 @@ function openCheckout(productId) {
 
     renderCheckoutAddress();
 
+    renderPaymentFields();
 
     document.getElementById(
         "checkoutMessage"
@@ -1729,6 +1705,109 @@ function renderCheckoutOptions() {
 
 
 
+function renderPaymentFields() {
+
+    const container = document.getElementById("paymentDetails");
+    const paymentMethod = document.getElementById("checkoutPayment").value;
+
+    if (!container) return;
+
+    if (paymentMethod === "Cash") {
+        container.innerHTML = "";
+        return;
+    }
+
+    let html = `
+        <div class="payment-details-title">${paymentMethod} Information</div>
+        <div class="payment-details-grid">
+    `;
+
+    if (paymentMethod === "GCash") {
+        html += `
+            <div class="form-group">
+                <label>GCash Number</label>
+                <input id="gcashNumber" type="text" placeholder="09XXXXXXXXX" maxlength="11">
+            </div>
+            <div class="form-group">
+                <label>Reference Number</label>
+                <input id="gcashReference" type="text" placeholder="Enter reference number">
+            </div>
+        `;
+    }
+
+    if (paymentMethod === "Bank Transfer") {
+        html += `
+            <div class="form-group">
+                <label>Bank Name</label>
+                <input id="bankName" type="text" placeholder="Enter bank name">
+            </div>
+            <div class="form-group">
+                <label>Transfer Reference</label>
+                <input id="bankReference" type="text" placeholder="Enter transfer reference">
+            </div>
+        `;
+    }
+
+    if (paymentMethod === "Card") {
+        html += `
+            <div class="form-group">
+                <label>Cardholder Name</label>
+                <input id="cardholderName" type="text" placeholder="Name on card">
+            </div>
+            <div class="form-group">
+                <label>Last 4 Digits</label>
+                <input id="cardLast4" type="text" inputmode="numeric" maxlength="4" placeholder="1234">
+            </div>
+            <div class="form-group">
+                <label>Expiry Date</label>
+                <input id="cardExpiry" type="text" placeholder="MM/YY" maxlength="5">
+            </div>
+            <div class="form-group full-width">
+                <small style="color:#777;">For this school demo, do not enter a full card number or CVV.</small>
+            </div>
+        `;
+    }
+
+    html += `</div>`;
+    container.innerHTML = html;
+}
+
+
+function collectPaymentDetails(paymentMethod) {
+
+    if (paymentMethod === "Cash") {
+        return { type: "Cash" };
+    }
+
+    if (paymentMethod === "GCash") {
+        const number = document.getElementById("gcashNumber").value.trim();
+        const reference = document.getElementById("gcashReference").value.trim();
+        if (!/^09\d{9}$/.test(number)) return { error: "Please enter a valid 11-digit GCash number." };
+        if (!reference) return { error: "Please enter the GCash reference number." };
+        return { type: "GCash", number, reference };
+    }
+
+    if (paymentMethod === "Bank Transfer") {
+        const bankName = document.getElementById("bankName").value.trim();
+        const reference = document.getElementById("bankReference").value.trim();
+        if (!bankName || !reference) return { error: "Please enter the bank name and transfer reference." };
+        return { type: "Bank Transfer", bankName, reference };
+    }
+
+    if (paymentMethod === "Card") {
+        const cardholderName = document.getElementById("cardholderName").value.trim();
+        const last4 = document.getElementById("cardLast4").value.trim();
+        const expiry = document.getElementById("cardExpiry").value.trim();
+        if (!cardholderName || !/^\d{4}$/.test(last4) || !/^\d{2}\/\d{2}$/.test(expiry)) {
+            return { error: "Please enter the cardholder name, last 4 digits, and expiry date." };
+        }
+        return { type: "Card", cardholderName, last4, expiry };
+    }
+
+    return { error: "Please select a payment method." };
+}
+
+
 function renderCheckoutAddress() {
 
     const address =
@@ -1772,7 +1851,7 @@ function renderCheckoutAddress() {
     ) {
 
         element.textContent =
-            "No shipping address saved. Add your address in Settings.";
+            "No shipping address saved. Add your address in Personal Information.";
 
         return;
 
@@ -1880,7 +1959,7 @@ function placeOrder() {
     ) {
 
         message.textContent =
-            "Please add your shipping address in Settings first.";
+            "Please add your shipping address in Personal Information first.";
 
         message.style.color =
             "#c0392b";
@@ -1943,6 +2022,14 @@ function placeOrder() {
             "checkoutPayment"
         ).value;
 
+    const paymentDetails = collectPaymentDetails(paymentMethod);
+
+    if (paymentDetails.error) {
+        message.textContent = paymentDetails.error;
+        message.style.color = "#c0392b";
+        return;
+    }
+
 
     const total =
         selectedProduct.price *
@@ -1996,6 +2083,9 @@ function placeOrder() {
 
         paymentMethod:
             paymentMethod,
+
+        paymentDetails:
+            paymentDetails,
 
         shippingAddress:
             addressParts.join(", "),
@@ -2145,6 +2235,13 @@ function renderOrders() {
                                     ${order.paymentMethod}
                                 </div>
 
+                                ${order.paymentDetails ? `
+                                    <div>
+                                        <strong>Payment Details:</strong>
+                                        ${formatPaymentDetails(order.paymentDetails)}
+                                    </div>
+                                ` : ""}
+
                                 ${
                                     order.color
                                         ? `
@@ -2234,6 +2331,16 @@ function renderOrders() {
    CANCEL ORDER
 ========================================== */
 
+function formatPaymentDetails(details) {
+    if (!details) return "";
+    if (details.type === "Cash") return "Cash on delivery";
+    if (details.type === "GCash") return `${details.number} • Ref: ${details.reference}`;
+    if (details.type === "Bank Transfer") return `${details.bankName} • Ref: ${details.reference}`;
+    if (details.type === "Card") return `${details.cardholderName} • **** ${details.last4} • ${details.expiry}`;
+    return "";
+}
+
+
 function cancelOrder(orderNumber) {
 
     const order =
@@ -2283,80 +2390,70 @@ function cancelOrder(orderNumber) {
    CHANGE PAYMENT
 ========================================== */
 
-function changePaymentMethod(
-    orderNumber
-) {
+function changePaymentMethod(orderNumber) {
 
-    const order =
-        orders.find(
-            function (item) {
+    const order = orders.find(function (item) {
+        return item.orderNumber === orderNumber &&
+            item.customerUsername === currentUser.username;
+    });
 
-                return (
-                    item.orderNumber ===
-                    orderNumber
-                );
+    if (!order || order.status === "Cancelled") return;
 
-            }
-        );
+    const newPayment = prompt(
+        "Enter payment method exactly as shown:\nCash\nGCash\nBank Transfer\nCard",
+        order.paymentMethod
+    );
 
+    if (!newPayment) return;
 
-    if (!order) {
-
+    const allowedPayments = ["Cash", "GCash", "Bank Transfer", "Card"];
+    if (!allowedPayments.includes(newPayment)) {
+        alert("Please enter Cash, GCash, Bank Transfer, or Card.");
         return;
-
     }
 
+    let details;
 
-    const newPayment =
-        prompt(
-            "Enter payment method:\nCash\nGCash\nBank Transfer\nCard",
-            order.paymentMethod
-        );
-
-
-    if (!newPayment) {
-
-        return;
-
+    if (newPayment === "Cash") {
+        details = { type: "Cash" };
+    } else if (newPayment === "GCash") {
+        const number = prompt("Enter your 11-digit GCash number:", order.paymentDetails?.number || "");
+        if (number === null) return;
+        const reference = prompt("Enter the GCash reference number:", order.paymentDetails?.reference || "");
+        if (reference === null) return;
+        if (!/^09\d{9}$/.test(number.trim()) || !reference.trim()) {
+            alert("Please enter a valid GCash number and reference number.");
+            return;
+        }
+        details = { type: "GCash", number: number.trim(), reference: reference.trim() };
+    } else if (newPayment === "Bank Transfer") {
+        const bankName = prompt("Enter the bank name:", order.paymentDetails?.bankName || "");
+        if (bankName === null) return;
+        const reference = prompt("Enter the transfer reference:", order.paymentDetails?.reference || "");
+        if (reference === null) return;
+        if (!bankName.trim() || !reference.trim()) {
+            alert("Please enter the bank name and transfer reference.");
+            return;
+        }
+        details = { type: "Bank Transfer", bankName: bankName.trim(), reference: reference.trim() };
+    } else {
+        const cardholderName = prompt("Enter the cardholder name:", order.paymentDetails?.cardholderName || "");
+        if (cardholderName === null) return;
+        const last4 = prompt("Enter the last 4 digits of the card:", order.paymentDetails?.last4 || "");
+        if (last4 === null) return;
+        const expiry = prompt("Enter the card expiry date (MM/YY):", order.paymentDetails?.expiry || "");
+        if (expiry === null) return;
+        if (!cardholderName.trim() || !/^\d{4}$/.test(last4.trim()) || !/^\d{2}\/\d{2}$/.test(expiry.trim())) {
+            alert("Please enter valid cardholder, last 4 digits, and expiry information.");
+            return;
+        }
+        details = { type: "Card", cardholderName: cardholderName.trim(), last4: last4.trim(), expiry: expiry.trim() };
     }
 
-
-    const allowedPayments = [
-
-        "Cash",
-
-        "GCash",
-
-        "Bank Transfer",
-
-        "Card"
-
-    ];
-
-
-    if (
-        !allowedPayments.includes(
-            newPayment
-        )
-    ) {
-
-        alert(
-            "Please enter one of the available payment methods."
-        );
-
-        return;
-
-    }
-
-
-    order.paymentMethod =
-        newPayment;
-
-
+    order.paymentMethod = newPayment;
+    order.paymentDetails = details;
     renderOrders();
-
 }
-
 
 
 /* ==========================================
@@ -2797,10 +2894,15 @@ function renderAdmin() {
 function logout() {
 
     currentUser = null;
+    loveLuxeData.currentUser = null;
 
 
     document.getElementById(
         "app"
+    ).style.display = "none";
+
+    document.getElementById(
+        "adminNavigation"
     ).style.display = "none";
 
 

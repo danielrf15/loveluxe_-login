@@ -782,6 +782,50 @@
             text-align: center;
         }
 
+        .payment-details {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fafafa;
+            border: 1px solid #e6e2da;
+            border-radius: 10px;
+        }
+
+        .payment-details-title {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .payment-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .payment-details .form-group {
+            margin-top: 0;
+        }
+
+        .payment-details .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .payment-details input {
+            width: 100%;
+            min-height: 42px;
+            border: 1px solid #ddd5c8;
+            border-radius: 7px;
+            padding: 0 11px;
+            outline: none;
+            background: white;
+        }
+
+        .payment-details input:focus {
+            border-color: #c5a059;
+        }
+
+
         .checkout-total {
             margin-top: 18px;
             padding-top: 15px;
@@ -920,6 +964,10 @@
             }
 
             .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-details-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1781,6 +1829,60 @@
 
                 </div>
 
+
+                <div class="card">
+
+                    <h3>Shipping Address</h3>
+
+                    <p style="margin-top:7px;color:#718096;font-size:13px;">
+                        Add the address where your orders should be delivered.
+                    </p>
+
+                    <div id="addressMessage" class="message" style="margin-top:10px;"></div>
+
+                    <div class="form-grid" style="margin-top:15px;">
+
+                        <div class="form-group">
+                            <label>House Number</label>
+                            <input id="houseNumber" type="text" placeholder="House number">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Street</label>
+                            <input id="street" type="text" placeholder="Street">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Barangay</label>
+                            <input id="barangay" type="text" placeholder="Barangay">
+                        </div>
+
+                        <div class="form-group">
+                            <label>City</label>
+                            <input id="city" type="text" placeholder="City">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Province</label>
+                            <input id="province" type="text" placeholder="Province">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Postal Code</label>
+                            <input id="postalCode" type="text" placeholder="Postal code">
+                        </div>
+
+                    </div>
+
+                    <div class="save-row">
+                        <button id="saveAddressButton" class="primary-button" type="button">
+                            SAVE ADDRESS
+                        </button>
+                    </div>
+
+                </div>
+                </div>
+
             </section>
 
 
@@ -1841,131 +1943,10 @@
                     </h2>
 
                     <p>
-                        Manage your shipping address and password.
+                        Manage your account password.
                     </p>
 
                 </div>
-
-
-                <div class="card">
-
-                    <h3>
-                        Shipping Address
-                    </h3>
-
-
-                    <div
-                        id="addressMessage"
-                        class="message"
-                        style="margin-top:10px;"
-                    ></div>
-
-
-                    <div
-                        class="form-grid"
-                        style="margin-top:15px;"
-                    >
-
-                        <div class="form-group">
-
-                            <label>
-                                House Number
-                            </label>
-
-                            <input
-                                id="houseNumber"
-                                type="text"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Street
-                            </label>
-
-                            <input
-                                id="street"
-                                type="text"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Barangay
-                            </label>
-
-                            <input
-                                id="barangay"
-                                type="text"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                City
-                            </label>
-
-                            <input
-                                id="city"
-                                type="text"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Province
-                            </label>
-
-                            <input
-                                id="province"
-                                type="text"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Postal Code
-                            </label>
-
-                            <input
-                                id="postalCode"
-                                type="text"
-                            >
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="save-row">
-
-                        <button
-                            id="saveAddressButton"
-                            class="primary-button"
-                            type="button"
-                        >
-                            SAVE ADDRESS
-                        </button>
-
-                    </div>
-
-                </div>
-
 
 
                 <div class="card">
@@ -2231,6 +2212,12 @@
 
 
                     <div
+                        id="paymentDetails"
+                        class="payment-details"
+                    ></div>
+
+
+                    <div
                         id="checkoutAddress"
                         style="
                             margin-top:15px;
@@ -2277,6 +2264,7 @@
     </div>
 
 
+    <script src="data.js"></script>
     <script src="script.js"></script>
 
 </body>
