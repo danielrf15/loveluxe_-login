@@ -1,61 +1,35 @@
 /* ==========================================
-   LOVE LUXE PRODUCT CATALOG
+   LOVE LUXE CUSTOMER SPA
 ========================================== */
 
 
 /* ==========================================
-   CUSTOMER ACCESS
+   CUSTOMER DATA
 ========================================== */
 
-const loveLuxeData = window.LoveLuxeData;
+const loveLuxeData =
+    window.LoveLuxeData;
 
 const customers =
     loveLuxeData.customers;
 
-
-/*
- * Get the currently logged-in customer.
- * The login system already saves this in localStorage.
- */
-
-let currentUser = null;
-
-
-try {
-
-    const savedUser =
-        localStorage.getItem(
-            "loveLuxeCurrentUser"
-        );
-
-    if (savedUser) {
-
-        currentUser =
-            JSON.parse(savedUser);
-
-    }
-
-} catch (error) {
-
-    currentUser = null;
-
-}
+const orders =
+    loveLuxeData.orders;
 
 
 /*
- * If there is no valid customer,
- * return to the login page.
- */
+    Arrays only.
 
-if (
-    !currentUser ||
-    currentUser.role !== "customer"
-) {
+    NO localStorage
+    NO sessionStorage
+    NO cookies
+    NO database
+*/
 
-    window.location.href =
-        "index.html";
 
-}
+let currentUser =
+    customers[0];
+
 
 
 /* ==========================================
@@ -69,17 +43,22 @@ const products = [
         name: "Sophia Skirt",
         category: "Clothing",
         price: 790,
-        image: "images/sophia-skirt.jpg",
+
+        image:
+            "images/sophia-skirt.jpg",
+
         images: [
             "images/sophia-skirt.jpg",
             "images/sophia-skirt-2.jpg"
         ],
+
         colors: [
             "Black and White Polka",
             "Light Blue",
             "Gray",
             "Black"
         ],
+
         sizes: [
             "S",
             "M",
@@ -88,6 +67,7 @@ const products = [
             "2XL",
             "3XL"
         ],
+
         description:
             "A simple and stylish skirt that is easy to pair with different outfits."
     },
@@ -98,16 +78,21 @@ const products = [
         name: "Nov-Mardi T-Shirt",
         category: "Clothing",
         price: 450,
-        image: "images/nov-mardi-tshirt.jpg",
+
+        image:
+            "images/nov-mardi-tshirt.jpg",
+
         images: [
             "images/nov-mardi-tshirt.jpg",
             "images/nov-mardi-tshirt-2.jpg"
         ],
+
         colors: [
             "White",
             "Pink",
             "Black"
         ],
+
         sizes: [
             "S",
             "M",
@@ -116,6 +101,7 @@ const products = [
             "2XL",
             "3XL"
         ],
+
         description:
             "A comfortable everyday t-shirt with a simple and casual style."
     },
@@ -126,11 +112,15 @@ const products = [
         name: "Basic Chic01 Terno",
         category: "Clothing",
         price: 950,
-        image: "images/basic-chic01-terno.jpg",
+
+        image:
+            "images/basic-chic01-terno.jpg",
+
         images: [
             "images/basic-chic01-terno.jpg",
             "images/basic-chic01-terno-2.jpg"
         ],
+
         sizes: [
             "S",
             "M",
@@ -139,6 +129,7 @@ const products = [
             "2XL",
             "3XL"
         ],
+
         description:
             "A stylish terno set designed for a simple and comfortable look."
     },
@@ -149,11 +140,15 @@ const products = [
         name: "Sami T-Shirt",
         category: "Clothing",
         price: 790,
-        image: "images/sami-tshirt.jpg",
+
+        image:
+            "images/sami-tshirt.jpg",
+
         images: [
             "images/sami-tshirt.jpg",
             "images/sami-tshirt-2.jpg"
         ],
+
         colors: [
             "Brown",
             "Tan",
@@ -161,6 +156,7 @@ const products = [
             "Black",
             "Light Blue"
         ],
+
         description:
             "A casual t-shirt that can be worn for everyday activities."
     },
@@ -171,11 +167,15 @@ const products = [
         name: "Alada Soap",
         category: "Body Care",
         price: 350,
-        image: "images/alada-soap.jpg",
+
+        image:
+            "images/alada-soap.jpg",
+
         images: [
             "images/alada-soap.jpg",
             "images/alada-soap-2.jpg"
         ],
+
         description:
             "A body care soap for a simple everyday skincare routine."
     },
@@ -186,11 +186,15 @@ const products = [
         name: "Dewy Gluta Soap",
         category: "Body Care",
         price: 199,
-        image: "images/dewy-gluta-soap.jpg",
+
+        image:
+            "images/dewy-gluta-soap.jpg",
+
         images: [
             "images/dewy-gluta-soap.jpg",
             "images/dewy-gluta-soap-2.jpg"
         ],
+
         description:
             "A cleansing soap made for everyday personal care."
     },
@@ -201,7 +205,10 @@ const products = [
         name: "Serene Skin Soap",
         category: "Body Care",
         price: 299,
-        image: "images/serene-skin-soap.jpg",
+
+        image:
+            "images/serene-skin-soap.jpg",
+
         description:
             "A gentle body care product for everyday use."
     },
@@ -212,7 +219,10 @@ const products = [
         name: "Vitamin E Whitening Cream",
         category: "Body Care",
         price: 180,
-        image: "images/vitamin-e-whitening-cream.jpg",
+
+        image:
+            "images/vitamin-e-whitening-cream.jpg",
+
         description:
             "A moisturizing cream for an everyday skincare routine."
     },
@@ -223,17 +233,22 @@ const products = [
         name: "Mini Enzo",
         category: "Bags",
         price: 3590,
-        image: "images/mini-enzo.jpg",
+
+        image:
+            "images/mini-enzo.jpg",
+
         images: [
             "images/mini-enzo.jpg",
             "images/mini-enzo-2.jpg"
         ],
+
         colors: [
             "Black",
             "Green",
             "Red",
             "Blue"
         ],
+
         description:
             "A compact and stylish bag that works well for everyday use."
     },
@@ -244,17 +259,22 @@ const products = [
         name: "Mini Bucket Bag",
         category: "Bags",
         price: 2090,
-        image: "images/mini-bucket-bag.jpg",
+
+        image:
+            "images/mini-bucket-bag.jpg",
+
         images: [
             "images/mini-bucket-bag.jpg",
             "images/mini-bucket-bag-2.jpg"
         ],
+
         colors: [
             "Dark Blue",
             "Grayish Blue",
             "Blue",
             "Blue Stripes"
         ],
+
         description:
             "A small bucket-style bag with a simple and fashionable design."
     },
@@ -265,11 +285,15 @@ const products = [
         name: "Anytime Medium",
         category: "Bags",
         price: 2890,
-        image: "images/anytime-medium.jpg",
+
+        image:
+            "images/anytime-medium.jpg",
+
         images: [
             "images/anytime-medium.jpg",
             "images/anytime-medium-2.jpg"
         ],
+
         colors: [
             "Black",
             "Tantaupe",
@@ -277,6 +301,7 @@ const products = [
             "White",
             "Clay Two"
         ],
+
         description:
             "A medium-sized everyday bag with enough space for your essentials."
     },
@@ -287,17 +312,22 @@ const products = [
         name: "Emilio Barrel",
         category: "Bags",
         price: 3590,
-        image: "images/emilio-barrel.jpg",
+
+        image:
+            "images/emilio-barrel.jpg",
+
         images: [
             "images/emilio-barrel.jpg",
             "images/emilio-barrel-2.jpg"
         ],
+
         colors: [
             "Dark Brown",
             "Red",
             "Green",
             "Black"
         ],
+
         description:
             "A barrel-style bag with a clean and modern appearance."
     },
@@ -308,11 +338,15 @@ const products = [
         name: "Victoria's Secret Perfume",
         category: "Perfume",
         price: 700,
-        image: "images/victorias-secret-perfume.jpg",
+
+        image:
+            "images/victorias-secret-perfume.jpg",
+
         images: [
             "images/victorias-secret-perfume.jpg",
             "images/victorias-secret-perfume-2.jpg"
         ],
+
         scents: [
             "Bare Vanilla",
             "Aqua Kiss",
@@ -322,6 +356,7 @@ const products = [
             "Pure Seduction",
             "Velvet Petals"
         ],
+
         description:
             "A fragrance option for everyday wear."
     },
@@ -332,7 +367,10 @@ const products = [
         name: "Bath & Body Works Perfume",
         category: "Perfume",
         price: 600,
-        image: "images/bath-body-works-perfume.jpg",
+
+        image:
+            "images/bath-body-works-perfume.jpg",
+
         scents: [
             "Pure Wonder",
             "Hello Beautiful",
@@ -340,6 +378,7 @@ const products = [
             "You're the One",
             "Vanilla Ease"
         ],
+
         description:
             "A fragrance designed for a fresh everyday scent."
     },
@@ -350,10 +389,14 @@ const products = [
         name: "Smart Collection Perfume",
         category: "Perfume",
         price: 350,
-        image: "images/smart-collection-perfume.jpg",
+
+        image:
+            "images/smart-collection-perfume.jpg",
+
         scents: [
             "Chanel N'5"
         ],
+
         description:
             "An affordable fragrance option for everyday use."
     },
@@ -364,7 +407,10 @@ const products = [
         name: "Lattafa YARA",
         category: "Perfume",
         price: 390,
-        image: "images/lattafa-yara.jpg",
+
+        image:
+            "images/lattafa-yara.jpg",
+
         description:
             "A popular fragrance choice with a soft and pleasant scent."
     }
@@ -372,21 +418,29 @@ const products = [
 ];
 
 
+
 /* ==========================================
    VARIABLES
 ========================================== */
 
-let selectedCategory = "All";
+let selectedCategory =
+    "All";
 
-let selectedProduct = null;
+let selectedProduct =
+    null;
 
-let selectedQuantity = 1;
+let selectedQuantity =
+    1;
 
-let selectedColor = "";
+let selectedColor =
+    "";
 
-let selectedSize = "";
+let selectedSize =
+    "";
 
-let selectedScent = "";
+let selectedScent =
+    "";
+
 
 
 /* ==========================================
@@ -423,9 +477,15 @@ const customerName =
         "customerName"
     );
 
+const pageTitle =
+    document.getElementById(
+        "pageTitle"
+    );
+
+
 
 /* ==========================================
-   CUSTOMER NAME
+   CUSTOMER INFORMATION
 ========================================== */
 
 if (
@@ -440,8 +500,9 @@ if (
 }
 
 
+
 /* ==========================================
-   PRICE
+   PRICE FORMAT
 ========================================== */
 
 function formatPrice(price) {
@@ -458,8 +519,9 @@ function formatPrice(price) {
 }
 
 
+
 /* ==========================================
-   DISPLAY PRODUCTS
+   PRODUCT DISPLAY
 ========================================== */
 
 function displayProducts() {
@@ -511,7 +573,8 @@ function displayProducts() {
         filteredProducts.length === 0
     ) {
 
-        productGrid.innerHTML = "";
+        productGrid.innerHTML =
+            "";
 
         noProducts.style.display =
             "block";
@@ -613,6 +676,7 @@ function displayProducts() {
 }
 
 
+
 /* ==========================================
    CATEGORY FILTER
 ========================================== */
@@ -653,6 +717,7 @@ filterButtons.forEach(
 );
 
 
+
 /* ==========================================
    SEARCH
 ========================================== */
@@ -661,6 +726,7 @@ searchInput?.addEventListener(
     "input",
     displayProducts
 );
+
 
 
 /* ==========================================
@@ -728,6 +794,7 @@ const productOptions =
     );
 
 
+
 /* ==========================================
    VIEW PRODUCT
 ========================================== */
@@ -750,18 +817,21 @@ function viewProduct(productId) {
     }
 
 
-    selectedQuantity = 1;
+    selectedQuantity =
+        1;
 
-    selectedColor = "";
+    selectedColor =
+        "";
 
-    selectedSize = "";
+    selectedSize =
+        "";
 
-    selectedScent = "";
+    selectedScent =
+        "";
 
 
     checkoutImage.src =
         selectedProduct.image;
-
 
     checkoutImage.alt =
         selectedProduct.name;
@@ -785,7 +855,8 @@ function viewProduct(productId) {
         );
 
 
-    checkoutQuantity.value = 1;
+    checkoutQuantity.value =
+        1;
 
 
     displayProductImages(
@@ -800,10 +871,14 @@ function viewProduct(productId) {
 
     updateCheckoutQuantity();
 
+
     displayShippingAddress();
 
 
     checkoutMessage.textContent =
+        "";
+
+    checkoutMessage.style.color =
         "";
 
 
@@ -816,6 +891,7 @@ function viewProduct(productId) {
         "hidden";
 
 }
+
 
 
 /* ==========================================
@@ -913,6 +989,7 @@ function displayProductImages(
 }
 
 
+
 /* ==========================================
    PRODUCT OPTIONS
 ========================================== */
@@ -924,6 +1001,8 @@ function displayProductOptions(
     productOptions.innerHTML =
         "";
 
+
+    /* COLOR */
 
     if (
         product.colors &&
@@ -955,18 +1034,30 @@ function displayProductOptions(
 
 
         select.innerHTML =
-            `<option value="">
-                Select color
-            </option>`;
+            `
+                <option value="">
+                    Select color
+                </option>
+            `;
 
 
         product.colors.forEach(
             function(color) {
 
-                select.innerHTML +=
-                    `<option value="${color}">
-                        ${color}
-                    </option>`;
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    color;
+
+                option.textContent =
+                    color;
+
+                select.appendChild(
+                    option
+                );
 
             }
         );
@@ -998,6 +1089,9 @@ function displayProductOptions(
     }
 
 
+
+    /* SIZE */
+
     if (
         product.sizes &&
         product.sizes.length > 0
@@ -1028,18 +1122,30 @@ function displayProductOptions(
 
 
         select.innerHTML =
-            `<option value="">
-                Select size
-            </option>`;
+            `
+                <option value="">
+                    Select size
+                </option>
+            `;
 
 
         product.sizes.forEach(
             function(size) {
 
-                select.innerHTML +=
-                    `<option value="${size}">
-                        ${size}
-                    </option>`;
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    size;
+
+                option.textContent =
+                    size;
+
+                select.appendChild(
+                    option
+                );
 
             }
         );
@@ -1071,6 +1177,9 @@ function displayProductOptions(
     }
 
 
+
+    /* SCENT */
+
     if (
         product.scents &&
         product.scents.length > 0
@@ -1101,18 +1210,30 @@ function displayProductOptions(
 
 
         select.innerHTML =
-            `<option value="">
-                Select scent
-            </option>`;
+            `
+                <option value="">
+                    Select scent
+                </option>
+            `;
 
 
         product.scents.forEach(
             function(scent) {
 
-                select.innerHTML +=
-                    `<option value="${scent}">
-                        ${scent}
-                    </option>`;
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    scent;
+
+                option.textContent =
+                    scent;
+
+                select.appendChild(
+                    option
+                );
 
             }
         );
@@ -1146,6 +1267,7 @@ function displayProductOptions(
 }
 
 
+
 /* ==========================================
    QUANTITY
 ========================================== */
@@ -1154,6 +1276,11 @@ function updateCheckoutQuantity() {
 
     checkoutQuantity.value =
         selectedQuantity;
+
+
+    if (!selectedProduct) {
+        return;
+    }
 
 
     const total =
@@ -1165,6 +1292,7 @@ function updateCheckoutQuantity() {
         formatPrice(total);
 
 }
+
 
 
 /* MINUS */
@@ -1191,6 +1319,7 @@ document
     );
 
 
+
 /* PLUS */
 
 document
@@ -1213,6 +1342,7 @@ document
 
         }
     );
+
 
 
 /* TYPED QUANTITY */
@@ -1238,7 +1368,9 @@ checkoutQuantity?.addEventListener(
         }
 
 
-        if (quantity > 99) {
+        if (
+            quantity > 99
+        ) {
 
             quantity = 99;
 
@@ -1253,6 +1385,7 @@ checkoutQuantity?.addEventListener(
 
     }
 );
+
 
 
 /* ==========================================
@@ -1308,7 +1441,9 @@ function displayShippingAddress() {
     );
 
 
-    if (parts.length === 0) {
+    if (
+        parts.length === 0
+    ) {
 
         checkoutAddress.textContent =
             "No shipping address saved.";
@@ -1322,6 +1457,7 @@ function displayShippingAddress() {
         parts.join(", ");
 
 }
+
 
 
 /* ==========================================
@@ -1365,6 +1501,7 @@ checkoutModal?.addEventListener(
 
     }
 );
+
 
 
 /* ==========================================
@@ -1445,6 +1582,9 @@ function placeOrder() {
     }
 
 
+
+    /* COLOR CHECK */
+
     if (
         selectedProduct.colors &&
         !selectedColor
@@ -1460,6 +1600,9 @@ function placeOrder() {
 
     }
 
+
+
+    /* SIZE CHECK */
 
     if (
         selectedProduct.sizes &&
@@ -1477,6 +1620,9 @@ function placeOrder() {
     }
 
 
+
+    /* SCENT CHECK */
+
     if (
         selectedProduct.scents &&
         !selectedScent
@@ -1491,6 +1637,7 @@ function placeOrder() {
         return;
 
     }
+
 
 
     const paymentMethod =
@@ -1510,6 +1657,11 @@ function placeOrder() {
             .toString()
             .slice(-8);
 
+
+
+    /* ======================================
+       CREATE ORDER
+    ====================================== */
 
     const order = {
 
@@ -1564,46 +1716,18 @@ function placeOrder() {
     };
 
 
-    /* ==========================================
-       SAVE ORDER
-    ========================================== */
-
-    let savedOrders = [];
-
-
-    try {
-
-        savedOrders =
-            JSON.parse(
-                localStorage.getItem(
-                    "loveLuxeOrders"
-                )
-            ) || [];
-
-    } catch (error) {
-
-        savedOrders = [];
-
-    }
-
 
     /*
-     * Add the new order to the existing orders.
-     */
+        THIS IS THE IMPORTANT PART.
 
-    savedOrders.push(order);
+        The order is added to the SAME
+        orders array that My Orders uses.
+    */
 
-
-    /*
-     * Save all orders.
-     */
-
-    localStorage.setItem(
-        "loveLuxeOrders",
-        JSON.stringify(
-            savedOrders
-        )
+    orders.push(
+        order
     );
+
 
 
     checkoutMessage.textContent =
@@ -1613,22 +1737,34 @@ function placeOrder() {
         "#16834a";
 
 
+
     setTimeout(
         function() {
 
             closeCheckout();
 
+            showView(
+                "orders"
+            );
+
             alert(
                 "Order placed successfully!\n\n" +
+
                 "Order #: " +
                 orderNumber +
+
                 "\n" +
+
                 "Product: " +
                 selectedProduct.name +
+
                 "\n" +
+
                 "Quantity: " +
                 selectedQuantity +
+
                 "\n" +
+
                 "Total: " +
                 formatPrice(total)
             );
@@ -1640,8 +1776,236 @@ function placeOrder() {
 }
 
 
+
 /* ==========================================
-   MY ACCOUNT DROPDOWN
+   SPA NAVIGATION
+========================================== */
+
+const spaViews = {
+
+    products:
+        document.getElementById(
+            "productsView"
+        ),
+
+    personal:
+        document.getElementById(
+            "personalView"
+        ),
+
+    orders:
+        document.getElementById(
+            "ordersView"
+        ),
+
+    settings:
+        document.getElementById(
+            "settingsView"
+        )
+
+};
+
+
+
+function showView(
+    viewName
+) {
+
+    if (
+        !spaViews[viewName]
+    ) {
+
+        viewName =
+            "products";
+
+    }
+
+
+    Object.keys(
+        spaViews
+    ).forEach(
+        function(key) {
+
+            spaViews[key]
+                .classList.remove(
+                    "active"
+                );
+
+        }
+    );
+
+
+    spaViews[viewName]
+        .classList.add(
+            "active"
+        );
+
+
+    updateNavigation(
+        viewName
+    );
+
+
+    if (
+        viewName === "orders"
+    ) {
+
+        renderOrders();
+
+    }
+
+
+    if (
+        viewName === "personal"
+    ) {
+
+        renderPersonalInformation();
+
+    }
+
+
+    if (
+        viewName === "settings"
+    ) {
+
+        renderSettings();
+
+    }
+
+
+    if (
+        viewName === "products"
+    ) {
+
+        pageTitle.textContent =
+            "Product Management";
+
+    } else {
+
+        pageTitle.textContent =
+            "My Account";
+
+    }
+
+
+    closeSidebar();
+
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+}
+
+
+
+function updateNavigation(
+    viewName
+) {
+
+    document
+        .querySelectorAll(
+            "[data-view]"
+        )
+        .forEach(
+            function(link) {
+
+                link.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    const selectedLink =
+        document.querySelector(
+            `[data-view="${viewName}"]`
+        );
+
+
+    selectedLink?.classList.add(
+        "active"
+    );
+
+
+
+    if (
+        viewName === "products"
+    ) {
+
+        document
+            .getElementById(
+                "productsLink"
+            )
+            ?.classList.add(
+                "active"
+            );
+
+    }
+
+
+    if (
+        viewName === "personal" ||
+        viewName === "orders" ||
+        viewName === "settings"
+    ) {
+
+        document
+            .getElementById(
+                "accountToggle"
+            )
+            ?.classList.add(
+                "active"
+            );
+
+    }
+
+}
+
+
+
+/* ==========================================
+   HASH NAVIGATION
+========================================== */
+
+function loadViewFromHash() {
+
+    let view =
+        window.location.hash
+            .replace(
+                "#",
+                ""
+            );
+
+
+    if (
+        !spaViews[view]
+    ) {
+
+        view =
+            "products";
+
+    }
+
+
+    showView(
+        view
+    );
+
+}
+
+
+window.addEventListener(
+    "hashchange",
+    loadViewFromHash
+);
+
+
+
+/* ==========================================
+   ACCOUNT DROPDOWN
 ========================================== */
 
 const accountToggle =
@@ -1654,11 +2018,6 @@ const accountDropdown =
         "accountDropdown"
     );
 
-const productsLink =
-    document.getElementById(
-        "productsLink"
-    );
-
 
 accountToggle?.addEventListener(
     "click",
@@ -1669,61 +2028,460 @@ accountToggle?.addEventListener(
         event.stopPropagation();
 
 
-        productsLink?.classList.remove(
-            "active"
-        );
+        accountDropdown
+            ?.classList.toggle(
+                "show"
+            );
 
 
-        accountToggle.classList.toggle(
-            "active"
-        );
-
-
-        accountDropdown?.classList.toggle(
-            "show"
-        );
+        accountToggle
+            ?.classList.toggle(
+                "active"
+            );
 
     }
 );
+
 
 
 /* ==========================================
-   LOGOUT
+   ACCOUNT LINKS
 ========================================== */
 
-const logoutButton =
-    document.getElementById(
-        "logoutButton"
+document
+    .querySelectorAll(
+        ".account-dropdown [data-view]"
+    )
+    .forEach(
+        function(link) {
+
+            link.addEventListener(
+                "click",
+                function() {
+
+                    accountDropdown
+                        ?.classList.remove(
+                            "show"
+                        );
+
+                }
+            );
+
+        }
     );
 
 
-logoutButton?.addEventListener(
+
+/* ==========================================
+   PERSONAL INFORMATION
+========================================== */
+
+function renderPersonalInformation() {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    document
+        .getElementById(
+            "personalFullName"
+        )
+        .textContent =
+            currentUser.fullName ||
+            "Customer";
+
+
+    document
+        .getElementById(
+            "personalUsername"
+        )
+        .textContent =
+            currentUser.username ||
+            "-";
+
+
+    document
+        .getElementById(
+            "personalEmail"
+        )
+        .textContent =
+            currentUser.email ||
+            "-";
+
+
+    document
+        .getElementById(
+            "personalRole"
+        )
+        .textContent =
+            currentUser.role ||
+            "customer";
+
+}
+
+
+
+/* ==========================================
+   MY ORDERS
+========================================== */
+
+function renderOrders() {
+
+    const ordersContainer =
+        document.getElementById(
+            "ordersContainer"
+        );
+
+
+    if (!ordersContainer) {
+        return;
+    }
+
+
+    /*
+        Only show orders belonging
+        to the current customer.
+    */
+
+    const customerOrders =
+        orders.filter(
+            function(order) {
+
+                return (
+                    order.customerUsername ===
+                    currentUser.username
+                );
+
+            }
+        );
+
+
+    if (
+        customerOrders.length === 0
+    ) {
+
+        ordersContainer.innerHTML = `
+
+            <div class="no-orders">
+
+                <h3>
+                    No orders yet
+                </h3>
+
+                <p>
+                    Your placed orders will appear here.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    ordersContainer.innerHTML =
+        customerOrders
+            .slice()
+            .reverse()
+            .map(
+                function(order) {
+
+                    const orderDate =
+                        new Date(
+                            order.date
+                        );
+
+
+                    const formattedDate =
+                        orderDate.toLocaleString(
+                            "en-PH",
+                            {
+                                dateStyle:
+                                    "medium",
+
+                                timeStyle:
+                                    "short"
+                            }
+                        );
+
+
+                    return `
+
+                        <div class="order-card">
+
+                            <div class="order-top">
+
+                                <div>
+
+                                    <div class="order-number">
+                                        ${order.orderNumber}
+                                    </div>
+
+                                    <small>
+                                        ${formattedDate}
+                                    </small>
+
+                                </div>
+
+
+                                <span class="order-status">
+                                    ${order.status}
+                                </span>
+
+                            </div>
+
+
+                            <div class="order-details">
+
+
+                                <div class="order-detail">
+
+                                    <span>
+                                        Product
+                                    </span>
+
+                                    <strong>
+                                        ${order.productName}
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="order-detail">
+
+                                    <span>
+                                        Category
+                                    </span>
+
+                                    <strong>
+                                        ${order.category}
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="order-detail">
+
+                                    <span>
+                                        Quantity
+                                    </span>
+
+                                    <strong>
+                                        ${order.quantity}
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="order-detail">
+
+                                    <span>
+                                        Payment Method
+                                    </span>
+
+                                    <strong>
+                                        ${order.paymentMethod}
+                                    </strong>
+
+                                </div>
+
+
+                                ${
+                                    order.color
+                                    ?
+                                    `
+                                        <div class="order-detail">
+
+                                            <span>
+                                                Color
+                                            </span>
+
+                                            <strong>
+                                                ${order.color}
+                                            </strong>
+
+                                        </div>
+                                    `
+                                    :
+                                    ""
+                                }
+
+
+                                ${
+                                    order.size
+                                    ?
+                                    `
+                                        <div class="order-detail">
+
+                                            <span>
+                                                Size
+                                            </span>
+
+                                            <strong>
+                                                ${order.size}
+                                            </strong>
+
+                                        </div>
+                                    `
+                                    :
+                                    ""
+                                }
+
+
+                                ${
+                                    order.scent
+                                    ?
+                                    `
+                                        <div class="order-detail">
+
+                                            <span>
+                                                Scent
+                                            </span>
+
+                                            <strong>
+                                                ${order.scent}
+                                            </strong>
+
+                                        </div>
+                                    `
+                                    :
+                                    ""
+                                }
+
+
+                                <div class="order-detail">
+
+                                    <span>
+                                        Shipping Address
+                                    </span>
+
+                                    <strong>
+                                        ${order.shippingAddress}
+                                    </strong>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="order-total">
+
+                                <span>
+                                    Order Total
+                                </span>
+
+                                <strong>
+                                    ${formatPrice(order.total)}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
+
+
+/* ==========================================
+   SETTINGS
+========================================== */
+
+const viewAddressButton =
+    document.getElementById(
+        "viewAddressButton"
+    );
+
+const passwordButton =
+    document.getElementById(
+        "passwordButton"
+    );
+
+const settingsMessage =
+    document.getElementById(
+        "settingsMessage"
+    );
+
+
+
+viewAddressButton?.addEventListener(
     "click",
     function() {
 
-        localStorage.removeItem(
-            "loveLuxeCurrentUser"
-        );
+        if (
+            !currentUser ||
+            !currentUser.shippingAddress
+        ) {
+
+            settingsMessage.textContent =
+                "No shipping address has been added yet.";
+
+        } else {
+
+            const address =
+                currentUser.shippingAddress;
 
 
-        localStorage.removeItem(
-            "loveLuxeAdminLoggedIn"
-        );
+            const parts = [
+
+                address.houseNumber,
+                address.street,
+                address.barangay,
+                address.city,
+                address.province,
+                address.postalCode
+
+            ].filter(
+                function(part) {
+
+                    return (
+                        part &&
+                        String(part).trim() !== ""
+                    );
+
+                }
+            );
 
 
-        loveLuxeData.currentUser =
-            null;
+            settingsMessage.textContent =
+                parts.length > 0
+                    ? parts.join(", ")
+                    : "No shipping address has been added.";
+
+        }
 
 
-        currentUser =
-            null;
-
-
-        window.location.href =
-            "index.html";
+        settingsMessage.style.display =
+            "block";
 
     }
 );
+
+
+
+passwordButton?.addEventListener(
+    "click",
+    function() {
+
+        settingsMessage.textContent =
+            "Password management can be connected to your account module later.";
+
+        settingsMessage.style.display =
+            "block";
+
+    }
+);
+
 
 
 /* ==========================================
@@ -1773,8 +2531,12 @@ sidebarOverlay?.addEventListener(
 );
 
 
+
 /* ==========================================
    INITIAL DISPLAY
 ========================================== */
 
 displayProducts();
+
+
+loadViewFromHash();
