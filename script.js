@@ -5,13 +5,13 @@
 
 const data = window.LoveLuxeData;
 
-const adminAccount = data.adminAccount;
-
-const customers = data.customers;
+if (!data) {
+    console.error("LoveLuxeData was not loaded.");
+}
 
 
 /* ==========================================
-   MESSAGE FUNCTION
+   COMMON MESSAGE
 ========================================== */
 
 function showMessage(element, message, isError) {
@@ -37,35 +37,45 @@ const loginForm =
     document.getElementById("loginForm");
 
 
-if (loginForm) {
+if (loginForm && data) {
 
     loginForm.addEventListener(
         "submit",
-        function (event) {
+        function(event) {
 
             event.preventDefault();
 
 
+            const usernameInput =
+                document.getElementById("username") ||
+                document.getElementById("loginUsername");
+
+
+            const passwordInput =
+                document.getElementById("password") ||
+                document.getElementById("loginPassword");
+
+
+            const loginMessage =
+                document.getElementById("loginMessage");
+
+
             const username =
-                document.getElementById("username")?.value.trim() ||
-                document.getElementById("loginUsername")?.value.trim() ||
-                "";
+                usernameInput
+                    ? usernameInput.value.trim()
+                    : "";
 
 
             const password =
-                document.getElementById("password")?.value ||
-                document.getElementById("loginPassword")?.value ||
-                "";
-
-
-            const message =
-                document.getElementById("loginMessage");
+                passwordInput
+                    ? passwordInput.value
+                    : "";
 
 
             if (!username || !password) {
 
                 showMessage(
-                    message,
+                    loginMessage,
                     "Please enter your username and password.",
                     true
                 );
@@ -74,28 +84,31 @@ if (loginForm) {
             }
 
 
-            /* ADMIN LOGIN */
+            /* ======================================
+               ADMIN LOGIN
+            ====================================== */
 
             if (
                 username.toLowerCase() ===
-                    adminAccount.username.toLowerCase() &&
+                    data.adminAccount.username.toLowerCase()
+                &&
                 password ===
-                    adminAccount.password
+                    data.adminAccount.password
             ) {
 
                 data.currentUser =
-                    adminAccount;
+                    data.adminAccount;
 
 
                 showMessage(
-                    message,
+                    loginMessage,
                     "Admin login successful!",
                     false
                 );
 
 
                 setTimeout(
-                    function () {
+                    function() {
 
                         window.location.href =
                             "admin.html";
@@ -109,15 +122,18 @@ if (loginForm) {
             }
 
 
-            /* CUSTOMER LOGIN */
+            /* ======================================
+               CUSTOMER LOGIN
+            ====================================== */
 
             const customer =
-                customers.find(
-                    function (user) {
+                data.customers.find(
+                    function(user) {
 
                         return (
                             user.username.toLowerCase() ===
-                                username.toLowerCase() &&
+                                username.toLowerCase()
+                            &&
                             user.password ===
                                 password
                         );
@@ -133,14 +149,14 @@ if (loginForm) {
 
 
                 showMessage(
-                    message,
+                    loginMessage,
                     "Login successful!",
                     false
                 );
 
 
                 setTimeout(
-                    function () {
+                    function() {
 
                         window.location.href =
                             "catalog.html";
@@ -154,8 +170,12 @@ if (loginForm) {
             }
 
 
+            /* ======================================
+               INVALID LOGIN
+            ====================================== */
+
             showMessage(
-                message,
+                loginMessage,
                 "Invalid username or password.",
                 true
             );
@@ -173,43 +193,41 @@ const signupForm =
     document.getElementById("signupForm");
 
 
-if (signupForm) {
+if (signupForm && data) {
 
     signupForm.addEventListener(
         "submit",
-        function (event) {
+        function(event) {
 
             event.preventDefault();
 
 
             const fullName =
-                document.getElementById(
-                    "fullName"
-                )?.value.trim() || "";
+                document.getElementById("fullName")
+                    ?.value.trim()
+                || "";
 
 
             const username =
-                document.getElementById(
-                    "signupUsername"
-                )?.value.trim() || "";
+                document.getElementById("signupUsername")
+                    ?.value.trim()
+                || "";
 
 
             const password =
-                document.getElementById(
-                    "signupPassword"
-                )?.value || "";
+                document.getElementById("signupPassword")
+                    ?.value
+                || "";
 
 
             const confirmPassword =
-                document.getElementById(
-                    "confirmPassword"
-                )?.value || "";
+                document.getElementById("confirmPassword")
+                    ?.value
+                || "";
 
 
-            const message =
-                document.getElementById(
-                    "signupMessage"
-                );
+            const signupMessage =
+                document.getElementById("signupMessage");
 
 
             if (
@@ -220,7 +238,7 @@ if (signupForm) {
             ) {
 
                 showMessage(
-                    message,
+                    signupMessage,
                     "Please complete all fields.",
                     true
                 );
@@ -235,7 +253,7 @@ if (signupForm) {
             ) {
 
                 showMessage(
-                    message,
+                    signupMessage,
                     "This username is not available.",
                     true
                 );
@@ -250,7 +268,7 @@ if (signupForm) {
             ) {
 
                 showMessage(
-                    message,
+                    signupMessage,
                     "Passwords do not match.",
                     true
                 );
@@ -259,9 +277,9 @@ if (signupForm) {
             }
 
 
-            const exists =
-                customers.some(
-                    function (customer) {
+            const existingCustomer =
+                data.customers.find(
+                    function(customer) {
 
                         return (
                             customer.username.toLowerCase() ===
@@ -272,10 +290,10 @@ if (signupForm) {
                 );
 
 
-            if (exists) {
+            if (existingCustomer) {
 
                 showMessage(
-                    message,
+                    signupMessage,
                     "Username already exists.",
                     true
                 );
@@ -284,9 +302,11 @@ if (signupForm) {
             }
 
 
-            /* ADD CUSTOMER TO ARRAY */
+            /* ======================================
+               CREATE CUSTOMER
+            ====================================== */
 
-            customers.push({
+            const newCustomer = {
 
                 fullName:
                     fullName,
@@ -305,31 +325,25 @@ if (signupForm) {
 
                 shippingAddress: {
 
-                    houseNumber:
-                        "",
-
-                    street:
-                        "",
-
-                    barangay:
-                        "",
-
-                    city:
-                        "",
-
-                    province:
-                        "",
-
-                    postalCode:
-                        ""
+                    houseNumber: "",
+                    street: "",
+                    barangay: "",
+                    city: "",
+                    province: "",
+                    postalCode: ""
 
                 }
 
-            });
+            };
+
+
+            data.customers.push(
+                newCustomer
+            );
 
 
             showMessage(
-                message,
+                signupMessage,
                 "Account created successfully for this session!",
                 false
             );
@@ -339,7 +353,7 @@ if (signupForm) {
 
 
             setTimeout(
-                function () {
+                function() {
 
                     window.location.href =
                         "index.html";
@@ -359,43 +373,45 @@ if (signupForm) {
 
 function resetPassword() {
 
+    if (!data) {
+        return false;
+    }
+
+
     const username =
-        document.getElementById(
-            "forgotUsername"
-        )?.value.trim() ||
-        document.getElementById(
-            "resetUsername"
-        )?.value.trim() ||
+        document.getElementById("forgotUsername")
+            ?.value.trim()
+        ||
+        document.getElementById("resetUsername")
+            ?.value.trim()
+        ||
         "";
 
 
     const newPassword =
-        document.getElementById(
-            "forgotNewPassword"
-        )?.value ||
-        document.getElementById(
-            "newPassword"
-        )?.value ||
+        document.getElementById("forgotNewPassword")
+            ?.value
+        ||
+        document.getElementById("newPassword")
+            ?.value
+        ||
         "";
 
 
     const confirmPassword =
-        document.getElementById(
-            "forgotConfirmPassword"
-        )?.value ||
-        document.getElementById(
-            "confirmPassword"
-        )?.value ||
+        document.getElementById("forgotConfirmPassword")
+            ?.value
+        ||
+        document.getElementById("confirmPassword")
+            ?.value
+        ||
         "";
 
 
     const message =
-        document.getElementById(
-            "forgotMessage"
-        ) ||
-        document.getElementById(
-            "resetMessage"
-        );
+        document.getElementById("forgotMessage")
+        ||
+        document.getElementById("resetMessage");
 
 
     if (
@@ -416,7 +432,7 @@ function resetPassword() {
 
     if (
         username.toLowerCase() ===
-        adminAccount.username.toLowerCase()
+        data.adminAccount.username.toLowerCase()
     ) {
 
         showMessage(
@@ -445,8 +461,8 @@ function resetPassword() {
 
 
     const customer =
-        customers.find(
-            function (user) {
+        data.customers.find(
+            function(user) {
 
                 return (
                     user.username.toLowerCase() ===
