@@ -1164,3 +1164,21 @@ body {
     }
 
 }
+/* ==========================================
+   LOGOUT BUTTON
+========================================== */
+
+.logout-link {
+    margin-top: 10px;
+    color: #bdbdbd;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    text-align: left;
+    font-family: inherit;
+}
+
+.logout-link:hover {
+    color: white;
+    background: #1d1d1d;
+}
