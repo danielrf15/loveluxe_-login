@@ -1,516 +1,484 @@
 /* ==========================================
-   LOVE LUXE BY EA
-   LOGIN + SIGNUP
-   ARRAY ONLY
+   LOVE LUXE AUTHENTICATION
+   ARRAY-ONLY VERSION
 ========================================== */
+
+const data = window.LoveLuxeData;
+
+const adminAccount = data.adminAccount;
+
+const customers = data.customers;
+
+
+/* ==========================================
+   MESSAGE FUNCTION
+========================================== */
+
+function showMessage(element, message, isError) {
+
+    if (!element) {
+        return;
+    }
+
+    element.textContent = message;
+
+    element.style.color =
+        isError
+            ? "#c0392b"
+            : "#16834a";
+}
 
 
 /* ==========================================
    LOGIN
 ========================================== */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+const loginForm =
+    document.getElementById("loginForm");
 
 
-        const loginForm =
-            document.getElementById(
-                "loginForm"
+if (loginForm) {
+
+    loginForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const username =
+                document.getElementById("username")?.value.trim() ||
+                document.getElementById("loginUsername")?.value.trim() ||
+                "";
+
+
+            const password =
+                document.getElementById("password")?.value ||
+                document.getElementById("loginPassword")?.value ||
+                "";
+
+
+            const message =
+                document.getElementById("loginMessage");
+
+
+            if (!username || !password) {
+
+                showMessage(
+                    message,
+                    "Please enter your username and password.",
+                    true
+                );
+
+                return;
+            }
+
+
+            /* ADMIN LOGIN */
+
+            if (
+                username.toLowerCase() ===
+                    adminAccount.username.toLowerCase() &&
+                password ===
+                    adminAccount.password
+            ) {
+
+                data.currentUser =
+                    adminAccount;
+
+
+                showMessage(
+                    message,
+                    "Admin login successful!",
+                    false
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "admin.html";
+
+                    },
+                    400
+                );
+
+
+                return;
+            }
+
+
+            /* CUSTOMER LOGIN */
+
+            const customer =
+                customers.find(
+                    function (user) {
+
+                        return (
+                            user.username.toLowerCase() ===
+                                username.toLowerCase() &&
+                            user.password ===
+                                password
+                        );
+
+                    }
+                );
+
+
+            if (customer) {
+
+                data.currentUser =
+                    customer;
+
+
+                showMessage(
+                    message,
+                    "Login successful!",
+                    false
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "catalog.html";
+
+                    },
+                    400
+                );
+
+
+                return;
+            }
+
+
+            showMessage(
+                message,
+                "Invalid username or password.",
+                true
             );
 
-
-        if (!loginForm) {
-            return;
         }
-
-
-        loginForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-
-                const usernameInput =
-                    document.getElementById(
-                        "username"
-                    );
-
-
-                const passwordInput =
-                    document.getElementById(
-                        "password"
-                    );
-
-
-                const loginMessage =
-                    document.getElementById(
-                        "loginMessage"
-                    );
-
-
-                if (
-                    !usernameInput ||
-                    !passwordInput
-                ) {
-
-                    return;
-
-                }
-
-
-                const username =
-                    usernameInput.value.trim();
-
-
-                const password =
-                    passwordInput.value;
-
-
-                /* =========================
-                   CLEAR MESSAGE
-                ========================= */
-
-                if (loginMessage) {
-
-                    loginMessage.textContent =
-                        "";
-
-                }
-
-
-                /* =========================
-                   EMPTY FIELDS
-                ========================= */
-
-                if (
-                    username === "" ||
-                    password === ""
-                ) {
-
-                    if (loginMessage) {
-
-                        loginMessage.textContent =
-                            "Please enter your username and password.";
-
-                        loginMessage.style.color =
-                            "red";
-
-                    }
-
-                    return;
-
-                }
-
-
-                /* =========================
-                   ADMIN LOGIN
-                ========================= */
-
-                if (
-                    username ===
-                        adminAccount.username &&
-                    password ===
-                        adminAccount.password
-                ) {
-
-
-                    currentUser =
-                        adminAccount;
-
-
-                    if (loginMessage) {
-
-                        loginMessage.textContent =
-                            "Login successful. Opening admin dashboard...";
-
-                        loginMessage.style.color =
-                            "green";
-
-                    }
-
-
-                    setTimeout(
-                        function () {
-
-                            window.location.href =
-                                "admin.html";
-
-                        },
-                        300
-                    );
-
-
-                    return;
-
-                }
-
-
-                /* =========================
-                   CUSTOMER LOGIN
-                ========================= */
-
-                const customer =
-                    customers.find(
-                        function (account) {
-
-                            return (
-                                account.username ===
-                                    username &&
-                                account.password ===
-                                    password
-                            );
-
-                        }
-                    );
-
-
-                if (customer) {
-
-
-                    currentUser =
-                        customer;
-
-
-                    if (loginMessage) {
-
-                        loginMessage.textContent =
-                            "Login successful. Opening shop...";
-
-                        loginMessage.style.color =
-                            "green";
-
-                    }
-
-
-                    setTimeout(
-                        function () {
-
-                            window.location.href =
-                                "catalog.html";
-
-                        },
-                        300
-                    );
-
-
-                    return;
-
-                }
-
-
-                /* =========================
-                   INVALID LOGIN
-                ========================= */
-
-                if (loginMessage) {
-
-                    loginMessage.textContent =
-                        "Invalid username or password.";
-
-                    loginMessage.style.color =
-                        "red";
-
-                }
-
-            }
-        );
-
-    }
-);
+    );
+}
 
 
 /* ==========================================
    SIGN UP
 ========================================== */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+const signupForm =
+    document.getElementById("signupForm");
 
 
-        const signupForm =
-            document.getElementById(
-                "signupForm"
+if (signupForm) {
+
+    signupForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const fullName =
+                document.getElementById(
+                    "fullName"
+                )?.value.trim() || "";
+
+
+            const username =
+                document.getElementById(
+                    "signupUsername"
+                )?.value.trim() || "";
+
+
+            const password =
+                document.getElementById(
+                    "signupPassword"
+                )?.value || "";
+
+
+            const confirmPassword =
+                document.getElementById(
+                    "confirmPassword"
+                )?.value || "";
+
+
+            const message =
+                document.getElementById(
+                    "signupMessage"
+                );
+
+
+            if (
+                !fullName ||
+                !username ||
+                !password ||
+                !confirmPassword
+            ) {
+
+                showMessage(
+                    message,
+                    "Please complete all fields.",
+                    true
+                );
+
+                return;
+            }
+
+
+            if (
+                username.toLowerCase() ===
+                "admin"
+            ) {
+
+                showMessage(
+                    message,
+                    "This username is not available.",
+                    true
+                );
+
+                return;
+            }
+
+
+            if (
+                password !==
+                confirmPassword
+            ) {
+
+                showMessage(
+                    message,
+                    "Passwords do not match.",
+                    true
+                );
+
+                return;
+            }
+
+
+            const exists =
+                customers.some(
+                    function (customer) {
+
+                        return (
+                            customer.username.toLowerCase() ===
+                            username.toLowerCase()
+                        );
+
+                    }
+                );
+
+
+            if (exists) {
+
+                showMessage(
+                    message,
+                    "Username already exists.",
+                    true
+                );
+
+                return;
+            }
+
+
+            /* ADD CUSTOMER TO ARRAY */
+
+            customers.push({
+
+                fullName:
+                    fullName,
+
+                username:
+                    username,
+
+                password:
+                    password,
+
+                phone:
+                    "",
+
+                role:
+                    "customer",
+
+                shippingAddress: {
+
+                    houseNumber:
+                        "",
+
+                    street:
+                        "",
+
+                    barangay:
+                        "",
+
+                    city:
+                        "",
+
+                    province:
+                        "",
+
+                    postalCode:
+                        ""
+
+                }
+
+            });
+
+
+            showMessage(
+                message,
+                "Account created successfully for this session!",
+                false
             );
 
 
-        if (!signupForm) {
-            return;
+            signupForm.reset();
+
+
+            setTimeout(
+                function () {
+
+                    window.location.href =
+                        "index.html";
+
+                },
+                800
+            );
+
         }
-
-
-        signupForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-
-                const fullNameInput =
-                    document.getElementById(
-                        "fullName"
-                    );
-
-
-                const usernameInput =
-                    document.getElementById(
-                        "signupUsername"
-                    );
-
-
-                const passwordInput =
-                    document.getElementById(
-                        "signupPassword"
-                    );
-
-
-                const confirmPasswordInput =
-                    document.getElementById(
-                        "confirmPassword"
-                    );
-
-
-                const signupMessage =
-                    document.getElementById(
-                        "signupMessage"
-                    );
-
-
-                if (
-                    !fullNameInput ||
-                    !usernameInput ||
-                    !passwordInput ||
-                    !confirmPasswordInput
-                ) {
-
-                    return;
-
-                }
-
-
-                const fullName =
-                    fullNameInput.value.trim();
-
-
-                const username =
-                    usernameInput.value.trim();
-
-
-                const password =
-                    passwordInput.value;
-
-
-                const confirmPassword =
-                    confirmPasswordInput.value;
-
-
-                /* =========================
-                   EMPTY FIELDS
-                ========================= */
-
-                if (
-                    fullName === "" ||
-                    username === "" ||
-                    password === "" ||
-                    confirmPassword === ""
-                ) {
-
-                    showSignupMessage(
-                        signupMessage,
-                        "Please complete all fields.",
-                        true
-                    );
-
-                    return;
-
-                }
-
-
-                /* =========================
-                   ADMIN USERNAME
-                ========================= */
-
-                if (
-                    username.toLowerCase() ===
-                    "admin"
-                ) {
-
-                    showSignupMessage(
-                        signupMessage,
-                        "This username is not available.",
-                        true
-                    );
-
-                    return;
-
-                }
-
-
-                /* =========================
-                   PASSWORD CHECK
-                ========================= */
-
-                if (
-                    password !==
-                    confirmPassword
-                ) {
-
-                    showSignupMessage(
-                        signupMessage,
-                        "Passwords do not match.",
-                        true
-                    );
-
-                    return;
-
-                }
-
-
-                /* =========================
-                   DUPLICATE USERNAME
-                ========================= */
-
-                const existingCustomer =
-                    customers.find(
-                        function (customer) {
-
-                            return (
-                                customer.username
-                                    .toLowerCase() ===
-                                username.toLowerCase()
-                            );
-
-                        }
-                    );
-
-
-                if (existingCustomer) {
-
-                    showSignupMessage(
-                        signupMessage,
-                        "Username already exists.",
-                        true
-                    );
-
-                    return;
-
-                }
-
-
-                /* =========================
-                   CREATE CUSTOMER
-                ========================= */
-
-                const newCustomer = {
-
-                    fullName:
-                        fullName,
-
-                    username:
-                        username,
-
-                    password:
-                        password,
-
-                    phone:
-                        "",
-
-                    shippingAddress: {
-
-                        houseNumber:
-                            "",
-
-                        street:
-                            "",
-
-                        barangay:
-                            "",
-
-                        city:
-                            "",
-
-                        province:
-                            "",
-
-                        postalCode:
-                            ""
-
-                    },
-
-                    role:
-                        "customer"
-
-                };
-
-
-                customers.push(
-                    newCustomer
-                );
-
-
-                showSignupMessage(
-                    signupMessage,
-                    "Account created successfully!",
-                    false
-                );
-
-
-                signupForm.reset();
-
-
-                /* =========================
-                   IMPORTANT
-                   ARRAY-ONLY SYSTEM
-                ========================= */
-
-                setTimeout(
-                    function () {
-
-                        window.location.href =
-                            "index.html";
-
-                    },
-                    1000
+    );
+}
+
+
+/* ==========================================
+   FORGOT PASSWORD
+========================================== */
+
+function resetPassword() {
+
+    const username =
+        document.getElementById(
+            "forgotUsername"
+        )?.value.trim() ||
+        document.getElementById(
+            "resetUsername"
+        )?.value.trim() ||
+        "";
+
+
+    const newPassword =
+        document.getElementById(
+            "forgotNewPassword"
+        )?.value ||
+        document.getElementById(
+            "newPassword"
+        )?.value ||
+        "";
+
+
+    const confirmPassword =
+        document.getElementById(
+            "forgotConfirmPassword"
+        )?.value ||
+        document.getElementById(
+            "confirmPassword"
+        )?.value ||
+        "";
+
+
+    const message =
+        document.getElementById(
+            "forgotMessage"
+        ) ||
+        document.getElementById(
+            "resetMessage"
+        );
+
+
+    if (
+        !username ||
+        !newPassword ||
+        !confirmPassword
+    ) {
+
+        showMessage(
+            message,
+            "Please complete all fields.",
+            true
+        );
+
+        return false;
+    }
+
+
+    if (
+        username.toLowerCase() ===
+        adminAccount.username.toLowerCase()
+    ) {
+
+        showMessage(
+            message,
+            "Admin password cannot be reset here.",
+            true
+        );
+
+        return false;
+    }
+
+
+    if (
+        newPassword !==
+        confirmPassword
+    ) {
+
+        showMessage(
+            message,
+            "Passwords do not match.",
+            true
+        );
+
+        return false;
+    }
+
+
+    const customer =
+        customers.find(
+            function (user) {
+
+                return (
+                    user.username.toLowerCase() ===
+                    username.toLowerCase()
                 );
 
             }
         );
 
-    }
-);
 
+    if (!customer) {
 
-/* ==========================================
-   SIGNUP MESSAGE
-========================================== */
+        showMessage(
+            message,
+            "Username not found.",
+            true
+        );
 
-function showSignupMessage(
-    element,
-    message,
-    isError
-) {
-
-    if (!element) {
-        return;
+        return false;
     }
 
 
-    element.textContent =
-        message;
+    customer.password =
+        newPassword;
 
 
-    if (isError) {
+    showMessage(
+        message,
+        "Password changed successfully for this session!",
+        false
+    );
 
-        element.style.color =
-            "red";
 
-    } else {
-
-        element.style.color =
-            "green";
-
-    }
-
+    return false;
 }
