@@ -8,486 +8,240 @@
    SHARED DATA
 ========================================== */
 
-const loveLuxeData =
-    window.LoveLuxeData;
+const loveLuxeData = window.LoveLuxeData;
 
+const customers = loveLuxeData.customers;
 
-const customers =
-    loveLuxeData.customers;
-
-
-const orders =
-    loveLuxeData.orders;
-
-
-/*
-    Array-only project.
-
-    No localStorage.
-    No sessionStorage.
-    No cookies.
-*/
-
-
-let currentUser =
-    customers[0];
+const orders = loveLuxeData.orders;
 
 
 /* ==========================================
-   PRODUCTS
+   CURRENT CUSTOMER
+========================================== */
+
+let currentUser = customers[0];
+
+
+/* ==========================================
+   PRODUCT ARRAY
 ========================================== */
 
 const products = [
 
-    /* ======================================
-       CLOTHING
-    ====================================== */
-
     {
-        id: 1,
-
+        id: "LL-001",
         name: "Sophia Skirt",
-
         category: "Clothing",
-
         price: 790,
-
-        image:
-            "images/sophia-skirt.jpg",
-
+        image: "images/sophia-skirt.jpg",
         images: [
             "images/sophia-skirt.jpg",
             "images/sophia-skirt-2.jpg"
         ],
-
-        colors: [
-            "Black and White Polka",
-            "Light Blue",
-            "Gray",
-            "Black"
-        ],
-
-        sizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "2XL",
-            "3XL"
-        ],
-
-        description:
-            "A simple and stylish skirt that is easy to pair with different outfits."
+        description: "A stylish and comfortable skirt for everyday wear.",
+        colors: ["Black", "White", "Brown"],
+        sizes: ["Small", "Medium", "Large"]
     },
 
-
     {
-        id: 2,
-
+        id: "LL-002",
         name: "Nov-Mardi T-Shirt",
-
         category: "Clothing",
-
         price: 450,
-
-        image:
-            "images/nov-mardi-tshirt.jpg",
-
+        image: "images/nov-mardi-tshirt.jpg",
         images: [
             "images/nov-mardi-tshirt.jpg",
             "images/nov-mardi-tshirt-2.jpg"
         ],
-
-        colors: [
-            "White",
-            "Pink",
-            "Black"
-        ],
-
-        sizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "2XL",
-            "3XL"
-        ],
-
-        description:
-            "A comfortable everyday t-shirt with a simple and casual style."
+        description: "A simple and comfortable shirt that is easy to style.",
+        colors: ["Black", "White", "Gray"],
+        sizes: ["Small", "Medium", "Large"]
     },
 
-
     {
-        id: 3,
-
+        id: "LL-003",
         name: "Basic Chic01 Terno",
-
         category: "Clothing",
-
         price: 950,
-
-        image:
-            "images/basic-chic01-terno.jpg",
-
+        image: "images/basic-chic01-terno.jpg",
         images: [
             "images/basic-chic01-terno.jpg",
             "images/basic-chic01-terno-2.jpg"
         ],
-
-        sizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "2XL",
-            "3XL"
-        ],
-
-        description:
-            "A stylish terno set designed for a simple and comfortable look."
+        description: "A simple matching terno set with a clean and stylish look.",
+        colors: ["Black", "Beige", "Brown"],
+        sizes: ["Small", "Medium", "Large"]
     },
 
-
     {
-        id: 4,
-
+        id: "LL-004",
         name: "Sami T-Shirt",
-
         category: "Clothing",
-
         price: 790,
-
-        image:
-            "images/sami-tshirt.jpg",
-
+        image: "images/sami-tshirt.jpg",
         images: [
             "images/sami-tshirt.jpg",
             "images/sami-tshirt-2.jpg"
         ],
-
-        colors: [
-            "Brown",
-            "Tan",
-            "Pink",
-            "Black",
-            "Light Blue"
-        ],
-
-        description:
-            "A casual t-shirt that can be worn for everyday activities."
+        description: "A casual shirt designed for comfortable everyday use.",
+        colors: ["Black", "White", "Pink"],
+        sizes: ["Small", "Medium", "Large"]
     },
 
-
-    /* ======================================
-       BODY CARE
-    ====================================== */
-
     {
-        id: 5,
-
+        id: "LL-005",
         name: "Alada Soap",
-
         category: "Body Care",
-
         price: 350,
-
-        image:
-            "images/alada-soap.jpg",
-
+        image: "images/alada-soap.jpg",
         images: [
             "images/alada-soap.jpg",
             "images/alada-soap-2.jpg"
         ],
-
-        description:
-            "A body care soap for a simple everyday skincare routine."
+        description: "A body care soap made for a refreshing daily routine.",
+        scents: ["Original"]
     },
 
-
     {
-        id: 6,
-
+        id: "LL-006",
         name: "Dewy Gluta Soap",
-
         category: "Body Care",
-
         price: 199,
-
-        image:
-            "images/dewy-gluta-soap.jpg",
-
+        image: "images/dewy-gluta-soap.jpg",
         images: [
             "images/dewy-gluta-soap.jpg",
             "images/dewy-gluta-soap-2.jpg"
         ],
-
-        description:
-            "A cleansing soap made for everyday personal care."
+        description: "A body care soap for a simple daily skincare routine.",
+        scents: ["Original"]
     },
 
-
     {
-        id: 7,
-
+        id: "LL-007",
         name: "Serene Skin Soap",
-
         category: "Body Care",
-
         price: 299,
-
-        image:
-            "images/serene-skin-soap.jpg",
-
-        description:
-            "A gentle body care product for everyday use."
+        image: "images/serene-skin-soap.jpg",
+        description: "A gentle soap for everyday body care.",
+        scents: ["Original"]
     },
 
-
     {
-        id: 8,
-
+        id: "LL-008",
         name: "Vitamin E Whitening Cream",
-
         category: "Body Care",
-
         price: 180,
-
-        image:
-            "images/vitamin-e-whitening-cream.jpg",
-
-        description:
-            "A moisturizing cream for an everyday skincare routine."
+        image: "images/vitamin-e-whitening-cream.jpg",
+        description: "A Vitamin E cream for a simple skincare routine.",
+        scents: ["Original"]
     },
 
-
-    /* ======================================
-       BAGS
-    ====================================== */
-
     {
-        id: 9,
-
+        id: "LL-009",
         name: "Mini Enzo",
-
         category: "Bags",
-
         price: 3590,
-
-        image:
-            "images/mini-enzo.jpg",
-
+        image: "images/mini-enzo.jpg",
         images: [
             "images/mini-enzo.jpg",
             "images/mini-enzo-2.jpg"
         ],
-
-        colors: [
-            "Black",
-            "Green",
-            "Red",
-            "Blue"
-        ],
-
-        description:
-            "A compact and stylish bag that works well for everyday use."
+        description: "A compact and stylish bag suitable for everyday use.",
+        colors: ["Black", "Brown", "Beige"]
     },
 
-
     {
-        id: 10,
-
+        id: "LL-010",
         name: "Mini Bucket Bag",
-
         category: "Bags",
-
         price: 2090,
-
-        image:
-            "images/mini-bucket-bag.jpg",
-
+        image: "images/mini-bucket-bag.jpg",
         images: [
             "images/mini-bucket-bag.jpg",
             "images/mini-bucket-bag-2.jpg"
         ],
-
-        colors: [
-            "Dark Blue",
-            "Grayish Blue",
-            "Blue",
-            "Blue Stripes"
-        ],
-
-        description:
-            "A small bucket-style bag with a simple and fashionable design."
+        description: "A practical bucket bag with a simple and stylish design.",
+        colors: ["Black", "Brown", "Cream"]
     },
 
-
     {
-        id: 11,
-
+        id: "LL-011",
         name: "Anytime Medium",
-
         category: "Bags",
-
         price: 2890,
-
-        image:
-            "images/anytime-medium.jpg",
-
+        image: "images/anytime-medium.jpg",
         images: [
             "images/anytime-medium.jpg",
             "images/anytime-medium-2.jpg"
         ],
-
-        colors: [
-            "Black",
-            "Tantaupe",
-            "Tantaupe Two",
-            "White",
-            "Clay Two"
-        ],
-
-        description:
-            "A medium-sized everyday bag with enough space for your essentials."
+        description: "A medium-sized bag made for everyday activities.",
+        colors: ["Black", "Brown", "Beige"]
     },
 
-
     {
-        id: 12,
-
+        id: "LL-012",
         name: "Emilio Barrel",
-
         category: "Bags",
-
         price: 3590,
-
-        image:
-            "images/emilio-barrel.jpg",
-
+        image: "images/emilio-barrel.jpg",
         images: [
             "images/emilio-barrel.jpg",
             "images/emilio-barrel-2.jpg"
         ],
-
-        colors: [
-            "Dark Brown",
-            "Red",
-            "Green",
-            "Black"
-        ],
-
-        description:
-            "A barrel-style bag with a clean and modern appearance."
+        description: "A stylish barrel-shaped bag for casual and daily use.",
+        colors: ["Black", "Brown", "Cream"]
     },
 
-
-    /* ======================================
-       PERFUME
-    ====================================== */
-
     {
-        id: 13,
-
+        id: "LL-013",
         name: "Victoria's Secret Perfume",
-
         category: "Perfume",
-
         price: 700,
-
-        image:
-            "images/victorias-secret-perfume.jpg",
-
+        image: "images/victorias-secret-perfume.jpg",
         images: [
             "images/victorias-secret-perfume.jpg",
             "images/victorias-secret-perfume-2.jpg"
         ],
-
-        scents: [
-            "Bare Vanilla",
-            "Aqua Kiss",
-            "Vanilla Lace",
-            "Midnight Bloom",
-            "Love Spell",
-            "Pure Seduction",
-            "Velvet Petals"
-        ],
-
-        description:
-            "A fragrance option for everyday wear."
+        description: "A sweet and elegant fragrance for everyday wear.",
+        scents: ["Original"]
     },
 
-
     {
-        id: 14,
-
+        id: "LL-014",
         name: "Bath & Body Works Perfume",
-
         category: "Perfume",
-
         price: 600,
-
-        image:
-            "images/bath-body-works-perfume.jpg",
-
-        scents: [
-            "Pure Wonder",
-            "Hello Beautiful",
-            "A Thousand Wishes",
-            "You're the One",
-            "Vanilla Ease"
-        ],
-
-        description:
-            "A fragrance designed for a fresh everyday scent."
+        image: "images/bath-body-works-perfume.jpg",
+        description: "A pleasant fragrance suitable for everyday use.",
+        scents: ["Original"]
     },
 
-
     {
-        id: 15,
-
+        id: "LL-015",
         name: "Smart Collection Perfume",
-
         category: "Perfume",
-
         price: 350,
-
-        image:
-            "images/smart-collection-perfume.jpg",
-
-        scents: [
-            "Chanel N'5"
-        ],
-
-        description:
-            "An affordable fragrance option for everyday use."
+        image: "images/smart-collection-perfume.jpg",
+        description: "A budget-friendly fragrance option for daily use.",
+        scents: ["Original"]
     },
 
-
     {
-        id: 16,
-
+        id: "LL-016",
         name: "Lattafa YARA",
-
         category: "Perfume",
-
         price: 390,
-
-        image:
-            "images/lattafa-yara.jpg",
-
-        description:
-            "A popular fragrance choice with a soft and pleasant scent."
+        image: "images/lattafa-yara.jpg",
+        description: "A sweet and elegant perfume for everyday use.",
+        scents: ["Original"]
     }
 
 ];
 
 
 /* ==========================================
-   VARIABLES
+   SELECTED PRODUCT
 ========================================== */
-
-let selectedCategory = "All";
 
 let selectedProduct = null;
 
@@ -501,123 +255,103 @@ let selectedScent = "";
 
 
 /* ==========================================
-   ELEMENTS
+   DOM ELEMENTS
 ========================================== */
 
 const productGrid =
-    document.getElementById(
-        "productGrid"
-    );
-
+    document.getElementById("productGrid");
 
 const productCount =
-    document.getElementById(
-        "productCount"
-    );
-
-
-const searchInput =
-    document.getElementById(
-        "searchInput"
-    );
-
+    document.getElementById("productCount");
 
 const noProducts =
-    document.getElementById(
-        "noProducts"
-    );
+    document.getElementById("noProducts");
 
+const searchInput =
+    document.getElementById("searchInput");
 
 const filterButtons =
-    document.querySelectorAll(
-        ".filter-button"
-    );
-
+    document.querySelectorAll(".filter-button");
 
 const customerName =
-    document.getElementById(
-        "customerName"
-    );
-
+    document.getElementById("customerName");
 
 const checkoutModal =
-    document.getElementById(
-        "checkoutModal"
-    );
+    document.getElementById("checkoutModal");
 
+const checkoutImage =
+    document.getElementById("checkoutImage");
 
-const checkoutProductImage =
-    document.getElementById(
-        "checkoutProductImage"
-    );
+const checkoutThumbnails =
+    document.getElementById("checkoutThumbnails");
 
+const checkoutName =
+    document.getElementById("checkoutName");
 
-const checkoutProductName =
-    document.getElementById(
-        "checkoutProductName"
-    );
+const checkoutCategory =
+    document.getElementById("checkoutCategory");
 
+const checkoutDescription =
+    document.getElementById("checkoutDescription");
 
-const checkoutProductCategory =
-    document.getElementById(
-        "checkoutProductCategory"
-    );
-
-
-const checkoutProductPrice =
-    document.getElementById(
-        "checkoutProductPrice"
-    );
-
+const checkoutPrice =
+    document.getElementById("checkoutPrice");
 
 const checkoutTotal =
-    document.getElementById(
-        "checkoutTotal"
-    );
+    document.getElementById("checkoutTotal");
 
-
-const quantityInput =
-    document.getElementById(
-        "quantityInput"
-    );
-
+const checkoutQuantity =
+    document.getElementById("checkoutQuantity");
 
 const productOptions =
-    document.getElementById(
-        "productOptions"
-    );
+    document.getElementById("productOptions");
 
+const checkoutAddress =
+    document.getElementById("checkoutAddress");
 
 const checkoutMessage =
-    document.getElementById(
-        "checkoutMessage"
-    );
-
+    document.getElementById("checkoutMessage");
 
 const paymentMethod =
-    document.getElementById(
-        "paymentMethod"
-    );
+    document.getElementById("paymentMethod");
+
+const closeCheckout =
+    document.getElementById("closeCheckout");
+
+const decreaseQuantity =
+    document.getElementById("decreaseQuantity");
+
+const increaseQuantity =
+    document.getElementById("increaseQuantity");
+
+const placeOrderButton =
+    document.getElementById("placeOrderButton");
+
+const accountToggle =
+    document.getElementById("accountToggle");
+
+const accountDropdown =
+    document.getElementById("accountDropdown");
+
+const productsLink =
+    document.getElementById("productsLink");
+
+const shopSidebar =
+    document.getElementById("shopSidebar");
+
+const sidebarOverlay =
+    document.getElementById("sidebarOverlay");
 
 
 /* ==========================================
-   CUSTOMER NAME
+   CURRENT CATEGORY
 ========================================== */
 
-if (
-    customerName &&
-    currentUser
-) {
-
-    customerName.textContent =
-        currentUser.fullName ||
-        "Customer";
-
-}
+let selectedCategory = "All";
 
 
 /* ==========================================
-   PRICE FORMAT
+   FORMAT PRICE
 ========================================== */
 
 function formatPrice(price) {
@@ -640,41 +374,38 @@ function formatPrice(price) {
 
 function displayProducts() {
 
-    const searchText =
+    if (!productGrid) {
+        return;
+    }
+
+    const searchTerm =
         searchInput
             ? searchInput.value
-                .toLowerCase()
                 .trim()
+                .toLowerCase()
             : "";
 
-
-    const filteredProducts =
+    let filteredProducts =
         products.filter(
             function(product) {
 
                 const categoryMatch =
                     selectedCategory === "All" ||
-                    product.category ===
-                    selectedCategory;
-
+                    product.category === selectedCategory;
 
                 const searchMatch =
                     product.name
                         .toLowerCase()
-                        .includes(searchText) ||
+                        .includes(searchTerm);
 
-                    product.category
-                        .toLowerCase()
-                        .includes(searchText);
-
-
-                return (
-                    categoryMatch &&
-                    searchMatch
-                );
+                return categoryMatch &&
+                    searchMatch;
 
             }
         );
+
+
+    productGrid.innerHTML = "";
 
 
     if (productCount) {
@@ -687,114 +418,135 @@ function displayProducts() {
     }
 
 
-    if (
-        filteredProducts.length === 0
-    ) {
+    if (filteredProducts.length === 0) {
 
-        productGrid.innerHTML = "";
-
-        noProducts.style.display =
-            "block";
+        if (noProducts) {
+            noProducts.style.display = "block";
+        }
 
         return;
 
     }
 
 
-    noProducts.style.display =
-        "none";
+    if (noProducts) {
+        noProducts.style.display = "none";
+    }
 
 
-    productGrid.innerHTML =
-        filteredProducts.map(
-            function(product) {
+    filteredProducts.forEach(
+        function(product) {
 
-                return `
+            const card =
+                document.createElement("article");
 
-                    <article class="product-card">
-
-                        <div class="product-image">
-
-                            <img
-                                src="${product.image}"
-                                alt="${product.name}"
-                            >
-
-                        </div>
+            card.className =
+                "product-card";
 
 
-                        <div class="product-info">
+            const image =
+                document.createElement("img");
 
-                            <div class="product-category">
-                                ${product.category}
-                            </div>
+            image.className =
+                "product-image";
 
+            image.src =
+                product.image;
 
-                            <div class="product-name">
-                                ${product.name}
-                            </div>
+            image.alt =
+                product.name;
 
+            image.onerror =
+                function() {
 
-                            <div class="product-description">
-                                ${product.description}
-                            </div>
+                    this.style.display = "none";
 
-
-                            <div class="product-bottom">
-
-                                <div class="product-price">
-                                    ${formatPrice(product.price)}
-                                </div>
+                };
 
 
-                                <button
-                                    type="button"
-                                    class="view-button"
-                                    data-product-id="${product.id}"
-                                >
-                                    VIEW
-                                </button>
+            const content =
+                document.createElement("div");
 
-                            </div>
-
-                        </div>
-
-                    </article>
-
-                `;
-
-            }
-        ).join("");
+            content.className =
+                "product-card-content";
 
 
-    document
-        .querySelectorAll(
-            ".view-button"
-        )
-        .forEach(
-            function(button) {
+            const category =
+                document.createElement("div");
 
-                button.addEventListener(
-                    "click",
-                    function() {
+            category.className =
+                "product-category";
 
-                        viewProduct(
-                            Number(
-                                button.dataset.productId
-                            )
-                        );
+            category.textContent =
+                product.category;
 
-                    }
-                );
 
-            }
-        );
+            const name =
+                document.createElement("h3");
+
+            name.className =
+                "product-name";
+
+            name.textContent =
+                product.name;
+
+
+            const price =
+                document.createElement("div");
+
+            price.className =
+                "product-price";
+
+            price.textContent =
+                formatPrice(product.price);
+
+
+            const button =
+                document.createElement("button");
+
+            button.type =
+                "button";
+
+            button.className =
+                "view-button";
+
+            button.textContent =
+                "VIEW";
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    viewProduct(product.id);
+
+                }
+            );
+
+
+            content.appendChild(category);
+
+            content.appendChild(name);
+
+            content.appendChild(price);
+
+            content.appendChild(button);
+
+
+            card.appendChild(image);
+
+            card.appendChild(content);
+
+
+            productGrid.appendChild(card);
+
+        }
+    );
 
 }
 
 
 /* ==========================================
-   CATEGORY FILTERS
+   FILTER BUTTONS
 ========================================== */
 
 filterButtons.forEach(
@@ -803,6 +555,11 @@ filterButtons.forEach(
         button.addEventListener(
             "click",
             function() {
+
+                selectedCategory =
+                    button.dataset.category ||
+                    "All";
+
 
                 filterButtons.forEach(
                     function(item) {
@@ -820,70 +577,7 @@ filterButtons.forEach(
                 );
 
 
-                selectedCategory =
-                    button.dataset.category;
-
-
                 displayProducts();
-
-            }
-        );
-
-    }
-);
-
-
-/* ==========================================
-   SIDEBAR CATEGORY BUTTONS
-========================================== */
-
-const sidebarCategoryButtons =
-    document.querySelectorAll(
-        ".category-sidebar-link"
-    );
-
-
-sidebarCategoryButtons.forEach(
-    function(button) {
-
-        button.addEventListener(
-            "click",
-            function() {
-
-                const category =
-                    button.dataset.sidebarCategory;
-
-
-                selectedCategory =
-                    category;
-
-
-                filterButtons.forEach(
-                    function(filterButton) {
-
-                        filterButton.classList.remove(
-                            "active"
-                        );
-
-
-                        if (
-                            filterButton.dataset.category ===
-                            category
-                        ) {
-
-                            filterButton.classList.add(
-                                "active"
-                            );
-
-                        }
-
-                    }
-                );
-
-
-                displayProducts();
-
-                closeSidebar();
 
             }
         );
@@ -941,36 +635,44 @@ function viewProduct(productId) {
     selectedScent = "";
 
 
-    if (checkoutProductImage) {
+    if (checkoutImage) {
 
-        checkoutProductImage.src =
+        checkoutImage.src =
             selectedProduct.image;
 
-        checkoutProductImage.alt =
+        checkoutImage.alt =
             selectedProduct.name;
 
     }
 
 
-    if (checkoutProductName) {
+    if (checkoutName) {
 
-        checkoutProductName.textContent =
+        checkoutName.textContent =
             selectedProduct.name;
 
     }
 
 
-    if (checkoutProductCategory) {
+    if (checkoutCategory) {
 
-        checkoutProductCategory.textContent =
+        checkoutCategory.textContent =
             selectedProduct.category;
 
     }
 
 
-    if (checkoutProductPrice) {
+    if (checkoutDescription) {
 
-        checkoutProductPrice.textContent =
+        checkoutDescription.textContent =
+            selectedProduct.description;
+
+    }
+
+
+    if (checkoutPrice) {
+
+        checkoutPrice.textContent =
             formatPrice(
                 selectedProduct.price
             );
@@ -978,11 +680,16 @@ function viewProduct(productId) {
     }
 
 
-    if (quantityInput) {
+    if (checkoutQuantity) {
 
-        quantityInput.value = 1;
+        checkoutQuantity.value = 1;
 
     }
+
+
+    displayProductImages(
+        selectedProduct
+    );
 
 
     displayProductOptions(
@@ -990,12 +697,15 @@ function viewProduct(productId) {
     );
 
 
-    updateTotal();
+    updateCheckoutQuantity();
+
+    displayShippingAddress();
 
 
     if (checkoutMessage) {
 
-        checkoutMessage.textContent = "";
+        checkoutMessage.textContent =
+            "";
 
     }
 
@@ -1006,10 +716,111 @@ function viewProduct(productId) {
             "show"
         );
 
-        document.body.style.overflow =
-            "hidden";
-
     }
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* ==========================================
+   PRODUCT IMAGES
+========================================== */
+
+function displayProductImages(product) {
+
+    if (!checkoutThumbnails) {
+        return;
+    }
+
+
+    checkoutThumbnails.innerHTML =
+        "";
+
+
+    const images =
+        product.images ||
+        [product.image];
+
+
+    images.forEach(
+        function(image, index) {
+
+            const thumbnail =
+                document.createElement("img");
+
+
+            thumbnail.src =
+                image;
+
+            thumbnail.alt =
+                product.name;
+
+            thumbnail.className =
+                "checkout-thumbnail";
+
+
+            if (index === 0) {
+
+                thumbnail.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            thumbnail.onerror =
+                function() {
+
+                    this.style.display =
+                        "none";
+
+                };
+
+
+            thumbnail.addEventListener(
+                "click",
+                function() {
+
+                    if (checkoutImage) {
+
+                        checkoutImage.src =
+                            image;
+
+                    }
+
+
+                    document
+                        .querySelectorAll(
+                            ".checkout-thumbnail"
+                        )
+                        .forEach(
+                            function(item) {
+
+                                item.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                    thumbnail.classList.add(
+                        "active"
+                    );
+
+                }
+            );
+
+
+            checkoutThumbnails.appendChild(
+                thumbnail
+            );
+
+        }
+    );
 
 }
 
@@ -1018,9 +829,7 @@ function viewProduct(productId) {
    PRODUCT OPTIONS
 ========================================== */
 
-function displayProductOptions(
-    product
-) {
+function displayProductOptions(product) {
 
     if (!productOptions) {
         return;
@@ -1031,45 +840,41 @@ function displayProductOptions(
         "";
 
 
-    /* COLOR */
-
     if (
         product.colors &&
         product.colors.length > 0
     ) {
 
         const wrapper =
-            document.createElement(
-                "div"
-            );
-
+            document.createElement("div");
 
         wrapper.className =
             "option-group";
 
 
         const label =
-            document.createElement(
-                "label"
-            );
-
+            document.createElement("label");
 
         label.textContent =
             "Color";
 
 
         const select =
-            document.createElement(
-                "select"
-            );
+            document.createElement("select");
 
 
-        select.innerHTML =
-            `
-                <option value="">
-                    Select color
-                </option>
-            `;
+        const defaultOption =
+            document.createElement("option");
+
+        defaultOption.value = "";
+
+        defaultOption.textContent =
+            "Select color";
+
+
+        select.appendChild(
+            defaultOption
+        );
 
 
         product.colors.forEach(
@@ -1080,13 +885,11 @@ function displayProductOptions(
                         "option"
                     );
 
-
                 option.value =
                     color;
 
                 option.textContent =
                     color;
-
 
                 select.appendChild(
                     option
@@ -1107,15 +910,9 @@ function displayProductOptions(
         );
 
 
-        wrapper.appendChild(
-            label
-        );
+        wrapper.appendChild(label);
 
-
-        wrapper.appendChild(
-            select
-        );
-
+        wrapper.appendChild(select);
 
         productOptions.appendChild(
             wrapper
@@ -1124,45 +921,41 @@ function displayProductOptions(
     }
 
 
-    /* SIZE */
-
     if (
         product.sizes &&
         product.sizes.length > 0
     ) {
 
         const wrapper =
-            document.createElement(
-                "div"
-            );
-
+            document.createElement("div");
 
         wrapper.className =
             "option-group";
 
 
         const label =
-            document.createElement(
-                "label"
-            );
-
+            document.createElement("label");
 
         label.textContent =
             "Size";
 
 
         const select =
-            document.createElement(
-                "select"
-            );
+            document.createElement("select");
 
 
-        select.innerHTML =
-            `
-                <option value="">
-                    Select size
-                </option>
-            `;
+        const defaultOption =
+            document.createElement("option");
+
+        defaultOption.value = "";
+
+        defaultOption.textContent =
+            "Select size";
+
+
+        select.appendChild(
+            defaultOption
+        );
 
 
         product.sizes.forEach(
@@ -1173,13 +966,11 @@ function displayProductOptions(
                         "option"
                     );
 
-
                 option.value =
                     size;
 
                 option.textContent =
                     size;
-
 
                 select.appendChild(
                     option
@@ -1200,15 +991,9 @@ function displayProductOptions(
         );
 
 
-        wrapper.appendChild(
-            label
-        );
+        wrapper.appendChild(label);
 
-
-        wrapper.appendChild(
-            select
-        );
-
+        wrapper.appendChild(select);
 
         productOptions.appendChild(
             wrapper
@@ -1217,45 +1002,41 @@ function displayProductOptions(
     }
 
 
-    /* SCENT */
-
     if (
         product.scents &&
         product.scents.length > 0
     ) {
 
         const wrapper =
-            document.createElement(
-                "div"
-            );
-
+            document.createElement("div");
 
         wrapper.className =
             "option-group";
 
 
         const label =
-            document.createElement(
-                "label"
-            );
-
+            document.createElement("label");
 
         label.textContent =
             "Scent";
 
 
         const select =
-            document.createElement(
-                "select"
-            );
+            document.createElement("select");
 
 
-        select.innerHTML =
-            `
-                <option value="">
-                    Select scent
-                </option>
-            `;
+        const defaultOption =
+            document.createElement("option");
+
+        defaultOption.value = "";
+
+        defaultOption.textContent =
+            "Select scent";
+
+
+        select.appendChild(
+            defaultOption
+        );
 
 
         product.scents.forEach(
@@ -1266,13 +1047,11 @@ function displayProductOptions(
                         "option"
                     );
 
-
                 option.value =
                     scent;
 
                 option.textContent =
                     scent;
-
 
                 select.appendChild(
                     option
@@ -1293,15 +1072,9 @@ function displayProductOptions(
         );
 
 
-        wrapper.appendChild(
-            label
-        );
+        wrapper.appendChild(label);
 
-
-        wrapper.appendChild(
-            select
-        );
-
+        wrapper.appendChild(select);
 
         productOptions.appendChild(
             wrapper
@@ -1316,25 +1089,19 @@ function displayProductOptions(
    QUANTITY
 ========================================== */
 
-function updateTotal() {
+function updateCheckoutQuantity() {
 
-    if (
-        !selectedProduct ||
-        !quantityInput
-    ) {
+    if (!selectedProduct) {
         return;
     }
 
 
     let quantity =
-        parseInt(
-            quantityInput.value,
-            10
-        );
+        Number(selectedQuantity);
 
 
     if (
-        isNaN(quantity) ||
+        !Number.isFinite(quantity) ||
         quantity < 1
     ) {
 
@@ -1351,22 +1118,24 @@ function updateTotal() {
 
 
     selectedQuantity =
-        quantity;
+        Math.floor(quantity);
 
 
-    quantityInput.value =
-        selectedQuantity;
+    if (checkoutQuantity) {
 
+        checkoutQuantity.value =
+            selectedQuantity;
 
-    const total =
-        selectedProduct.price *
-        selectedQuantity;
+    }
 
 
     if (checkoutTotal) {
 
         checkoutTotal.textContent =
-            formatPrice(total);
+            formatPrice(
+                selectedProduct.price *
+                selectedQuantity
+            );
 
     }
 
@@ -1374,47 +1143,24 @@ function updateTotal() {
 
 
 /* ==========================================
-   MINUS BUTTON
+   DECREASE QUANTITY
 ========================================== */
 
-const quantityMinus =
-    document.getElementById(
-        "quantityMinus"
-    );
+if (decreaseQuantity) {
 
-
-if (quantityMinus) {
-
-    quantityMinus.addEventListener(
+    decreaseQuantity.addEventListener(
         "click",
         function() {
 
-            let quantity =
-                parseInt(
-                    quantityInput.value,
-                    10
-                );
+            selectedQuantity--;
 
+            if (selectedQuantity < 1) {
 
-            if (
-                isNaN(quantity) ||
-                quantity <= 1
-            ) {
-
-                quantity = 1;
-
-            } else {
-
-                quantity--;
+                selectedQuantity = 1;
 
             }
 
-
-            quantityInput.value =
-                quantity;
-
-
-            updateTotal();
+            updateCheckoutQuantity();
 
         }
     );
@@ -1423,50 +1169,24 @@ if (quantityMinus) {
 
 
 /* ==========================================
-   PLUS BUTTON
+   INCREASE QUANTITY
 ========================================== */
 
-const quantityPlus =
-    document.getElementById(
-        "quantityPlus"
-    );
+if (increaseQuantity) {
 
-
-if (quantityPlus) {
-
-    quantityPlus.addEventListener(
+    increaseQuantity.addEventListener(
         "click",
         function() {
 
-            let quantity =
-                parseInt(
-                    quantityInput.value,
-                    10
-                );
+            selectedQuantity++;
 
+            if (selectedQuantity > 99) {
 
-            if (
-                isNaN(quantity) ||
-                quantity < 1
-            ) {
-
-                quantity = 1;
+                selectedQuantity = 99;
 
             }
 
-
-            if (quantity < 99) {
-
-                quantity++;
-
-            }
-
-
-            quantityInput.value =
-                quantity;
-
-
-            updateTotal();
+            updateCheckoutQuantity();
 
         }
     );
@@ -1478,13 +1198,19 @@ if (quantityPlus) {
    TYPED QUANTITY
 ========================================== */
 
-if (quantityInput) {
+if (checkoutQuantity) {
 
-    quantityInput.addEventListener(
+    checkoutQuantity.addEventListener(
         "input",
         function() {
 
-            updateTotal();
+            selectedQuantity =
+                Number(
+                    checkoutQuantity.value
+                );
+
+
+            updateCheckoutQuantity();
 
         }
     );
@@ -1493,43 +1219,54 @@ if (quantityInput) {
 
 
 /* ==========================================
-   PAYMENT METHOD
+   SHIPPING ADDRESS
 ========================================== */
 
-if (paymentMethod) {
+function displayShippingAddress() {
 
-    paymentMethod.addEventListener(
-        "change",
-        function() {
-
-            const referenceField =
-                document.getElementById(
-                    "referenceField"
-                );
+    if (!checkoutAddress) {
+        return;
+    }
 
 
-            if (!referenceField) {
-                return;
-            }
+    if (
+        !currentUser ||
+        !currentUser.shippingAddress
+    ) {
+
+        checkoutAddress.textContent =
+            "No shipping address saved.";
+
+        return;
+
+    }
 
 
-            if (
-                paymentMethod.value ===
-                "Cash"
-            ) {
+    const address =
+        currentUser.shippingAddress;
 
-                referenceField.style.display =
-                    "none";
 
-            } else {
+    const parts = [
+        address.houseNumber,
+        address.street,
+        address.barangay,
+        address.city,
+        address.province,
+        address.postalCode
+    ];
 
-                referenceField.style.display =
-                    "block";
 
-            }
+    checkoutAddress.textContent =
+        parts
+            .filter(
+                function(part) {
 
-        }
-    );
+                    return part &&
+                        String(part).trim() !== "";
+
+                }
+            )
+            .join(", ");
 
 }
 
@@ -1538,7 +1275,7 @@ if (paymentMethod) {
    CLOSE CHECKOUT
 ========================================== */
 
-function closeCheckout() {
+function closeProductModal() {
 
     if (checkoutModal) {
 
@@ -1555,17 +1292,15 @@ function closeCheckout() {
 }
 
 
-const closeCheckoutButton =
-    document.getElementById(
-        "closeCheckout"
-    );
+if (closeCheckout) {
 
-
-if (closeCheckoutButton) {
-
-    closeCheckoutButton.addEventListener(
+    closeCheckout.addEventListener(
         "click",
-        closeCheckout
+        function() {
+
+            closeProductModal();
+
+        }
     );
 
 }
@@ -1582,7 +1317,7 @@ if (checkoutModal) {
                 checkoutModal
             ) {
 
-                closeCheckout();
+                closeProductModal();
 
             }
 
@@ -1596,322 +1331,151 @@ if (checkoutModal) {
    PLACE ORDER
 ========================================== */
 
-const placeOrderButton =
-    document.getElementById(
-        "placeOrderButton"
-    );
-
-
 if (placeOrderButton) {
 
     placeOrderButton.addEventListener(
         "click",
-        placeOrder
-    );
+        function() {
 
-}
-
-
-function placeOrder() {
-
-    if (!selectedProduct) {
-        return;
-    }
+            if (!selectedProduct) {
+                return;
+            }
 
 
-    if (
-        !currentUser ||
-        currentUser.role !==
-        "customer"
-    ) {
+            if (
+                selectedProduct.colors &&
+                selectedProduct.colors.length > 0 &&
+                !selectedColor
+            ) {
 
-        window.location.href =
-            "index.html";
+                if (checkoutMessage) {
 
-        return;
+                    checkoutMessage.textContent =
+                        "Please select a color.";
 
-    }
+                }
 
+                return;
 
-    /* ======================================
-       SHIPPING ADDRESS
-    ====================================== */
-
-    const address =
-        currentUser.shippingAddress ||
-        {};
+            }
 
 
-    const addressParts = [
+            if (
+                selectedProduct.sizes &&
+                selectedProduct.sizes.length > 0 &&
+                !selectedSize
+            ) {
 
-        address.houseNumber,
+                if (checkoutMessage) {
 
-        address.street,
+                    checkoutMessage.textContent =
+                        "Please select a size.";
 
-        address.barangay,
+                }
 
-        address.city,
+                return;
 
-        address.province,
+            }
 
-        address.postalCode
 
-    ].filter(
-        function(part) {
+            if (
+                selectedProduct.scents &&
+                selectedProduct.scents.length > 0 &&
+                !selectedScent
+            ) {
 
-            return (
-                part &&
-                String(part).trim() !== ""
-            );
+                if (checkoutMessage) {
+
+                    checkoutMessage.textContent =
+                        "Please select a scent.";
+
+                }
+
+                return;
+
+            }
+
+
+            const payment =
+                paymentMethod
+                    ? paymentMethod.value
+                    : "Cash on Delivery";
+
+
+            const newOrder = {
+
+                id:
+                    "ORD-" +
+                    Date.now(),
+
+                customer:
+                    currentUser
+                        ? currentUser.fullName
+                        : "Customer",
+
+                productId:
+                    selectedProduct.id,
+
+                productName:
+                    selectedProduct.name,
+
+                category:
+                    selectedProduct.category,
+
+                price:
+                    selectedProduct.price,
+
+                quantity:
+                    selectedQuantity,
+
+                color:
+                    selectedColor,
+
+                size:
+                    selectedSize,
+
+                scent:
+                    selectedScent,
+
+                paymentMethod:
+                    payment,
+
+                total:
+                    selectedProduct.price *
+                    selectedQuantity,
+
+                shippingAddress:
+                    currentUser
+                        ? currentUser.shippingAddress
+                        : null,
+
+                date:
+                    new Date().toLocaleString()
+
+            };
+
+
+            orders.push(newOrder);
+
+
+            if (checkoutMessage) {
+
+                checkoutMessage.textContent =
+                    "Order placed successfully.";
+
+            }
 
         }
     );
 
-
-    if (
-        addressParts.length === 0
-    ) {
-
-        showCheckoutMessage(
-            "Please add your shipping address first.",
-            "#c0392b"
-        );
-
-        return;
-
-    }
-
-
-    /* ======================================
-       PRODUCT OPTIONS
-    ====================================== */
-
-    if (
-        selectedProduct.colors &&
-        !selectedColor
-    ) {
-
-        showCheckoutMessage(
-            "Please select a color.",
-            "#c0392b"
-        );
-
-        return;
-
-    }
-
-
-    if (
-        selectedProduct.sizes &&
-        !selectedSize
-    ) {
-
-        showCheckoutMessage(
-            "Please select a size.",
-            "#c0392b"
-        );
-
-        return;
-
-    }
-
-
-    if (
-        selectedProduct.scents &&
-        !selectedScent
-    ) {
-
-        showCheckoutMessage(
-            "Please select a scent.",
-            "#c0392b"
-        );
-
-        return;
-
-    }
-
-
-    /* ======================================
-       PAYMENT
-    ====================================== */
-
-    const selectedPayment =
-        paymentMethod
-            ? paymentMethod.value
-            : "";
-
-
-    if (!selectedPayment) {
-
-        showCheckoutMessage(
-            "Please select a payment method.",
-            "#c0392b"
-        );
-
-        return;
-
-    }
-
-
-    const total =
-        selectedProduct.price *
-        selectedQuantity;
-
-
-    const orderNumber =
-        "LL-" +
-        Date.now()
-            .toString()
-            .slice(-8);
-
-
-    /* ======================================
-       CREATE ORDER
-    ====================================== */
-
-    const order = {
-
-        orderNumber:
-            orderNumber,
-
-        customerUsername:
-            currentUser.username,
-
-        customerName:
-            currentUser.fullName,
-
-        productId:
-            selectedProduct.id,
-
-        productName:
-            selectedProduct.name,
-
-        category:
-            selectedProduct.category,
-
-        quantity:
-            selectedQuantity,
-
-        color:
-            selectedColor,
-
-        size:
-            selectedSize,
-
-        scent:
-            selectedScent,
-
-        unitPrice:
-            selectedProduct.price,
-
-        total:
-            total,
-
-        shippingAddress:
-            addressParts.join(", "),
-
-        paymentMethod:
-            selectedPayment,
-
-        date:
-            new Date().toISOString(),
-
-        status:
-            "Pending"
-
-    };
-
-
-    /* ======================================
-       ARRAY
-    ====================================== */
-
-    orders.push(
-        order
-    );
-
-
-    showCheckoutMessage(
-        "Order placed successfully!",
-        "#16834a"
-    );
-
-
-    setTimeout(
-        function() {
-
-            closeCheckout();
-
-
-            alert(
-                "Order placed successfully!\n\n" +
-                "Order #: " +
-                orderNumber +
-                "\n" +
-                "Product: " +
-                selectedProduct.name +
-                "\n" +
-                "Quantity: " +
-                selectedQuantity +
-                "\n" +
-                "Total: " +
-                formatPrice(total)
-            );
-
-        },
-        500
-    );
-
 }
 
 
 /* ==========================================
-   CHECKOUT MESSAGE
+   ACCOUNT DROPDOWN
 ========================================== */
 
-function showCheckoutMessage(
-    message,
-    color
-) {
-
-    if (!checkoutMessage) {
-        return;
-    }
-
-
-    checkoutMessage.textContent =
-        message;
-
-
-    checkoutMessage.style.color =
-        color;
-
-}
-
-
-/* ==========================================
-   MY ACCOUNT DROPDOWN
-========================================== */
-
-const accountToggle =
-    document.getElementById(
-        "accountToggle"
-    );
-
-
-const accountDropdown =
-    document.getElementById(
-        "accountDropdown"
-    );
-
-
-const productsLink =
-    document.getElementById(
-        "productsLink"
-    );
-
-
-if (accountToggle) {
+if (accountToggle && accountDropdown) {
 
     accountToggle.addEventListener(
         "click",
@@ -1922,13 +1486,9 @@ if (accountToggle) {
             event.stopPropagation();
 
 
-            if (productsLink) {
-
-                productsLink.classList.remove(
-                    "active"
-                );
-
-            }
+            accountDropdown.classList.toggle(
+                "show"
+            );
 
 
             accountToggle.classList.toggle(
@@ -1936,10 +1496,10 @@ if (accountToggle) {
             );
 
 
-            if (accountDropdown) {
+            if (productsLink) {
 
-                accountDropdown.classList.toggle(
-                    "show"
+                productsLink.classList.remove(
+                    "active"
                 );
 
             }
@@ -1973,7 +1533,6 @@ document.addEventListener(
                 "show"
             );
 
-
             accountToggle.classList.remove(
                 "active"
             );
@@ -1985,58 +1544,8 @@ document.addEventListener(
 
 
 /* ==========================================
-   LOGOUT
-========================================== */
-
-const logoutButton =
-    document.getElementById(
-        "logoutButton"
-    );
-
-
-if (logoutButton) {
-
-    logoutButton.addEventListener(
-        "click",
-        function() {
-
-            /*
-                No browser storage is used.
-
-                Simply return to the
-                login page.
-            */
-
-            window.location.href =
-                "index.html";
-
-        }
-    );
-
-}
-
-
-/* ==========================================
    MOBILE SIDEBAR
 ========================================== */
-
-const shopSidebar =
-    document.getElementById(
-        "shopSidebar"
-    );
-
-
-const sidebarOverlay =
-    document.getElementById(
-        "sidebarOverlay"
-    );
-
-
-const menuButton =
-    document.getElementById(
-        "menuButton"
-    );
-
 
 function openSidebar() {
 
@@ -2052,7 +1561,7 @@ function openSidebar() {
     if (sidebarOverlay) {
 
         sidebarOverlay.classList.add(
-            "active"
+            "show"
         );
 
     }
@@ -2074,24 +1583,10 @@ function closeSidebar() {
     if (sidebarOverlay) {
 
         sidebarOverlay.classList.remove(
-            "active"
+            "show"
         );
 
     }
-
-}
-
-
-if (menuButton) {
-
-    menuButton.addEventListener(
-        "click",
-        function() {
-
-            openSidebar();
-
-        }
-    );
 
 }
 
@@ -2106,6 +1601,22 @@ if (sidebarOverlay) {
 
         }
     );
+
+}
+
+
+/* ==========================================
+   CUSTOMER NAME
+========================================== */
+
+if (
+    customerName &&
+    currentUser
+) {
+
+    customerName.textContent =
+        currentUser.fullName ||
+        "Customer";
 
 }
 
