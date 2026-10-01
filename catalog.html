@@ -25,9 +25,7 @@
 <body>
 
 
-    <!-- ==========================================
-         MOBILE HEADER
-    =========================================== -->
+    <!-- MOBILE HEADER -->
 
     <header class="mobile-header">
 
@@ -39,30 +37,21 @@
             ☰
         </button>
 
-
         <div class="mobile-brand">
-
             LOVE LUXE
-
-            <span>
-                by EA
-            </span>
-
+            <span>by EA</span>
         </div>
 
     </header>
 
 
 
-    <!-- ==========================================
-         SIDEBAR
-    =========================================== -->
+    <!-- SIDEBAR -->
 
     <aside
         class="shop-sidebar"
         id="shopSidebar"
     >
-
 
         <div class="sidebar-brand">
 
@@ -75,7 +64,6 @@
             </div>
 
         </div>
-
 
 
         <div class="sidebar-section">
@@ -94,15 +82,10 @@
             >
 
                 <span>
-                    🛍️
-                </span>
-
-                <span>
                     Products
                 </span>
 
             </a>
-
 
 
             <!-- MY ACCOUNT -->
@@ -114,10 +97,6 @@
             >
 
                 <span>
-                    👤
-                </span>
-
-                <span>
                     My Account
                 </span>
 
@@ -126,7 +105,6 @@
                 </span>
 
             </button>
-
 
 
             <!-- ACCOUNT DROPDOWN -->
@@ -150,15 +128,28 @@
 
             </div>
 
+
+            <!-- LOGOUT -->
+
+            <button
+                type="button"
+                class="sidebar-link"
+                id="catalogLogoutButton"
+            >
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
         </div>
 
     </aside>
 
 
 
-    <!-- ==========================================
-         SIDEBAR OVERLAY
-    =========================================== -->
+    <!-- SIDEBAR OVERLAY -->
 
     <div
         class="sidebar-overlay"
@@ -167,16 +158,12 @@
 
 
 
-    <!-- ==========================================
-         MAIN
-    =========================================== -->
+    <!-- MAIN -->
 
     <main class="shop-main">
 
 
-        <!-- ======================================
-             TOP BAR
-        ======================================= -->
+        <!-- TOP BAR -->
 
         <div class="shop-topbar">
 
@@ -220,9 +207,7 @@
 
 
 
-        <!-- ======================================
-             SHOP HEADER
-        ======================================= -->
+        <!-- SHOP HEADER -->
 
         <section class="catalog-header">
 
@@ -255,9 +240,7 @@
 
 
 
-        <!-- ======================================
-             SEARCH
-        ======================================= -->
+        <!-- SEARCH -->
 
         <section class="catalog-tools">
 
@@ -280,9 +263,7 @@
 
 
 
-        <!-- ======================================
-             CATEGORY FILTERS
-        ======================================= -->
+        <!-- CATEGORY FILTERS -->
 
         <div class="filter-buttons">
 
@@ -294,7 +275,6 @@
                 All
             </button>
 
-
             <button
                 type="button"
                 class="filter-button"
@@ -302,7 +282,6 @@
             >
                 Bags
             </button>
-
 
             <button
                 type="button"
@@ -312,7 +291,6 @@
                 Clothing
             </button>
 
-
             <button
                 type="button"
                 class="filter-button"
@@ -320,7 +298,6 @@
             >
                 Perfume
             </button>
-
 
             <button
                 type="button"
@@ -334,9 +311,7 @@
 
 
 
-        <!-- ======================================
-             PRODUCT GRID
-        ======================================= -->
+        <!-- PRODUCT GRID -->
 
         <section
             class="product-grid"
@@ -346,9 +321,7 @@
 
 
 
-        <!-- ======================================
-             NO PRODUCTS
-        ======================================= -->
+        <!-- NO PRODUCTS -->
 
         <div
             class="no-products"
@@ -372,9 +345,7 @@
 
 
 
-        <!-- ======================================
-             FOOTER
-        ======================================= -->
+        <!-- FOOTER -->
 
         <footer class="shop-footer">
 
@@ -388,13 +359,12 @@
 
         </footer>
 
-
     </main>
 
 
 
     <!-- ==========================================
-         PRODUCT / CHECKOUT MODAL
+         CHECKOUT / PRODUCT MODAL
     =========================================== -->
 
     <div
@@ -403,9 +373,6 @@
     >
 
         <div class="checkout-box">
-
-
-            <!-- CLOSE -->
 
             <button
                 type="button"
@@ -416,13 +383,10 @@
             </button>
 
 
-
             <div class="checkout-content">
 
 
-                <!-- ==================================
-                     PRODUCT IMAGE
-                =================================== -->
+                <!-- IMAGE -->
 
                 <div class="checkout-image-area">
 
@@ -431,7 +395,6 @@
                         src=""
                         alt="Product"
                     >
-
 
                     <div
                         class="product-gallery"
@@ -443,12 +406,9 @@
 
 
 
-                <!-- ==================================
-                     PRODUCT DETAILS
-                =================================== -->
+                <!-- DETAILS -->
 
                 <div class="checkout-details">
-
 
                     <div
                         class="checkout-category"
@@ -456,17 +416,14 @@
                     >
                     </div>
 
-
                     <h2 id="checkoutName">
                     </h2>
-
 
                     <p
                         class="checkout-description"
                         id="checkoutDescription"
                     >
                     </p>
-
 
                     <div
                         class="checkout-price"
@@ -535,7 +492,6 @@
                             Shipping Address
                         </label>
 
-
                         <div
                             class="checkout-address"
                             id="checkoutAddress"
@@ -551,16 +507,11 @@
 
                     <div class="payment-section">
 
-                        <label
-                            for="paymentMethod"
-                        >
+                        <label for="paymentMethod">
                             Payment Method
                         </label>
 
-
-                        <select
-                            id="paymentMethod"
-                        >
+                        <select id="paymentMethod">
 
                             <option value="Cash on Delivery">
                                 Cash on Delivery
@@ -592,7 +543,6 @@
                             Total
                         </span>
 
-
                         <strong id="checkoutTotal">
                             ₱0.00
                         </strong>
@@ -601,7 +551,7 @@
 
 
 
-                    <!-- PLACE ORDER -->
+                    <!-- ORDER -->
 
                     <button
                         type="button"
@@ -618,7 +568,6 @@
                     >
                     </div>
 
-
                 </div>
 
             </div>
@@ -629,14 +578,115 @@
 
 
 
-    <!-- ==========================================
-         IMPORTANT SCRIPT ORDER
-    =========================================== -->
+    <!-- DATA -->
 
     <script src="data.js"></script>
 
+    <!-- CATALOG SCRIPT -->
+
     <script src="catalog.js"></script>
 
+
+    <!-- CATALOG SIDEBAR FUNCTIONS -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const accountToggle =
+                    document.getElementById(
+                        "accountToggle"
+                    );
+
+                const accountDropdown =
+                    document.getElementById(
+                        "accountDropdown"
+                    );
+
+                const productsLink =
+                    document.getElementById(
+                        "productsLink"
+                    );
+
+                const logoutButton =
+                    document.getElementById(
+                        "catalogLogoutButton"
+                    );
+
+
+                /* MY ACCOUNT DROPDOWN */
+
+                if (
+                    accountToggle &&
+                    accountDropdown
+                ) {
+
+                    accountToggle.addEventListener(
+                        "click",
+                        function () {
+
+                            accountDropdown.classList.toggle(
+                                "show"
+                            );
+
+                            accountToggle.classList.toggle(
+                                "active"
+                            );
+
+                            if (
+                                accountDropdown.classList.contains(
+                                    "show"
+                                )
+                            ) {
+
+                                if (productsLink) {
+
+                                    productsLink.classList.remove(
+                                        "active"
+                                    );
+
+                                }
+
+                            } else {
+
+                                if (productsLink) {
+
+                                    productsLink.classList.add(
+                                        "active"
+                                    );
+
+                                }
+
+                            }
+
+                        }
+                    );
+
+                }
+
+
+                /* LOGOUT */
+
+                if (logoutButton) {
+
+                    logoutButton.addEventListener(
+                        "click",
+                        function () {
+
+                            window.location.href =
+                                "index.html";
+
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
 
