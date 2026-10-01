@@ -12,12 +12,50 @@ const loveLuxeData = window.LoveLuxeData;
 const customers =
     loveLuxeData.customers;
 
-const orders =
-    loveLuxeData.orders;
 
-// Arrays only. No browser storage is used.
-let currentUser =
-    customers[0];
+/*
+ * Get the currently logged-in customer.
+ * The login system already saves this in localStorage.
+ */
+
+let currentUser = null;
+
+
+try {
+
+    const savedUser =
+        localStorage.getItem(
+            "loveLuxeCurrentUser"
+        );
+
+    if (savedUser) {
+
+        currentUser =
+            JSON.parse(savedUser);
+
+    }
+
+} catch (error) {
+
+    currentUser = null;
+
+}
+
+
+/*
+ * If there is no valid customer,
+ * return to the login page.
+ */
+
+if (
+    !currentUser ||
+    currentUser.role !== "customer"
+) {
+
+    window.location.href =
+        "index.html";
+
+}
 
 
 /* ==========================================
@@ -1526,7 +1564,46 @@ function placeOrder() {
     };
 
 
-    orders.push(order);
+    /* ==========================================
+       SAVE ORDER
+    ========================================== */
+
+    let savedOrders = [];
+
+
+    try {
+
+        savedOrders =
+            JSON.parse(
+                localStorage.getItem(
+                    "loveLuxeOrders"
+                )
+            ) || [];
+
+    } catch (error) {
+
+        savedOrders = [];
+
+    }
+
+
+    /*
+     * Add the new order to the existing orders.
+     */
+
+    savedOrders.push(order);
+
+
+    /*
+     * Save all orders.
+     */
+
+    localStorage.setItem(
+        "loveLuxeOrders",
+        JSON.stringify(
+            savedOrders
+        )
+    );
 
 
     checkoutMessage.textContent =
@@ -1624,21 +1701,23 @@ logoutButton?.addEventListener(
     "click",
     function() {
 
-        /*
-         * Clear the current array user.
-         * No localStorage is used.
-         */
+        localStorage.removeItem(
+            "loveLuxeCurrentUser"
+        );
+
+
+        localStorage.removeItem(
+            "loveLuxeAdminLoggedIn"
+        );
+
 
         loveLuxeData.currentUser =
             null;
 
+
         currentUser =
             null;
 
-
-        /*
-         * Return to the login page.
-         */
 
         window.location.href =
             "index.html";
