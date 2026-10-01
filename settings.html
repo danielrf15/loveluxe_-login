@@ -16,184 +16,36 @@
 
     <link
         rel="stylesheet"
-        href="catalog.css"
+        href="style.css"
     >
-
-    <style>
-
-        .account-content {
-            padding: 30px;
-            max-width: 1100px;
-        }
-
-        .account-page-header {
-            margin-bottom: 25px;
-        }
-
-        .account-page-header .small-title {
-            color: #c5a059;
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-
-        .account-page-header h2 {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .account-page-header p {
-            color: #777;
-            font-size: 14px;
-        }
-
-        .account-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 25px;
-        }
-
-        .account-card h3 {
-            margin-bottom: 8px;
-            font-size: 20px;
-        }
-
-        .account-card-description {
-            color: #777;
-            font-size: 13px;
-            margin-bottom: 25px;
-        }
-
-        .account-form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 13px 14px;
-            border: 1px solid #d9dfe7;
-            border-radius: 7px;
-            font-family: inherit;
-            font-size: 14px;
-            outline: none;
-        }
-
-        .form-group input:focus {
-            border-color: #c5a059;
-        }
-
-        .account-card-footer {
-            margin-top: 25px;
-        }
-
-        .primary-button {
-            border: none;
-            background: #c5a059;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 7px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .primary-button:hover {
-            background: #ad8845;
-        }
-
-        .settings-heading {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .settings-icon {
-            font-size: 25px;
-        }
-
-        .password-form {
-            display: grid;
-            gap: 20px;
-            max-width: 600px;
-        }
-
-        .sidebar-bottom {
-            margin-top: auto;
-            padding: 15px;
-            border-top: 1px solid #292929;
-        }
-
-        .logout-link {
-            margin-bottom: 0;
-            color: #bdbdbd;
-        }
-
-        .logout-link:hover {
-            color: white;
-            background: #1d1d1d;
-        }
-
-        .account-dropdown a.active {
-            background: #c5a059;
-            color: white;
-        }
-
-        .account-dropdown a.active:hover {
-            background: #c5a059;
-            color: white;
-        }
-
-        @media (max-width: 700px) {
-
-            .account-content {
-                padding: 20px;
-            }
-
-            .account-form-grid {
-                grid-template-columns: 1fr;
-            }
-
-        }
-
-    </style>
 
 </head>
 
 
-<body>
+<body id="customerPage">
 
 
     <!-- MOBILE HEADER -->
 
-    <header class="mobile-header">
+    <header class="customer-mobile-header">
 
         <button
-            class="menu-button"
-            id="menuButton"
             type="button"
+            id="customerMenuButton"
+            class="customer-menu-button"
         >
             ☰
         </button>
 
-        <div class="mobile-brand">
+
+        <div class="customer-mobile-brand">
+
             LOVE LUXE
-            <span>by EA</span>
+
+            <span>
+                BY EA • EST. 2024
+            </span>
+
         </div>
 
     </header>
@@ -203,115 +55,85 @@
     <!-- SIDEBAR -->
 
     <aside
-        class="shop-sidebar"
-        id="shopSidebar"
+        id="customerSidebar"
+        class="customer-sidebar"
     >
 
-        <div class="sidebar-brand">
+        <div class="customer-brand">
 
-            <div class="brand-title">
-                Love Luxe
+            <div class="customer-brand-title">
+                LOVE LUXE
             </div>
 
-            <div class="brand-subtitle">
-                by EA • Est. 2024
+            <div class="customer-brand-subtitle">
+                BY EA • EST. 2024
             </div>
 
         </div>
 
 
-        <div class="sidebar-section">
+        <div class="customer-sidebar-welcome">
 
-            <div class="sidebar-label">
-                SHOP
+            <span>
+                Welcome
+            </span>
+
+            <strong id="sidebarCustomerName">
+                Customer
+            </strong>
+
+        </div>
+
+
+        <nav class="customer-nav">
+
+            <div class="customer-nav-heading">
+                ACCOUNT
             </div>
 
 
             <a
-                href="catalog.html"
-                class="sidebar-link"
+                href="personal.html"
+                class="customer-nav-link"
             >
-
-                <span>
-                    🛍️
-                </span>
-
-                <span>
-                    Products
-                </span>
-
+                Personal Information
             </a>
 
 
-            <!-- MY ACCOUNT -->
+            <a
+                href="orders.html"
+                class="customer-nav-link"
+            >
+                My Orders
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="customer-nav-link active"
+            >
+                Settings
+            </a>
+
+
+            <a
+                href="catalog.html"
+                class="customer-nav-link"
+            >
+                Back to Shop
+            </a>
+
+        </nav>
+
+
+        <div class="customer-sidebar-bottom">
 
             <button
                 type="button"
-                class="sidebar-link account-toggle active"
-                id="accountToggle"
-            >
-
-                <span>
-                    👤
-                </span>
-
-                <span>
-                    My Account
-                </span>
-
-                <span
-                    class="account-arrow"
-                    id="accountArrow"
-                >
-                    ▲
-                </span>
-
-            </button>
-
-
-            <div
-                class="account-dropdown show"
-                id="accountDropdown"
-            >
-
-                <a href="personal.html">
-                    Personal Information
-                </a>
-
-                <a href="orders.html">
-                    My Orders
-                </a>
-
-                <a
-                    href="settings.html"
-                    class="active"
-                >
-                    Settings
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- LOGOUT -->
-
-        <div class="sidebar-bottom">
-
-            <button
-                type="button"
-                class="sidebar-link logout-link"
                 id="logoutButton"
+                class="customer-logout-button"
             >
-
-                <span>
-                    🚪
-                </span>
-
-                <span>
-                    Logout
-                </span>
-
+                ↪ &nbsp; Logout
             </button>
 
         </div>
@@ -323,24 +145,24 @@
     <!-- OVERLAY -->
 
     <div
-        class="sidebar-overlay"
-        id="sidebarOverlay"
+        id="customerSidebarOverlay"
+        class="customer-sidebar-overlay"
     ></div>
 
 
 
     <!-- MAIN -->
 
-    <main class="shop-main">
+    <main class="customer-main">
 
 
         <!-- TOP BAR -->
 
-        <div class="shop-topbar">
+        <header class="customer-topbar">
 
             <div>
 
-                <div class="page-small-title">
+                <div class="customer-topbar-label">
                     CUSTOMER ACCOUNT
                 </div>
 
@@ -350,221 +172,52 @@
 
             </div>
 
+        </header>
 
-            <div class="customer-profile">
 
-                <div
-                    class="customer-avatar"
-                    id="customerAvatar"
-                >
-                    C
-                </div>
+
+        <!-- MESSAGE -->
+
+        <div
+            id="accountMessage"
+            class="account-message"
+        ></div>
+
+
+
+        <!-- ======================================
+             CHANGE PASSWORD
+        ======================================= -->
+
+        <section class="account-section">
+
+            <div class="section-heading">
 
                 <div>
 
-                    <div class="customer-label">
-                        Welcome Customer
+                    <div class="section-small-title">
+                        SECURITY
                     </div>
 
-                    <div
-                        class="customer-name"
-                        id="customerName"
-                    >
-                        Customer
-                    </div>
+                    <h2>
+                        Change Password
+                    </h2>
 
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- CONTENT -->
-
-        <section class="account-content">
-
-            <div class="account-page-header">
-
-                <div class="small-title">
-                    ACCOUNT SETTINGS
-                </div>
-
-                <h2>
-                    Settings
-                </h2>
-
-                <p>
-                    Manage your shipping address and password.
-                </p>
-
-            </div>
-
-
-            <!-- SHIPPING ADDRESS -->
-
-            <div class="account-card">
-
-                <div class="settings-heading">
-
-                    <div>
-
-                        <h3>
-                            Shipping Address
-                        </h3>
-
-                        <p class="account-card-description">
-                            This address will be used when you checkout.
-                        </p>
-
-                    </div>
-
-                    <div class="settings-icon">
-                        📍
-                    </div>
-
-                </div>
-
-
-                <div class="account-form-grid">
-
-
-                    <div class="form-group">
-
-                        <label for="houseNumber">
-                            House / Unit Number
-                        </label>
-
-                        <input
-                            type="text"
-                            id="houseNumber"
-                            placeholder="e.g. 123"
-                        >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="street">
-                            Street
-                        </label>
-
-                        <input
-                            type="text"
-                            id="street"
-                            placeholder="Enter street"
-                        >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="barangay">
-                            Barangay
-                        </label>
-
-                        <input
-                            type="text"
-                            id="barangay"
-                            placeholder="Enter barangay"
-                        >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="city">
-                            City / Municipality
-                        </label>
-
-                        <input
-                            type="text"
-                            id="city"
-                            placeholder="Enter city or municipality"
-                        >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="province">
-                            Province
-                        </label>
-
-                        <input
-                            type="text"
-                            id="province"
-                            placeholder="Enter province"
-                        >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="postalCode">
-                            Postal Code
-                        </label>
-
-                        <input
-                            type="text"
-                            id="postalCode"
-                            placeholder="Enter postal code"
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <div class="account-card-footer">
-
-                    <button
-                        type="button"
-                        class="primary-button"
-                        id="saveShippingButton"
-                    >
-                        SAVE SHIPPING ADDRESS
-                    </button>
+                    <p>
+                        Update your account password.
+                    </p>
 
                 </div>
 
             </div>
 
 
-
-            <!-- CHANGE PASSWORD -->
-
-            <div class="account-card">
-
-                <div class="settings-heading">
-
-                    <div>
-
-                        <h3>
-                            Change Password
-                        </h3>
-
-                        <p class="account-card-description">
-                            Update your account password.
-                        </p>
-
-                    </div>
-
-                    <div class="settings-icon">
-                        🔒
-                    </div>
-
-                </div>
-
+            <div class="account-card settings-card">
 
                 <div class="password-form">
 
+
+                    <!-- CURRENT PASSWORD -->
 
                     <div class="form-group">
 
@@ -581,6 +234,9 @@
                     </div>
 
 
+
+                    <!-- NEW PASSWORD -->
+
                     <div class="form-group">
 
                         <label for="newPassword">
@@ -595,6 +251,9 @@
 
                     </div>
 
+
+
+                    <!-- CONFIRM PASSWORD -->
 
                     <div class="form-group">
 
@@ -613,12 +272,12 @@
                 </div>
 
 
-                <div class="account-card-footer">
+                <div class="settings-card-footer">
 
                     <button
                         type="button"
-                        class="primary-button"
                         id="changePasswordButton"
+                        class="primary-button"
                     >
                         CHANGE PASSWORD
                     </button>
@@ -634,380 +293,243 @@
 
 
 
+    <!-- DATA -->
+
     <script src="data.js"></script>
 
+
     <script>
+
+        const data =
+            window.LoveLuxeData;
+
+        const user =
+            data.customers[0];
+
 
         document.addEventListener(
             "DOMContentLoaded",
             function () {
 
-
-                /* =========================
-                   ACCOUNT DROPDOWN
-                ========================= */
-
-                const accountToggle =
-                    document.getElementById(
-                        "accountToggle"
-                    );
-
-                const accountDropdown =
-                    document.getElementById(
-                        "accountDropdown"
-                    );
-
-                const accountArrow =
-                    document.getElementById(
-                        "accountArrow"
-                    );
-
-
-                accountToggle.addEventListener(
-                    "click",
-                    function () {
-
-                        accountDropdown.classList.toggle(
-                            "show"
-                        );
-
-                        accountToggle.classList.add(
-                            "active"
-                        );
-
-                        if (
-                            accountDropdown.classList.contains(
-                                "show"
-                            )
-                        ) {
-
-                            accountArrow.textContent = "▲";
-
-                        } else {
-
-                            accountArrow.textContent = "▼";
-
-                        }
-
-                    }
-                );
-
-
-                /* =========================
-                   MOBILE SIDEBAR
-                ========================= */
-
-                const sidebar =
-                    document.getElementById(
-                        "shopSidebar"
-                    );
-
-                const overlay =
-                    document.getElementById(
-                        "sidebarOverlay"
-                    );
-
-                const menuButton =
-                    document.getElementById(
-                        "menuButton"
-                    );
-
-
-                menuButton.addEventListener(
-                    "click",
-                    function () {
-
-                        sidebar.classList.add(
-                            "open"
-                        );
-
-                        overlay.classList.add(
-                            "show"
-                        );
-
-                    }
-                );
-
-
-                overlay.addEventListener(
-                    "click",
-                    function () {
-
-                        sidebar.classList.remove(
-                            "open"
-                        );
-
-                        overlay.classList.remove(
-                            "show"
-                        );
-
-                    }
-                );
-
-
-                /* =========================
-                   CUSTOMER DATA
-                ========================= */
-
-                if (
-                    typeof currentUser !== "undefined" &&
-                    currentUser !== null &&
-                    currentUser.role === "customer"
-                ) {
-
-                    document.getElementById(
-                        "customerName"
-                    ).textContent =
-                        currentUser.fullName ||
-                        "Customer";
-
-                    document.getElementById(
-                        "customerAvatar"
-                    ).textContent =
-                        (
-                            currentUser.fullName ||
-                            "C"
-                        ).charAt(0).toUpperCase();
-
-
-                    if (
-                        currentUser.shippingAddress
-                    ) {
-
-                        const address =
-                            currentUser.shippingAddress;
-
-                        document.getElementById(
-                            "houseNumber"
-                        ).value =
-                            address.houseNumber || "";
-
-                        document.getElementById(
-                            "street"
-                        ).value =
-                            address.street || "";
-
-                        document.getElementById(
-                            "barangay"
-                        ).value =
-                            address.barangay || "";
-
-                        document.getElementById(
-                            "city"
-                        ).value =
-                            address.city || "";
-
-                        document.getElementById(
-                            "province"
-                        ).value =
-                            address.province || "";
-
-                        document.getElementById(
-                            "postalCode"
-                        ).value =
-                            address.postalCode || "";
-
-                    }
-
-                }
-
-
-                /* =========================
-                   SAVE SHIPPING ADDRESS
-                ========================= */
-
                 document.getElementById(
-                    "saveShippingButton"
-                ).addEventListener(
-                    "click",
-                    function () {
+                    "sidebarCustomerName"
+                ).textContent =
+                    user.fullName;
 
-                        if (
-                            typeof currentUser !== "undefined" &&
-                            currentUser !== null
-                        ) {
-
-                            currentUser.shippingAddress = {
-
-                                houseNumber:
-                                    document.getElementById(
-                                        "houseNumber"
-                                    ).value,
-
-                                street:
-                                    document.getElementById(
-                                        "street"
-                                    ).value,
-
-                                barangay:
-                                    document.getElementById(
-                                        "barangay"
-                                    ).value,
-
-                                city:
-                                    document.getElementById(
-                                        "city"
-                                    ).value,
-
-                                province:
-                                    document.getElementById(
-                                        "province"
-                                    ).value,
-
-                                postalCode:
-                                    document.getElementById(
-                                        "postalCode"
-                                    ).value
-
-                            };
-
-                        }
-
-                        alert(
-                            "Shipping address has been updated."
-                        );
-
-                    }
-                );
-
-
-                /* =========================
-                   CHANGE PASSWORD
-                ========================= */
 
                 document.getElementById(
                     "changePasswordButton"
-                ).addEventListener(
-                    "click",
-                    function () {
+                ).onclick =
+                    changePassword;
 
-                        const currentPassword =
-                            document.getElementById(
-                                "currentPassword"
-                            ).value;
-
-                        const newPassword =
-                            document.getElementById(
-                                "newPassword"
-                            ).value;
-
-                        const confirmPassword =
-                            document.getElementById(
-                                "confirmPassword"
-                            ).value;
-
-
-                        if (
-                            currentPassword === "" ||
-                            newPassword === "" ||
-                            confirmPassword === ""
-                        ) {
-
-                            alert(
-                                "Please complete all password fields."
-                            );
-
-                            return;
-
-                        }
-
-
-                        if (
-                            newPassword !==
-                            confirmPassword
-                        ) {
-
-                            alert(
-                                "The new passwords do not match."
-                            );
-
-                            return;
-
-                        }
-
-
-                        if (
-                            typeof currentUser !== "undefined" &&
-                            currentUser !== null
-                        ) {
-
-                            if (
-                                currentUser.password !==
-                                currentPassword
-                            ) {
-
-                                alert(
-                                    "Current password is incorrect."
-                                );
-
-                                return;
-
-                            }
-
-                            currentUser.password =
-                                newPassword;
-
-                        }
-
-
-                        document.getElementById(
-                            "currentPassword"
-                        ).value = "";
-
-                        document.getElementById(
-                            "newPassword"
-                        ).value = "";
-
-                        document.getElementById(
-                            "confirmPassword"
-                        ).value = "";
-
-
-                        alert(
-                            "Password has been changed."
-                        );
-
-                    }
-                );
-
-
-                /* =========================
-                   LOGOUT
-                ========================= */
 
                 document.getElementById(
                     "logoutButton"
-                ).addEventListener(
-                    "click",
-                    function () {
+                ).onclick =
+                    logout;
 
-                        const confirmLogout =
-                            confirm(
-                                "Are you sure you want to logout?"
-                            );
 
-                        if (!confirmLogout) {
-                            return;
-                        }
-
-                        if (
-                            typeof currentUser !== "undefined"
-                        ) {
-
-                            currentUser = null;
-
-                        }
-
-                        window.location.href =
-                            "index.html";
-
-                    }
-                );
+                setupMobile();
 
             }
         );
 
+
+
+        /* CHANGE PASSWORD */
+
+        function changePassword() {
+
+            const currentPassword =
+                document.getElementById(
+                    "currentPassword"
+                ).value;
+
+
+            const newPassword =
+                document.getElementById(
+                    "newPassword"
+                ).value;
+
+
+            const confirmPassword =
+                document.getElementById(
+                    "confirmPassword"
+                ).value;
+
+
+            if (
+                currentPassword !==
+                user.password
+            ) {
+
+                showMessage(
+                    "Current password is incorrect.",
+                    true
+                );
+
+                return;
+
+            }
+
+
+            if (
+                newPassword === ""
+            ) {
+
+                showMessage(
+                    "Please enter a new password.",
+                    true
+                );
+
+                return;
+
+            }
+
+
+            if (
+                newPassword !==
+                confirmPassword
+            ) {
+
+                showMessage(
+                    "New passwords do not match.",
+                    true
+                );
+
+                return;
+
+            }
+
+
+            user.password =
+                newPassword;
+
+
+            document.getElementById(
+                "currentPassword"
+            ).value = "";
+
+
+            document.getElementById(
+                "newPassword"
+            ).value = "";
+
+
+            document.getElementById(
+                "confirmPassword"
+            ).value = "";
+
+
+            showMessage(
+                "Password changed successfully for this session.",
+                false
+            );
+
+        }
+
+
+
+        /* MESSAGE */
+
+        function showMessage(
+            text,
+            isError
+        ) {
+
+            const box =
+                document.getElementById(
+                    "accountMessage"
+                );
+
+
+            box.textContent =
+                text;
+
+
+            box.className =
+                isError
+                    ? "account-message error"
+                    : "account-message success";
+
+        }
+
+
+
+        /* MOBILE SIDEBAR */
+
+        function setupMobile() {
+
+            const button =
+                document.getElementById(
+                    "customerMenuButton"
+                );
+
+
+            const sidebar =
+                document.getElementById(
+                    "customerSidebar"
+                );
+
+
+            const overlay =
+                document.getElementById(
+                    "customerSidebarOverlay"
+                );
+
+
+            button.onclick =
+                function () {
+
+                    sidebar.classList.toggle(
+                        "open"
+                    );
+
+                    overlay.classList.toggle(
+                        "active"
+                    );
+
+                };
+
+
+            overlay.onclick =
+                function () {
+
+                    sidebar.classList.remove(
+                        "open"
+                    );
+
+                    overlay.classList.remove(
+                        "active"
+                    );
+
+                };
+
+        }
+
+
+
+        /* LOGOUT */
+
+        function logout() {
+
+            const confirmLogout =
+                confirm(
+                    "Are you sure you want to logout?"
+                );
+
+
+            if (confirmLogout) {
+
+                window.location.href =
+                    "index.html";
+
+            }
+
+        }
+
     </script>
+
 
 </body>
 
