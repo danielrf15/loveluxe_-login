@@ -10,9 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Love Luxe by EA - My Orders
-    </title>
+    <title>Love Luxe by EA - My Orders</title>
 
     <link
         rel="stylesheet"
@@ -61,7 +59,7 @@
         }
 
         .empty-orders-icon {
-            font-size: 45px;
+            font-size: 40px;
             margin-bottom: 15px;
         }
 
@@ -108,32 +106,6 @@
             margin-bottom: 5px;
         }
 
-        .sidebar-bottom {
-            margin-top: auto;
-            padding: 15px;
-            border-top: 1px solid #292929;
-        }
-
-        .logout-link {
-            margin-bottom: 0;
-            color: #bdbdbd;
-        }
-
-        .logout-link:hover {
-            color: white;
-            background: #1d1d1d;
-        }
-
-        .account-dropdown a.active {
-            background: #c5a059;
-            color: white;
-        }
-
-        .account-dropdown a.active:hover {
-            background: #c5a059;
-            color: white;
-        }
-
         @media (max-width: 700px) {
 
             .account-content {
@@ -146,11 +118,7 @@
 
 </head>
 
-
 <body>
-
-
-    <!-- MOBILE HEADER -->
 
     <header class="mobile-header">
 
@@ -169,9 +137,6 @@
 
     </header>
 
-
-
-    <!-- SIDEBAR -->
 
     <aside
         class="shop-sidebar"
@@ -202,19 +167,9 @@
                 href="catalog.html"
                 class="sidebar-link"
             >
-
-                <span>
-                    🛍️
-                </span>
-
-                <span>
-                    Products
-                </span>
-
+                <span>Products</span>
             </a>
 
-
-            <!-- MY ACCOUNT -->
 
             <button
                 type="button"
@@ -222,13 +177,7 @@
                 id="accountToggle"
             >
 
-                <span>
-                    👤
-                </span>
-
-                <span>
-                    My Account
-                </span>
+                <span>My Account</span>
 
                 <span
                     class="account-arrow"
@@ -265,8 +214,6 @@
         </div>
 
 
-        <!-- LOGOUT -->
-
         <div class="sidebar-bottom">
 
             <button
@@ -274,15 +221,7 @@
                 class="sidebar-link logout-link"
                 id="logoutButton"
             >
-
-                <span>
-                    🚪
-                </span>
-
-                <span>
-                    Logout
-                </span>
-
+                <span>Logout</span>
             </button>
 
         </div>
@@ -290,22 +229,13 @@
     </aside>
 
 
-
-    <!-- OVERLAY -->
-
     <div
         class="sidebar-overlay"
         id="sidebarOverlay"
     ></div>
 
 
-
-    <!-- MAIN -->
-
     <main class="shop-main">
-
-
-        <!-- TOP BAR -->
 
         <div class="shop-topbar">
 
@@ -351,9 +281,6 @@
         </div>
 
 
-
-        <!-- CONTENT -->
-
         <section class="account-content">
 
             <div class="account-page-header">
@@ -376,15 +303,11 @@
             <div
                 class="account-card"
                 id="ordersContainer"
-            >
-
-            </div>
+            ></div>
 
         </section>
 
-
     </main>
-
 
 
     <script src="data.js"></script>
@@ -395,10 +318,15 @@
             "DOMContentLoaded",
             function () {
 
+                const data =
+                    window.LoveLuxeData;
 
-                /* =========================
-                   ACCOUNT DROPDOWN
-                ========================= */
+                const user =
+                    data.customers[0];
+
+                const orders =
+                    data.orders;
+
 
                 const accountToggle =
                     document.getElementById(
@@ -420,35 +348,38 @@
                     "click",
                     function () {
 
-                        accountDropdown.classList.toggle(
-                            "show"
-                        );
+                        const open =
+                            accountDropdown.classList.contains(
+                                "show"
+                            );
+
+                        if (open) {
+
+                            accountDropdown.classList.remove(
+                                "show"
+                            );
+
+                            accountArrow.textContent =
+                                "▼";
+
+                        } else {
+
+                            accountDropdown.classList.add(
+                                "show"
+                            );
+
+                            accountArrow.textContent =
+                                "▲";
+
+                        }
 
                         accountToggle.classList.add(
                             "active"
                         );
 
-                        if (
-                            accountDropdown.classList.contains(
-                                "show"
-                            )
-                        ) {
-
-                            accountArrow.textContent = "▲";
-
-                        } else {
-
-                            accountArrow.textContent = "▼";
-
-                        }
-
                     }
                 );
 
-
-                /* =========================
-                   MOBILE SIDEBAR
-                ========================= */
 
                 const sidebar =
                     document.getElementById(
@@ -475,7 +406,7 @@
                         );
 
                         overlay.classList.add(
-                            "show"
+                            "active"
                         );
 
                     }
@@ -491,43 +422,33 @@
                         );
 
                         overlay.classList.remove(
-                            "show"
+                            "active"
                         );
 
                     }
                 );
 
 
-                /* =========================
-                   CUSTOMER INFORMATION
-                ========================= */
-
-                if (
-                    typeof currentUser !== "undefined" &&
-                    currentUser !== null &&
-                    currentUser.role === "customer"
-                ) {
+                if (user) {
 
                     document.getElementById(
                         "customerName"
                     ).textContent =
-                        currentUser.fullName ||
+                        user.fullName ||
                         "Customer";
 
                     document.getElementById(
                         "customerAvatar"
                     ).textContent =
                         (
-                            currentUser.fullName ||
+                            user.fullName ||
                             "C"
-                        ).charAt(0).toUpperCase();
+                        )
+                        .charAt(0)
+                        .toUpperCase();
 
                 }
 
-
-                /* =========================
-                   ORDERS
-                ========================= */
 
                 const ordersContainer =
                     document.getElementById(
@@ -536,7 +457,7 @@
 
 
                 if (
-                    typeof orders === "undefined" ||
+                    !orders ||
                     orders.length === 0
                 ) {
 
@@ -571,6 +492,7 @@
 
                     ordersContainer.innerHTML = "";
 
+
                     orders.forEach(
                         function (order) {
 
@@ -581,6 +503,7 @@
 
                             orderCard.className =
                                 "order-card";
+
 
                             orderCard.innerHTML = `
 
@@ -609,6 +532,7 @@
 
                             `;
 
+
                             ordersContainer.appendChild(
                                 orderCard
                             );
@@ -619,35 +543,25 @@
                 }
 
 
-                /* =========================
-                   LOGOUT
-                ========================= */
-
                 document.getElementById(
                     "logoutButton"
                 ).addEventListener(
                     "click",
                     function () {
 
-                        const confirmLogout =
+                        if (
                             confirm(
                                 "Are you sure you want to logout?"
-                            );
-
-                        if (!confirmLogout) {
-                            return;
-                        }
-
-                        if (
-                            typeof currentUser !== "undefined"
+                            )
                         ) {
 
-                            currentUser = null;
+                            data.currentUser =
+                                null;
+
+                            window.location.href =
+                                "index.html";
 
                         }
-
-                        window.location.href =
-                            "index.html";
 
                     }
                 );
