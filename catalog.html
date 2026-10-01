@@ -73,6 +73,8 @@
             </div>
 
 
+            <!-- PRODUCTS -->
+
             <a
                 href="catalog.html"
                 class="sidebar-link active"
@@ -105,6 +107,8 @@
             </button>
 
 
+            <!-- MY ACCOUNT DROPDOWN -->
+
             <div
                 class="account-dropdown"
                 id="accountDropdown"
@@ -123,6 +127,23 @@
                 </a>
 
             </div>
+
+
+            <!-- LOGOUT
+                 THIS IS OUTSIDE MY ACCOUNT
+                 SO IT WILL ONLY APPEAR ONCE -->
+
+            <button
+                type="button"
+                class="sidebar-link logout-link"
+                id="logoutButton"
+            >
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
 
         </div>
 
@@ -562,26 +583,89 @@
     <script src="catalog.js"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const accountToggle = document.getElementById("accountToggle");
-            const accountDropdown = document.getElementById("accountDropdown");
-            const productsLink = document.getElementById("productsLink");
-            const links = accountDropdown.querySelectorAll("a");
-            const page = window.location.pathname.split("/").pop().toLowerCase();
 
-            if (page !== "catalog.html") {
-                productsLink.classList.remove("active");
-                accountToggle.classList.add("active");
-                accountDropdown.classList.add("show");
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
 
-                links.forEach(function (link) {
-                    const linkPage = link.getAttribute("href").toLowerCase();
-                    if (linkPage === page) {
-                        link.classList.add("selected");
-                    }
-                });
+                const accountToggle =
+                    document.getElementById(
+                        "accountToggle"
+                    );
+
+                const accountDropdown =
+                    document.getElementById(
+                        "accountDropdown"
+                    );
+
+                const productsLink =
+                    document.getElementById(
+                        "productsLink"
+                    );
+
+                const links =
+                    accountDropdown.querySelectorAll(
+                        "a"
+                    );
+
+                const page =
+                    window.location.pathname
+                        .split("/")
+                        .pop()
+                        .toLowerCase();
+
+
+                /*
+                 * ACCOUNT PAGE HIGHLIGHT
+                 */
+
+                if (
+                    page !== "catalog.html" &&
+                    page !== ""
+                ) {
+
+                    productsLink.classList.remove(
+                        "active"
+                    );
+
+                    accountToggle.classList.add(
+                        "active"
+                    );
+
+                    accountDropdown.classList.add(
+                        "show"
+                    );
+
+
+                    links.forEach(
+                        function (link) {
+
+                            const linkPage =
+                                link
+                                    .getAttribute(
+                                        "href"
+                                    )
+                                    .toLowerCase();
+
+
+                            if (
+                                linkPage === page
+                            ) {
+
+                                link.classList.add(
+                                    "selected"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+
             }
-        });
+        );
+
     </script>
 
 </body>
