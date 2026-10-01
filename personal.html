@@ -16,171 +16,35 @@
 
     <link
         rel="stylesheet"
-        href="catalog.css"
+        href="style.css"
     >
-
-    <style>
-
-        .account-content {
-            padding: 30px;
-            max-width: 1100px;
-        }
-
-        .account-page-header {
-            margin-bottom: 25px;
-        }
-
-        .account-page-header .small-title {
-            color: #c5a059;
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-
-        .account-page-header h2 {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .account-page-header p {
-            color: #777;
-            font-size: 14px;
-        }
-
-        .account-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 25px;
-        }
-
-        .account-card h3 {
-            margin-bottom: 8px;
-            font-size: 20px;
-        }
-
-        .account-card-description {
-            color: #777;
-            font-size: 13px;
-            margin-bottom: 25px;
-        }
-
-        .account-form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 13px 14px;
-            border: 1px solid #d9dfe7;
-            border-radius: 7px;
-            font-family: inherit;
-            font-size: 14px;
-            outline: none;
-        }
-
-        .form-group input:focus {
-            border-color: #c5a059;
-        }
-
-        .readonly-input {
-            background: #f5f6fa;
-        }
-
-        .account-card-footer {
-            margin-top: 25px;
-        }
-
-        .primary-button {
-            border: none;
-            background: #c5a059;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 7px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .primary-button:hover {
-            background: #ad8845;
-        }
-
-        .sidebar-bottom {
-            margin-top: auto;
-            padding: 15px;
-            border-top: 1px solid #292929;
-        }
-
-        .logout-link {
-            margin-bottom: 0;
-            color: #bdbdbd;
-        }
-
-        .logout-link:hover {
-            color: white;
-            background: #1d1d1d;
-        }
-
-        .account-dropdown a.active {
-            background: #c5a059;
-            color: white;
-        }
-
-        .account-dropdown a.active:hover {
-            background: #c5a059;
-            color: white;
-        }
-
-        @media (max-width: 700px) {
-
-            .account-content {
-                padding: 20px;
-            }
-
-            .account-form-grid {
-                grid-template-columns: 1fr;
-            }
-
-        }
-
-    </style>
 
 </head>
 
 
-<body>
+<body id="customerPage">
 
 
     <!-- MOBILE HEADER -->
 
-    <header class="mobile-header">
+    <header class="customer-mobile-header">
 
         <button
-            class="menu-button"
-            id="menuButton"
             type="button"
+            id="customerMenuButton"
+            class="customer-menu-button"
         >
             ☰
         </button>
 
-        <div class="mobile-brand">
+        <div class="customer-mobile-brand">
+
             LOVE LUXE
-            <span>by EA</span>
+
+            <span>
+                BY EA • EST. 2024
+            </span>
+
         </div>
 
     </header>
@@ -190,119 +54,85 @@
     <!-- SIDEBAR -->
 
     <aside
-        class="shop-sidebar"
-        id="shopSidebar"
+        id="customerSidebar"
+        class="customer-sidebar"
     >
 
-        <div class="sidebar-brand">
+        <div class="customer-brand">
 
-            <div class="brand-title">
-                Love Luxe
+            <div class="customer-brand-title">
+                LOVE LUXE
             </div>
 
-            <div class="brand-subtitle">
-                by EA • Est. 2024
+            <div class="customer-brand-subtitle">
+                BY EA • EST. 2024
             </div>
 
         </div>
 
 
-        <div class="sidebar-section">
+        <div class="customer-sidebar-welcome">
 
-            <div class="sidebar-label">
-                SHOP
+            <span>
+                Welcome
+            </span>
+
+            <strong id="sidebarCustomerName">
+                Customer
+            </strong>
+
+        </div>
+
+
+        <nav class="customer-nav">
+
+            <div class="customer-nav-heading">
+                ACCOUNT
             </div>
 
 
-            <!-- PRODUCTS -->
-
             <a
-                href="catalog.html"
-                class="sidebar-link"
+                href="personal.html"
+                class="customer-nav-link active"
             >
-
-                <span>
-                    🛍️
-                </span>
-
-                <span>
-                    Products
-                </span>
-
+                Personal Information
             </a>
 
 
-            <!-- MY ACCOUNT -->
+            <a
+                href="orders.html"
+                class="customer-nav-link"
+            >
+                My Orders
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="customer-nav-link"
+            >
+                Settings
+            </a>
+
+
+            <a
+                href="catalog.html"
+                class="customer-nav-link"
+            >
+                Back to Shop
+            </a>
+
+        </nav>
+
+
+        <div class="customer-sidebar-bottom">
 
             <button
                 type="button"
-                class="sidebar-link account-toggle active"
-                id="accountToggle"
-            >
-
-                <span>
-                    👤
-                </span>
-
-                <span>
-                    My Account
-                </span>
-
-                <span
-                    class="account-arrow"
-                    id="accountArrow"
-                >
-                    ▲
-                </span>
-
-            </button>
-
-
-            <!-- DROPDOWN -->
-
-            <div
-                class="account-dropdown show"
-                id="accountDropdown"
-            >
-
-                <a
-                    href="personal.html"
-                    class="active"
-                >
-                    Personal Information
-                </a>
-
-                <a href="orders.html">
-                    My Orders
-                </a>
-
-                <a href="settings.html">
-                    Settings
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- LOGOUT -->
-
-        <div class="sidebar-bottom">
-
-            <button
-                type="button"
-                class="sidebar-link logout-link"
                 id="logoutButton"
+                class="customer-logout-button"
             >
-
-                <span>
-                    🚪
-                </span>
-
-                <span>
-                    Logout
-                </span>
-
+                ↪ &nbsp; Logout
             </button>
 
         </div>
@@ -314,24 +144,24 @@
     <!-- OVERLAY -->
 
     <div
-        class="sidebar-overlay"
-        id="sidebarOverlay"
+        id="customerSidebarOverlay"
+        class="customer-sidebar-overlay"
     ></div>
 
 
 
     <!-- MAIN -->
 
-    <main class="shop-main">
+    <main class="customer-main">
 
 
         <!-- TOP BAR -->
 
-        <div class="shop-topbar">
+        <header class="customer-topbar">
 
             <div>
 
-                <div class="page-small-title">
+                <div class="customer-topbar-label">
                     CUSTOMER ACCOUNT
                 </div>
 
@@ -341,126 +171,115 @@
 
             </div>
 
+        </header>
 
-            <div class="customer-profile">
 
-                <div
-                    class="customer-avatar"
-                    id="customerAvatar"
-                >
-                    C
-                </div>
+
+        <!-- MESSAGE -->
+
+        <div
+            id="accountMessage"
+            class="account-message"
+        ></div>
+
+
+
+        <!-- ======================================
+             PERSONAL INFORMATION
+        ======================================= -->
+
+        <section class="account-section">
+
+            <div class="section-heading">
 
                 <div>
 
-                    <div class="customer-label">
-                        Welcome Customer
+                    <div class="section-small-title">
+                        ACCOUNT
                     </div>
 
-                    <div
-                        class="customer-name"
-                        id="customerName"
-                    >
-                        Customer
-                    </div>
+                    <h2>
+                        Personal Information
+                    </h2>
+
+                    <p>
+                        Manage your basic account information.
+                    </p>
 
                 </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- CONTENT -->
-
-        <section class="account-content">
-
-            <div class="account-page-header">
-
-                <div class="small-title">
-                    ACCOUNT
-                </div>
-
-                <h2>
-                    Personal Information
-                </h2>
-
-                <p>
-                    Manage your basic account information.
-                </p>
 
             </div>
 
 
             <div class="account-card">
 
-                <h3>
-                    Account Information
-                </h3>
-
-                <p class="account-card-description">
-                    View and update your customer information.
-                </p>
-
-
                 <div class="account-form-grid">
 
 
+                    <!-- FULL NAME -->
+
                     <div class="form-group">
 
-                        <label for="fullName">
+                        <label for="accountFullName">
                             Full Name
                         </label>
 
                         <input
+                            id="accountFullName"
                             type="text"
-                            id="fullName"
                             placeholder="Enter your full name"
                         >
 
                     </div>
 
 
+
+                    <!-- USERNAME -->
+
                     <div class="form-group">
 
-                        <label for="username">
+                        <label for="accountUsername">
                             Username
                         </label>
 
                         <input
+                            id="accountUsername"
                             type="text"
-                            id="username"
                             placeholder="Enter your username"
                         >
 
                     </div>
 
 
+
+                    <!-- PHONE -->
+
                     <div class="form-group">
 
-                        <label for="phone">
+                        <label for="accountPhone">
                             Phone Number
                         </label>
 
                         <input
+                            id="accountPhone"
                             type="text"
-                            id="phone"
                             placeholder="Enter your phone number"
                         >
 
                     </div>
 
 
+
+                    <!-- ACCOUNT TYPE -->
+
                     <div class="form-group">
 
-                        <label for="accountType">
+                        <label>
                             Account Type
                         </label>
 
                         <input
                             type="text"
-                            id="accountType"
                             value="Customer"
                             readonly
                             class="readonly-input"
@@ -475,11 +294,211 @@
 
                     <button
                         type="button"
+                        id="saveAccountButton"
                         class="primary-button"
-                        id="saveButton"
                     >
                         SAVE CHANGES
                     </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ======================================
+             SHIPPING ADDRESS
+        ======================================= -->
+
+        <section class="account-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <div class="section-small-title">
+                        DELIVERY
+                    </div>
+
+                    <h2>
+                        Shipping Address
+                    </h2>
+
+                    <p>
+                        This address will be used when you checkout.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="account-card settings-card">
+
+                <div class="account-form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="houseNumber">
+                            House / Unit Number
+                        </label>
+
+                        <input
+                            id="houseNumber"
+                            type="text"
+                            placeholder="e.g. 123"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="street">
+                            Street
+                        </label>
+
+                        <input
+                            id="street"
+                            type="text"
+                            placeholder="Enter street"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="barangay">
+                            Barangay
+                        </label>
+
+                        <input
+                            id="barangay"
+                            type="text"
+                            placeholder="Enter barangay"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="city">
+                            City / Municipality
+                        </label>
+
+                        <input
+                            id="city"
+                            type="text"
+                            placeholder="Enter city or municipality"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="province">
+                            Province
+                        </label>
+
+                        <input
+                            id="province"
+                            type="text"
+                            placeholder="Enter province"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="postalCode">
+                            Postal Code
+                        </label>
+
+                        <input
+                            id="postalCode"
+                            type="text"
+                            placeholder="Enter postal code"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card-footer">
+
+                    <button
+                        type="button"
+                        id="saveShippingButton"
+                        class="primary-button"
+                    >
+                        SAVE SHIPPING ADDRESS
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ACCOUNT SUMMARY -->
+
+        <section class="account-summary-section">
+
+            <div class="summary-card">
+
+                <div class="summary-title">
+                    ACCOUNT SUMMARY
+                </div>
+
+                <div class="summary-grid">
+
+                    <div>
+
+                        <span>
+                            Account Type
+                        </span>
+
+                        <strong>
+                            Customer
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Username
+                        </span>
+
+                        <strong id="summaryUsername">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Orders
+                        </span>
+
+                        <strong id="summaryOrders">
+                            0
+                        </strong>
+
+                    </div>
 
                 </div>
 
@@ -492,235 +511,360 @@
 
 
 
+    <!-- DATA -->
+
     <script src="data.js"></script>
 
+
     <script>
+
+        const data =
+            window.LoveLuxeData;
+
+        const user =
+            data.customers[0];
+
 
         document.addEventListener(
             "DOMContentLoaded",
             function () {
 
+                document.getElementById(
+                    "sidebarCustomerName"
+                ).textContent =
+                    user.fullName;
 
-                /* =========================
-                   ACCOUNT DROPDOWN
-                ========================= */
-
-                const accountToggle =
-                    document.getElementById(
-                        "accountToggle"
-                    );
-
-                const accountDropdown =
-                    document.getElementById(
-                        "accountDropdown"
-                    );
-
-                const accountArrow =
-                    document.getElementById(
-                        "accountArrow"
-                    );
-
-
-                accountToggle.addEventListener(
-                    "click",
-                    function () {
-
-                        accountDropdown.classList.toggle(
-                            "show"
-                        );
-
-                        accountToggle.classList.add(
-                            "active"
-                        );
-
-                        if (
-                            accountDropdown.classList.contains(
-                                "show"
-                            )
-                        ) {
-
-                            accountArrow.textContent = "▲";
-
-                        } else {
-
-                            accountArrow.textContent = "▼";
-
-                        }
-
-                    }
-                );
-
-
-                /* =========================
-                   MOBILE SIDEBAR
-                ========================= */
-
-                const sidebar =
-                    document.getElementById(
-                        "shopSidebar"
-                    );
-
-                const overlay =
-                    document.getElementById(
-                        "sidebarOverlay"
-                    );
-
-                const menuButton =
-                    document.getElementById(
-                        "menuButton"
-                    );
-
-
-                menuButton.addEventListener(
-                    "click",
-                    function () {
-
-                        sidebar.classList.add(
-                            "open"
-                        );
-
-                        overlay.classList.add(
-                            "show"
-                        );
-
-                    }
-                );
-
-
-                overlay.addEventListener(
-                    "click",
-                    function () {
-
-                        sidebar.classList.remove(
-                            "open"
-                        );
-
-                        overlay.classList.remove(
-                            "show"
-                        );
-
-                    }
-                );
-
-
-                /* =========================
-                   CUSTOMER DATA
-                ========================= */
-
-                if (
-                    typeof currentUser !== "undefined" &&
-                    currentUser !== null &&
-                    currentUser.role === "customer"
-                ) {
-
-                    document.getElementById(
-                        "fullName"
-                    ).value =
-                        currentUser.fullName || "";
-
-                    document.getElementById(
-                        "username"
-                    ).value =
-                        currentUser.username || "";
-
-                    document.getElementById(
-                        "phone"
-                    ).value =
-                        currentUser.phone || "";
-
-                    document.getElementById(
-                        "customerName"
-                    ).textContent =
-                        currentUser.fullName || "Customer";
-
-                    document.getElementById(
-                        "customerAvatar"
-                    ).textContent =
-                        (
-                            currentUser.fullName ||
-                            "C"
-                        ).charAt(0).toUpperCase();
-
-                }
-
-
-                /* =========================
-                   SAVE
-                ========================= */
 
                 document.getElementById(
-                    "saveButton"
-                ).addEventListener(
-                    "click",
-                    function () {
+                    "accountFullName"
+                ).value =
+                    user.fullName;
 
-                        if (
-                            typeof currentUser !== "undefined" &&
-                            currentUser !== null
-                        ) {
 
-                            currentUser.fullName =
-                                document.getElementById(
-                                    "fullName"
-                                ).value;
+                document.getElementById(
+                    "accountUsername"
+                ).value =
+                    user.username;
 
-                            currentUser.username =
-                                document.getElementById(
-                                    "username"
-                                ).value;
 
-                            currentUser.phone =
-                                document.getElementById(
-                                    "phone"
-                                ).value;
+                document.getElementById(
+                    "accountPhone"
+                ).value =
+                    user.phone || "";
+
+
+                document.getElementById(
+                    "summaryUsername"
+                ).textContent =
+                    user.username;
+
+
+                document.getElementById(
+                    "summaryOrders"
+                ).textContent =
+                    data.orders.filter(
+                        function (order) {
+
+                            return (
+                                order.customerUsername ===
+                                user.username
+                            );
 
                         }
-
-                        alert(
-                            "Your information has been updated."
-                        );
-
-                    }
-                );
+                    ).length;
 
 
-                /* =========================
-                   LOGOUT
-                ========================= */
+                loadShippingAddress();
+
+
+                document.getElementById(
+                    "saveAccountButton"
+                ).onclick =
+                    saveAccount;
+
+
+                document.getElementById(
+                    "saveShippingButton"
+                ).onclick =
+                    saveShippingAddress;
+
 
                 document.getElementById(
                     "logoutButton"
-                ).addEventListener(
-                    "click",
-                    function () {
+                ).onclick =
+                    logout;
 
-                        const confirmLogout =
-                            confirm(
-                                "Are you sure you want to logout?"
-                            );
 
-                        if (!confirmLogout) {
-                            return;
-                        }
-
-                        if (
-                            typeof currentUser !== "undefined"
-                        ) {
-
-                            currentUser = null;
-
-                        }
-
-                        window.location.href =
-                            "index.html";
-
-                    }
-                );
+                setupMobile();
 
             }
         );
 
+
+
+        /* SAVE PERSONAL INFORMATION */
+
+        function saveAccount() {
+
+            const name =
+                document.getElementById(
+                    "accountFullName"
+                ).value.trim();
+
+
+            const username =
+                document.getElementById(
+                    "accountUsername"
+                ).value.trim();
+
+
+            const phone =
+                document.getElementById(
+                    "accountPhone"
+                ).value.trim();
+
+
+            if (
+                name === "" ||
+                username === ""
+            ) {
+
+                showMessage(
+                    "Please enter your name and username.",
+                    true
+                );
+
+                return;
+
+            }
+
+
+            user.fullName =
+                name;
+
+            user.username =
+                username;
+
+            user.phone =
+                phone;
+
+
+            document.getElementById(
+                "sidebarCustomerName"
+            ).textContent =
+                name;
+
+
+            document.getElementById(
+                "summaryUsername"
+            ).textContent =
+                username;
+
+
+            showMessage(
+                "Personal information saved successfully for this session.",
+                false
+            );
+
+        }
+
+
+
+        /* LOAD SHIPPING ADDRESS */
+
+        function loadShippingAddress() {
+
+            const address =
+                user.shippingAddress || {};
+
+
+            document.getElementById(
+                "houseNumber"
+            ).value =
+                address.houseNumber || "";
+
+
+            document.getElementById(
+                "street"
+            ).value =
+                address.street || "";
+
+
+            document.getElementById(
+                "barangay"
+            ).value =
+                address.barangay || "";
+
+
+            document.getElementById(
+                "city"
+            ).value =
+                address.city || "";
+
+
+            document.getElementById(
+                "province"
+            ).value =
+                address.province || "";
+
+
+            document.getElementById(
+                "postalCode"
+            ).value =
+                address.postalCode || "";
+
+        }
+
+
+
+        /* SAVE SHIPPING ADDRESS */
+
+        function saveShippingAddress() {
+
+            user.shippingAddress = {
+
+                houseNumber:
+                    document.getElementById(
+                        "houseNumber"
+                    ).value.trim(),
+
+                street:
+                    document.getElementById(
+                        "street"
+                    ).value.trim(),
+
+                barangay:
+                    document.getElementById(
+                        "barangay"
+                    ).value.trim(),
+
+                city:
+                    document.getElementById(
+                        "city"
+                    ).value.trim(),
+
+                province:
+                    document.getElementById(
+                        "province"
+                    ).value.trim(),
+
+                postalCode:
+                    document.getElementById(
+                        "postalCode"
+                    ).value.trim()
+
+            };
+
+
+            showMessage(
+                "Shipping address saved successfully for this session.",
+                false
+            );
+
+        }
+
+
+
+        /* MESSAGE */
+
+        function showMessage(
+            text,
+            isError
+        ) {
+
+            const box =
+                document.getElementById(
+                    "accountMessage"
+                );
+
+
+            box.textContent =
+                text;
+
+
+            box.className =
+                isError
+                    ? "account-message error"
+                    : "account-message success";
+
+        }
+
+
+
+        /* MOBILE SIDEBAR */
+
+        function setupMobile() {
+
+            const button =
+                document.getElementById(
+                    "customerMenuButton"
+                );
+
+
+            const sidebar =
+                document.getElementById(
+                    "customerSidebar"
+                );
+
+
+            const overlay =
+                document.getElementById(
+                    "customerSidebarOverlay"
+                );
+
+
+            button.onclick =
+                function () {
+
+                    sidebar.classList.toggle(
+                        "open"
+                    );
+
+                    overlay.classList.toggle(
+                        "active"
+                    );
+
+                };
+
+
+            overlay.onclick =
+                function () {
+
+                    sidebar.classList.remove(
+                        "open"
+                    );
+
+                    overlay.classList.remove(
+                        "active"
+                    );
+
+                };
+
+        }
+
+
+
+        /* LOGOUT */
+
+        function logout() {
+
+            const confirmLogout =
+                confirm(
+                    "Are you sure you want to logout?"
+                );
+
+
+            if (confirmLogout) {
+
+                window.location.href =
+                    "index.html";
+
+            }
+
+        }
+
     </script>
+
 
 </body>
 
