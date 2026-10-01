@@ -33,8 +33,8 @@
 
         <button
             class="menu-button"
-            id="menuButton"
             type="button"
+            onclick="openSidebar()"
         >
             ☰
         </button>
@@ -70,14 +70,14 @@
         </div>
 
 
-        <!-- SHOP -->
-
         <div class="sidebar-section">
 
             <div class="sidebar-label">
                 SHOP
             </div>
 
+
+            <!-- PRODUCTS -->
 
             <a
                 href="catalog.html"
@@ -94,134 +94,59 @@
 
             <!-- MY ACCOUNT -->
 
-            <div class="account-menu">
+            <button
+                type="button"
+                class="sidebar-link account-toggle"
+                id="accountToggle"
+            >
 
-                <button
-                    type="button"
-                    class="sidebar-link account-toggle"
-                    id="accountToggle"
+                <span>
+                    My Account
+                </span>
+
+                <span class="account-arrow">
+                    ▼
+                </span>
+
+            </button>
+
+
+            <!-- ACCOUNT DROPDOWN -->
+
+            <div
+                class="account-dropdown"
+                id="accountDropdown"
+            >
+
+                <a
+                    href="personal.html"
+                    class="account-dropdown-link"
+                    data-page="personal.html"
                 >
-
-                    <span>
-                        My Account
-                    </span>
-
-                    <span
-                        class="account-arrow"
-                        id="accountArrow"
-                    >
-                        ▾
-                    </span>
-
-                </button>
+                    Personal Information
+                </a>
 
 
-                <div
-                    class="account-dropdown"
-                    id="accountDropdown"
+                <a
+                    href="orders.html"
+                    class="account-dropdown-link"
+                    data-page="orders.html"
                 >
+                    My Orders
+                </a>
 
-                    <a
-                        href="personal.html"
-                        class="account-dropdown-link"
-                    >
-                        Personal Information
-                    </a>
 
-                    <a
-                        href="orders.html"
-                        class="account-dropdown-link"
-                    >
-                        My Orders
-                    </a>
-
-                    <a
-                        href="settings.html"
-                        class="account-dropdown-link"
-                    >
-                        Settings
-                    </a>
-
-                    <button
-                        type="button"
-                        class="account-dropdown-link logout-link"
-                        id="logoutButton"
-                    >
-                        Logout
-                    </button>
-
-                </div>
+                <a
+                    href="settings.html"
+                    class="account-dropdown-link"
+                    data-page="settings.html"
+                >
+                    Settings
+                </a>
 
             </div>
 
         </div>
-
-
-
-        <!-- ======================================
-             CATEGORIES
-        ======================================= -->
-
-        <div class="sidebar-section">
-
-            <div class="sidebar-label">
-                CATEGORIES
-            </div>
-
-
-            <button
-                type="button"
-                class="sidebar-link category-sidebar-link"
-                data-sidebar-category="Bags"
-            >
-
-                <span>
-                    Bags
-                </span>
-
-            </button>
-
-
-            <button
-                type="button"
-                class="sidebar-link category-sidebar-link"
-                data-sidebar-category="Clothing"
-            >
-
-                <span>
-                    Clothing
-                </span>
-
-            </button>
-
-
-            <button
-                type="button"
-                class="sidebar-link category-sidebar-link"
-                data-sidebar-category="Perfume"
-            >
-
-                <span>
-                    Perfume
-                </span>
-
-            </button>
-
-
-            <button
-                type="button"
-                class="sidebar-link category-sidebar-link"
-                data-sidebar-category="Body Care"
-            >
-
-                <span>
-                    Body Care
-                </span>
-
-            </button>
-
-        </div>
-
 
     </aside>
 
@@ -353,9 +278,13 @@
 
         <!-- ======================================
              CATEGORY FILTERS
+             CATEGORIES ARE ONLY HERE
         ======================================= -->
 
-        <div class="filter-buttons">
+        <div
+            class="filter-buttons"
+            id="filterButtons"
+        >
 
             <button
                 type="button"
@@ -418,7 +347,7 @@
 
 
         <!-- ======================================
-             NO PRODUCTS MESSAGE
+             NO PRODUCTS
         ======================================= -->
 
         <div
@@ -465,7 +394,7 @@
 
 
     <!-- ==========================================
-         CHECKOUT MODAL
+         CHECKOUT / PRODUCT MODAL
     =========================================== -->
 
     <div
@@ -473,324 +402,240 @@
         id="checkoutModal"
     >
 
-        <div class="checkout-modal-content">
+        <div class="checkout-box">
+
+
+            <!-- CLOSE -->
 
             <button
                 type="button"
-                class="checkout-close"
+                class="close-checkout"
                 id="closeCheckout"
             >
                 ×
             </button>
 
 
-            <div class="checkout-header">
 
-                <div class="checkout-eyebrow">
-                    LOVE LUXE
-                </div>
-
-                <h2>
-                    Product Checkout
-                </h2>
-
-                <p>
-                    Review your product before placing your order.
-                </p>
-
-            </div>
+            <div class="checkout-content">
 
 
+                <!-- ==================================
+                     PRODUCT IMAGES
+                =================================== -->
 
-            <!-- PRODUCT PREVIEW -->
-
-            <div class="checkout-product">
-
-                <div class="checkout-image-wrapper">
+                <div class="checkout-image-area">
 
                     <img
+                        id="checkoutImage"
                         src=""
                         alt="Product"
-                        id="checkoutProductImage"
                     >
+
+
+                    <div
+                        class="product-gallery"
+                        id="checkoutThumbnails"
+                    >
+                    </div>
 
                 </div>
 
 
-                <div class="checkout-product-details">
 
-                    <h3 id="checkoutProductName">
-                        Product Name
-                    </h3>
+                <!-- ==================================
+                     PRODUCT DETAILS
+                =================================== -->
 
-                    <p id="checkoutProductCategory">
-                        Category
+                <div class="checkout-details">
+
+
+                    <div
+                        class="checkout-category"
+                        id="checkoutCategory"
+                    >
+                    </div>
+
+
+                    <h2
+                        id="checkoutName"
+                    >
+                    </h2>
+
+
+                    <p
+                        class="checkout-description"
+                        id="checkoutDescription"
+                    >
                     </p>
+
 
                     <div
                         class="checkout-price"
-                        id="checkoutProductPrice"
+                        id="checkoutPrice"
                     >
-                        ₱0.00
                     </div>
 
-                </div>
-
-            </div>
 
 
+                    <!-- PRODUCT OPTIONS -->
 
-            <!-- PRODUCT OPTIONS -->
-
-            <div
-                class="product-options"
-                id="productOptions"
-            >
-
-            </div>
+                    <div
+                        class="product-options"
+                        id="productOptions"
+                    >
+                    </div>
 
 
 
-            <!-- QUANTITY -->
+                    <!-- ==================================
+                         QUANTITY
+                    =================================== -->
 
-            <div class="checkout-field">
+                    <div class="quantity-section">
 
-                <label for="quantityInput">
-                    Quantity
-                </label>
+                        <label>
+                            Quantity
+                        </label>
 
-                <div class="quantity-control">
+
+                        <div class="quantity-controls">
+
+
+                            <button
+                                type="button"
+                                id="decreaseQuantity"
+                            >
+                                −
+                            </button>
+
+
+                            <input
+                                type="number"
+                                id="checkoutQuantity"
+                                min="1"
+                                max="99"
+                                value="1"
+                            >
+
+
+                            <button
+                                type="button"
+                                id="increaseQuantity"
+                            >
+                                +
+                            </button>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ==================================
+                         SHIPPING ADDRESS
+                    =================================== -->
+
+                    <div class="checkout-address-section">
+
+                        <label>
+                            Shipping Address
+                        </label>
+
+
+                        <div
+                            class="checkout-address"
+                            id="checkoutAddress"
+                        >
+                            No shipping address saved.
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ==================================
+                         PAYMENT
+                    =================================== -->
+
+                    <div class="payment-section">
+
+                        <label for="paymentMethod">
+                            Payment Method
+                        </label>
+
+
+                        <select
+                            id="paymentMethod"
+                        >
+
+                            <option value="Cash on Delivery">
+                                Cash on Delivery
+                            </option>
+
+                            <option value="GCash">
+                                GCash
+                            </option>
+
+                            <option value="Bank Transfer">
+                                Bank Transfer
+                            </option>
+
+                            <option value="Card">
+                                Card
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- ==================================
+                         TOTAL
+                    =================================== -->
+
+                    <div class="checkout-total-row">
+
+                        <span>
+                            Total
+                        </span>
+
+
+                        <strong
+                            id="checkoutTotal"
+                        >
+                            ₱0.00
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- ==================================
+                         PLACE ORDER
+                    =================================== -->
 
                     <button
                         type="button"
-                        id="quantityMinus"
+                        class="place-order-button"
+                        id="placeOrderButton"
                     >
-                        −
+                        PLACE ORDER
                     </button>
 
-                    <input
-                        type="number"
-                        id="quantityInput"
-                        min="1"
-                        value="1"
+
+                    <div
+                        class="checkout-message"
+                        id="checkoutMessage"
                     >
+                    </div>
 
-                    <button
-                        type="button"
-                        id="quantityPlus"
-                    >
-                        +
-                    </button>
 
                 </div>
 
             </div>
-
-
-
-            <!-- TOTAL -->
-
-            <div class="checkout-total">
-
-                <span>
-                    Total
-                </span>
-
-                <strong id="checkoutTotal">
-                    ₱0.00
-                </strong>
-
-            </div>
-
-
-
-            <!-- SHIPPING ADDRESS -->
-
-            <div class="checkout-section">
-
-                <h3>
-                    Shipping Address
-                </h3>
-
-
-                <div class="checkout-grid">
-
-                    <div class="checkout-field">
-
-                        <label for="houseNumber">
-                            House Number
-                        </label>
-
-                        <input
-                            type="text"
-                            id="houseNumber"
-                            placeholder="House number"
-                        >
-
-                    </div>
-
-
-                    <div class="checkout-field">
-
-                        <label for="street">
-                            Street
-                        </label>
-
-                        <input
-                            type="text"
-                            id="street"
-                            placeholder="Street"
-                        >
-
-                    </div>
-
-
-                    <div class="checkout-field">
-
-                        <label for="barangay">
-                            Barangay
-                        </label>
-
-                        <input
-                            type="text"
-                            id="barangay"
-                            placeholder="Barangay"
-                        >
-
-                    </div>
-
-
-                    <div class="checkout-field">
-
-                        <label for="city">
-                            City
-                        </label>
-
-                        <input
-                            type="text"
-                            id="city"
-                            placeholder="City"
-                        >
-
-                    </div>
-
-
-                    <div class="checkout-field">
-
-                        <label for="province">
-                            Province
-                        </label>
-
-                        <input
-                            type="text"
-                            id="province"
-                            placeholder="Province"
-                        >
-
-                    </div>
-
-
-                    <div class="checkout-field">
-
-                        <label for="postalCode">
-                            Postal Code
-                        </label>
-
-                        <input
-                            type="text"
-                            id="postalCode"
-                            placeholder="Postal code"
-                        >
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- PAYMENT -->
-
-            <div class="checkout-section">
-
-                <h3>
-                    Payment Method
-                </h3>
-
-                <div class="checkout-field">
-
-                    <label for="paymentMethod">
-                        Payment Method
-                    </label>
-
-                    <select id="paymentMethod">
-
-                        <option value="">
-                            Select payment method
-                        </option>
-
-                        <option value="Cash">
-                            Cash
-                        </option>
-
-                        <option value="GCash">
-                            GCash
-                        </option>
-
-                        <option value="Bank Transfer">
-                            Bank Transfer
-                        </option>
-
-                        <option value="Card">
-                            Card
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div
-                    class="checkout-field"
-                    id="referenceField"
-                >
-
-                    <label for="referenceNumber">
-                        Reference No.
-                    </label>
-
-                    <input
-                        type="text"
-                        id="referenceNumber"
-                        placeholder="Reference number"
-                    >
-
-                </div>
-
-            </div>
-
-
-
-            <!-- CHECKOUT MESSAGE -->
-
-            <div
-                class="checkout-message"
-                id="checkoutMessage"
-            ></div>
-
-
-
-            <!-- PLACE ORDER -->
-
-            <button
-                type="button"
-                class="place-order-button"
-                id="placeOrderButton"
-            >
-                Place Order
-            </button>
-
 
         </div>
 
@@ -799,11 +644,99 @@
 
 
     <!-- ==========================================
-         REQUIRED JAVASCRIPT ORDER
+         JAVASCRIPT
     =========================================== -->
 
     <script src="data.js"></script>
     <script src="catalog.js"></script>
+
+
+    <!-- ==========================================
+         ACCOUNT PAGE HIGHLIGHT
+    =========================================== -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const productsLink =
+                document.getElementById("productsLink");
+
+            const accountToggle =
+                document.getElementById("accountToggle");
+
+            const accountDropdown =
+                document.getElementById("accountDropdown");
+
+            const dropdownLinks =
+                document.querySelectorAll(".account-dropdown-link");
+
+
+            const currentPage =
+                window.location.pathname
+                    .split("/")
+                    .pop()
+                    .toLowerCase();
+
+
+            /*
+                When the customer is on catalog.html,
+                Products stays highlighted.
+            */
+
+            if (
+                currentPage === "" ||
+                currentPage === "catalog.html"
+            ) {
+
+                productsLink.classList.add("active");
+
+            }
+
+
+            /*
+                Highlight the My Account button when
+                the customer is using an account page.
+            */
+
+            const accountPages = [
+                "personal.html",
+                "orders.html",
+                "settings.html"
+            ];
+
+
+            if (accountPages.includes(currentPage)) {
+
+                productsLink.classList.remove("active");
+
+                accountToggle.classList.add("active");
+
+                accountDropdown.classList.add("show");
+
+            }
+
+
+            /*
+                Highlight the exact dropdown page.
+            */
+
+            dropdownLinks.forEach(function (link) {
+
+                const page =
+                    link.getAttribute("data-page");
+
+                if (page === currentPage) {
+
+                    link.classList.add("selected");
+
+                }
+
+            });
+
+        });
+
+    </script>
 
 
 </body>
