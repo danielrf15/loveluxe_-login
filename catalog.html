@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -10,28 +9,21 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Love Luxe by EA - Products
-    </title>
+    <title>Love Luxe by EA - Products</title>
 
     <link
         rel="stylesheet"
         href="catalog.css"
     >
-
 </head>
 
-
 <body>
-
-
-    <!-- MOBILE HEADER -->
 
     <header class="mobile-header">
 
         <button
             class="menu-button"
-            onclick="openSidebar()"
+            id="menuButton"
             type="button"
         >
             ☰
@@ -44,9 +36,6 @@
 
     </header>
 
-
-
-    <!-- SIDEBAR -->
 
     <aside
         class="shop-sidebar"
@@ -73,22 +62,14 @@
             </div>
 
 
-            <!-- PRODUCTS -->
-
             <a
                 href="catalog.html"
                 class="sidebar-link active"
                 id="productsLink"
             >
-
-                <span>
-                    Products
-                </span>
-
+                <span>Products</span>
             </a>
 
-
-            <!-- MY ACCOUNT -->
 
             <button
                 type="button"
@@ -96,18 +77,17 @@
                 id="accountToggle"
             >
 
-                <span>
-                    My Account
-                </span>
+                <span>My Account</span>
 
-                <span class="account-arrow">
+                <span
+                    class="account-arrow"
+                    id="accountArrow"
+                >
                     ▼
                 </span>
 
             </button>
 
-
-            <!-- ACCOUNT DROPDOWN -->
 
             <div
                 class="account-dropdown"
@@ -128,19 +108,17 @@
 
             </div>
 
+        </div>
 
-            <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
 
             <button
                 type="button"
-                class="sidebar-link"
+                class="sidebar-link logout-link"
                 id="catalogLogoutButton"
             >
-
-                <span>
-                    Logout
-                </span>
-
+                <span>Logout</span>
             </button>
 
         </div>
@@ -148,22 +126,13 @@
     </aside>
 
 
-
-    <!-- SIDEBAR OVERLAY -->
-
     <div
         class="sidebar-overlay"
         id="sidebarOverlay"
     ></div>
 
 
-
-    <!-- MAIN -->
-
     <main class="shop-main">
-
-
-        <!-- TOP BAR -->
 
         <div class="shop-topbar">
 
@@ -182,7 +151,10 @@
 
             <div class="customer-profile">
 
-                <div class="customer-avatar">
+                <div
+                    class="customer-avatar"
+                    id="customerAvatar"
+                >
                     C
                 </div>
 
@@ -206,9 +178,6 @@
         </div>
 
 
-
-        <!-- SHOP HEADER -->
-
         <section class="catalog-header">
 
             <div>
@@ -222,8 +191,7 @@
                 </h2>
 
                 <p>
-                    Browse our available products and
-                    choose what you would like to order.
+                    Browse our available products and choose what you would like to order.
                 </p>
 
             </div>
@@ -238,9 +206,6 @@
 
         </section>
 
-
-
-        <!-- SEARCH -->
 
         <section class="catalog-tools">
 
@@ -261,9 +226,6 @@
 
         </section>
 
-
-
-        <!-- CATEGORY FILTERS -->
 
         <div class="filter-buttons">
 
@@ -310,18 +272,11 @@
         </div>
 
 
-
-        <!-- PRODUCT GRID -->
-
         <section
             class="product-grid"
             id="productGrid"
-        >
-        </section>
+        ></section>
 
-
-
-        <!-- NO PRODUCTS -->
 
         <div
             class="no-products"
@@ -344,9 +299,6 @@
         </div>
 
 
-
-        <!-- FOOTER -->
-
         <footer class="shop-footer">
 
             <div>
@@ -361,11 +313,6 @@
 
     </main>
 
-
-
-    <!-- ==========================================
-         CHECKOUT / PRODUCT MODAL
-    =========================================== -->
 
     <div
         class="checkout-modal"
@@ -385,9 +332,6 @@
 
             <div class="checkout-content">
 
-
-                <!-- IMAGE -->
-
                 <div class="checkout-image-area">
 
                     <img
@@ -399,58 +343,42 @@
                     <div
                         class="product-gallery"
                         id="checkoutThumbnails"
-                    >
-                    </div>
+                    ></div>
 
                 </div>
 
-
-
-                <!-- DETAILS -->
 
                 <div class="checkout-details">
 
                     <div
                         class="checkout-category"
                         id="checkoutCategory"
-                    >
-                    </div>
+                    ></div>
 
-                    <h2 id="checkoutName">
-                    </h2>
+                    <h2 id="checkoutName"></h2>
 
                     <p
                         class="checkout-description"
                         id="checkoutDescription"
-                    >
-                    </p>
+                    ></p>
 
                     <div
                         class="checkout-price"
                         id="checkoutPrice"
-                    >
-                    </div>
+                    ></div>
 
-
-
-                    <!-- OPTIONS -->
 
                     <div
                         class="product-options"
                         id="productOptions"
-                    >
-                    </div>
+                    ></div>
 
-
-
-                    <!-- QUANTITY -->
 
                     <div class="quantity-section">
 
                         <label>
                             Quantity
                         </label>
-
 
                         <div class="quantity-controls">
 
@@ -461,7 +389,6 @@
                                 −
                             </button>
 
-
                             <input
                                 type="number"
                                 id="checkoutQuantity"
@@ -469,7 +396,6 @@
                                 max="99"
                                 value="1"
                             >
-
 
                             <button
                                 type="button"
@@ -482,9 +408,6 @@
 
                     </div>
 
-
-
-                    <!-- SHIPPING ADDRESS -->
 
                     <div class="checkout-address-section">
 
@@ -501,9 +424,6 @@
 
                     </div>
 
-
-
-                    <!-- PAYMENT -->
 
                     <div class="payment-section">
 
@@ -534,9 +454,6 @@
                     </div>
 
 
-
-                    <!-- TOTAL -->
-
                     <div class="checkout-total-row">
 
                         <span>
@@ -550,9 +467,6 @@
                     </div>
 
 
-
-                    <!-- ORDER -->
-
                     <button
                         type="button"
                         class="place-order-button"
@@ -565,8 +479,7 @@
                     <div
                         class="checkout-message"
                         id="checkoutMessage"
-                    >
-                    </div>
+                    ></div>
 
                 </div>
 
@@ -577,17 +490,7 @@
     </div>
 
 
-
-    <!-- DATA -->
-
-    <script src="data.js"></script>
-
-    <!-- CATALOG SCRIPT -->
-
     <script src="catalog.js"></script>
-
-
-    <!-- CATALOG SIDEBAR FUNCTIONS -->
 
     <script>
 
@@ -605,10 +508,113 @@
                         "accountDropdown"
                     );
 
+                const accountArrow =
+                    document.getElementById(
+                        "accountArrow"
+                    );
+
                 const productsLink =
                     document.getElementById(
                         "productsLink"
                     );
+
+
+                accountToggle.addEventListener(
+                    "click",
+                    function () {
+
+                        const open =
+                            accountDropdown.classList.contains(
+                                "show"
+                            );
+
+                        if (open) {
+
+                            accountDropdown.classList.remove(
+                                "show"
+                            );
+
+                            accountArrow.textContent =
+                                "▼";
+
+                            accountToggle.classList.remove(
+                                "active"
+                            );
+
+                            productsLink.classList.add(
+                                "active"
+                            );
+
+                        } else {
+
+                            accountDropdown.classList.add(
+                                "show"
+                            );
+
+                            accountArrow.textContent =
+                                "▲";
+
+                            accountToggle.classList.add(
+                                "active"
+                            );
+
+                            productsLink.classList.remove(
+                                "active"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                const sidebar =
+                    document.getElementById(
+                        "shopSidebar"
+                    );
+
+                const overlay =
+                    document.getElementById(
+                        "sidebarOverlay"
+                    );
+
+                const menuButton =
+                    document.getElementById(
+                        "menuButton"
+                    );
+
+
+                menuButton.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.add(
+                            "open"
+                        );
+
+                        overlay.classList.add(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                overlay.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.remove(
+                            "open"
+                        );
+
+                        overlay.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
 
                 const logoutButton =
                     document.getElementById(
@@ -616,72 +622,32 @@
                     );
 
 
-                /* MY ACCOUNT DROPDOWN */
+                logoutButton.addEventListener(
+                    "click",
+                    function () {
 
-                if (
-                    accountToggle &&
-                    accountDropdown
-                ) {
-
-                    accountToggle.addEventListener(
-                        "click",
-                        function () {
-
-                            accountDropdown.classList.toggle(
-                                "show"
-                            );
-
-                            accountToggle.classList.toggle(
-                                "active"
-                            );
+                        if (
+                            confirm(
+                                "Are you sure you want to logout?"
+                            )
+                        ) {
 
                             if (
-                                accountDropdown.classList.contains(
-                                    "show"
-                                )
+                                window.LoveLuxeData
                             ) {
 
-                                if (productsLink) {
-
-                                    productsLink.classList.remove(
-                                        "active"
-                                    );
-
-                                }
-
-                            } else {
-
-                                if (productsLink) {
-
-                                    productsLink.classList.add(
-                                        "active"
-                                    );
-
-                                }
+                                window.LoveLuxeData.currentUser =
+                                    null;
 
                             }
-
-                        }
-                    );
-
-                }
-
-
-                /* LOGOUT */
-
-                if (logoutButton) {
-
-                    logoutButton.addEventListener(
-                        "click",
-                        function () {
 
                             window.location.href =
                                 "index.html";
 
                         }
-                    );
 
-                }
+                    }
+                );
 
             }
         );
