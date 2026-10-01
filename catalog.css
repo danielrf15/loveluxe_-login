@@ -1137,3 +1137,21 @@ a {
         font-size: 10px;
     }
 }
+/* ==========================================
+   ACCOUNT PAGE HIGHLIGHTS
+========================================== */
+
+.account-toggle.active {
+    background: var(--brand-gold);
+    color: white;
+}
+
+.account-dropdown-link.selected {
+    background: var(--brand-gold);
+    color: white;
+}
+
+.account-dropdown-link.selected:hover {
+    background: var(--brand-gold);
+    color: white;
+}
